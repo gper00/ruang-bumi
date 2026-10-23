@@ -1,0 +1,9 @@
+id: pb2002-plates
+nama: "Lempeng tektonik PB2002"
+sumber: bird-2003-pb2002
+asal: https://github.com/fraxen/tectonicplates
+lisensi: ODbL-1.0
+diambil: 2026-10-21
+proses: data/scripts/plates.mjs
+keluaran: public/data/plates.geojson
+catatan: "Koordinat dibulatkan 1 desimal, poligon kecil dibuang. Berkas asli dari model PB2002 (Bird, 2003) lewat repositori tectonicplates."

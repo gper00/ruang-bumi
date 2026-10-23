@@ -1,0 +1,142 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumb from '../components/layout/Breadcrumb.astro';
+import { glosarium, istilahSlug } from '../lib/glosarium';
+
+const istilah = [...glosarium].sort((a, b) => a.istilah.localeCompare(b.istilah, 'id'));
+
+const grup = new Map<string, typeof istilah>();
+for (const item of istilah) {
+  const huruf = item.istilah.charAt(0).toUpperCase();
+  if (!grup.has(huruf)) grup.set(huruf, []);
+  grup.get(huruf)!.push(item);
+}
+---
+
+<Layout title="Glosarium" description="Istilah ilmu kebumian yang dipakai di Ruang Bumi, dijelaskan dengan bahasa sehari-hari.">
+  <div class="wrap halaman">
+    <Breadcrumb items={[{ href: '/', label: 'Beranda' }, { label: 'Glosarium' }]} />
+
+    <header class="kepala">
+      <p class="label">{istilah.length} istilah</p>
+      <h1>Glosarium</h1>
+      <p class="intro">
+        Istilah teknis dijelaskan sekali, lalu dipakai konsisten. Tanda bintang kecil di dalam
+        artikel menunjuk ke halaman ini.
+      </p>
+    </header>
+
+    <nav class="huruf" aria-label="Lompat ke huruf">
+      {[...grup.keys()].map((huruf) => <a href={`#${huruf}`}>{huruf}</a>)}
+    </nav>
+
+    {
+      [...grup.entries()].map(([huruf, isi]) => (
+        <section class="grup" aria-labelledby={`huruf-${huruf}`}>
+          <h2 id={`huruf-${huruf}`}>{huruf}</h2>
+          <dl>
+            {isi.map((item) => (
+              <div class="istilah" id={istilahSlug(item.istilah)}>
+                <dt>{item.istilah}</dt>
+                <dd>{item.definisi}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+      ))
+    }
+  </div>
+</Layout>
+
+<style>
+  .halaman {
+    padding-block: 20px 30px;
+  }
+
+  .kepala {
+    margin: 18px 0 22px;
+  }
+
+  .kepala h1 {
+    margin: 6px 0 8px;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 800;
+  }
+
+  .intro {
+    max-width: 60ch;
+    margin: 0;
+    color: var(--muted);
+  }
+
+  .huruf {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--line);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+  }
+
+  .huruf a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    color: var(--muted);
+    text-decoration: none;
+  }
+
+  .huruf a:hover {
+    border-color: var(--sea);
+    color: var(--sea);
+  }
+
+  .grup {
+    margin-top: 22px;
+  }
+
+  .grup h2 {
+    margin: 0 0 10px;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 4px;
+  }
+
+  dl {
+    display: grid;
+    gap: 14px;
+    margin: 0;
+  }
+
+  @media (min-width: 760px) {
+    dl {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px 32px;
+    }
+  }
+
+  .istilah {
+    scroll-margin-top: 90px;
+  }
+
+  dt {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1rem;
+  }
+
+  dd {
+    margin: 2px 0 0;
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+</style>

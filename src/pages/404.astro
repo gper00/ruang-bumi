@@ -1,0 +1,49 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Halaman tidak ditemukan" description="Halaman yang kamu cari tidak ada di Ruang Bumi.">
+  <div class="wrap halaman">
+    <p class="kode">404</p>
+    <h1>Halaman ini tidak ada di peta.</h1>
+    <p class="pesan">
+      Mungkin tautannya salah, atau topiknya belum terbit. Coba mulai dari daftar pertanyaan.
+    </p>
+    <p class="aksi">
+      <a class="btn" href="/">Ke beranda</a>
+      <a class="btn" href="/topik/">Semua topik</a>
+    </p>
+  </div>
+</Layout>
+
+<style>
+  .halaman {
+    padding-block: 70px 90px;
+    max-width: 620px;
+  }
+
+  .kode {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+  }
+
+  h1 {
+    margin: 10px 0 12px;
+    font-size: clamp(1.8rem, 4.5vw, 2.6rem);
+    font-weight: 800;
+  }
+
+  .pesan {
+    margin: 0 0 24px;
+    color: var(--muted);
+  }
+
+  .aksi {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+</style>

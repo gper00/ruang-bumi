@@ -1,0 +1,64 @@
+- id: angin-laut
+  istilah: Angin laut
+  definisi: Angin yang bertiup dari laut ke darat pada siang hari karena daratan lebih cepat panas daripada laut.
+  sumber: noaa-sea-breeze
+- id: angin-darat
+  istilah: Angin darat
+  definisi: Angin yang bertiup dari darat ke laut pada malam hari karena laut menyimpan panas lebih lama daripada daratan.
+  sumber: noaa-sea-breeze
+- id: kalor-jenis
+  istilah: Kalor jenis
+  definisi: Banyaknya energi panas yang dibutuhkan untuk menaikkan suhu satu kilogram zat sebesar satu derajat Celsius. Air punya kalor jenis tinggi, sekitar 4.180 J/(kg·°C).
+  sumber: noaa-sea-breeze
+- id: lempeng-tektonik
+  istilah: Lempeng tektonik
+  definisi: Potongan besar litosfer Bumi yang bergerak di atas lapisan mantel yang lebih lentur.
+  sumber: usgs-plate-tectonics
+- id: zona-subduksi
+  istilah: Zona subduksi
+  definisi: Tempat satu lempeng menunjam ke bawah lempeng lain, biasanya di dasar samudra. Di sini gempa kuat dan gunung api sering muncul.
+  sumber: usgs-plate-tectonics
+- id: cincin-api
+  istilah: Cincin Api
+  definisi: Sabuk gunung api dan zona gempa yang mengelilingi Samudra Pasifik, melewati Indonesia, Filipina, Jepang, dan Amerika.
+  sumber: usgs-plate-tectonics
+- id: musim
+  istilah: Musim
+  definisi: Bagian tahun dengan pola cuaca yang khas. Di Indonesia, musim hujan dan kemarau bergantung pada arah angin muson.
+  sumber: bmkg-musim
+- id: angin-muson
+  istilah: Angin muson
+  definisi: Angin yang berganti arah dua kali setahun karena perbedaan pemanasan antara benua Asia dan Australia.
+  sumber: bmkg-musim
+- id: siklus-air
+  istilah: Siklus air
+  definisi: Perjalanan air dari laut ke atmosfer, ke daratan, lalu kembali lagi ke laut lewat hujan dan aliran sungai.
+  sumber: usgs-water-cycle
+- id: penguapan
+  istilah: Penguapan
+  definisi: Perubahan air menjadi uap air setelah menyerap panas, misalnya dari sinar matahari.
+  sumber: usgs-water-cycle
+- id: kondensasi
+  istilah: Kondensasi
+  definisi: Perubahan uap air menjadi titik-titik air atau kristal es ketika udara mendingin.
+  sumber: usgs-water-cycle
+- id: akuifer
+  istilah: Akuifer
+  definisi: Lapisan batuan atau tanah yang mampu menyimpan dan mengalirkan air tanah dalam jumlah besar.
+  sumber: usgs-water-cycle
+- id: bioma
+  istilah: Bioma
+  definisi: Wilayah luas dengan iklim dan jenis tumbuhan serta hewan yang khas, misalnya hutan hujan tropis atau gurun.
+  sumber: nasa-biomes
+- id: hutan-hujan-tropis
+  istilah: Hutan hujan tropis
+  definisi: Bioma panas dan basah sepanjang tahun dengan kanopi rapat dan keanekaragaman hayati sangat tinggi.
+  sumber: nasa-biomes
+- id: iklim
+  istilah: Iklim
+  definisi: Rata-rata dan pola cuaca suatu tempat dalam jangka panjang, biasanya dihitung puluhan tahun.
+  sumber: bmkg-musim
+- id: litosfer
+  istilah: Litosfer
+  definisi: Lapisan luar Bumi yang kaku, terdiri dari kerak dan bagian atas mantel, terpecah menjadi lempeng-lempeng.
+  sumber: usgs-plate-tectonics

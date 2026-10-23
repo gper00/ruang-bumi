@@ -1,0 +1,8 @@
+id: bmkg-gempa
+penerbit: BMKG
+judul: "Informasi Gempabumi"
+url: https://www.bmkg.go.id/gempabumi/
+jenis: web
+lisensi: bmkg-attribution
+diakses: 2026-10-22
+catatan: "Hanya ditautkan sebagai rujukan; data BMKG tidak diambil otomatis di v1."

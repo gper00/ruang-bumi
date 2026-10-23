@@ -1,0 +1,121 @@
+---
+pertanyaan: "Kenapa ada musim, dan kenapa Indonesia cuma punya hujan dan kemarau?"
+kategori: "atmosfer"
+level: "pemula"
+menit: 6
+jawabanSingkat: "Bumi miring 23,5 derajat, jadi tiap belahan bergantian menerima sinar Matahari lebih langsung. Indonesia di ekuator hampir tidak merasakan beda itu; yang mengatur musimnya adalah angin muson."
+terkait: ["atmosfer/angin-darat-laut", "atmosfer/siklus-air", "ekologi/bioma"]
+sumber: ["noaa-seasons", "nasa-seasons", "bmkg-musim"]
+glosarium: ["musim", "angin-muson", "iklim"]
+status: "terbit"
+diverifikasi: 2026-10-23
+---
+
+import SimMusim from '../../../components/viz/SimMusim';
+import Figure from '../../../components/sumber/Figure.astro';
+import DataNote from '../../../components/sumber/DataNote.astro';
+import Cite from '../../../components/sumber/Cite.astro';
+import Term from '../../../components/glosarium/Term.astro';
+import Quiz from '../../../components/quiz/Quiz';
+
+<Figure
+  caption="Geser slider bulan. Perhatikan bahwa arah kemiringan sumbu Bumi tetap, sementara posisinya berubah mengelilingi Matahari."
+  source="noaa-seasons"
+>
+  <SimMusim client:visible />
+</Figure>
+
+<DataNote>
+  Ilustrasi. Ukuran Matahari dan Bumi, bentuk orbit, serta tanggal peralihan musim disederhanakan.
+  Sabuk musim di lintang tinggi juga dipengaruhi benua dan arus laut.
+</DataNote>
+
+## Kok bisa?
+
+Bumi berputar sambil mengelilingi Matahari dengan sumbu yang miring sekitar 23,5 derajat terhadap
+bidang orbitnya. Arah kemiringan itu tidak berubah sepanjang tahun. Akibatnya, pada bulan-bulan
+tertentu belahan utara lebih condong ke Matahari, dan setengah tahun kemudian belahan selatan yang
+lebih condong. <Cite id="noaa-seasons" />
+
+Kemiringan mengubah dua hal sekaligus: sudut datang sinar Matahari dan panjang siang. Sinar yang
+datang lebih tegak lurus memusatkan energi pada area yang lebih kecil, sehingga permukaan lebih
+cepat panas. Siang yang lebih panjang juga memberi waktu pemanasan lebih lama. Kombinasi keduanya
+menghasilkan musim. <Cite id="nasa-seasons" />
+
+Jarak Bumi ke Matahari bukan penyebabnya. Bumi justru berada paling dekat ke Matahari pada awal
+Januari, saat belahan utara sedang musim dingin. Menurut NASA, jarak terdekat sekitar 147 juta
+kilometer dan jarak terjauh sekitar 152 juta kilometer. Selisihnya tampak besar, tetapi relatif
+terhadap total jarak itu kecil, jadi pengaruhnya pada cuaca tidak sebesar pengaruh kemiringan.
+<Cite id="nasa-seasons" />
+
+### Dari mana kemiringan itu datang?
+
+Tidak ada yang tahu pasti, tetapi teori yang paling umum: ketika Bumi masih muda, sebuah benda
+besar menabraknya. Tumbukan itu mengubah sumbu Bumi menjadi miring, dan puing-puing yang terlempar
+konon lama-kelamaan berkumpul membentuk Bulan. Yang penting bukan detail tumbukannya, melainkan
+hasilnya: sejak saat itu sumbu Bumi selalu condong ke arah yang sama sepanjang tahun.
+<Cite id="nasa-seasons" />
+
+### Kalau begitu, kenapa Indonesia tidak punya empat musim?
+
+Indonesia terletak di sekitar ekuator. Sepanjang tahun, sudut datang sinar Matahari di sini
+relatif tinggi dan panjang siangnya hampir sama, sekitar 12 jam. Perbedaan energi antara "musim
+panas" dan "musim dingin" jadi kecil. Suhu di banyak wilayah Indonesia lebih ditentukan oleh
+awan, hujan, dan angin daripada oleh kemiringan sumbu Bumi.
+
+Yang membuat musim di Indonesia terasa jelas adalah <Term istilah="angin-muson" />. Ketika Benua
+Asia lebih dingin daripada Australia, angin bergerak dari Asia menuju Australia dan membawa udara
+lembap: musim hujan. Saat tekanannya berbalik, angin datang dari Australia yang lebih kering:
+musim kemarau. <Cite id="bmkg-musim" />
+
+BMKG menetapkan awal musim berdasarkan curah hujan yang dihitung per dasarian, bukan berdasarkan
+kalender. Karena itu awal musim hujan di Sumatra bisa berbeda dari Nusa Tenggara, dan bisa bergeser
+sedikit setiap tahun. <Cite id="bmkg-musim" />
+
+## Fakta menarik
+
+- Di belahan utara dan selatan, musim selalu berlawanan: saat Eropa panas, Australia sedang dingin.
+- Bumi paling dekat ke Matahari sekitar awal Januari dan paling jauh sekitar awal Juli — dua momen yang justru kebalikan dari musim panas dan dingin di belahan utara. <Cite id="nasa-seasons" />
+- Daerah di sekitar ekuator punya dua kali waktu Matahari berada tepat di atas kepala dalam setahun, sekitar Maret dan September.
+- <Term istilah="iklim" /> adalah pola jangka panjang; satu musim hujan yang datang terlambat belum berarti iklimnya berubah.
+- Gunung tinggi di Indonesia bisa punya suhu yang lebih mirip lintang sedang, meski letaknya di ekuator.
+
+<Quiz
+  judul="Kuis"
+  client:visible
+  soal={[
+    {
+      tanya: 'Apa penyebab utama pergantian musim di lintang tinggi?',
+      opsi: [
+        'Jarak Bumi ke Matahari yang berubah',
+        'Kemiringan sumbu Bumi terhadap bidang orbit',
+        'Kecepatan rotasi Bumi yang berubah',
+      ],
+      benar: 1,
+      penjelasan:
+        'Kemiringan sumbu mengubah sudut datang sinar dan panjang siang. Jarak ke Matahari bukan penyebab utamanya.',
+    },
+    {
+      tanya: 'Mengapa Indonesia tidak mengalami empat musim seperti Eropa?',
+      opsi: [
+        'Karena letaknya dekat ekuator sehingga beda energi Matahari sepanjang tahun kecil',
+        'Karena Indonesia tidak pernah menerima sinar Matahari miring',
+        'Karena Indonesia dikelilingi laut',
+      ],
+      benar: 0,
+      penjelasan:
+        'Di ekuator, sudut sinar Matahari dan panjang siang relatif stabil sepanjang tahun. Musim di Indonesia lebih ditentukan oleh angin muson.',
+    },
+    {
+      tanya: 'Apa yang dipakai BMKG untuk menentukan awal musim hujan?',
+      opsi: [
+        'Tanggal tetap setiap tahun',
+        'Curah hujan yang dihitung per dasarian',
+        'Suhu udara rata-rata harian',
+      ],
+      benar: 1,
+      penjelasan:
+        'BMKG memakai besaran curah hujan per dasarian, sehingga awal musim bisa berbeda antar wilayah dan antar tahun.',
+    },
+  ]}
+/>

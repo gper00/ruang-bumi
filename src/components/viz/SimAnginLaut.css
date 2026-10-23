@@ -1,0 +1,181 @@
+.sal {
+  display: grid;
+  gap: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.sal-kanvas {
+  position: relative;
+  background: var(--ocean);
+}
+
+.sal-kanvas svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.sal-label {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  letter-spacing: 0.18em;
+  fill: rgb(255 255 255 / 0.9);
+}
+
+.sal-suhu text {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  fill: #0f2229;
+}
+
+.sal-tenang {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  fill: #0f2229;
+  opacity: 0.7;
+}
+
+.sal-lencana {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: grid;
+  gap: 1px;
+  padding: 5px 10px;
+  border-radius: 6px;
+  background: rgb(255 255 255 / 0.9);
+  color: #0f2229;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+.sal-lencana-arah {
+  font-size: 0.62rem;
+  color: #4b6670;
+}
+
+/* Airflow arrows: a gentle drift in the selected direction. */
+.sal-angin {
+  animation: sal-geser 3.2s linear infinite;
+}
+
+.sal-angin.darat {
+  animation-direction: reverse;
+}
+
+.sal-angin.tenang {
+  opacity: 0.25;
+  animation: none;
+}
+
+.sal-angin.statis {
+  animation: none;
+}
+
+@keyframes sal-geser {
+  from {
+    transform: translateX(-6px);
+  }
+  to {
+    transform: translateX(6px);
+  }
+}
+
+.sal-kontrol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
+  padding: 12px 14px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.sal-slider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1 1 200px;
+}
+
+.sal-slider-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+.sal-slider input {
+  flex: 1;
+  accent-color: var(--sea);
+}
+
+.sal-jam {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  min-width: 8ch;
+  text-align: right;
+}
+
+.sal-baca {
+  display: grid;
+  gap: 10px;
+  padding: 12px 14px;
+}
+
+@media (min-width: 640px) {
+  .sal-baca {
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 20px;
+  }
+}
+
+.sal-baca dl {
+  display: flex;
+  gap: 18px;
+  margin: 0;
+}
+
+.sal-baca dt {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--muted);
+}
+
+.sal-baca dd {
+  margin: 1px 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+}
+
+.sal-kesimpulan {
+  margin: 0;
+  font-size: 0.86rem;
+  color: var(--muted);
+}
+
+.sal-nota {
+  margin: 0;
+  padding: 8px 14px 12px;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.sal-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

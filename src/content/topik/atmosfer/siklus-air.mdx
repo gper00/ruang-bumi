@@ -1,0 +1,122 @@
+---
+pertanyaan: "Dari mana air hujan berasal, dan apakah air di Bumi bisa habis?"
+kategori: "atmosfer"
+level: "pemula"
+menit: 6
+jawabanSingkat: "Air terus berpindah tempat: menguap dari laut dan daratan, mengembun menjadi awan, jatuh sebagai hujan, lalu mengalir kembali ke laut. Jumlah totalnya nyaris tetap, tetapi air bersih yang mudah dipakai tidak merata."
+terkait: ["atmosfer/musim", "atmosfer/angin-darat-laut", "ekologi/bioma"]
+sumber: ["usgs-water-cycle", "noaa-water-cycle", "usgs-water-distribution"]
+glosarium: ["siklus-air", "penguapan", "kondensasi", "akuifer"]
+status: "terbit"
+diverifikasi: 2026-10-23
+---
+
+import SiklusAir from '../../../components/viz/SiklusAir';
+import DistribusiAir from '../../../components/viz/DistribusiAir.astro';
+import Figure from '../../../components/sumber/Figure.astro';
+import DataNote from '../../../components/sumber/DataNote.astro';
+import Cite from '../../../components/sumber/Cite.astro';
+import Term from '../../../components/glosarium/Term.astro';
+import Quiz from '../../../components/quiz/Quiz';
+
+<Figure
+  caption="Pilih salah satu tahap untuk membaca penjelasannya. Panah menunjukkan arah perpindahan air, bukan aliran satu tetes air."
+  source="usgs-water-cycle"
+>
+  <SiklusAir client:visible />
+</Figure>
+
+<DataNote>
+  Ilustrasi. Proporsi air di tiap tahap dan skala tinggi awan tidak digambar sesuai kenyataan.
+</DataNote>
+
+## Kok bisa?
+
+Air di Bumi tidak hilang, hanya berubah bentuk dan tempat. <Term istilah="siklus-air" /> dimulai
+ketika energi Matahari memanaskan air di laut, danau, sungai, dan tanah. Air berubah menjadi uap
+air dalam proses <Term istilah="penguapan" />. Tumbuhan juga melepaskan uap air lewat daun.
+<Cite id="usgs-water-cycle" />
+
+Uap air naik bersama udara. Semakin tinggi, suhu udara semakin rendah, sehingga uap itu berubah
+menjadi titik-titik air atau kristal es. Proses ini disebut <Term istilah="kondensasi" />, dan
+hasilnya terlihat sebagai awan. Titik-titik air di dalam awan sangat kecil sehingga masih bisa
+tertahan oleh gerakan udara. <Cite id="noaa-water-cycle" />
+
+Ketika titik-titik itu bergabung dan menjadi cukup berat, mereka jatuh sebagai hujan, salju, atau
+es. Sebagian hujan menguap lagi sebelum mencapai tanah. Sebagian yang sampai ke daratan mengalir
+di permukaan menuju sungai dan kembali ke laut. Sebagian lagi meresap ke dalam tanah dan batuan,
+mengisi <Term istilah="akuifer" />, lalu bisa muncul lagi sebagai mata air. <Cite id="usgs-water-cycle" />
+
+### Air tanah: cadangan yang tidak terlihat
+
+Air tanah adalah bagian dari siklus yang jarang terlihat, padahal volumenya besar. Dari seluruh
+air tawar di Bumi, sekitar 30 persen berada di dalam tanah dan batuan. <Cite id="usgs-water-distribution" />
+Air ini bergerak sangat lambat melalui pori-pori dan rekahan batuan, sehingga sebuah akuifer bisa
+terisi selama bertahun-tahun namun juga bisa terkuras lebih cepat daripada pengisiannya bila
+pompaannya berlebihan. <Cite id="usgs-water-cycle" />
+
+Yang penting untuk dipahami: air tanah bukan tangki tertutup. Ia bagian dari siklus yang terus
+mengisi ulang lewat hujan yang meresap, hanya saja kecepatan pengisinya jauh lebih lambat
+daripada kecepatan pengambilan yang biasa dipakai pertanian dan kota. Di situlah letak
+perbedaannya: siklusnya sehat, tetapi laju pengambilan lokal bisa melampaui laju pengisian.
+
+### Berapa banyak air yang benar-benar bisa dipakai?
+
+Sekitar 96,5 persen air Bumi ada di laut sebagai air asin. Hanya sekitar 2,5 persen yang air
+tawar, dan sebagian besar dari itu tersimpan sebagai es di kutub serta gletser. Air tawar yang
+mudah dijangkau manusia hanya sebagian kecil dari total. <Cite id="usgs-water-distribution" />
+
+<Figure
+  caption="Baris atas: seluruh air di Bumi. Baris bawah: rincian 2,5 persen air tawar saja. Angka dari tabel sebaran air USGS."
+  source="usgs-water-distribution"
+>
+  <DistribusiAir />
+</Figure>
+
+Dari air tawar itu sendiri, lebih dari 68 persen terkunci dalam es dan gletser, sekitar 30 persen
+ada di dalam tanah sebagai air tanah, dan hanya sekitar 1,2 persen yang berupa air permukaan
+seperti danau, sungai, dan rawa. <Cite id="usgs-water-distribution" />
+
+Karena itu "air tidak habis" dan "air bersih selalu tersedia" adalah dua hal berbeda. Siklus air
+menjaga jumlah totalnya, tetapi kualitas dan sebarannya bisa berubah karena pencemaran,
+pengambilan air tanah yang berlebihan, dan perubahan tata guna lahan.
+
+## Fakta menarik
+
+- Laut menyimpan sekitar 96,5 persen air Bumi; air tawar hanya sekitar 2,5 persen. <Cite id="usgs-water-distribution" />
+- Sebagian besar air tawar justru berbentuk es, bukan air yang bisa langsung diminum.
+- Sungai menyumbang sekitar 0,006 persen dari seluruh air tawar, tetapi tetap menjadi sumber air sehari-hari bagi banyak orang. <Cite id="usgs-water-distribution" />
+- Satu molekul air bisa berpindah dari laut ke awan, turun sebagai hujan di gunung, masuk ke air tanah, lalu kembali ke laut dalam waktu yang sangat berbeda-beda.
+- Penguapan membutuhkan energi, sehingga siklus air juga memindahkan panas dari permukaan ke atmosfer. <Cite id="noaa-water-cycle" />
+
+<Quiz
+  judul="Kuis"
+  client:visible
+  soal={[
+    {
+      tanya: 'Proses apa yang mengubah uap air menjadi titik-titik air di awan?',
+      opsi: ['Penguapan', 'Kondensasi', 'Infiltrasi'],
+      benar: 1,
+      penjelasan:
+        'Kondensasi terjadi ketika uap air mendingin dan berubah menjadi titik air atau kristal es.',
+    },
+    {
+      tanya: 'Di mana sebagian besar air Bumi berada?',
+      opsi: ['Di sungai dan danau', 'Di laut sebagai air asin', 'Di atmosfer sebagai uap'],
+      benar: 1,
+      penjelasan:
+        'Sekitar 96,5 persen air Bumi ada di laut. Air tawar hanya sekitar 2,5 persen dari total.',
+    },
+    {
+      tanya: 'Apa yang dimaksud infiltrasi dalam siklus air?',
+      opsi: [
+        'Air meresap ke dalam tanah dan batuan',
+        'Air menguap dari permukaan laut',
+        'Awan bergerak karena angin',
+      ],
+      benar: 0,
+      penjelasan:
+        'Infiltrasi adalah air yang masuk ke pori tanah dan batuan, sebagian tersimpan di akuifer dan bisa keluar lagi sebagai mata air.',
+    },
+  ]}
+/>

@@ -1,0 +1,121 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Breadcrumb from '../../components/layout/Breadcrumb.astro';
+import TopicCard from '../../components/topik/TopicCard.astro';
+import { KATEGORI, getTopikTerbit } from '../../lib/topik';
+
+const topik = await getTopikTerbit();
+---
+
+<Layout title="Semua topik" description="Daftar semua pertanyaan tentang Bumi yang sudah dijawab di Ruang Bumi.">
+  <div class="wrap halaman">
+    <Breadcrumb items={[{ href: '/', label: 'Beranda' }, { label: 'Semua topik' }]} />
+
+    <header class="kepala">
+      <p class="label">{topik.length} topik terbit</p>
+      <h1>Semua pertanyaan</h1>
+      <p class="intro">
+        Diurutkan dari inti ke tepi: planet, atmosfer, laut, daratan, lalu ekologi. Setiap topik
+        punya minimal dua sumber dan satu visual interaktif.
+      </p>
+    </header>
+
+    {
+      KATEGORI.map((k) => {
+        const isi = topik.filter((t) => t.data.kategori === k.id);
+        if (isi.length === 0) return null;
+        return (
+          <section class="kelompok" aria-labelledby={`k-${k.id}`} data-kategori={k.id}>
+            <h2 id={`k-${k.id}`}>
+              <a href={`/kategori/${k.id}/`}>
+                <span class="kelompok-tanda" aria-hidden="true"></span>
+                {k.label}
+              </a>
+            </h2>
+            <p class="kelompok-desc">{k.deskripsi}</p>
+            <div class="grid-topik">
+              {isi.map((entry) => (
+                <TopicCard entry={entry} kategori={false} />
+              ))}
+            </div>
+          </section>
+        );
+      })
+    }
+  </div>
+</Layout>
+
+<style>
+  .halaman {
+    padding-block: 20px 30px;
+  }
+
+  .kepala {
+    margin: 18px 0 36px;
+  }
+
+  .kepala h1 {
+    margin: 8px 0 10px;
+    font-size: clamp(1.9rem, 4vw, 2.6rem);
+    font-weight: 800;
+    text-wrap: balance;
+  }
+
+  .intro {
+    max-width: 60ch;
+    margin: 0;
+    color: var(--muted);
+  }
+
+  .kelompok {
+    margin-top: 38px;
+  }
+
+  .kelompok h2 {
+    margin: 0;
+    font-size: 1.25rem;
+  }
+
+  .kelompok h2 a {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--fg);
+    text-decoration: none;
+  }
+
+  .kelompok h2 a:hover {
+    color: var(--sea);
+  }
+
+  .kelompok-tanda {
+    width: 14px;
+    height: 14px;
+    border-radius: 4px;
+    background: var(--aksen, var(--sea));
+    flex-shrink: 0;
+  }
+
+  .kelompok-desc {
+    margin: 4px 0 16px;
+    font-size: 0.86rem;
+    color: var(--muted);
+  }
+
+  .grid-topik {
+    display: grid;
+    gap: 16px;
+  }
+
+  @media (min-width: 700px) {
+    .grid-topik {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1040px) {
+    .grid-topik {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>

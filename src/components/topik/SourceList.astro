@@ -1,0 +1,125 @@
+---
+import { datasetById, sumberHalaman, tanggalIndo, type Topik } from '../../lib/topik';
+
+interface Props {
+  entry: Topik;
+}
+
+const { entry } = Astro.props;
+const daftar = await sumberHalaman(entry);
+const datasets = [];
+for (const id of entry.data.dataset ?? []) {
+  const dataset = await datasetById(id);
+  if (dataset) datasets.push({ id, data: dataset.data });
+}
+---
+
+<section class="sumber-blok" id="sumber" aria-labelledby="sumber-judul">
+  <h2 id="sumber-judul" class="label">Sumber</h2>
+  <ol class="sumber-list">
+    {
+      daftar.map((s) => (
+        <li id={`sumber-${s.id}`}>
+          <span class="nomor">[{s.nomor}]</span>
+          <div>
+            <p class="judul">{s.data.judul}</p>
+            <p class="meta">
+              {s.data.penerbit} · diakses {tanggalIndo(s.data.diakses)} · lisensi {s.data.lisensi}
+            </p>
+            {s.data.catatan && <p class="catatan">{s.data.catatan}</p>}
+            <a class="tautan" href={s.data.url} rel="noopener noreferrer" target="_blank">
+              {new URL(s.data.url).hostname}
+            </a>
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+
+  {
+    datasets.length > 0 && (
+      <>
+        <h3 class="label label-gap">Dataset</h3>
+        <ul class="sumber-list">
+          {datasets.map((d) => (
+            <li id={`dataset-${d.id}`}>
+              <span class="nomor">data</span>
+              <div>
+                <p class="judul">{d.data.nama}</p>
+                <p class="meta">
+                  {d.data.lisensi} · diambil {tanggalIndo(d.data.diambil)}
+                  {d.data.proses ? ` · diproses oleh ${d.data.proses}` : ''}
+                </p>
+                {d.data.catatan && <p class="catatan">{d.data.catatan}</p>}
+                <a class="tautan" href={d.data.asal} rel="noopener noreferrer" target="_blank">
+                  {new URL(d.data.asal).hostname}
+                </a>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </>
+    )
+  }
+</section>
+
+<style>
+  .sumber-blok {
+    margin-top: 1rem;
+  }
+
+  .label-gap {
+    margin-top: 1.5rem;
+  }
+
+  .sumber-list {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 0;
+    display: grid;
+    gap: 12px;
+  }
+
+  .sumber-list li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 8px;
+    scroll-margin-top: 80px;
+  }
+
+  .nomor {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--muted);
+    padding-top: 2px;
+    min-width: 2.5rem;
+  }
+
+  .judul {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+
+  .meta,
+  .catatan {
+    margin: 2px 0 0;
+    font-size: 0.76rem;
+    color: var(--muted);
+  }
+
+  .catatan {
+    font-style: italic;
+  }
+
+  .tautan {
+    display: inline-block;
+    margin-top: 2px;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--sea);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    word-break: break-all;
+  }
+</style>

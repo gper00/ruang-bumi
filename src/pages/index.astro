@@ -1,0 +1,356 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TopicCard from '../components/topik/TopicCard.astro';
+import { KATEGORI, getTopikTerbit, topikHref } from '../lib/topik';
+
+const topik = await getTopikTerbit();
+const unggulan = topik[0];
+const kategoriAktif = KATEGORI.filter((k) => topik.some((t) => t.data.kategori === k.id));
+const totalSumber = new Set(topik.flatMap((t) => t.data.sumber)).size;
+---
+
+<Layout title="Ruang Bumi — ilmu kebumian lewat pertanyaan" fullTitle>
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <div class="hero-teks">
+        <p class="label">Ilmu kebumian · bahasa Indonesia</p>
+        <h1>Tanya Bumi,<br />dapat jawaban yang bisa ditelusuri.</h1>
+        <p class="hero-sub">
+          Setiap halaman menjawab satu pertanyaan lewat visual interaktif. Setiap angka punya
+          sumber yang bisa kamu buka sendiri.
+        </p>
+        {
+          unggulan && (
+            <p class="hero-aksi">
+              <a class="btn" href={topikHref(unggulan)}>Mulai dari: {unggulan.data.pertanyaan}</a>
+            </p>
+          )
+        }
+      </div>
+
+      <div class="hero-gambar" aria-hidden="true">
+        <svg viewBox="0 0 320 260" role="presentation">
+          <defs>
+            <linearGradient id="lautHero" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="var(--sea)" />
+              <stop offset="1" stop-color="var(--sea-soft)" />
+            </linearGradient>
+          </defs>
+          <circle cx="160" cy="130" r="104" fill="url(#lautHero)" opacity="0.35" />
+          <circle cx="160" cy="130" r="104" fill="none" stroke="var(--sea)" stroke-width="1" />
+          <circle cx="160" cy="130" r="76" fill="none" stroke="var(--coast)" stroke-width="0.8" stroke-dasharray="3 5" />
+          <path
+            d="M92 148c18-26 42-14 56-30s30-6 44 10 24 20 38 12"
+            fill="none"
+            stroke="var(--heat)"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+          <circle cx="148" cy="118" r="4" fill="var(--heat)" />
+          <path
+            d="M60 130h200"
+            stroke="var(--fg)"
+            stroke-width="0.7"
+            stroke-dasharray="2 6"
+            opacity="0.4"
+          />
+          <text x="160" y="252" text-anchor="middle" font-family="var(--font-mono)" font-size="9" fill="var(--muted)">
+            potongan bumi, bukan skala
+          </text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap daftar" aria-labelledby="daftar-judul">
+    <header class="daftar-head">
+      <div>
+        <h2 id="daftar-judul">Pertanyaan yang sudah dijawab</h2>
+        <p class="label">
+          {topik.length} topik terbit · {totalSumber} sumber
+        </p>
+      </div>
+
+      <div class="alat">
+        <label class="cari">
+          <span class="label">Cari</span>
+          <input
+            id="cari-topik"
+            type="search"
+            placeholder="gempa, angin, hujan…"
+            autocomplete="off"
+          />
+        </label>
+        <div class="filter" role="group" aria-label="Filter kategori">
+          <button type="button" class="chip filter-btn" data-kategori="semua" aria-pressed="true">
+            Semua
+          </button>
+          {
+            kategoriAktif.map((k) => (
+              <button type="button" class="chip filter-btn" data-kategori={k.id} aria-pressed="false">
+                {k.label}
+              </button>
+            ))
+          }
+        </div>
+      </div>
+    </header>
+
+    <p id="hasil-hitung" class="hasil" aria-live="polite">{topik.length} topik ditampilkan</p>
+
+    <div class="grid-topik" id="grid-topik">
+      {topik.map((entry) => <TopicCard entry={entry} />)}
+    </div>
+
+    <p id="kosong" class="kosong" hidden>
+      Belum ada topik yang cocok. Coba kata kunci lain.
+    </p>
+
+    <nav class="kategori-nav" aria-label="Jelajahi kategori">
+      {
+        kategoriAktif.map((k) => (
+          <a href={`/kategori/${k.id}/`} data-kategori={k.id}>
+            <span>{k.label}</span>
+            <span>{k.deskripsi}</span>
+          </a>
+        ))
+      }
+    </nav>
+  </section>
+</Layout>
+
+<script>
+  const input = document.getElementById('cari-topik') as HTMLInputElement | null;
+  const tombol = Array.from(document.querySelectorAll<HTMLButtonElement>('.filter-btn'));
+  const kartu = Array.from(document.querySelectorAll<HTMLElement>('.kartu-topik'));
+  const hitung = document.getElementById('hasil-hitung');
+  const kosong = document.getElementById('kosong');
+  let kategori = 'semua';
+
+  function terapkan() {
+    const kata = (input?.value ?? '').toLowerCase().trim();
+    let tampil = 0;
+    for (const el of kartu) {
+      const cocokKategori = kategori === 'semua' || el.dataset.kategori === kategori;
+      const cocokKata = !kata || (el.dataset.cari ?? '').includes(kata);
+      const tampilkan = cocokKategori && cocokKata;
+      el.hidden = !tampilkan;
+      if (tampilkan) tampil += 1;
+    }
+    if (hitung) hitung.textContent = `${tampil} topik ditampilkan`;
+    if (kosong) kosong.hidden = tampil !== 0;
+  }
+
+  for (const b of tombol) {
+    b.addEventListener('click', () => {
+      kategori = b.dataset.kategori ?? 'semua';
+      for (const lain of tombol) lain.setAttribute('aria-pressed', String(lain === b));
+      terapkan();
+    });
+  }
+
+  input?.addEventListener('input', terapkan);
+</script>
+
+<style>
+  .hero {
+    border-bottom: 1px solid var(--line);
+    background:
+      radial-gradient(ellipse 80% 60% at 85% -10%, var(--sea-soft), transparent 60%),
+      var(--surface);
+    overflow: hidden;
+  }
+
+  .hero-inner {
+    display: grid;
+    gap: 24px;
+    padding-block: 48px 52px;
+  }
+
+  @media (min-width: 880px) {
+    .hero-inner {
+      grid-template-columns: 1.5fr 1fr;
+      align-items: center;
+      padding-block: 56px 60px;
+    }
+  }
+
+  .hero h1 {
+    font-size: clamp(2.1rem, 5.6vw, 3.5rem);
+    font-weight: 800;
+    margin: 12px 0 16px;
+    letter-spacing: -0.03em;
+    line-height: 1.04;
+    text-wrap: balance;
+  }
+
+  .hero-sub {
+    max-width: 48ch;
+    margin: 0;
+    font-size: 1.08rem;
+    line-height: 1.65;
+    color: var(--muted);
+    text-wrap: pretty;
+  }
+
+  .hero-aksi {
+    margin: 22px 0 0;
+  }
+
+  .hero-gambar {
+    max-width: 340px;
+    justify-self: center;
+  }
+
+  .hero-gambar svg {
+    width: 100%;
+    height: auto;
+  }
+
+  .daftar {
+    padding-block: 36px 10px;
+  }
+
+  .daftar-head {
+    display: grid;
+    gap: 18px;
+    align-items: end;
+    margin-bottom: 8px;
+  }
+
+  @media (min-width: 760px) {
+    .daftar-head {
+      grid-template-columns: 1fr auto;
+    }
+  }
+
+  .daftar-head h2 {
+    margin: 4px 0 0;
+    font-size: clamp(1.3rem, 2.5vw, 1.6rem);
+    text-wrap: balance;
+  }
+
+  .alat {
+    display: grid;
+    gap: 10px;
+    justify-items: start;
+  }
+
+  @media (min-width: 760px) {
+    .alat {
+      justify-items: end;
+    }
+  }
+
+  .cari {
+    display: grid;
+    gap: 2px;
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .cari input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--fg);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+  }
+
+  .cari input:focus-visible {
+    border-color: var(--sea);
+  }
+
+  .filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .filter-btn {
+    min-height: 30px;
+    padding: 2px 12px;
+    cursor: pointer;
+  }
+
+  .hasil {
+    margin: 14px 0 18px;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--muted);
+  }
+
+  .grid-topik {
+    display: grid;
+    gap: 16px;
+  }
+
+  @media (min-width: 700px) {
+    .grid-topik {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1040px) {
+    .grid-topik {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  .kartu-topik[hidden] {
+    display: none;
+  }
+
+  .kosong {
+    padding: 30px;
+    text-align: center;
+    color: var(--muted);
+    border: 1px dashed var(--line-strong);
+    border-radius: var(--radius);
+  }
+
+  .kategori-nav {
+    display: grid;
+    gap: 10px;
+    margin-top: 36px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+  }
+
+  @media (min-width: 700px) {
+    .kategori-nav {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  .kategori-nav a {
+    display: grid;
+    gap: 3px;
+    padding: 13px 16px;
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--aksen, var(--line-strong));
+    border-radius: 10px;
+    text-decoration: none;
+    color: var(--fg);
+    background: var(--surface);
+    transition: border-color 0.15s ease;
+  }
+
+  .kategori-nav a:hover {
+    border-color: var(--aksen, var(--sea));
+  }
+
+  .kategori-nav span:first-child {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+
+  .kategori-nav span:last-child {
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+</style>

@@ -1,0 +1,91 @@
+---
+const tahun = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <p class="footer-name">Ruang Bumi</p>
+      <p class="footer-desc">
+        Belajar ilmu kebumian lewat pertanyaan, visual interaktif, dan sumber yang bisa ditelusuri.
+      </p>
+    </div>
+
+    <nav aria-label="Navigasi kaki halaman">
+      <ul>
+        <li><a href="/topik/">Semua topik</a></li>
+        <li><a href="/kategori/atmosfer/">Kategori</a></li>
+        <li><a href="/glosarium/">Glosarium</a></li>
+        <li><a href="/sumber/">Sumber &amp; lisensi</a></li>
+        <li><a href="/tentang/">Tentang</a></li>
+      </ul>
+    </nav>
+
+    <div class="footer-legal">
+      <p>© {tahun} Ruang Bumi. Teks CC BY 4.0, kode MIT.</p>
+      <p>Nama situs masih placeholder.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: 56px;
+    border-top: 1px solid var(--line);
+    background: var(--surface);
+  }
+
+  .footer-inner {
+    display: grid;
+    gap: 22px;
+    padding-block: 28px 34px;
+    font-size: 0.85rem;
+  }
+
+  @media (min-width: 760px) {
+    .footer-inner {
+      grid-template-columns: 1.4fr 1fr 1fr;
+      gap: 32px;
+    }
+  }
+
+  .footer-name {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.05rem;
+  }
+
+  .footer-desc,
+  .footer-legal p {
+    margin: 4px 0 0;
+    color: var(--muted);
+    max-width: 42ch;
+  }
+
+  .footer-legal p {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+  }
+
+  a {
+    color: var(--muted);
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: var(--sea);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+</style>

@@ -1,0 +1,90 @@
+---
+import { datasetById } from '../../lib/topik';
+import { getEntry } from 'astro:content';
+
+interface Props {
+  source?: string;
+  dataset?: string | string[];
+  caption: string;
+}
+
+const { source, dataset, caption } = Astro.props;
+
+const sumber = source ? await getEntry('sumber', source) : undefined;
+const datasetIds = dataset ? (Array.isArray(dataset) ? dataset : [dataset]) : [];
+const datasets = [];
+for (const id of datasetIds) {
+  const entry = await datasetById(id);
+  if (entry) datasets.push({ id, data: entry.data });
+}
+---
+
+<figure class="figure">
+  <div class="figure-body">
+    <slot />
+  </div>
+  <figcaption class="figure-caption">
+    <span>{caption}</span>
+    <span class="figure-source">
+      {
+        sumber && (
+          <>
+            Sumber: <a href={sumber.data.url} rel="noopener noreferrer" target="_blank">
+              {sumber.data.penerbit} — {sumber.data.judul}
+            </a>
+          </>
+        )
+      }
+      {
+        datasets.map((d, i) => (
+          <>
+            {(sumber || i > 0) && ' · '}
+            Data: <a href={`#dataset-${d.id}`}>{d.data.nama}</a> ({d.data.lisensi})
+          </>
+        ))
+      }
+      {!sumber && datasets.length === 0 && <span class="missing">Sumber belum ditulis.</span>}
+    </span>
+  </figcaption>
+</figure>
+
+<style>
+  .figure {
+    margin: 2rem 0;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    overflow: hidden;
+    box-shadow: 0 1px 2px rgb(0 0 0 / 0.04);
+  }
+
+  .figure-body {
+    padding: 14px;
+    background: linear-gradient(180deg, var(--surface) 0%, var(--bg) 100%);
+  }
+
+  .figure-caption {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 12px 16px 14px;
+    border-top: 1px solid var(--line);
+    background: var(--surface);
+    font-size: 0.85rem;
+    line-height: 1.55;
+    color: var(--muted);
+  }
+
+  .figure-source {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+  }
+
+  .figure-source a {
+    color: var(--sea);
+  }
+
+  .missing {
+    color: var(--bad);
+  }
+</style>

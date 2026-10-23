@@ -1,0 +1,156 @@
+---
+pertanyaan: "Kenapa Indonesia sering gempa dan punya banyak gunung api?"
+kategori: "planet-bumi"
+level: "pemula"
+menit: 7
+jawabanSingkat: "Indonesia berada di pertemuan beberapa lempeng besar. Saat lempeng bertemu, salah satunya menunjam ke bawah, menimbulkan gempa dan melelehkan batuan yang kemudian muncul sebagai gunung api."
+terkait: ["atmosfer/musim", "ekologi/bioma", "atmosfer/angin-darat-laut"]
+sumber: ["usgs-plate-tectonics", "usgs-plate-motions", "bird-2003-pb2002", "bmkg-gempa"]
+dataset: ["pb2002-plates", "natural-earth-land"]
+glosarium: ["lempeng-tektonik", "zona-subduksi", "cincin-api", "litosfer"]
+status: "terbit"
+diverifikasi: 2026-10-23
+---
+
+import MapView from '../../../components/viz/MapView';
+import SubduksiDiagram from '../../../components/viz/SubduksiDiagram.astro';
+import Figure from '../../../components/sumber/Figure.astro';
+import DataNote from '../../../components/sumber/DataNote.astro';
+import Cite from '../../../components/sumber/Cite.astro';
+import Term from '../../../components/glosarium/Term.astro';
+import Quiz from '../../../components/quiz/Quiz';
+
+<Figure
+  caption="Peta batas lempeng PB2002. Klik sebuah lempeng untuk melihat namanya, atau pakai tombol Dunia dan Indonesia untuk berpindah wilayah."
+  dataset={['pb2002-plates', 'natural-earth-land']}
+>
+  <MapView
+    client:visible
+    layers={['plates', 'land']}
+    view="world"
+    dataset={['pb2002-plates', 'natural-earth-land']}
+  />
+</Figure>
+
+<DataNote>
+  Batas lempeng digambar dari model PB2002, bukan garis resmi. Batas di alam adalah zona yang
+  lebarnya bisa puluhan kilometer, bukan garis tipis.
+</DataNote>
+
+## Kok bisa?
+
+Lapisan luar Bumi yang kaku, <Term istilah="litosfer" />, tidak utuh seperti cangkang telur. Ia
+terpecah menjadi banyak <Term istilah="lempeng-tektonik" /> yang bergerak sangat lambat, dalam
+hitungan sentimeter per tahun. <Cite id="usgs-plate-tectonics" /> Gerakan ini tidak terasa
+sehari-hari, tetapi dalam jutaan tahun ia mengubah bentuk benua dan dasar laut.
+
+Lempeng bisa bertemu dengan tiga cara. Pada batas **divergen**, dua lempeng menjauh dan magma naik
+mengisi celah. Pada batas **konvergen**, dua lempeng bertabrakan; salah satunya bisa menunjam ke
+bawah. Pada batas **transform**, keduanya bergeser saling menyamping. <Cite id="usgs-plate-motions" />
+
+### Yang terjadi di Indonesia
+
+Indonesia terletak di zona pertemuan. Lempeng Indo-Australia bergerak ke utara dan menunjam di
+selatan Sumatra, Jawa, dan Nusa Tenggara. Lempeng Pasifik bergerak ke barat di bagian timur.
+Lempeng Eurasia menjadi tempat keduanya bertemu. <Cite id="usgs-plate-tectonics" />
+
+Proses menunjamnya satu lempeng ke bawah lempeng lain disebut <Term istilah="zona-subduksi" />.
+Di zona ini, batuan yang masuk ke mantel memanas dan sebagian meleleh. Lelehan itu naik kembali ke
+permukaan dan membentuk gunung api. Karena itu deretan gunung api Indonesia sejajar dengan jalur
+subduksi di selatan dan timur. <Cite id="usgs-plate-tectonics" />
+
+<Figure
+  caption="Penampang melintang satu zona subduksi: lempeng samudra menunjam, parit terbentuk di tepinya, pusat gempa makin dalam ke arah benua, dan magma naik menuju gunung api."
+  source="usgs-plate-motions"
+>
+  <SubduksiDiagram />
+</Figure>
+
+<DataNote>
+  Ilustrasi. Ketebalan kerak, kedalaman menunjam, dan sudut bidang kontak tidak digambar sesuai
+  skala. Pusat gempa digambar sebagai titik sepanjang bidang menunjam; gempa nyata juga terjadi
+  di luar garis itu.
+</DataNote>
+
+Gempa terjadi karena batuan di sekitar batas lempeng menahan gerakan selama bertahun-tahun, lalu
+tiba-tiba slip saat tegangannya melewati batas kekuatan batuan. Gempa dangkal bisa terjadi di
+sepanjang sesar, sedangkan gempa sangat kuat sering berasal dari bidang kontak antara dua lempeng.
+
+### Seberapa dalam gempa bisa terjadi?
+
+Titik awal patahan di dalam Bumi disebut fokus, dan titik di permukaan yang tepat di atasnya
+adalah episentrum. Di zona subduksi, fokus gempa tidak terbatas di dekat permukaan: ia mengikuti
+bidang lempeng yang menunjam, sehingga makin jauh ke arah benua, gempanya bisa makin dalam.
+<Cite id="usgs-plate-tectonics" />
+
+Sebagai contoh, gempa berkekuatan magnitudo 8,3 di Bolivia pada 1994 berasal dari kedalaman sekitar
+636 kilometer di dalam zona subduksi Nazca. Karena pusatnya sangat dalam, guncangannya terasa
+sampai jauh tetapi kerusakannya kecil. <Cite id="usgs-plate-motions" /> Gempa dangkal dan dalam
+berbeda cara rasanya: gempa dangkal terasa menyentak singkat, sedangkan gempa dalam biasanya
+goyangnya lebih panjang dan melibatkan wilayah yang lebih luas.
+
+Bandingkan dengan batas transform, seperti Sesar San Andreas di California. Zona sisanya hanya
+sedalam sekitar 15 kilometer — seperempat tebal kerak benua — jadi kalau ada yang bilang
+California akan "tenggelam ke Pasifik" saat gempa besar, itu tidak punya dasar ilmiah. Lempeng di
+sana bergeser mendatar, bukan tenggelam. <Cite id="usgs-plate-tectonics" />
+
+Indonesia juga bagian dari <Term istilah="cincin-api" />, sabuk gunung api dan gempa yang
+mengelilingi Samudra Pasifik. USGS menyebutnya zona paling aktif secara seismik dan vulkanik di
+dunia. <Cite id="usgs-plate-tectonics" /> Informasi gempa terbaru untuk
+Indonesia diterbitkan BMKG; situs ini hanya menautkannya dan tidak mengambil datanya secara
+otomatis. <Cite id="bmkg-gempa" />
+
+### Membaca petanya
+
+Peta di atas memakai model PB2002 yang membagi litosfer menjadi puluhan lempeng besar dan kecil,
+lengkap dengan kode dua huruf untuk masing-masing. <Cite id="bird-2003-pb2002" /> Warna hanya
+pembeda, bukan tanda jenis batas. Perhatikan bahwa Laut Banda, Laut Maluku, dan Kepala Burung punya
+lempengnya sendiri: di wilayah timur Indonesia, potongan litosfernya memang lebih kecil dan rumit.
+
+## Fakta menarik
+
+- Lempeng bergerak dengan kecepatan yang kurang lebih setara pertumbuhan kuku manusia, tetapi gaya yang dihasilkannya cukup untuk mengangkat pegunungan. <Cite id="usgs-plate-motions" />
+- Di Pegunungan Tengah Atlantik, dua lempeng menjauh dengan rata-rata sekitar 2,5 sentimeter per tahun. Selama jutaan tahun, laju sekilometer-per-juta-tahun itu membuat Samudra Atlantik membesar. <Cite id="usgs-plate-motions" />
+- Parit laut bisa mencapai kedalaman 8 sampai 10 kilometer; bagian terdalam dasar laut justru terbentuk oleh subduksi. <Cite id="usgs-plate-motions" />
+- Gempa di zona subduksi bisa terjadi jauh di bawah dasar laut, lalu mengangkat air di atasnya dan memicu tsunami.
+- Lempeng tidak hanya bergerak mendatar; sebagian naik atau turun, dan arahnya bisa berubah dalam rentang jutaan tahun.
+
+<Quiz
+  judul="Kuis"
+  client:visible
+  soal={[
+    {
+      tanya: 'Apa yang terjadi pada batas konvergen?',
+      opsi: [
+        'Dua lempeng menjauh dan magma mengisi celah',
+        'Dua lempeng bertabrakan dan salah satunya bisa menunjam',
+        'Dua lempeng bergeser saling menyamping tanpa bertemu',
+      ],
+      benar: 1,
+      penjelasan:
+        'Pada batas konvergen, lempeng saling mendekat. Salah satunya dapat menunjam ke bawah lempeng lain di zona subduksi.',
+    },
+    {
+      tanya: 'Mengapa Indonesia punya banyak gunung api?',
+      opsi: [
+        'Karena letaknya di ekuator sehingga udaranya panas',
+        'Karena batuan yang menunjam meleleh lalu naik ke permukaan',
+        'Karena banyak danau di dalam gunung',
+      ],
+      benar: 1,
+      penjelasan:
+        'Subduksi membawa batuan ke kedalaman, sebagian meleleh, dan lelehan itu naik membentuk gunung api.',
+    },
+    {
+      tanya: 'Apa arti warna berbeda pada peta lempeng di halaman ini?',
+      opsi: [
+        'Menandai jenis batas lempeng',
+        'Sekadar pembeda antar lempeng',
+        'Menandai lempeng yang paling cepat bergerak',
+      ],
+      benar: 1,
+      penjelasan:
+        'Warna hanya membantu mata membedakan satu lempeng dari yang lain. Jenis batas tidak dikodekan dengan warna di peta ini.',
+    },
+  ]}
+/>

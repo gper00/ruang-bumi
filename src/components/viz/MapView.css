@@ -1,0 +1,213 @@
+.mv {
+  display: grid;
+  gap: 10px;
+}
+
+.mv-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  align-items: center;
+}
+
+.mv-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* Desktop already supports drag, so the touch-only toggle is hidden there. */
+@media (hover: hover) and (pointer: fine) {
+  .mv-drag {
+    display: none;
+  }
+}
+
+.mv .btn {
+  min-height: 32px;
+  padding: 4px 12px;
+  font-size: 0.74rem;
+}
+
+.mv-canvas {
+  position: relative;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--ocean);
+}
+
+.mv-map {
+  width: 100%;
+  height: 100%;
+  background: var(--ocean);
+}
+
+.mv-status {
+  position: absolute;
+  inset: auto 12px 12px auto;
+  margin: 0;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--muted);
+  z-index: 500;
+}
+
+.mv-status.error {
+  color: var(--bad);
+  border-color: var(--bad);
+}
+
+.mv-info {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  z-index: 500;
+  max-width: min(280px, calc(100% - 24px));
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.16);
+}
+
+.mv-info-judul {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.92rem;
+}
+
+.mv-info-ket {
+  margin: 2px 0 6px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--muted);
+}
+
+.mv-info-sumber {
+  display: inline-block;
+  margin: 0 8px 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--sea);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.mv-tutup {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  padding: 2px 10px;
+  cursor: pointer;
+}
+
+.mv-alt {
+  border-top: 1px solid var(--line);
+  padding-top: 8px;
+  font-size: 0.82rem;
+}
+
+.mv-alt summary {
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--muted);
+}
+
+.mv-alt-nota {
+  margin: 6px 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.mv-alt ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  max-height: 140px;
+  overflow-y: auto;
+}
+
+.mv-alt button {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--fg);
+  padding: 2px 9px;
+  font-size: 0.72rem;
+  cursor: pointer;
+}
+
+.mv-alt button:hover {
+  border-color: var(--sea);
+}
+
+.mv-alt button span {
+  font-family: var(--font-mono);
+  color: var(--muted);
+  font-size: 0.65rem;
+  margin-left: 2px;
+}
+
+.mv-sumber {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--muted);
+}
+
+/* Leaflet overrides: use the site palette instead of Leaflet's defaults. */
+.mv .leaflet-container {
+  font-family: var(--font-body);
+  background: var(--ocean);
+}
+
+.mv .leaflet-control-zoom a {
+  background: var(--surface);
+  color: var(--fg);
+  border-color: var(--line);
+}
+
+.mv .leaflet-control-zoom a:hover {
+  background: var(--surface-2);
+}
+
+.mv .leaflet-control-attribution {
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+}
+
+.mv .leaflet-control-attribution a {
+  color: var(--sea);
+}
+
+.mv .leaflet-tooltip {
+  background: var(--surface);
+  color: var(--fg);
+  border: 1px solid var(--line);
+  font-size: 0.75rem;
+  box-shadow: none;
+}
+
+.mv .leaflet-tooltip-top::before {
+  border-top-color: var(--line);
+}
+
+.mv .mv-plate:focus-visible {
+  outline: 2px solid var(--heat);
+  outline-offset: 1px;
+}

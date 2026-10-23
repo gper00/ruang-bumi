@@ -1,0 +1,19 @@
+---
+import { getCollection, render } from 'astro:content';
+import TopikLayout from '../../layouts/TopikLayout.astro';
+
+export async function getStaticPaths() {
+  const topik = await getCollection('topik', (entry) => entry.data.status === 'terbit');
+  return topik.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content, headings } = await render(entry);
+---
+
+<TopikLayout entry={entry} headings={headings}>
+  <Content />
+</TopikLayout>

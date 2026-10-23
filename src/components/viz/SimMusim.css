@@ -1,0 +1,116 @@
+.sms {
+  display: grid;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.sms-kanvas {
+  background: var(--surface-2);
+}
+
+.sms-kanvas svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.sms-sun {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.14em;
+  fill: var(--muted);
+}
+
+.sms-kutub {
+  font-family: var(--font-mono);
+  font-size: 7px;
+  fill: var(--muted);
+}
+
+.sms-anotasi {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  fill: var(--muted);
+}
+
+.sms-kontrol {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.sms-slider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+}
+
+.sms-slider-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+.sms-slider input {
+  flex: 1;
+  accent-color: var(--sea);
+}
+
+.sms-bulan {
+  margin: 0;
+  min-width: 8ch;
+  text-align: right;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+}
+
+.sms-hasil {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 1px;
+  background: var(--line);
+}
+
+.sms-hasil > div {
+  padding: 10px 14px;
+  background: var(--surface);
+}
+
+.sms-label {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--muted);
+}
+
+.sms-nilai {
+  margin: 2px 0 0;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.sms-catatan,
+.sms-ilustrasi {
+  margin: 0;
+  padding: 10px 14px;
+  font-size: 0.84rem;
+  color: var(--muted);
+}
+
+.sms-catatan {
+  border-top: 1px solid var(--line);
+}
+
+.sms-ilustrasi {
+  border-top: 1px dashed var(--line-strong);
+  font-size: 0.76rem;
+  font-family: var(--font-mono);
+}

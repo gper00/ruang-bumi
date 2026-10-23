@@ -1,0 +1,137 @@
+.siklus {
+  display: grid;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.siklus-kanvas svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: var(--surface-2);
+}
+
+.siklus-kecil {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  fill: var(--muted);
+}
+
+.siklus-hujan {
+  animation: siklus-turun 1.6s linear infinite;
+}
+
+.siklus-awan {
+  animation: siklus-melayang 8s ease-in-out infinite alternate;
+}
+
+.siklus-panah {
+  animation: siklus-pudar 2.8s ease-in-out infinite alternate;
+}
+
+@keyframes siklus-turun {
+  0% {
+    transform: translateY(-4px);
+    opacity: 0.35;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(6px);
+    opacity: 0.2;
+  }
+}
+
+@keyframes siklus-melayang {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(4px);
+  }
+}
+
+@keyframes siklus-pudar {
+  from {
+    opacity: 0.55;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .siklus-hujan,
+  .siklus-awan,
+  .siklus-panah {
+    animation: none;
+  }
+}
+
+.siklus-langkah {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 12px 14px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.siklus-tab {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  padding: 5px 12px;
+  cursor: pointer;
+}
+
+.siklus-tab[aria-selected='true'] {
+  border-color: var(--sea);
+  background: var(--sea-soft);
+  color: var(--fg);
+}
+
+.siklus-tab:hover {
+  border-color: var(--sea);
+}
+
+.siklus-panel {
+  padding: 14px;
+  display: grid;
+  gap: 4px;
+  min-height: 150px;
+}
+
+.siklus-judul {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.siklus-ringkas {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.siklus-detail {
+  margin: 0;
+  font-size: 0.86rem;
+  color: var(--muted);
+  max-width: 62ch;
+}
+
+.siklus-ilustrasi {
+  margin: 0;
+  padding: 8px 14px 12px;
+  border-top: 1px dashed var(--line-strong);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--muted);
+}

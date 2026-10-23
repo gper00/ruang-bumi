@@ -1,0 +1,143 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Breadcrumb from '../../components/layout/Breadcrumb.astro';
+import TopicCard from '../../components/topik/TopicCard.astro';
+import { KATEGORI, getTopikTerbit } from '../../lib/topik';
+
+export async function getStaticPaths() {
+  return KATEGORI.map((k) => ({ params: { kategori: k.id } }));
+}
+
+const { kategori } = Astro.params;
+const info = KATEGORI.find((k) => k.id === kategori);
+if (!info) throw new Error(`Kategori tidak dikenal: ${kategori}`);
+
+const semua = await getTopikTerbit();
+const topik = semua.filter((t) => t.data.kategori === kategori);
+---
+
+<Layout
+  title={info.label}
+  description={`${info.deskripsi} ${topik.length} topik dengan sumber terbuka.`}
+>
+  <div class="wrap halaman">
+    <Breadcrumb
+      items={[
+        { href: '/', label: 'Beranda' },
+        { href: '/topik/', label: 'Semua topik' },
+        { label: info.label },
+      ]}
+    />
+
+    <header class="kepala" data-kategori={kategori}>
+      <p class="label"><span class="tanda" aria-hidden="true"></span> Kategori</p>
+      <h1>{info.label}</h1>
+      <p class="intro">{info.deskripsi}</p>
+    </header>
+
+    {
+      topik.length === 0 ? (
+        <p class="kosong">Belum ada topik terbit di kategori ini. Sedang kami tulis.</p>
+      ) : (
+        <div class="grid-topik">
+          {topik.map((entry) => (
+            <TopicCard entry={entry} kategori={false} />
+          ))}
+        </div>
+      )
+    }
+
+    <nav class="kategori-lain" aria-label="Kategori lain">
+      {
+        KATEGORI.filter((k) => k.id !== kategori).map((k) => (
+          <a href={`/kategori/${k.id}/`}>{k.label}</a>
+        ))
+      }
+    </nav>
+  </div>
+</Layout>
+
+<style>
+  .halaman {
+    padding-block: 20px 30px;
+  }
+
+  .kepala {
+    margin: 18px 0 26px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--line);
+    position: relative;
+  }
+
+  .kepala::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 64px;
+    height: 3px;
+    background: var(--aksen, var(--sea));
+  }
+
+  .tanda {
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    border-radius: 2px;
+    background: var(--aksen, var(--sea));
+    margin-right: 4px;
+  }
+
+  .kepala h1 {
+    margin: 6px 0 8px;
+    font-size: clamp(1.9rem, 4vw, 2.6rem);
+    font-weight: 800;
+    text-wrap: balance;
+  }
+
+  .intro {
+    max-width: 60ch;
+    margin: 0;
+    color: var(--muted);
+  }
+
+  .grid-topik {
+    display: grid;
+    gap: 14px;
+  }
+
+  @media (min-width: 700px) {
+    .grid-topik {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  .kosong {
+    color: var(--muted);
+    padding: 24px;
+    border: 1px dashed var(--line-strong);
+    border-radius: var(--radius);
+  }
+
+  .kategori-lain {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 32px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+  }
+
+  .kategori-lain a {
+    padding: 5px 12px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--muted);
+    text-decoration: none;
+  }
+
+  .kategori-lain a:hover {
+    color: var(--sea);
+    border-color: var(--sea);
+  }
+</style>

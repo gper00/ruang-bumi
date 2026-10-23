@@ -1,0 +1,33 @@
+---
+import { cariIstilah, istilahSlug } from '../../lib/glosarium';
+
+interface Props {
+  istilah: string;
+}
+
+const { istilah } = Astro.props;
+const item = cariIstilah(istilah);
+const label = item?.istilah ?? istilah;
+---
+
+<a class="term" href={`/glosarium/#${istilahSlug(label)}`} title={item?.definisi}>
+  {label}<span aria-hidden="true">*</span>
+</a>
+
+<style>
+  .term {
+    color: inherit;
+    text-decoration: underline dotted var(--sea);
+    text-underline-offset: 3px;
+  }
+
+  .term:hover {
+    color: var(--sea);
+  }
+
+  .term span {
+    color: var(--sea);
+    font-size: 0.7em;
+    vertical-align: super;
+  }
+</style>

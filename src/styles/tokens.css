@@ -1,0 +1,87 @@
+:root {
+  --bg: #eff5f6;
+  --surface: #ffffff;
+  --surface-2: #e6eff1;
+  --fg: #0f2229;
+  --muted: #4b6670;
+  --line: #cbdadf;
+  --line-strong: #9fb9c1;
+  --sea: #14789a;
+  --sea-soft: #d5ebf2;
+  --heat: #c9461f;
+  --heat-soft: #f9ddd3;
+  /* Ink-safe variant: --heat on --surface-2 is only 4.1:1; this passes 4.5:1. */
+  --heat-ink: #a5371a;
+  --ok: #1f7a4d;
+  --ok-soft: #d9efe3;
+  --bad: #b3342f;
+  --bad-soft: #f9dedd;
+  --ocean: #d9eaf0;
+  --land: #f1f4ec;
+  --coast: #7e9ca5;
+  --mantle: #f0d9cf;
+  --sand: #e2c98f;
+  --font-display: 'Bricolage Grotesque', 'Trebuchet MS', sans-serif;
+  --font-body: 'Figtree', 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+  --wrap: 1120px;
+  --radius: 12px;
+  /* Kategori accents. Referencing (not copying) the base tokens means they
+     follow the dark theme automatically. */
+  --acc-planet: var(--heat);
+  --acc-atmosfer: var(--sea);
+  --acc-laut: var(--coast);
+  --acc-daratan: color-mix(in srgb, var(--sand) 55%, var(--fg) 45%);
+  --acc-ekologi: var(--ok);
+  --acc-penutup: var(--line-strong);
+}
+
+[data-theme='dark'] {
+  --bg: #0b181d;
+  --surface: #12252c;
+  --surface-2: #173039;
+  --fg: #e3eef1;
+  --muted: #94aeb7;
+  --line: #264049;
+  --line-strong: #3d606b;
+  --sea: #4fb5d6;
+  --sea-soft: #173a47;
+  --heat: #f0835e;
+  --heat-ink: #f0835e;
+  --heat-soft: #3d231b;
+  --ok: #5cc08c;
+  --ok-soft: #143a2a;
+  --bad: #f07d77;
+  --bad-soft: #3d1e1d;
+  --ocean: #0d222b;
+  --land: #1f3b3b;
+  --coast: #4c7a84;
+  --mantle: #3a2620;
+  --sand: #6b5a3a;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: #0b181d;
+    --surface: #12252c;
+    --surface-2: #173039;
+    --fg: #e3eef1;
+    --muted: #94aeb7;
+    --line: #264049;
+    --line-strong: #3d606b;
+    --sea: #4fb5d6;
+    --sea-soft: #173a47;
+    --heat: #f0835e;
+    --heat-ink: #f0835e;
+    --heat-soft: #3d231b;
+    --ok: #5cc08c;
+    --ok-soft: #143a2a;
+    --bad: #f07d77;
+    --bad-soft: #3d1e1d;
+    --ocean: #0d222b;
+    --land: #1f3b3b;
+    --coast: #4c7a84;
+    --mantle: #3a2620;
+    --sand: #6b5a3a;
+  }
+}

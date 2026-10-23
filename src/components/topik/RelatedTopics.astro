@@ -1,0 +1,67 @@
+---
+import { topikHref, topikTerkait, type Topik } from '../../lib/topik';
+
+interface Props {
+  entry: Topik;
+}
+
+const { entry } = Astro.props;
+const daftar = await topikTerkait(entry);
+---
+
+{
+  daftar.length > 0 && (
+    <nav class="terkait" aria-labelledby="terkait-judul">
+      <h2 id="terkait-judul" class="label">Lanjut belajar</h2>
+      <ul>
+        {daftar.map((t) => (
+          <li>
+            <a href={topikHref(t)}>{t.data.pertanyaan}</a>
+            <span>{t.data.menit} menit</span>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  )
+}
+
+<style>
+  .terkait {
+    margin-top: 1rem;
+  }
+
+  .terkait ul {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 0;
+    display: grid;
+    gap: 10px;
+  }
+
+  .terkait li {
+    display: grid;
+    gap: 1px;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--surface);
+  }
+
+  .terkait a {
+    color: var(--fg);
+    text-decoration: none;
+    font-size: 0.9rem;
+    line-height: 1.35;
+    font-weight: 600;
+  }
+
+  .terkait a:hover {
+    color: var(--sea);
+  }
+
+  .terkait span {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--muted);
+  }
+</style>

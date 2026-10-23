@@ -1,0 +1,154 @@
+---
+/**
+ * Grafik sebaran air Bumi dari tabel USGS. Statis (tanpa JS).
+ * Bar atas: seluruh air. Bar bawah: rincian air tawar.
+ * Legenda teks di bawah bar berfungsi sebagai alternatif aksesibel.
+ */
+const bar1 = [
+  { nama: 'Laut', nilai: '96,5%', lebar: 96.5, warna: 'var(--sea)' },
+  { nama: 'Air tawar', nilai: '2,5%', lebar: 2.5, warna: 'var(--ok)' },
+];
+
+const bar2 = [
+  { nama: 'Es dan gletser', nilai: '68,7%', lebar: 68.7, warna: 'var(--coast)' },
+  { nama: 'Air tanah', nilai: '30,1%', lebar: 30.1, warna: 'var(--sand)' },
+  { nama: 'Air permukaan dan penyimpanan kecil lain', nilai: '1,2%', lebar: 1.2, warna: 'var(--heat)' },
+];
+---
+
+<div class="da">
+  <div class="da-blok">
+    <p class="da-judul">Seluruh air di Bumi</p>
+    <div class="da-bar" aria-hidden="true">
+      {
+        bar1.map((s) => (
+          <span class="da-seg" style={`width:${s.lebar}%;background:${s.warna}`} />
+        ))
+      }
+    </div>
+    <ul class="da-leg">
+      {
+        bar1.map((s) => (
+          <li>
+            <span class="da-sw" style={`background:${s.warna}`} aria-hidden="true" />
+            <span class="da-nama">{s.nama}</span>
+            <span class="da-nilai">{s.nilai}</span>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="da-note">
+      Sisa sekitar 1 persen adalah air asin lain, seperti air tanah asin dan danau asin. Angka
+      dibulatkan.
+    </p>
+  </div>
+
+  <div class="da-blok">
+    <p class="da-judul">Air tawar saja (bagian 2,5 persen tadi)</p>
+    <div class="da-bar" aria-hidden="true">
+      {
+        bar2.map((s) => (
+          <span class="da-seg" style={`width:${s.lebar}%;background:${s.warna}`} />
+        ))
+      }
+    </div>
+    <ul class="da-leg">
+      {
+        bar2.map((s) => (
+          <li>
+            <span class="da-sw" style={`background:${s.warna}`} aria-hidden="true" />
+            <span class="da-nama">{s.nama}</span>
+            <span class="da-nilai">{s.nilai}</span>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="da-note">Persentase dihitung terhadap seluruh air tawar, bukan terhadap seluruh air.</p>
+  </div>
+</div>
+
+<style>
+  .da {
+    display: grid;
+    gap: 26px;
+    padding: 6px 2px;
+  }
+
+  .da-blok {
+    display: grid;
+    gap: 8px;
+  }
+
+  .da-judul {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .da-bar {
+    display: flex;
+    height: 44px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--surface-2);
+  }
+
+  .da-seg {
+    display: block;
+    height: 100%;
+    min-width: 5px;
+    border-right: 1px solid var(--surface);
+  }
+
+  .da-seg:last-child {
+    border-right: 0;
+  }
+
+  .da-leg {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 5px;
+  }
+
+  .da-leg li {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 0.88rem;
+    max-width: none;
+  }
+
+  .da-sw {
+    width: 11px;
+    height: 11px;
+    border-radius: 3px;
+    flex-shrink: 0;
+    border: 1px solid rgb(0 0 0 / 0.12);
+  }
+
+  .da-nama {
+    color: var(--fg);
+  }
+
+  .da-nilai {
+    margin-left: auto;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .da-note {
+    margin: 2px 0 0;
+    font-size: 0.78rem;
+    line-height: 1.55;
+    color: var(--muted);
+    max-width: none;
+  }
+</style>

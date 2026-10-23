@@ -1,0 +1,118 @@
+---
+pertanyaan: "Kenapa angin di pantai berubah arah antara siang dan malam?"
+kategori: "atmosfer"
+level: "pemula"
+menit: 5
+jawabanSingkat: "Darat dan laut tidak memanas dengan kecepatan yang sama. Siang hari darat lebih panas, jadi angin bertiup dari laut ke darat. Malam hari laut lebih hangat, jadi angin berbalik dari darat ke laut."
+terkait: ["atmosfer/musim", "atmosfer/siklus-air", "ekologi/bioma"]
+sumber: ["noaa-sea-breeze", "noaa-jetstream-wind"]
+glosarium: ["angin-laut", "angin-darat", "kalor-jenis"]
+status: "terbit"
+diverifikasi: 2026-10-23
+---
+
+import SimAnginLaut from '../../../components/viz/SimAnginLaut';
+import Figure from '../../../components/sumber/Figure.astro';
+import DataNote from '../../../components/sumber/DataNote.astro';
+import Cite from '../../../components/sumber/Cite.astro';
+import Term from '../../../components/glosarium/Term.astro';
+import Quiz from '../../../components/quiz/Quiz';
+
+<Figure
+  caption="Geser slider jam untuk melihat perubahan suhu dan arah angin. Panah menunjukkan arah udara yang bergerak."
+  source="noaa-sea-breeze"
+>
+  <SimAnginLaut client:visible />
+</Figure>
+
+<DataNote>
+  Simulasi ini ilustrasi. Suhu darat dan laut mengikuti pola harian buatan, bukan data stasiun
+  cuaca. Yang ditiru hanya bentuk perubahannya: darat naik turun lebih cepat daripada laut.
+</DataNote>
+
+## Kok bisa?
+
+Angin bergerak karena ada perbedaan tekanan udara. Udara selalu mencari tempat yang tekanannya
+lebih rendah. Di pantai, perbedaan itu muncul setiap hari karena darat dan laut merespons panas
+Matahari dengan cara berbeda. <Cite id="noaa-jetstream-wind" />
+
+Air punya kalor jenis jauh lebih besar daripada pasir dan tanah. Artinya, untuk menaikkan suhu
+air sebanyak satu derajat, dibutuhkan lebih banyak energi daripada menaikkan suhu daratan.
+<Cite id="noaa-sea-breeze" /> Karena itu laut lambat panas dan lambat dingin. Daratan cepat panas
+di siang hari dan cepat melepas panas setelah Matahari terbenam. Istilah
+<Term istilah="kalor-jenis" /> merangkum sifat ini.
+
+NOAA menambah dua alasan kenapa laut begitu "sabar" menyimpan panas. Pertama, air yang jernih
+membuat sinar Matahari menembus jauh ke bawah — di air tropis yang bersih cahaya bisa tercapai
+kedalaman 150 sampai 200 meter — sehingga energinya terbagi ke volume air yang sangat besar.
+Kedua, angin dan gelombang terus mengaduk air permukaan, memindahkan panasnya ke lapisan bawah.
+Di darat, sebaliknya, panas Matahari hanya tersimpan di beberapa sentimeter teratas tanah.
+<Cite id="noaa-sea-breeze" />
+
+### Siang hari: angin laut
+
+Pada siang hari, daratan menerima panas lebih cepat. Udara di atas darat ikut menghangat, memuai,
+dan naik. Tekanan udara di dekat permukaan darat menurun, sehingga udara yang lebih dingin di atas
+laut mengalir masuk ke darat. Inilah **angin laut**. <Cite id="noaa-sea-breeze" />
+
+### Malam hari: angin darat
+
+Setelah Matahari terbenam, daratan cepat kehilangan panas, sedangkan laut masih menyimpan panas
+yang dikumpulkannya sepanjang siang. Udara di atas laut kini lebih hangat dan naik, sehingga udara
+dari darat mengalir ke laut. Inilah **angin darat**. <Cite id="noaa-sea-breeze" />
+
+Perubahan arah biasanya terjadi pada pagi dan sore hari, saat suhu kedua permukaan hampir sama.
+Pada jam-jam itu angin bisa terasa hampir berhenti sebelum berbalik arah. Di daerah tropis yang
+lembap, angin laut yang masuk pada siang hingga sore juga sering membantu pembentukan awan hujan
+di atas daratan.
+
+### Bagaimana angin bisa berubah arah?
+
+Angin adalah udara yang bergerak secara horizontal, dan penggeraknya adalah perbedaan tekanan:
+udara selalu bergerak dari daerah bertekanan tinggi menuju bertekanan rendah. Semakin curam
+perbedaan tekanan antara dua tempat, semakin kencang anginnya. <Cite id="noaa-jetstream-wind" />
+
+Di pantai, perbedaan tekanan itu dibuat oleh pemanasan yang berubah-ubah siang dan malam. Pada
+siang hari tekanan rendah terbentuk di atas darat yang panas, lalu berbalik pada malam hari saat
+darat yang sudah dingin menjaga tekanannya lebih tinggi daripada udara di atas laut yang masih
+hangat. Karena itu arah angin ikut berbalik dua kali sehari. <Cite id="noaa-sea-breeze" />
+
+## Fakta menarik
+
+- Karena angin darat bertiup ke laut pada dini hari, sebagian nelayan tradisional memanfaatkannya untuk berangkat melaut, lalu memakai angin laut untuk pulang pada siang hari.
+- Di air tropis yang jernih, cahaya Matahari bisa menembus sampai kedalaman 150–200 meter. Itulah salah satu alasan volume air yang dipanaskan sangat besar dan suhunya naik perlahan. <Cite id="noaa-sea-breeze" />
+- Angin laut paling terasa di dekat pantai dan melemah ketika masuk lebih jauh ke darat. Jangkauannya bergantung pada bentuk pantai dan kondisi cuaca. <Cite id="noaa-sea-breeze" />
+- Prinsip yang sama terjadi di lembah: siang hari udara naik dari lembah, malam hari turun dari lereng gunung.
+- Angin muson yang menentukan musim di Indonesia juga bekerja dengan logika beda tekanan, tetapi skalanya benua, bukan satu pantai. <Cite id="noaa-jetstream-wind" />
+
+<Quiz
+  judul="Kuis"
+  client:visible
+  soal={[
+    {
+      tanya: 'Pada siang hari yang cerah, angin di pantai bertiup dari arah mana?',
+      opsi: ['Dari darat ke laut', 'Dari laut ke darat', 'Tidak ada angin sama sekali'],
+      benar: 1,
+      penjelasan:
+        'Darat lebih cepat panas, udara di atasnya naik, dan udara dari laut mengalir masuk. Itu angin laut.',
+    },
+    {
+      tanya: 'Mengapa daratan lebih cepat panas daripada laut?',
+      opsi: [
+        'Karena daratan lebih dekat ke Matahari',
+        'Karena air membutuhkan lebih banyak energi untuk naik suhunya',
+        'Karena laut selalu tertutup awan',
+      ],
+      benar: 1,
+      penjelasan:
+        'Air punya kalor jenis besar, sehingga butuh lebih banyak energi untuk menaikkan suhunya. Daratan naik suhunya lebih cepat.',
+    },
+    {
+      tanya: 'Pukul dua pagi, angin di pantai paling mungkin bertiup ke arah mana?',
+      opsi: ['Dari darat ke laut', 'Dari laut ke darat', 'Berbalik setiap beberapa menit'],
+      benar: 0,
+      penjelasan:
+        'Pada malam hari laut masih lebih hangat daripada darat, jadi udara naik di atas laut dan angin darat mengalir ke laut.',
+    },
+  ]}
+/>

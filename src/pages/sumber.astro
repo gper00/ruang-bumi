@@ -1,0 +1,231 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import Breadcrumb from '../components/layout/Breadcrumb.astro';
+import { getTopikTerbit, tanggalIndo, topikHref } from '../lib/topik';
+
+const sumber = (await getCollection('sumber')).sort((a, b) =>
+  a.data.penerbit.localeCompare(b.data.penerbit, 'id'),
+);
+const dataset = (await getCollection('dataset')).sort((a, b) =>
+  a.data.nama.localeCompare(b.data.nama, 'id'),
+);
+const topik = await getTopikTerbit();
+
+const pemakaian = new Map<string, typeof topik>();
+for (const t of topik) {
+  for (const id of [...t.data.sumber, ...t.data.dataset]) {
+    if (!pemakaian.has(id)) pemakaian.set(id, []);
+    pemakaian.get(id)!.push(t);
+  }
+}
+
+const jenisLabel: Record<string, string> = {
+  web: 'Laman web',
+  jurnal: 'Jurnal',
+  buku: 'Buku',
+  dataset: 'Dataset',
+  video: 'Video',
+};
+---
+
+<Layout
+  title="Sumber & lisensi"
+  description="Semua sumber dan dataset yang dipakai Ruang Bumi, lengkap dengan lisensi dan tanggal akses."
+>
+  <div class="wrap halaman">
+    <Breadcrumb items={[{ href: '/', label: 'Beranda' }, { label: 'Sumber & lisensi' }]} />
+
+    <header class="kepala">
+      <p class="label">{sumber.length} sumber · {dataset.length} dataset</p>
+      <h1>Sumber &amp; lisensi</h1>
+      <p class="intro">
+        Halaman ini adalah daftar lengkap rujukan yang dipakai situs. Semua tautan dibuka di tab
+        baru. Kalau sebuah tautan mati, itu bukan alasan untuk menghapus klaim: kami cari salinan
+        resminya lebih dulu.
+      </p>
+    </header>
+
+    <section aria-labelledby="daftar-sumber">
+      <h2 id="daftar-sumber" class="label">Sumber</h2>
+      <ul class="daftar">
+        {
+          sumber.map((s) => (
+            <li>
+              <div class="baris">
+                <p class="judul">
+                  <a href={s.data.url} rel="noopener noreferrer" target="_blank">
+                    {s.data.judul}
+                  </a>
+                </p>
+                <span class="chip">{jenisLabel[s.data.jenis] ?? s.data.jenis}</span>
+              </div>
+              <p class="meta">
+                {s.data.penerbit} · diakses {tanggalIndo(s.data.diakses)} · lisensi {s.data.lisensi}
+              </p>
+              {s.data.catatan && <p class="catatan">{s.data.catatan}</p>}
+              {
+                (pemakaian.get(s.data.id) ?? []).length > 0 && (
+                  <p class="dipakai">
+                    Dipakai di:{' '}
+                    {(pemakaian.get(s.data.id) ?? []).map((t, i) => (
+                      <>
+                        {i > 0 && ', '}
+                        <a href={topikHref(t)}>{t.data.pertanyaan}</a>
+                      </>
+                    ))}
+                  </p>
+                )
+              }
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section aria-labelledby="daftar-dataset" class="blok">
+      <h2 id="daftar-dataset" class="label">Dataset</h2>
+      <ul class="daftar">
+        {
+          dataset.map((d) => (
+            <li>
+              <p class="judul">{d.data.nama}</p>
+              <p class="meta">
+                {d.data.lisensi} · diambil {tanggalIndo(d.data.diambil)} · asal {new URL(d.data.asal).hostname}
+              </p>
+              {d.data.catatan && <p class="catatan">{d.data.catatan}</p>}
+              <p class="dipakai">
+                Berkas: <code>{d.data.keluaran ?? '—'}</code>
+              </p>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section class="kebijakan" aria-labelledby="kebijakan">
+      <h2 id="kebijakan">Kebijakan singkat</h2>
+      <ul>
+        <li>NASA, NOAA, dan USGS dipakai sebagai rujukan dan gambar; kredit tetap dicantumkan.</li>
+        <li>BMKG hanya ditautkan sebagai rujukan, bukan sumber data otomatis.</li>
+        <li>Data lempeng memakai PB2002 (Bird, 2003) lewat berkas turunan berlisensi ODbL.</li>
+        <li>Teks ditulis ulang dengan kata sendiri; tidak ada kalimat yang disalin.</li>
+        <li>Visual yang disederhanakan diberi label ilustrasi.</li>
+      </ul>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .halaman {
+    padding-block: 20px 30px;
+  }
+
+  .kepala {
+    margin: 18px 0 26px;
+  }
+
+  .kepala h1 {
+    margin: 6px 0 8px;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 800;
+  }
+
+  .intro {
+    max-width: 62ch;
+    margin: 0;
+    color: var(--muted);
+  }
+
+  .blok {
+    margin-top: 34px;
+  }
+
+  .daftar {
+    list-style: none;
+    padding: 0;
+    margin: 8px 0 0;
+    display: grid;
+    gap: 16px;
+  }
+
+  .daftar li {
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .baris {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 8px;
+  }
+
+  .judul {
+    margin: 0;
+    font-size: 0.96rem;
+    font-weight: 600;
+  }
+
+  .judul a {
+    color: var(--fg);
+    text-decoration: none;
+  }
+
+  .judul a:hover {
+    color: var(--sea);
+    text-decoration: underline;
+  }
+
+  .meta {
+    margin: 3px 0 0;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--muted);
+  }
+
+  .catatan {
+    margin: 4px 0 0;
+    font-size: 0.84rem;
+    color: var(--muted);
+  }
+
+  .dipakai {
+    margin: 6px 0 0;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  .dipakai a {
+    color: var(--sea);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  code {
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+  }
+
+  .kebijakan {
+    margin-top: 36px;
+    padding: 18px 20px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+
+  .kebijakan h2 {
+    margin: 0 0 8px;
+    font-size: 1rem;
+  }
+
+  .kebijakan ul {
+    margin: 0;
+    padding-left: 1.1rem;
+    font-size: 0.88rem;
+    color: var(--muted);
+    display: grid;
+    gap: 4px;
+  }
+</style>

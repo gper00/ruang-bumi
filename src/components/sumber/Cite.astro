@@ -1,0 +1,118 @@
+---
+import { getTopikBySlug, sumberHalaman, topikDariPathname, tanggalIndo } from '../../lib/topik';
+
+interface Props {
+  id: string;
+}
+
+const { id } = Astro.props;
+const slug = topikDariPathname(Astro.url.pathname);
+const entry = slug ? await getTopikBySlug(slug) : undefined;
+const daftar = entry ? await sumberHalaman(entry) : [];
+const sumber = daftar.find((s) => s.id === id);
+const nomor = sumber?.nomor ?? '?';
+const popoverId = `cite-${id}-${nomor}`;
+---
+
+<sup class="cite">
+  <button
+    type="button"
+    class="cite-btn"
+    popovertarget={popoverId}
+    aria-label={sumber ? `Sumber ${nomor}: ${sumber.data.penerbit}` : `Sumber tidak ditemukan: ${id}`}
+  >[{nomor}]</button>
+  <span class="cite-pop" id={popoverId} popover>
+    {
+      sumber ? (
+        <>
+          <strong>{sumber.data.penerbit}</strong>
+          <em>{sumber.data.judul}</em>
+          <span class="cite-meta">
+            {sumber.data.jenis} · diakses {tanggalIndo(sumber.data.diakses)}
+          </span>
+          <a href={sumber.data.url} rel="noopener noreferrer" target="_blank">
+            Buka sumber
+          </a>
+          <a href={`#sumber-${id}`}>Lihat di daftar sumber</a>
+        </>
+      ) : (
+        <span>Id sumber <code>{id}</code> tidak ada di `sumber/`.</span>
+      )
+    }
+  </span>
+</sup>
+
+<style>
+  .cite {
+    font-family: var(--font-mono);
+    font-size: 0.7em;
+    line-height: 1;
+    vertical-align: super;
+  }
+
+  .cite-btn {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    line-height: 1.4;
+    color: var(--sea);
+    background: none;
+    border: 0;
+    /* WCAG 2.2 AA target size (2.5.8): min 24×24px. */
+    min-height: 24px;
+    min-width: 24px;
+    padding: 1px 3px;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .cite-btn:hover {
+    color: var(--heat);
+  }
+
+  .cite-pop {
+    max-width: min(22rem, 90vw);
+    margin: auto;
+    padding: 14px 16px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--surface);
+    color: var(--fg);
+    box-shadow: 0 12px 32px rgb(0 0 0 / 0.18);
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+
+  .cite-pop::backdrop {
+    background: rgb(8 20 24 / 0.25);
+  }
+
+  .cite-pop strong,
+  .cite-pop em,
+  .cite-pop span,
+  .cite-pop a {
+    display: block;
+  }
+
+  .cite-pop em {
+    margin-top: 2px;
+    color: var(--muted);
+  }
+
+  .cite-meta {
+    margin: 6px 0 10px;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--muted);
+  }
+
+  .cite-pop a {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--sea);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    margin-top: 4px;
+  }
+</style>

@@ -1,0 +1,111 @@
+.bio {
+  display: grid;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.bio-kanvas svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: var(--surface-2);
+}
+
+.bio-sabuk.aktif rect:nth-child(2) {
+  stroke: var(--heat);
+}
+
+.bio-nama {
+  font-family: var(--font-body);
+  font-size: 11px;
+  fill: #14282f;
+}
+
+.bio-lat {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  fill: #33474e;
+}
+
+.bio-sumbu {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  fill: var(--muted);
+}
+
+.bio-pilih {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  padding: 12px 14px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.bio-chip {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  padding: 4px 10px;
+  cursor: pointer;
+}
+
+.bio-chip:hover {
+  border-color: var(--sea);
+}
+
+.bio-chip[aria-pressed='true'] {
+  border-color: var(--sea);
+  background: var(--sea-soft);
+  color: var(--fg);
+}
+
+.bio-panel {
+  display: grid;
+  gap: 4px;
+  padding: 14px;
+  min-height: 130px;
+}
+
+.bio-judul {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: baseline;
+}
+
+.bio-judul span {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.bio-ciri {
+  margin: 0;
+  font-size: 0.88rem;
+}
+
+.bio-contoh {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.bio-ilustrasi {
+  margin: 0;
+  padding: 8px 14px 12px;
+  border-top: 1px dashed var(--line-strong);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--muted);
+}

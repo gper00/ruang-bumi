@@ -1,0 +1,9 @@
+id: natural-earth-land
+nama: "Garis besar daratan (Natural Earth 1:110m)"
+sumber: natural-earth
+asal: https://www.naturalearthdata.com/downloads/110m-physical-vectors/110m-land/
+lisensi: public-domain
+diambil: 2026-10-21
+proses: data/scripts/plates.mjs
+keluaran: public/data/land.geojson
+catatan: "Disederhanakan untuk ukuran berkas; hanya dipakai sebagai latar orientasi, bukan batas resmi."

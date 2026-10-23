@@ -1,0 +1,83 @@
+---
+---
+
+<button id="theme-toggle" class="theme-toggle" type="button" aria-label="Tema: ganti ke tema gelap">
+  <svg class="ikon-terang" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+    <circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.6"></circle>
+    <g stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+      <path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"></path>
+    </g>
+  </svg>
+  <svg class="ikon-gelap" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+    <path
+      d="M20 14.3A8.2 8.2 0 0 1 9.7 4a8.2 8.2 0 1 0 10.3 10.3z"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.6"
+      stroke-linejoin="round"></path>
+  </svg>
+  <span class="teks">Tema</span>
+</button>
+
+<script>
+  const tombol = document.getElementById('theme-toggle');
+
+  function labelUntuk(tema: string | null) {
+    tombol?.setAttribute(
+      'aria-label',
+      tema === 'dark' ? 'Tema: ganti ke tema terang' : 'Tema: ganti ke tema gelap',
+    );
+  }
+
+  tombol?.addEventListener('click', () => {
+    const sekarang = document.documentElement.getAttribute('data-theme');
+    const berikut = sekarang === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', berikut);
+    try {
+      localStorage.setItem('theme', berikut);
+    } catch {
+      /* localStorage bisa diblokir; tema tetap berlaku untuk halaman ini. */
+    }
+    labelUntuk(berikut);
+  });
+
+  labelUntuk(document.documentElement.getAttribute('data-theme'));
+</script>
+
+<style>
+  .theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 34px;
+    padding: 4px 10px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    cursor: pointer;
+  }
+
+  .theme-toggle:hover {
+    color: var(--fg);
+    border-color: var(--sea);
+  }
+
+  .teks {
+    color: var(--muted);
+  }
+
+  .ikon-gelap {
+    display: none;
+  }
+
+  :global([data-theme='dark']) .ikon-terang {
+    display: none;
+  }
+
+  :global([data-theme='dark']) .ikon-gelap {
+    display: block;
+  }
+</style>

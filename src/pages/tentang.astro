@@ -1,0 +1,147 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumb from '../components/layout/Breadcrumb.astro';
+import { getTopikTerbit } from '../lib/topik';
+
+const topik = await getTopikTerbit();
+---
+
+<Layout
+  title="Tentang"
+  description="Cara Ruang Bumi menulis, memilih sumber, dan memperbaiki kesalahan."
+>
+  <div class="wrap halaman">
+    <Breadcrumb items={[{ href: '/', label: 'Beranda' }, { label: 'Tentang' }]} />
+
+    <header class="kepala">
+      <p class="label">Tentang situs</p>
+      <h1>Atlas kecil yang bisa ditanya balik</h1>
+      <p class="intro">
+        Ruang Bumi adalah tempat membaca ulang hal-hal yang biasanya lewat cepat di video: kenapa
+        angin berbalik arah di pantai, kenapa Indonesia sering gempa, kenapa hujan datang musiman.
+        Isinya {topik.length} topik, ditulis pelan-pelan, satu per satu.
+      </p>
+    </header>
+
+    <section>
+      <h2>Cara kami bekerja</h2>
+      <ol>
+        <li>
+          Mulai dari pertanyaan yang orang benar-benar tanyakan, bukan dari daftar bab buku.
+        </li>
+        <li>Rancang visual lebih dulu. Kalau tidak bisa divisualkan, tulis lebih pendek.</li>
+        <li>
+          Setiap angka dan klaim spesifik diberi penanda sumber. Sumber harus primer atau lembaga
+          resmi, bukan artikel rangkuman.
+        </li>
+        <li>
+          Tulis ulang dengan kata sendiri. Tidak ada kalimat yang disalin dari referensi.
+        </li>
+        <li>
+          Sebelum status berubah menjadi terbit, build menolak halaman tanpa minimal dua sumber
+          atau tanpa lisensi di daftar sumber.
+        </li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Visual yang jujur</h2>
+      <p>
+        Simulasi di situs ini adalah model yang disederhanakan, bukan hasil pengukuran. Angka suhu
+        di simulasi angin darat-laut, misalnya, memakai pola harian yang dibuat agar bentuk
+        kurvanya benar, bukan data stasiun cuaca. Visual seperti itu selalu diberi label
+        <em>ilustrasi</em> atau catatan model.
+      </p>
+    </section>
+
+    <section>
+      <h2>Lisensi</h2>
+      <p>
+        Teks artikel berlisensi CC BY 4.0: boleh dipakai ulang dengan mencantumkan sumber dan
+        tautan. Kode situs berlisensi MIT. Data pihak ketiga mengikuti lisensi masing-masing, dan
+        dicatat di <a href="/sumber/">halaman sumber</a>.
+      </p>
+      <p>
+        Nama "Ruang Bumi" masih placeholder dan akan diganti sebelum rilis publik dengan domain
+        sendiri.
+      </p>
+    </section>
+
+    <section>
+      <h2>Koreksi</h2>
+      <p>
+        Kalau ada yang salah, kami ingin tahu. Sertakan halaman, kalimat, dan sumber pembanding.
+        Koreksi yang diterima akan mengubah halaman dan tanggal verifikasi, bukan disembunyikan.
+        Jalur kontak resmi akan diumumkan saat rilis; sebelum itu, buka isu di repositori proyek.
+      </p>
+    </section>
+
+    <section>
+      <h2>Teknis</h2>
+      <p>
+        Situs statis dengan Astro, MDX, React untuk bagian interaktif, dan Leaflet 1.9.4 untuk
+        peta. Basemap dan data lempeng disimpan lokal sebagai GeoJSON, jadi peta tidak bergantung
+        pada tile pihak ketiga. Pencarian di beranda bekerja di sisi peramban tanpa mengirim data
+        ke mana pun.
+      </p>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .halaman {
+    padding-block: 20px 30px;
+    max-width: 760px;
+  }
+
+  .kepala {
+    margin: 18px 0 26px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .kepala h1 {
+    margin: 6px 0 10px;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 800;
+    text-wrap: balance;
+  }
+
+  .intro {
+    margin: 0;
+    color: var(--muted);
+    font-size: 1.02rem;
+  }
+
+  section {
+    margin-top: 28px;
+  }
+
+  section h2 {
+    margin: 0 0 8px;
+    font-size: 1.1rem;
+  }
+
+  section p,
+  section li {
+    font-size: 0.96rem;
+    color: var(--muted);
+  }
+
+  section p {
+    margin: 0 0 10px;
+  }
+
+  ol {
+    margin: 0;
+    padding-left: 1.2rem;
+    display: grid;
+    gap: 6px;
+  }
+
+  a {
+    color: var(--sea);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+</style>
