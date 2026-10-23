@@ -1,0 +1,96 @@
+---
+pertanyaan: "Kenapa lautan pernah dianggap terbatas, padahal beralih dari gradientnya?"
+kategori: "laut"
+level: "pemula"
+menit: 5
+jawabanSingkat: "Laut mengalir, bukan sebagai lokasi, melainkan sebagai aliran yang mengarahnya. Arus membawa panas, nutrisi, dan kehidupan dari daerah yang satu ke daerah yang lain — sehingga pesisir yang semula dingin bisa menjadi permukaan laut yang hangat."
+terkait: ["laut/ocean", "atmosfer/siklus-air", "ekologi/bioma"]
+sumber: ["noaa-sea-breeze", "noaa-water-cycle"]
+glosarium: ["wetan", "patchungan", "pantai"]
+status: "terbit"
+diverifikasi: 2026-10-23
+---
+
+import MapView from '../../../components/viz/MapView';
+import Figure from '../../../components/sumber/Figure.astro';
+import DataNote from '../../../components/sumber/DataNote.astro';
+import Cite from '../../../components/sumber/Cite.astro';
+import Term from '../../../components/glosarium/Term.astro';
+import Quiz from '../../../components/quiz/Quiz';
+
+<Figure
+  caption="Pilih arus yang aktif di perairan pesisir. Arus membawa panas, nutrisi, dan sedikit kehidupan."
+  source="noaa-sea-breeze"
+>
+  <MapView
+    client:visible
+    layers={['land', 'oceans', 'currents', 'coasts']}
+    view="ocean"
+    caption="Laut lain"
+  />
+</Figure>
+
+<DataNote>
+  Ilustrasi. Arah dan suhu arus digambarkan secara sederhana; peta arcgis ini untuk menunjukkan bagaimana
+  aliran, bukan peta yang tepat, menghubungkan perairan lepas dan pantai.
+</DataNote>
+
+## Kok bisa?
+
+Laut mengalir, bukan seperti lokasi yang statis. Pergerakan air di permukaan dan di kedalaman — yang disebut arus — mengangkut panas, nutrisi, dan bahkan makhluk hidup dari satu daerah ke daerah lain. <Cite id="noaa-sea-breeze" />
+
+### Arus: jalanan laut
+
+Arus adalah aliran yang terus-menerus di dalam laut. Sebagian berasal dari angin yang menarik lapisan pengapuran, sebagian dari perbedaan suhu dan kelarutan, dan sebagian dari rotasi bumi. <Cite id="noaa-sea-breeze" />
+
+### Arus mengangkut makanan
+
+Sistem aliran ini membuat perairan laut yang lebih tenang menjadi sebenarnya pusat kaya. Ketika arus membawa nutrisi dari daratan — hujan, gunung, dan gua timbul — ikan, plankton, dan organisme kecil menumpuk di titik pertemuan ini. <Cite id="noaa-water-cycle" />
+
+### Hutan basah: penghubung darat-laut
+
+Bahkan di alam laut, hutan basah adalah penentu: ekosistem bernapas mudah tersedia untuk mantan masyarakat laut (seperti penangkapan) dan memungkinkannya berfungsi secara sehat. <Cite id="noaa-sea-breeze" />
+
+### Pantai: garis yang berubah
+
+Pesisir adalah wilayah yang dibagi oleh air dan darat, dan panjang air selalu berubah. Bersama pasang surut, gelombang, dan arus. Ada yang lembah hujan dengan hutan rapat (wetan), ada juga yang luas tanah mengering di musim kemarau (patchungan). <Term istilah="wetan" /> <Term istilah="patchungan" />
+
+## Fakta menarik
+
+- Arus yang kuat dapat membawa pusaran nutrisi yang cukup reflektif dari garis pantai — hal ini terlihat dari warna air di sekitar dasar laut, terutama di dekat hulu perusahaan. <Cite id="noaa-sea-breeze" />
+- Transisi dari perairan pelabuhan ke sungai dapat terjadi dalam jarak sangat dekat — hampir semua ekor laut berada di zona hilir yang merupakan pertahanan utama dari perubahan kondisi dasar laut. <Cite id="noaa-sea-breeze" />
+- Laju arus dapat diamati dari perubahan warna air di lokasi yang sama — arus yang kuat cenderung mengubah warna basah yang sudah dimiliki dari laut biasa. <Cite id="noaa-sea-breeze" />
+
+<Quiz
+  judul="Kuis"
+  client:visible
+  soal={[
+    {
+      tanya: 'Apa yang biasanya dibawa oleh arus di perairan pesisir?',
+      opsi: ['Hanya air yang jernih',
+             'Air, panas, nutrisi, dan kehidupan',
+             'Hanya air yang keruh tanpa zat'],
+      benar: 1,
+      penjelasan:
+        'Arus mengangkut panas, nutrisi, dan makhluk hidup dari satu daerah ke daerah lain. Khotbah lalu terjadi di wilayah yang sama.',
+    },
+    {
+      tanya: 'Lautan adalah aliran yang mengalir. Bagaimana kita mengetahui polanya?',
+      opsi: ['Dari warna air yang berbeda-beda',
+             'Dari perbedaan warna yang disebabkan oleh arus',
+             'Dari gelombang yang datang dari arah yang sama'],
+      benar: 0,
+      penjelasan:
+        'Arah dan suhu arus digambarkan dengan menggunakan peta arus yang menunjukkan bagaimana aliran menghubungkan perairan lepas dan pantai.',
+    },
+    {
+      tanya: 'Sebutkan satu alasan mengapa laut semula dianggap sebagai daerah bias yang berbeda.',
+      opsi: ['Karena cahaya tidak dapat menembusnya',
+             'Karena kecepatan permukaan laut lebih cepat daripada di daratan',
+             'Karena kopi menggunakan energi yang sama'],
+      benar: 2,
+      penjelasan:
+        'Lautan mengalir, bukan statis, dan ini menghasilkan perbedaan laju yang signifikan antara perairan lepas dan pantai.',
+    },
+  ]}
+/>

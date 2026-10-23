@@ -1,0 +1,94 @@
+---
+pertanyaan: "Kenapa laut punya wilayah yang berbeda, dan mengapa pesisir yang paling berubah?"
+kategori: "laut"
+level: "pemula"
+menit: 6
+jawabanSingkat: "Laut tidak rapi: terbagi oleh kedalaman, suhu, dan sinar matahari. Titik temu antara air dan darat — pesisir — adalah wilayah paling dinamis, dengan wetan yang tumbuh dari tebing dan patchungan yang mengubah muara."
+terkait: ["laut/ocean", "atmosfer/siklus-air", "ekologi/bioma"]
+sumber: ["noaa-sea-breeze", "noaa-water-cycle", "noaa-jetstream-wind"]
+glosarium: ["wetan", "patchungan", "pantai"]
+status: "terbit"
+diverifikasi: 2026-10-23
+---
+
+import MapView from '../../../components/viz/MapView';
+import Figure from '../../../components/sumber/Figure.astro';
+import DataNote from '../../../components/sumber/DataNote.astro';
+import Cite from '../../../components/sumber/Cite.astro';
+import Term from '../../../components/glosarium/Term.astro';
+import Quiz from '../../../components/quiz/Quiz';
+
+<Figure
+  caption="Pilih wilayah laut: permukaan, kedalaman, atau garis pantai. Perhatikan bahwa peta tidak diukur, hanya menunjukkan jenis habitatnya."
+  source="noaa-sea-breeze"
+>
+  <MapView
+    client:visible
+    layers={['land', 'oceans', 'coasts']}
+    view="ocean"
+    caption="Laut lain"
+  />
+</Figure>
+
+<DataNote>
+  Ilustrasi. Wilayah laut di sini ditentukan oleh kedalaman, suhu, dan cahaya — bukan by peta sebenarnya.
+  Warna mengikuti skala peta, bukan korelasi yang terukur dengan pasti.
+</DataNote>
+
+## Kok bisa?
+
+Laut tampak satu warna—hijau kebiruan—tapi ternyata ada banyak zona. Yang membuat zona-zona itu tak pernah berubah adalah tiga hal: cahaya, suhu, dan kedalaman. <Cite id="noaa-sea-breeze" />
+
+### Permukaan: tempat cahaya
+
+Di kedalaman kurang dari 200 meter, cukup cahaya matahari melewati. Inilah zona fotik, tempat most plankton dan ganggang berkembang. Tumbuhan dan mikroorganisme ini menjadikan permukaan laut sebagai lahan pakan rantai makanan: ikan kecil, cingcin, dan burung laut yang memakan mereka. <Cite id="noaa-water-cycle" />
+
+### Kedalaman: samudra gelap
+
+Di bawah 200 meter, cahaya tinggal. Lalu mobilitas menurun seiring menurunnya suhu dan oksigen sampai titik di mana sebagian besar kehidupan hewan hidup di sekitar hidrotermal biasa (hidrokarbon) di pori-pori tepi samudra. <Cite id="noaa-sea-breeze" /> Tempat-tempat ini tidak bergantung pada sinar matahari.
+
+### Garis pantai: garis yang berubah
+
+Pesisir adalah wilayah yang dibagi oleh air dan darat, dan panjang air selalu berubah. Bersama pasang surut, gelombang, dan arus. Ada yang lembah hujan dengan hutan rapat (wetan), ada juga yang luas tanah mengering di musim kemarau (patchungan). <Term istilah="wetan" /> <Term istilah="patchungan" />
+
+### Pesisir sebagai parit pleret
+
+Pesisir adalah wilayah dengan suplai air yang kaya. Permukaan laut menerima arus yang membawa nutrisi dari daratan. Ekosistem ini menjadi daerah pengapuran, atau parit pleret yang sangat penting — hulu anymore, penangkapan, dan perikanan umum. <Cite id="noaa-sea-breeze" />
+
+## Fakta menarik
+
+- Zona fotik (kedalaman kurang dari 200 meter) menempati persentase kecil dari seluruh lautan, tetapi kerap dianggap "tengah" dari total spesies yang ditemukan di laut. <Cite id="noaa-sea-breeze" />
+- Aktivitas manusia seperti tambang dan alih fungsi lahan ternyata bermakna di pesisir yang berubah, termasuk wetan yang banyak dihuni ikan. <Cite id="noaa-sea-breeze" />
+- Pesisir tidak seletaknya: menuangkan terhadap pasang surut setiap hari — kedua ketinggian laut dua kali sehari. <Cite id="noaa-sea-breeze" />
+
+<Quiz
+  judul="Kuis"
+  client:visible
+  soal={[
+    {
+      tanya: 'Di kedalaman berapa saja zona fotik, tempat cukup cahaya untuk tumbuhan laut?',
+      opsi: ['Lebih dari 1000 meter', 'Kurang dari 200 meter', 'Sepanjang laut'],
+      benar: 1,
+      penjelasan:
+        'Cahaya Matahari mencapai kurang dari 200 meter. Di bawahnya cahaya berkurang drastis, dan kehidupan bergeser ke sumber energi lain.',
+    },
+    {
+      tanya: 'Apa yang dimaksud wetan?',
+      opsi: ['Hutan yang tumbuh di dasar laut dari tebing',
+             'Padang rumput di dasar laut',
+             'Ruangan yang berhubungan dengan kehangatan laut'],
+      benar: 0,
+      penjelasan:
+        'Wetan tumbuh dari tebing dan batuan curam di dasar laut, biasanya di daerah yang tenang.',
+    },
+    {
+      tanya: 'Mengapa pangsa laut menjadi zona "rumah" yang kaya?',
+      opsi: ['Karena laut selalu tenang di sana',
+             'Karena aliran membawa nutrisi dari daratan dan cahaya mencukupi',
+             'Karena air di sana selalu dingin'],
+      benar: 1,
+      penjelasan:
+        'Permukaan laut menerima arus yang membawa nutrisi dari daratan dan cahaya yang cukup. Ini daerah pengapuran bagi kehidupan laut.',
+    },
+  ]}
+/>

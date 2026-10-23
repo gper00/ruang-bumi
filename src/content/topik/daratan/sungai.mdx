@@ -1,0 +1,96 @@
+---
+pertanyaan: "Kenapa banyak sungai dan danau diganggu, padahal kita minum dari atas?"
+kategori: "daratan"
+level: "pemula"
+menit: 6
+jawabanSingkat: "Sungai dan danau adalah sistem hidup yang mengalir. Mereka menerima yang masuk dari daratan (debu, pupuk, limbah) dan mengeluarkan yang keluar. Jika yang masuk terlalu banyak — atau salah —, yang keluar ikut berubah."
+terkait: ["daratan/sungai", "ekologi/bioma", "atmosfer/siklus-air"]
+sumber: ["usgs-water-cycle", "noaa-water-cycle"]
+glosarium: ["sungai", "danau", "auifer"]
+status: "terbit"
+diverifikasi: 2026-10-23
+---
+
+import MapView from '../../../components/viz/MapView';
+import Figure from '../../../components/sumber/Figure.astro';
+import DataNote from '../../../components/sumber/DataNote.astro';
+import Cite from '../../../components/sumber/Cite.astro';
+import Term from '../../../components/glosarium/Term.astro';
+import Quiz from '../../../components/quiz/Quiz';
+
+<Figure
+  caption="Peta aliran Sungai Amazon mengikuti model USGS Water Cycle. Garis tebal menunjukkan aliran utama, titik-titik menunjukkan cabang."
+  source="usgs-water-cycle"
+>
+  <MapView
+    client:visible
+    layers={['land', 'drainage']}
+    view="drainage"
+    caption="Sungai & pembuluh"
+  />
+</Figure>
+
+<DataNote>
+  Ilustrasi. Peta aliran digambar dari model tektonik (USGS Water Cycle). Peta ini menunjukkan aliran
+  umum, bukan detail teknis. Warna mengikuti peta pembuluh, bukan skala nyata.
+</DataNote>
+
+## Kok bisa?
+
+Sungai dan danau adalah sistem yang mengalir, bukan wadah statis. Mereka menerima yang masuk dari daratan — debu, pupuk, limbah — dan mengeluarkan yang keluar ke laut. Kualitas air di titik akhir tidak saja ditentukan oleh yang terjadi di situ, tetapi oleh apa yang sudah terjadi di sepanjang alirannya. <Cite id="usgs-water-cycle" />
+
+### Sungai: saluran air dari darat
+
+Sungai bermula dari sumber — hujan, air tanah, atau gletser. Di sepanjang perjalanan, sungai membawa muatan: sedimen dari tebing, nutrisi dari lahan pertanian, dan berbagai macam bahan dari permukiman manusia. <Cite id="noaa-water-cycle" />
+
+### Danau: bekas air yang duduk
+
+Danau berbeda dari sungai: airnya cenderung berdiam. Akibatnya, danau menjadi lokasi yang bagus untuk mengawasi kualitas air, tetapi juga tempat kumulasi — nutrisi, lumpur, dan zat yang tidak larut. <Cite id="noaa-water-cycle" />
+
+### Aliran = kualitas
+
+Kualitas air di sungai hanyalah cerminan dari apa yang dilakukan di atasnya. Penanaman di daerah hulu akan memengaruhi kualitas air di muara. Karena itu, yang mengubah "naik" hatiku adalah apa yang terjadi di kelilingnya. <Cite id="noaa-water-cycle" />
+
+### Pasang surut di perairan
+
+Aliran air sangat visibel di perairan: saat pasang, air laut masuk, membawa sedimen dan nutrisi; saat surut, air kembali, meninggalkan pasir, lumpur, dan zat yang ada di permukaan. Sistem ini berulang setiap hari. <Cite id="noaa-water-cycle" />
+
+## Fakta menarik
+
+- Sungai yang paling panjang di dunia, Amazon, mengalir hingga ke Samudra Pasifik. Sistem alirannya sangat luas sehingga perubahannya dapat merasakan sebagian besar bagian daratan. <Cite id="noaa-water-cycle" />
+- Gunung berapi adalah sumber energi alami yang dapat mengubah karakter air, termasuk mempercepat pendangan air. <Cite id="noaa-water-cycle" />
+- Air di bawah permukaan tanah dikenal sebagai air tanah, dan cangkupan air tanah dalam jumlah besar bisa menjadi ruang dalam wadah yang dapat diukur. <Cite id="noaa-water-cycle" />
+
+<Quiz
+  judul="Kuis"
+  client:visible
+  soal={[
+    {
+      tanya: 'Mengapa kualitas air di muara sungai bisa berubah?',
+      opsi: ['Karena muara selalu dekat ke laut',
+             'Karena air membawa apa yang diterima dari daratan sepanjang perjalanan',
+             'Karena sungai selalu berputar'],
+      benar: 1,
+      penjelasan:
+        'Sungai membawa muatan yang diterima dari daratan ke muara. Jadi kualitas air di muara ditentukan oleh apa yang terjadi di hulu.',
+    },
+    {
+      tanya: 'Perbedaan utama antara sungai dan danau adalah...',
+      opsi: ['Danau selalu lebih besar daripada sungai',
+             'Air di danau cenderung berdiam, sehingga kualitasnya stabil dan mudah diamati',
+             'Sungai tidak pernah mengalir'],
+      benar: 1,
+      penjelasan:
+        'Danau berair karena airnya cenderung berdiam. Akibatnya, kualitas air di danau stabil dan mudah diamati.',
+    },
+    {
+      tanya: 'Apa yang terjadi pada air saat pasang?',
+      opsi: ['Air laut masuk, membawa sedimen dan nutrisi ke daratan',
+             'Air laut keluar, meninggalkan pasir di permukaan',
+             'Sungai berputar lebih cepat'],
+      benar: 0,
+      penjelasan:
+        'Saat pasang, air laut mengalir masuk, membawa sedimen dan nutrisi; saat surut, air kembali, meninggalkan pasir dan lumpur.',
+    },
+  ]}
+/>

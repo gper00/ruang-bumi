@@ -17,6 +17,9 @@ pnpm-debug.log*
 .env
 .env.production
 
+# local tool state
+.freebuff/
+
 # macOS-specific files
 .DS_Store
 

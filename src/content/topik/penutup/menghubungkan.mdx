@@ -1,0 +1,87 @@
+---
+pertanyaan: "Bagaimana semua hal di atas saling terhubung?"
+kategori: "penutup"
+level: "pemula"
+menit: 4
+jawabanSingkat: "Bumi adalah satu sistem: air menguap, bercummbun, mengalir, dan digaruti arus. Setiap penanyaan di halaman ini adalah sudut pandang yang sama terhadap satu bumi yang saling terhubung."
+terkait: ["atmosfer/angin-darat-laut", "atmosfer/siklus-air", "laut/ocean"]
+sumber: ["noaa-water-cycle", "usgs-water-cycle"]
+glosarium: ["siklus-air"]
+status: "terbit"
+diverifikasi: 2026-10-23
+---
+
+import MapView from '../../../components/viz/MapView';
+import Figure from '../../../components/sumber/Figure.astro';
+import DataNote from '../../../components/sumber/DataNote.astro';
+import Cite from '../../../components/sumber/Cite.astro';
+import Term from '../../../components/glosarium/Term.astro';
+import Quiz from '../../../components/quiz/Quiz';
+
+<Figure
+  caption="Gambar ringkas: laut sebagai penghubung utama antara atmosfer, daratan, dan laut lepas."
+  source="noaa-water-cycle"
+>
+  <MapView
+    client:visible
+    layers={['land', 'oceans', 'currents']}
+    view="world"
+    caption="Satu bumi."
+  />
+</Figure>
+
+<DataNote>
+  Ilustrasi. Peta ini menggambarkan hubungan antar wilayah. Arah aliran di atas bukanlah aliran yang
+  tepat, melainkan pemetaan konsep.
+</DataNote>
+
+## Kok bisa?
+
+Ketika mulai belajar tentang Bumi, kita kadang melihat hal-hal terpisah: angin, air, gunung, danau. Padahal semuanya adalah satu sistem yang satu: air menguap, bercummbun, mengalir, dan digarungi arus. <Cite id="noaa-water-cycle" />
+
+### Koneksi sederhana
+
+- Angin dan arus adalah "pemindah" yang menggerakkan air dan panas.
+- Permukaan laut menerima penyalur dari daratan, sehingga kualitas air di laut dibedakan oleh apa yang terjadi di daratan.
+- Sungai dan danau adalah jalan yang membawa air dari hulu ke laut.
+- Lempeng tektonik menggerakkan gunung, danau (dari air), dan bagian dari siklus air.
+
+## Fakta menarik
+
+- Koneksi sederhana: angin, arus, dll.
+- Topik utama: air dan daratan.
+- Eksperimen: tidak ada.
+
+<Quiz
+  judul="Kuis"
+  client:visible
+  soal={[
+    {
+      tanya: 'Hubungan yang paling utama yang dijelaskan dalam halaman ini adalah...',
+      opsi: ['Air menguap, bercummbun, mengalir, dan digarungi arus',
+             'Udara mengalir, lalu menjadi air',
+             'Daratan mengalir ke laut'],
+      benar: 0,
+      penjelasan:
+        'Siklus air adalah koneksi utama: air menguap, bercummbun, mengalir, dan digarungi arus.',
+    },
+    {
+      tanya: 'Gunung danau dihubungkan dengan topik lain melalui...',
+      opsi: ['Lempeng tektonik yang menggerakkan tanah',
+             'Aktivitas manusia di sungai',
+             'Laut yang selalu dangkal'],
+      benar: 0,
+      penjelasan:
+        'Lempeng tektonik menggerakkan gunung, danau, dan bagian dari siklus air.',
+    },
+    {
+      tanya: 'Topik apa yang paling utama dalam koneksi sederhana?',
+      opsi: ['Laut dan daratan',
+             'Air dan daratan',
+             'Aliran dan arus'],
+      benar: 1,
+      penjelasan:
+        'Topik utama adalah air dan daratan, yang menjadi koneksi antara semua topik.',
+    },
+  ]}
+/>

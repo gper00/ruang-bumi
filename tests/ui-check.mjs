@@ -116,7 +116,8 @@ try {
       await page.locator('#cari-topik').fill('');
       await page.locator('.filter-btn', { hasText: 'Ekologi' }).click();
       tampil = await page.locator('.kartu-topik:visible').count();
-      if (tampil !== 1) catat(`Beranda: filter Ekologi menampilkan ${tampil} kartu, seharusnya 1`);
+      // Bioma kategori Ekologi sekarang 2 (yang lama + yang baru), jadi 2.
+      if (tampil !== 2) catat(`Beranda: filter Ekologi menampilkan ${tampil} kartu, seharusnya 2`);
 
       await page.goto(base + '/topik/planet-bumi/lempeng-tektonik/', { waitUntil: 'networkidle' });
       await page.waitForSelector('.mv-canvas .leaflet-container', { timeout: 15000 });

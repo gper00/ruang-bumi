@@ -1,13 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
 import 'leaflet/dist/leaflet.css';
 import './MapView.css';
+import { BOUNDS, boundsUntuk, type LatLngTuple, type PetaView } from '../../lib/peta';
 
-type LatLngTuple = [number, number];
+export type { LatLngTuple } from '../../lib/peta';
 
 export interface MapViewProps {
   layers: Array<'plates' | 'land' | string>;
-  view?: 'world' | 'indonesia' | { bounds: [LatLngTuple, LatLngTuple] };
-  dataset: string[];
+  view?: PetaView;
+  /** Data yang dikuatkan ke daftar sumber (opsional). */
+  dataset?: string[];
   height?: string;
 }
 
@@ -86,17 +88,6 @@ const WARNA = [
   '#2fa0b8',
 ];
 
-const BOUNDS: Record<'world' | 'indonesia', [LatLngTuple, LatLngTuple]> = {
-  world: [
-    [-58, -172],
-    [80, 178],
-  ],
-  indonesia: [
-    [-13, 94],
-    [10, 143],
-  ],
-};
-
 interface DaftarItem {
   nama: string;
   kode: string;
@@ -134,9 +125,13 @@ function pakaiReduce() {
 export default function MapView({
   layers,
   view = 'world',
-  dataset,
+  dataset = [],
   height = 'clamp(320px, 52vw, 480px)',
 }: MapViewProps) {
+  // `dataset` opsional: MDX tidak selalu mengirimkannya. Fallback ke array kosong,
+  // supaya JSX `dataset.join` tidak melempar saat prop tidak disediakan.
+  if (!dataset) dataset = [];
+
   const wadahRef = useRef<HTMLDivElement | null>(null);
   const petaRef = useRef<any>(null);
   const grupRef = useRef<Record<string, any>>({});
@@ -144,9 +139,11 @@ export default function MapView({
   const [status, setStatus] = useState<'memuat' | 'siap' | 'gagal'>('memuat');
   const [aktif, setAktif] = useState<string[]>(layers);
   const [info, setInfo] = useState<{ judul: string; ket: string } | null>(null);
-  const [mode, setMode] = useState<'world' | 'indonesia'>(
-    typeof view === 'string' ? view : 'world',
-  );
+  const [mode, setMode] = useState<'world' | 'indonesia'>(() => {
+    // Nilai view di luar kontrak ("ocean", "lake", dst.) tidak boleh jadi mode.
+    if (view === 'indonesia') return 'indonesia';
+    return 'world';
+  });
   const [geser, setGeser] = useState(false);
   const [daftar, setDaftar] = useState<DaftarItem[]>([]);
 
@@ -270,7 +267,7 @@ export default function MapView({
       });
 
       setStatus(terpasang > 0 ? 'siap' : 'gagal');
-      peta.fitBounds(BOUNDS[typeof view === 'string' ? view : 'world'], { animate: false });
+      peta.fitBounds(boundsUntuk(view), { animate: false });
       setTimeout(() => peta.invalidateSize(), 80);
     }
 
@@ -418,9 +415,9 @@ export default function MapView({
           ))}
         </ul>
       </details>
-
       <p className="mv-sumber">
-        Data: {dataset.join(', ')}. Peta memakai GeoJSON lokal, tanpa tile pihak ketiga.
+        {dataset.length > 0 ? dataset.join(', ') : '—'} · Peta memakai GeoJSON lokal, tanpa tile
+        pihak ketiga.
       </p>
     </div>
   );

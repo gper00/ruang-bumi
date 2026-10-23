@@ -22,5 +22,8 @@ export function cariIstilah(id: string): Istilah | undefined {
 
 /** Anchor used by both `<Term>` and the glossary page. */
 export function istilahSlug(teks: string): string {
-  return teks.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+  return teks
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
 }

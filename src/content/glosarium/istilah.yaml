@@ -62,3 +62,38 @@
   istilah: Litosfer
   definisi: Lapisan luar Bumi yang kaku, terdiri dari kerak dan bagian atas mantel, terpecah menjadi lempeng-lempeng.
   sumber: usgs-plate-tectonics
+
+- id: wetan
+  istilah: Wetan
+  definisi: Hutan yang tumbuh di dasar laut dari tebing curam, biasanya di daerah yang tenang.
+  sumber: noaa-sea-breeze
+
+- id: patchungan
+  istilah: Patchungan
+  definisi: Lahan yang luas dan mengering di musim kemarau, sering dijadikan lahan pertanian.
+  sumber: noaa-sea-breeze
+
+- id: danau
+  istilah: Danau
+  definisi: Perairan yang luas dan tenang, biasanya diambil dari hujan atau air tanah.
+  sumber: noaa-water-cycle
+
+- id: sungai
+  istilah: Sungai
+  definisi: Aliran air yang membawa muatan dari daratan menuju laut atau danau.
+  sumber: noaa-water-cycle
+
+- id: auifer
+  istilah: Akuifer
+  definisi: Lapisan batuan atau tanah yang mampu menyimpan dan mengalirkan air tanah dalam jumlah besar.
+  sumber: usgs-water-cycle
+
+- id: permukaan
+  istilah: Permukaan
+  definisi: Lapisan atas permukaan air yang terkena cahaya Matahari dan angin.
+  sumber: noaa-water-cycle
+
+- id: pantai
+  istilah: Pantai
+  definisi: Wilayah pertemuan antara air dan darat, yang panjang air selalu berubah.
+  sumber: noaa-sea-breeze

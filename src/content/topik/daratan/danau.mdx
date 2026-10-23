@@ -1,0 +1,96 @@
+---
+pertanyaan: "Kenapa danau kerap dipakai untuk memperkirakan keadaan air, padahal airnya tenang?"
+kategori: "daratan"
+level: "pemula"
+menit: 5
+jawabanSingkat: "Danau adalah lahan air yang tenang, bukan air yang mati. Air di tepiannya selalu berpindah, sedangkan bagian tengahnya berputar. Justru inilah yang membuat danau baik untuk memperkirakan kualitas air."
+terkait: ["daratan/sungai", "ekologi/bioma", "atmosfer/siklus-air"]
+sumber: ["noaa-water-cycle", "usgs-water-distribution"]
+glosarium: ["danau", "auifer", "permukaan"]
+status: "terbit"
+diverifikasi: 2026-10-23
+---
+
+import MapView from '../../../components/viz/MapView';
+import Figure from '../../../components/sumber/Figure.astro';
+import DataNote from '../../../components/sumber/DataNote.astro';
+import Cite from '../../../components/sumber/Cite.astro';
+import Term from '../../../components/glosarium/Term.astro';
+import Quiz from '../../../components/quiz/Quiz';
+
+<Figure
+  caption="Peta dasar danau menggambarkan fitur utama dan hubungannya dengan aliran air yang mengalir."
+  source="noaa-water-cycle"
+>
+  <MapView
+    client:visible
+    layers={['land', 'lakes']}
+    view="lake"
+    caption="Danau & perairan"
+  />
+</Figure>
+
+<DataNote>
+  Ilustrasi. Peta dasar danau berasal dari model yang menggambarkan fitur dasar, bukan peta yang mencerminkan
+  kondisi sungguhan di mana saja. Warna mengikuti skema peta, bukan korelasi yang terukur.
+</DataNote>
+
+## Kok bisa?
+
+Danau adalah lahan air yang tenang, bukan air yang mati. Air di tepiannya selalu berpindah akibat angin dan arus, sedangkan bagian tengahnya cenderung berputar. Ketimbang ketinggalan, itulah yang membuat danau menjadi tempat yang baik untuk memperkirakan keadaan air. <Cite id="noaa-water-cycle" />
+
+### Danau: permukaan air yang tenang
+
+Danau adalah perairan yang umumnya luas dan tidak terlalu dalam. Karena tidak mengalir seperti sungai, permukaan danau menjadi tempat yang baik untuk mengamati perubahan suhu, warna, dan kualitas air. <Cite id="noaa-water-cycle" />
+
+### Yang terjadi di dekat tepian
+
+Air di tepian danau selalu bergerak: keluar masuk, berganti, dan berganti arah sesuai angin. Air di tepian lebih terpengaruh oleh suhu, sedangkan air di tengah danau bisa berputar lebih stabil. <Cite id="noaa-water-cycle" />
+
+### Air tanah: cadangan yang tidak terlihat
+
+Air tanah adalah cadangan air yang tersembunyi di bawah permukaan, dalam jumlah besar. Air tanah bergerak sangat lambat melalui pori-pori dan rekahan batuan, sehingga suatu akuifer bisa mengisi ulang selama bertahun-tahun. <Term istilah="auifer" /> <Cite id="usgs-water-distribution" />
+
+### Perkiraan kualitas air
+
+Karena permukaan danau relatif stabil, sebagian besar kegiatan pengukuran biasanya dilakukan di permukaan, bukan di daerah dalam. Dengan demikian, memahami kualitas air di permukaan adalah cara yang baik untuk memperkirakan kualitas air yang lebih dalam. <Cite id="noaa-water-cycle" />
+
+## Fakta menarik
+
+- Danau adalah lahan perairan yang luas dan tenang. Danau yang berdampingan biasanya memiliki kualitas air yang berbeda-beda, bahkan jika sama-sama tenang. <Cite id="noaa-water-cycle" />
+- Air tanah adalah cadangan air yang tersembunyi di dalam tanah, dalam jumlah besar. Air tanah bergerak sangat lambat melalui pori-pori dan rekahan batuan. <Term istilah="auifer" /> <Cite id="usgs-water-distribution" />
+- Sebagian air tawar menyatu dalam air tanah, dan sebagian dari air tawar yang digunkan untuk keperluan domestik atau komersial diketahui berasal dari akuifer. <Cite id="usgs-water-distribution" />
+
+<Quiz
+  judul="Kuis"
+  client:visible
+  soal={[
+    {
+      tanya: 'Apa yang membuat danau berbeda dari sungai?',
+      opsi: ['Danau tidak pernah memiliki air',
+             'Perairan di danau cenderung bertahan dan berlanjut tanpa gerak',
+             'Danau tidak akan pernah mengalir'],
+      benar: 1,
+      penjelasan:
+        'Perairan di dalam danau cenderung stabil tanpa gerak, sehingga permukaan danau dapat diamati dengan mudah jika permukaannya dipantau.',
+    },
+    {
+      tanya: 'Bagaimana pergerakan air di permukaan danau?',
+      opsi: ['Selalu berputar dalam lingkaran yang sama',
+             'Berubah-ubah sesuai angin dan arus',
+             'Tidak pernah bergerak'],
+      benar: 0,
+      penjelasan:
+        'Air di permukaan danau selalu bergerak dan berganti-ubah sesuai angin dan arus yang dihasilkan oleh angin.',
+    },
+    {
+      tanya: 'Mengapa air tanah menjadi cadangan yang penting?',
+      opsi: ['Karena air tanah dapat didiamkan',
+             'Karena air tanah bergerak sangat lambat melalui pori-pori dan rekahan batuan',
+             'Karena air tanah tidak pernah bisa dieksploitasi'],
+      benar: 1,
+      penjelasan:
+        'Air tanah bergerak sangat lambat melalui pori-pori dan rekahan batuan. Karena laju pergerakannya lambat, suatu akuifer bisa dalam waktu bertahun-tahun.',
+    },
+  ]}
+/>
