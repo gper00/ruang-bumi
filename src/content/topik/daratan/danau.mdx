@@ -1,17 +1,18 @@
 ---
-pertanyaan: "Kenapa danau kerap dipakai untuk memperkirakan keadaan air, padahal airnya tenang?"
+pertanyaan: "Kenapa air danau tidak pernah benar-benar diam?"
 kategori: "daratan"
 level: "pemula"
-menit: 5
-jawabanSingkat: "Danau adalah lahan air yang tenang, bukan air yang mati. Air di tepiannya selalu berpindah, sedangkan bagian tengahnya berputar. Justru inilah yang membuat danau baik untuk memperkirakan kualitas air."
-terkait: ["daratan/sungai", "ekologi/bioma", "atmosfer/siklus-air"]
-sumber: ["noaa-water-cycle", "usgs-water-distribution"]
-glosarium: ["danau", "auifer", "permukaan"]
+menit: 6
+jawabanSingkat: "Danau memang tidak mengalir seperti sungai, tetapi airnya bergerak vertikal mengikuti suhu. Perbedaan massa jenis membentuk lapisan yang berganti pola sepanjang tahun, dan sesekali lapisan itu bercampur."
+terkait: ["daratan/sungai", "atmosfer/siklus-air", "ekologi/bioma"]
+sumber: ["usgs-lakes-stratification", "noaa-water-cycle", "usgs-water-cycle"]
+glosarium: ["epilimnion", "termoklin", "hipolimnion"]
+dataset: []
 status: "terbit"
-diverifikasi: 2026-10-23
+diverifikasi: 2026-10-24
 ---
 
-import MapView from '../../../components/viz/MapView';
+import DanauMusim from '../../../components/viz/DanauMusim';
 import Figure from '../../../components/sumber/Figure.astro';
 import DataNote from '../../../components/sumber/DataNote.astro';
 import Cite from '../../../components/sumber/Cite.astro';
@@ -19,78 +20,85 @@ import Term from '../../../components/glosarium/Term.astro';
 import Quiz from '../../../components/quiz/Quiz';
 
 <Figure
-  caption="Peta dasar danau menggambarkan fitur utama dan hubungannya dengan aliran air yang mengalir."
-  source="noaa-water-cycle"
+  caption="Pilih musim untuk melihat perubahan lapisan dan pencampuran. Panah muncul saat air bercampur dari permukaan sampai dasar."
+  source="usgs-lakes-stratification"
 >
-  <MapView
-    client:visible
-    layers={['land', 'lakes']}
-    view="lake"
-    caption="Danau & perairan"
-  />
+  <DanauMusim client:visible />
 </Figure>
 
 <DataNote>
-  Ilustrasi. Peta dasar danau berasal dari model yang menggambarkan fitur dasar, bukan peta yang mencerminkan
-  kondisi sungguhan di mana saja. Warna mengikuti skema peta, bukan korelasi yang terukur.
+  Ilustrasi. Model ini menggambarkan danau lintang tinggi dan menyederhanakan kedalaman serta suhu.
+  Danau tropis seperti di Indonesia berpola berbeda, karena tidak mengalami musim dingin berlapis es.
 </DataNote>
 
 ## Kok bisa?
 
-Danau adalah lahan air yang tenang, bukan air yang mati. Air di tepiannya selalu berpindah akibat angin dan arus, sedangkan bagian tengahnya cenderung berputar. Ketimbang ketinggalan, itulah yang membuat danau menjadi tempat yang baik untuk memperkirakan keadaan air. <Cite id="noaa-water-cycle" />
+Danau sering terlihat seperti genangan yang tenang. Tidak ada arus deras seperti di sungai, dan
+permukaannya bisa memantul seperti cermin. Namun air di dalamnya tetap bergerak, hanya arahnya
+vertikal: naik dan turun mengikuti perbedaan massa jenis. <Cite id="usgs-lakes-stratification" />
 
-### Danau: permukaan air yang tenang
+Kuncinya ada pada sifat air yang tidak biasa. Air mencapai massa jenis tertinggi pada suhu sekitar
+4 °C. Air yang lebih dingin maupun lebih hangat menjadi lebih ringan. Karena itu, lapisan air
+dengan suhu berbeda bisa tetap terpisah, dengan yang lebih ringan berada di atas.
+<Cite id="usgs-lakes-stratification" />
 
-Danau adalah perairan yang umumnya luas dan tidak terlalu dalam. Karena tidak mengalir seperti sungai, permukaan danau menjadi tempat yang baik untuk mengamati perubahan suhu, warna, dan kualitas air. <Cite id="noaa-water-cycle" />
+Pada musim panas di danau lintang tinggi, permukaan menghangat dan membentuk
+<Term istilah="epilimnion" />, lapisan atas yang lebih hangat dan diaduk oleh angin. Di bawahnya
+terbentuk <Term istilah="termoklin" />, lapisan peralihan tempat suhu turun cepat terhadap
+kedalaman. Lapisan paling bawah, <Term istilah="hipolimnion" />, tetap dingin dan padat.
+<Cite id="usgs-lakes-stratification" />
 
-### Yang terjadi di dekat tepian
+Angin memang mengaduk lapisan atas, tetapi biasanya tidak cukup kuat untuk menembus termoklin.
+Akibatnya hipolimnion terpisah dari atmosfer selama stratifikasi. Oksigen di sana tidak terisi
+ulang, sementara penguraian bahan organik terus memakainya, sehingga kadar oksigen di dasar bisa
+menurun. <Cite id="usgs-lakes-stratification" />
 
-Air di tepian danau selalu bergerak: keluar masuk, berganti, dan berganti arah sesuai angin. Air di tepian lebih terpengaruh oleh suhu, sedangkan air di tengah danau bisa berputar lebih stabil. <Cite id="noaa-water-cycle" />
+Keadaan itu tidak bertahan selamanya. Ketika permukaan mendingin pada musim gugur, atau menghangat
+pada musim semi, suhu permukaan mendekati suhu air di bawahnya. Perbedaan massa jenis melemah dan
+angin dapat mencampur seluruh kolom air. Peristiwa ini disebut pembalikan atau turnover. Oksigen
+dari permukaan ikut turun, sedangkan nutrisi dari dasar terangkat ke lapisan yang terkena cahaya.
+<Cite id="usgs-lakes-stratification" />
 
-### Air tanah: cadangan yang tidak terlihat
+Pada musim dingin, permukaan danau bisa membeku. Es lebih ringan daripada air, sehingga mengapung.
+Tepat di bawah es airnya mendekati 0 °C, lalu suhunya naik menuju sekitar 4 °C di kedalaman.
+Urutan lapisan ini berbeda dari musim panas, tetapi tetap merupakan stratifikasi.
+<Cite id="usgs-lakes-stratification" />
 
-Air tanah adalah cadangan air yang tersembunyi di bawah permukaan, dalam jumlah besar. Air tanah bergerak sangat lambat melalui pori-pori dan rekahan batuan, sehingga suatu akuifer bisa mengisi ulang selama bertahun-tahun. <Term istilah="auifer" /> <Cite id="usgs-water-distribution" />
-
-### Perkiraan kualitas air
-
-Karena permukaan danau relatif stabil, sebagian besar kegiatan pengukuran biasanya dilakukan di permukaan, bukan di daerah dalam. Dengan demikian, memahami kualitas air di permukaan adalah cara yang baik untuk memperkirakan kualitas air yang lebih dalam. <Cite id="noaa-water-cycle" />
+Pola empat musim tadi berlaku untuk danau lintang tinggi. Danau tropis tidak mengalami musim dingin
+berlapis es, sehingga pola pencampurannya berbeda: sebagian bercampur sekali setahun dan sebagian
+lagi sering bercampur, tergantung kedalaman serta angin. Karena itu, jangan menyamakan danau di
+Indonesia dengan danau di Eropa atau Amerika utara. <Cite id="usgs-lakes-stratification" />
 
 ## Fakta menarik
 
-- Danau adalah lahan perairan yang luas dan tenang. Danau yang berdampingan biasanya memiliki kualitas air yang berbeda-beda, bahkan jika sama-sama tenang. <Cite id="noaa-water-cycle" />
-- Air tanah adalah cadangan air yang tersembunyi di dalam tanah, dalam jumlah besar. Air tanah bergerak sangat lambat melalui pori-pori dan rekahan batuan. <Term istilah="auifer" /> <Cite id="usgs-water-distribution" />
-- Sebagian air tawar menyatu dalam air tanah, dan sebagian dari air tawar yang digunkan untuk keperluan domestik atau komersial diketahui berasal dari akuifer. <Cite id="usgs-water-distribution" />
+- Air mencapai massa jenis tertinggi pada suhu sekitar 4 °C, bukan pada 0 °C saat membeku. <Cite id="usgs-lakes-stratification" />
+- Danau yang bercampur dua kali setahun disebut dimiktik; yang bercampur sekali disebut monomiktik, dan yang sering bercampur disebut polimiktik. <Cite id="usgs-lakes-stratification" />
+- Selama stratifikasi, hipolimnion terpisah dari atmosfer sehingga oksigen di dasar bisa menurun, terutama bila bahan organik yang terurai banyak. <Cite id="usgs-lakes-stratification" />
 
 <Quiz
   judul="Kuis"
   client:visible
   soal={[
     {
-      tanya: 'Apa yang membuat danau berbeda dari sungai?',
-      opsi: ['Danau tidak pernah memiliki air',
-             'Perairan di danau cenderung bertahan dan berlanjut tanpa gerak',
-             'Danau tidak akan pernah mengalir'],
+      tanya: 'Pada suhu berapa air paling rapat?',
+      opsi: ['0 °C', '4 °C', '20 °C'],
       benar: 1,
       penjelasan:
-        'Perairan di dalam danau cenderung stabil tanpa gerak, sehingga permukaan danau dapat diamati dengan mudah jika permukaannya dipantau.',
+        'Air mencapai massa jenis tertinggi sekitar 4 °C; di atas dan di bawah suhu itu air menjadi lebih ringan. Pada 0 °C air justru membeku dan es mengapung.',
     },
     {
-      tanya: 'Bagaimana pergerakan air di permukaan danau?',
-      opsi: ['Selalu berputar dalam lingkaran yang sama',
-             'Berubah-ubah sesuai angin dan arus',
-             'Tidak pernah bergerak'],
+      tanya: 'Apa nama lapisan peralihan suhu di danau?',
+      opsi: ['Epilimnion', 'Termoklin', 'Hipolimnion'],
+      benar: 1,
+      penjelasan:
+        'Termoklin adalah lapisan tempat suhu turun cepat terhadap kedalaman. Epilimnion adalah lapisan hangat di atas, dan hipolimnion adalah lapisan dingin di bawah.',
+    },
+    {
+      tanya: 'Apa yang terjadi saat pencampuran (turnover)?',
+      opsi: ['Lapisan bercampur dan oksigen dari permukaan masuk ke dasar', 'Danau membeku total', 'Air berhenti bergerak selamanya'],
       benar: 0,
       penjelasan:
-        'Air di permukaan danau selalu bergerak dan berganti-ubah sesuai angin dan arus yang dihasilkan oleh angin.',
-    },
-    {
-      tanya: 'Mengapa air tanah menjadi cadangan yang penting?',
-      opsi: ['Karena air tanah dapat didiamkan',
-             'Karena air tanah bergerak sangat lambat melalui pori-pori dan rekahan batuan',
-             'Karena air tanah tidak pernah bisa dieksploitasi'],
-      benar: 1,
-      penjelasan:
-        'Air tanah bergerak sangat lambat melalui pori-pori dan rekahan batuan. Karena laju pergerakannya lambat, suatu akuifer bisa dalam waktu bertahun-tahun.',
+        'Saat permukaan mendingin atau menghangat, perbedaan massa jenis melemah dan angin mencampur lapisan, membawa oksigen ke bawah. Danau tidak membeku total, dan air tetap bergerak.',
     },
   ]}
 />

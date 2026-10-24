@@ -1,0 +1,154 @@
+.dm {
+  display: grid;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.dm-kanvas svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.dm-label {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 14px;
+  fill: var(--fg);
+}
+
+.dm-kecil {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  fill: var(--muted);
+}
+
+.dm-pencampuran path {
+  animation: dm-alir 2.2s linear infinite;
+}
+
+@keyframes dm-alir {
+  to {
+    stroke-dashoffset: -24;
+  }
+}
+
+.dm-tanpa-gerak .dm-pencampuran path {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dm-pencampuran path {
+    animation: none;
+  }
+}
+
+.dm-musim {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 12px 14px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.dm-musim button {
+  min-height: 32px;
+  padding: 5px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  cursor: pointer;
+}
+
+.dm-musim button:hover {
+  border-color: var(--sea);
+}
+
+.dm-musim button[aria-pressed='true'] {
+  border-color: var(--sea);
+  background: var(--sea-soft);
+  color: var(--fg);
+}
+
+.dm-musim button:focus-visible {
+  outline: 2px solid var(--sea);
+  outline-offset: 2px;
+}
+
+.dm-panel {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border-bottom: 1px solid var(--line);
+}
+
+.dm-status {
+  margin: 0;
+  font-size: 0.9rem;
+  max-width: 76ch;
+}
+
+.dm-status strong {
+  font-family: var(--font-display);
+}
+
+.dm-indikator {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  margin: 0;
+}
+
+.dm-indikator div {
+  display: grid;
+  gap: 1px;
+}
+
+.dm-indikator dt {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--muted);
+}
+
+.dm-indikator dd {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+}
+
+.dm-catatan {
+  display: grid;
+  gap: 8px;
+  padding: 10px 14px 14px;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.dm-khusus {
+  margin: 0;
+  padding: 8px 10px;
+  border: 1px dashed var(--line-strong);
+  border-radius: 6px;
+  background: var(--surface-2);
+  max-width: 80ch;
+}
+
+.dm-ringkas {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 4px;
+}
+
+.dm-ringkas strong {
+  color: var(--fg);
+}
