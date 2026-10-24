@@ -72,16 +72,19 @@ export default function SistemBumi() {
         {SIMPUL.map((s) => {
           const pos = POSISI[s.id];
           return (
-            <button
+            <div
               key={s.id}
-              type="button"
-              className="sb-simpul-tombol"
+              className="sb-simpul"
               style={{ left: `${(pos.x / 1000) * 100}%`, top: `${(pos.y / 560) * 100}%` }}
-              aria-pressed={aktif === s.id}
-              onClick={() => setAktif(aktif === s.id ? null : s.id)}
             >
-              {s.nama}
-            </button>
+              <button
+                type="button"
+                aria-pressed={aktif === s.id}
+                onClick={() => setAktif(aktif === s.id ? null : s.id)}
+              >
+                {s.nama}
+              </button>
+            </div>
           );
         })}
       </div>

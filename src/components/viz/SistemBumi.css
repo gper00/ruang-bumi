@@ -49,9 +49,12 @@
   stroke-linejoin: round;
 }
 
-.sb-simpul-tombol {
+.sb-simpul {
   position: absolute;
   transform: translate(-50%, -50%);
+}
+
+.sb-simpul button {
   min-height: 34px;
   padding: 6px 14px;
   border: 1px solid var(--line-strong);
@@ -66,27 +69,27 @@
   transition: background 0.15s linear, border-color 0.15s linear;
 }
 
-.sb-simpul-tombol:hover {
+.sb-simpul button:hover {
   border-color: var(--sea);
 }
 
-.sb-simpul-tombol[aria-pressed='true'] {
+.sb-simpul button[aria-pressed='true'] {
   border-color: var(--sea);
   background: var(--sea-soft);
 }
 
-.sb-simpul-tombol:focus-visible {
+.sb-simpul button:focus-visible {
   outline: 2px solid var(--sea);
   outline-offset: 2px;
 }
 
 .sb-tanpa-gerak .sb-garis path,
-.sb-tanpa-gerak .sb-simpul-tombol {
+.sb-tanpa-gerak .sb-simpul button {
   transition: none;
 }
 
 @media (max-width: 520px) {
-  .sb-simpul-tombol {
+  .sb-simpul button {
     padding: 5px 10px;
     font-size: 0.7rem;
     min-height: 30px;
@@ -95,7 +98,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .sb-garis path,
-  .sb-simpul-tombol {
+  .sb-simpul button {
     transition: none;
   }
 }
