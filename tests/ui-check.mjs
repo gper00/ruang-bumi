@@ -55,6 +55,11 @@ const halaman = [
   '/topik/atmosfer/siklus-air/',
   '/topik/ekologi/bioma/',
   '/topik/planet-bumi/lempeng-tektonik/',
+  '/topik/laut/ocean/',
+  '/topik/laut/arus/',
+  '/topik/daratan/sungai/',
+  '/topik/daratan/danau/',
+  '/topik/penutup/menghubungkan/',
   '/kategori/atmosfer/',
   '/glosarium/',
   '/sumber/',
@@ -70,16 +75,20 @@ const catat = (pesan) => {
 const browser = await chromium.launch({ executablePath });
 
 try {
-  for (const { lebar, skema } of [
+  for (const { lebar, skema, gerak } of [
     { lebar: 390, skema: 'light' },
     { lebar: 1280, skema: 'light' },
     { lebar: 390, skema: 'dark' },
     { lebar: 1280, skema: 'dark' },
+    { lebar: 360, skema: 'light' },
+    { lebar: 360, skema: 'dark' },
+    { lebar: 1280, skema: 'light', gerak: 'reduce' },
   ]) {
-    const tanda = `${lebar}px/${skema}`;
+    const tanda = `${lebar}px/${skema}${gerak ? `/${gerak}` : ''}`;
     const context = await browser.newContext({
       viewport: { width: lebar, height: 900 },
       colorScheme: skema,
+      ...(gerak ? { reducedMotion: gerak } : {}),
     });
     const page = await context.newPage();
 
@@ -107,8 +116,8 @@ try {
       for (const v of hasil) catat(`[${tanda}] axe ${url}: ${v}`);
     }
 
-    // Interactive checks only once, at the desktop light viewport.
-    if (lebar === 1280 && skema === 'light') {
+    // Interactive checks only once, at the desktop light viewport without reduced motion.
+    if (lebar === 1280 && skema === 'light' && !gerak) {
       await page.goto(base + '/', { waitUntil: 'networkidle' });
       await page.locator('#cari-topik').fill('gempa');
       let tampil = await page.locator('.kartu-topik:visible').count();
@@ -116,8 +125,8 @@ try {
       await page.locator('#cari-topik').fill('');
       await page.locator('.filter-btn', { hasText: 'Ekologi' }).click();
       tampil = await page.locator('.kartu-topik:visible').count();
-      // Bioma kategori Ekologi sekarang 2 (yang lama + yang baru), jadi 2.
-      if (tampil !== 2) catat(`Beranda: filter Ekologi menampilkan ${tampil} kartu, seharusnya 2`);
+      // Duplikat bioma sudah dihapus, jadi kategori Ekologi hanya punya 1 topik.
+      if (tampil !== 1) catat(`Beranda: filter Ekologi menampilkan ${tampil} kartu, seharusnya 1`);
 
       await page.goto(base + '/topik/planet-bumi/lempeng-tektonik/', { waitUntil: 'networkidle' });
       await page.waitForSelector('.mv-canvas .leaflet-container', { timeout: 15000 });
@@ -179,6 +188,40 @@ try {
       await page.locator('.quiz-opsi-btn').nth(1).click();
       const umpan = page.locator('.quiz-feedback').first();
       if (!(await umpan.isVisible())) catat('Kuis: umpan balik tidak muncul setelah memilih jawaban');
+
+      await page.goto(base + '/topik/laut/ocean/', { waitUntil: 'networkidle' });
+      await page.locator('.zl-slider input').fill('1500');
+      if (!(await page.locator('.zl-zona-nama').textContent())?.toLowerCase().includes('gelap'))
+        catat('Zona laut: kedalaman 1.500 m bukan zona gelap');
+
+      await page.goto(base + '/topik/laut/arus/', { waitUntil: 'networkidle' });
+      await page.locator('.pa-daftar button', { hasText: 'Gulf Stream' }).click();
+      if (!(await page.locator('.pa-info-nama').textContent())?.includes('Gulf Stream'))
+        catat('Arus: memilih Gulf Stream tidak mengisi panel info');
+
+      await page.goto(base + '/topik/daratan/sungai/', { waitUntil: 'networkidle' });
+      await page.locator('.as-jenis select').selectOption('limbah');
+      await page.locator('.as-intensitas input').fill('80');
+      if (!(await page.locator('.as-status').textContent())?.toLowerCase().includes('tercemar'))
+        catat('Sungai: beban limbah tinggi tidak menandai tercemar');
+
+      await page.goto(base + '/topik/daratan/danau/', { waitUntil: 'networkidle' });
+      await page.locator('.dm-musim button', { hasText: 'Gugur' }).click();
+      if (!(await page.locator('.dm-status').textContent())?.toLowerCase().includes('campur'))
+        catat('Danau: musim gugur tidak menampilkan pencampuran');
+
+      await page.goto(base + '/topik/penutup/menghubungkan/', { waitUntil: 'networkidle' });
+      await page.locator('.sb-simpul button', { hasText: 'Laut' }).click();
+      if (!(await page.locator('.sb-panel').textContent())?.toLowerCase().includes('laut'))
+        catat('Sistem Bumi: memilih simpul laut tidak mengisi panel');
+
+      await page.goto(base + '/topik/laut/ocean/', { waitUntil: 'networkidle' });
+      const slider = page.locator('.zl-slider input');
+      await slider.focus();
+      const sebelum = await slider.inputValue();
+      await page.keyboard.press('ArrowRight');
+      if ((await slider.inputValue()) === sebelum)
+        catat('Zona laut: slider tidak merespons panah keyboard');
     }
 
     await context.close();
