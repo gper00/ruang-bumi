@@ -1,0 +1,102 @@
+---
+pertanyaan: "Kenapa air laut mengalir, dan ke mana arusnya pergi?"
+kategori: "laut"
+level: "pemula"
+menit: 6
+jawabanSingkat: "Angin serta perbedaan suhu dan kadar garam menggerakkan air laut dalam aliran yang tetap. Arus memindahkan panas dan nutrisi antarbenua, sehingga laut ikut mengatur iklim dan kehidupan di pesisir."
+terkait: ["laut/ocean", "atmosfer/angin-darat-laut", "atmosfer/siklus-air"]
+sumber: ["noaa-ocean-currents", "noaa-gyre", "noaa-thermohaline"]
+glosarium: ["arus-laut", "efek-coriolis", "upwelling"]
+dataset: []
+status: "terbit"
+diverifikasi: 2026-10-24
+---
+
+import PetaArus from '../../../components/viz/PetaArus';
+import Figure from '../../../components/sumber/Figure.astro';
+import DataNote from '../../../components/sumber/DataNote.astro';
+import Cite from '../../../components/sumber/Cite.astro';
+import Term from '../../../components/glosarium/Term.astro';
+import Quiz from '../../../components/quiz/Quiz';
+
+<Figure
+  caption="Pilih arus pada daftar atau saring menurut jenisnya. Panah oranye adalah arus hangat, panah biru adalah arus dingin."
+  source="noaa-ocean-currents"
+>
+  <PetaArus client:visible />
+</Figure>
+
+<DataNote>
+  Ilustrasi. Peta skematik: bentuk daratan disederhanakan dan posisi panah tidak mengikuti koordinat
+  arus yang terukur. Gunakan untuk memahami pola, bukan untuk navigasi.
+</DataNote>
+
+## Kok bisa?
+
+Air laut tidak pernah benar-benar diam. Pergerakan air yang terus-menerus dan terarah ini disebut
+<Term istilah="arus-laut" />. Angin menggerakkan lapisan permukaan, terutama 100 meter teratas.
+Selain angin, pasang surut dan perbedaan massa jenis air juga menjadi penggerak, sedangkan bentuk
+pesisir dan dasar laut memengaruhi arah serta kecepatan alirannya. <Cite id="noaa-thermohaline" />
+<Cite id="noaa-ocean-currents" />
+
+Karena Bumi berputar, jalur air yang tadinya lurus tampak membelok: ke kanan di belahan utara dan
+ke kiri di belahan selatan. Pembelokan ini disebut <Term istilah="efek-coriolis" />, dan efeknya
+terasa pada angin maupun arus laut. <Cite id="noaa-ocean-currents" />
+
+Benua lalu menghalangi aliran itu. Arus permukaan berbelok dan membentuk lingkaran besar yang
+disebut gyre. Ada lima gyre subtropis utama: Pasifik utara dan selatan, Atlantik utara dan selatan,
+serta Samudra Hindia. <Cite id="noaa-gyre" />
+
+Arus hangat membawa panas dari daerah tropis ke lintang tinggi. Gulf Stream, misalnya, mengangkut
+panas ke utara di sepanjang pantai timur Amerika Serikat menuju perairan yang lebih dingin.
+<Cite id="noaa-ocean-currents" /> Arus dingin bergerak dari lintang tinggi menuju ekuator dan
+mendinginkan perairan yang dilewatinya. Karena air membawa panas, arus tidak hanya mengubah suhu
+laut, tetapi juga iklim wilayah pesisir yang dilewatinya.
+
+Di bawah permukaan, arus digerakkan oleh perbedaan massa jenis air yang ditentukan suhu (thermo)
+dan kadar garam (haline). Di daerah kutub, air laut mendingin dan es laut terbentuk. Garam yang
+tertinggal membuat air sekitarnya makin asin dan padat, sehingga tenggelam. Air permukaan mengalir
+masuk menggantikannya, lalu ikut mendingin dan tenggelam. Proses ini membentuk sabuk arus dalam
+yang menghubungkan samudra-samudra. <Cite id="noaa-thermohaline" />
+
+Di beberapa pesisir, angin mendorong air permukaan menjauh dari daratan. Air dari kedalaman naik
+mengisi tempatnya; inilah <Term istilah="upwelling" />. Air yang naik biasanya dingin dan kaya
+nutrisi, sehingga daerah upwelling menjadi salah satu wilayah perikanan paling produktif.
+<Cite id="noaa-ocean-currents" />
+
+Jadi "ke mana perginya" bukan pertanyaan tentang satu tujuan akhir. Air terus berputar: sebagian di
+permukaan, sebagian di kedalaman, membawa panas dan makanan dari satu tempat ke tempat lain.
+
+## Fakta menarik
+
+- Gulf Stream mengangkut panas ke lintang tinggi di sepanjang pantai timur Amerika Serikat, menuju perairan yang lebih dingin. <Cite id="noaa-ocean-currents" />
+- Lima gyre subtropis utama terbentuk di Pasifik utara dan selatan, Atlantik utara dan selatan, serta Samudra Hindia. <Cite id="noaa-gyre" />
+- Saat es laut terbentuk di kutub, garam yang tertinggal membuat air sekitarnya lebih padat dan tenggelam. Peristiwa ini memulai arus dalam yang menyusuri samudra. <Cite id="noaa-thermohaline" />
+
+<Quiz
+  judul="Kuis"
+  client:visible
+  soal={[
+    {
+      tanya: 'Apa penggerak utama arus permukaan?',
+      opsi: ['Angin', 'Gempa bumi', 'Pasang surut'],
+      benar: 0,
+      penjelasan:
+        'Angin menggerakkan lapisan atas laut. Gempa bumi bukan penggerak arus, sedangkan pasang surut memang menggerakkan air tetapi bukan penggerak utama arus permukaan global.',
+    },
+    {
+      tanya: 'Mengapa arah arus membelok?',
+      opsi: ['Karena rotasi Bumi (efek Coriolis)', 'Karena warna air', 'Karena fase Bulan'],
+      benar: 0,
+      penjelasan:
+        'Rotasi Bumi membelokkan gerak air dan udara, ke kanan di belahan utara dan ke kiri di belahan selatan. Warna air dan fase Bulan bukan penyebab pembelokan itu.',
+    },
+    {
+      tanya: 'Apa yang dibawa upwelling ke permukaan?',
+      opsi: ['Air hangat miskin nutrisi', 'Air dingin kaya nutrisi', 'Pasir dari dasar'],
+      benar: 1,
+      penjelasan:
+        'Upwelling mengangkat air dalam yang dingin dan kaya nutrisi ke lapisan yang terkena cahaya, sehingga kehidupan di sana subur. Air hangat miskin nutrisi justru kebalikannya.',
+    },
+  ]}
+/>

@@ -1,0 +1,267 @@
+.pa {
+  display: grid;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.pa-kanvas svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.pa-laut-label {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  fill: var(--muted);
+}
+
+.pa-panah {
+  stroke-dasharray: 7 7;
+  animation: pa-alir 2.6s linear infinite;
+  transition: opacity 0.2s linear;
+}
+
+.pa-panah.pa-redup {
+  opacity: 0.16;
+}
+
+.pa-panah.pa-aktif {
+  stroke-dasharray: none;
+}
+
+@keyframes pa-alir {
+  to {
+    stroke-dashoffset: -28;
+  }
+}
+
+.pa-tanpa-gerak .pa-panah {
+  animation: none;
+  transition: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pa-panah {
+    animation: none;
+    transition: none;
+  }
+}
+
+.pa-kontrol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.pa-toggle {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.pa-toggle button {
+  min-height: 32px;
+  padding: 5px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  cursor: pointer;
+}
+
+.pa-toggle button:hover {
+  border-color: var(--sea);
+}
+
+.pa-toggle button[aria-pressed='true'] {
+  border-color: var(--sea);
+  background: var(--sea-soft);
+  color: var(--fg);
+}
+
+.pa-toggle button[data-jenis='hangat'][aria-pressed='true'] {
+  border-color: var(--heat);
+  background: var(--heat-soft);
+  color: var(--fg);
+}
+
+.pa-toggle button:focus-visible,
+.pa-daftar button:focus-visible {
+  outline: 2px solid var(--sea);
+  outline-offset: 2px;
+}
+
+.pa-legenda {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--muted);
+}
+
+.pa-legenda li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pa-kunci {
+  display: inline-block;
+  width: 18px;
+  height: 4px;
+  border-radius: 2px;
+}
+
+.pa-kunci-hangat {
+  background: var(--heat);
+}
+
+.pa-kunci-dingin {
+  background: var(--sea);
+}
+
+.pa-badan {
+  display: grid;
+  border-bottom: 1px solid var(--line);
+}
+
+@media (min-width: 760px) {
+  .pa-badan {
+    grid-template-columns: 240px 1fr;
+  }
+}
+
+.pa-daftar {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-bottom: 1px solid var(--line);
+}
+
+@media (min-width: 760px) {
+  .pa-daftar {
+    border-bottom: 0;
+    border-right: 1px solid var(--line);
+  }
+}
+
+.pa-daftar li + li {
+  border-top: 1px solid var(--line);
+}
+
+.pa-daftar button {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 40px;
+  padding: 8px 14px;
+  border: 0;
+  background: transparent;
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.pa-daftar button:hover {
+  background: var(--surface-2);
+}
+
+.pa-daftar button[aria-pressed='true'] {
+  background: var(--sea-soft);
+  box-shadow: inset 3px 0 0 var(--sea);
+}
+
+.pa-daftar-jenis {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+.pa-info {
+  display: grid;
+  gap: 4px;
+  align-content: start;
+  padding: 14px;
+  min-height: 170px;
+}
+
+.pa-info-nama {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.pa-info-jenis {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--muted);
+}
+
+.pa-info-arah,
+.pa-info-pengaruh {
+  margin: 4px 0 0;
+  font-size: 0.86rem;
+  max-width: 66ch;
+}
+
+.pa-info-arah span,
+.pa-info-pengaruh span {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--muted);
+  margin-right: 4px;
+}
+
+.pa-catatan {
+  display: grid;
+  gap: 8px;
+  padding: 10px 14px 14px;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.pa-catatan p {
+  margin: 0;
+  max-width: 78ch;
+}
+
+.pa-ringkas {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 2px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+}
+
+.pa-ringkas strong {
+  font-weight: 600;
+  color: var(--fg);
+}
