@@ -1,17 +1,18 @@
 ---
-pertanyaan: "Kenapa banyak sungai dan danau diganggu, padahal kita minum dari atas?"
+pertanyaan: "Kenapa kualitas air di muara ditentukan oleh apa yang terjadi di hulu?"
 kategori: "daratan"
 level: "pemula"
 menit: 6
-jawabanSingkat: "Sungai dan danau adalah sistem hidup yang mengalir. Mereka menerima yang masuk dari daratan (debu, pupuk, limbah) dan mengeluarkan yang keluar. Jika yang masuk terlalu banyak — atau salah —, yang keluar ikut berubah."
-terkait: ["daratan/sungai", "ekologi/bioma", "atmosfer/siklus-air"]
-sumber: ["usgs-water-cycle", "noaa-water-cycle"]
-glosarium: ["sungai", "danau", "auifer"]
+jawabanSingkat: "Sungai mengumpulkan air dari seluruh daerah alirannya, bukan hanya dari tepiannya. Apa yang masuk di hulu, seperti tanah tererosi, pupuk, atau limbah, ikut terbawa dan terakumulasi di hilir dan muara."
+terkait: ["daratan/danau", "atmosfer/siklus-air", "laut/arus"]
+sumber: ["usgs-watersheds", "usgs-river-monitoring", "usgs-water-cycle"]
+glosarium: ["daerah-aliran-sungai", "sedimen", "muara"]
+dataset: []
 status: "terbit"
-diverifikasi: 2026-10-23
+diverifikasi: 2026-10-24
 ---
 
-import MapView from '../../../components/viz/MapView';
+import AliranSungai from '../../../components/viz/AliranSungai';
 import Figure from '../../../components/sumber/Figure.astro';
 import DataNote from '../../../components/sumber/DataNote.astro';
 import Cite from '../../../components/sumber/Cite.astro';
@@ -19,78 +20,81 @@ import Term from '../../../components/glosarium/Term.astro';
 import Quiz from '../../../components/quiz/Quiz';
 
 <Figure
-  caption="Peta aliran Sungai Amazon mengikuti model USGS Water Cycle. Garis tebal menunjukkan aliran utama, titik-titik menunjukkan cabang."
-  source="usgs-water-cycle"
+  caption="Pilih jenis beban lalu geser intensitasnya. Warna air dan penanda di muara menunjukkan dampak yang terbawa sampai hilir."
+  source="usgs-watersheds"
 >
-  <MapView
-    client:visible
-    layers={['land', 'drainage']}
-    view="drainage"
-    caption="Sungai & pembuluh"
-  />
+  <AliranSungai client:visible />
 </Figure>
 
 <DataNote>
-  Ilustrasi. Peta aliran digambar dari model tektonik (USGS Water Cycle). Peta ini menunjukkan aliran
-  umum, bukan detail teknis. Warna mengikuti peta pembuluh, bukan skala nyata.
+  Ilustrasi. Model ini kualitatif: bentuk sungai disederhanakan dan besar beban tidak dihitung dari
+  data lapangan. Yang ditiru hanya arah perpindahan materi dari hulu ke muara.
 </DataNote>
 
 ## Kok bisa?
 
-Sungai dan danau adalah sistem yang mengalir, bukan wadah statis. Mereka menerima yang masuk dari daratan — debu, pupuk, limbah — dan mengeluarkan yang keluar ke laut. Kualitas air di titik akhir tidak saja ditentukan oleh yang terjadi di situ, tetapi oleh apa yang sudah terjadi di sepanjang alirannya. <Cite id="usgs-water-cycle" />
+Sungai bukan pipa yang hanya mengalirkan air dari satu titik. Ia mengumpulkan air dari seluruh
+cekungan di sekitarnya. Hujan yang jatuh di punggung bukit mengalir menuruni lereng, bergabung
+dengan anak sungai, dan akhirnya menuju satu titik keluaran. Seluruh daratan yang mengalirkan air
+ke titik itu disebut <Term istilah="daerah-aliran-sungai" />. <Cite id="usgs-watersheds" />
 
-### Sungai: saluran air dari darat
+Definisi itu lebih luas daripada yang terlihat di peta. Daerah aliran sungai mencakup air
+permukaan seperti danau, sungai, waduk, dan lahan basah, serta seluruh air tanah di bawahnya.
+Batasnya bukan garis di permukaan air, melainkan punggung bukit dan tinggi rendah lahan yang
+memisahkan satu cekungan dari cekungan lain. <Cite id="usgs-watersheds" />
 
-Sungai bermula dari sumber — hujan, air tanah, atau gletser. Di sepanjang perjalanan, sungai membawa muatan: sedimen dari tebing, nutrisi dari lahan pertanian, dan berbagai macam bahan dari permukiman manusia. <Cite id="noaa-water-cycle" />
+Karena itu, kualitas air di hilir tidak hanya ditentukan oleh apa yang terjadi di dekat hilir. USGS
+menyatakan bahwa kualitas air permukaan mencerminkan kondisi alami dan kondisi akibat aktivitas
+manusia di dalam daerah aliran sungai. <Cite id="usgs-river-monitoring" /> Tanah yang tererosi di
+hulu membawa <Term istilah="sedimen" />, lahan pertanian membawa pupuk, dan permukiman membawa
+limbah. Semuanya bergerak bersama air.
 
-### Danau: bekas air yang duduk
+Partikel yang lebih kasar mengendap ketika aliran melambat, misalnya di dataran rendah dan di
+muara. Partikel yang lebih halus tetap melayang dan membuat air keruh. Kekeruhan serta sedimen
+termasuk hal yang dipantau karena memengaruhi kualitas air. <Cite id="usgs-river-monitoring" />
+Nutrisi seperti nitrogen dan fosfor bisa larut dan terbawa lebih jauh; kadar nutrisi yang tinggi
+berkaitan dengan pertumbuhan alga yang berlebihan. <Cite id="usgs-river-monitoring" />
 
-Danau berbeda dari sungai: airnya cenderung berdiam. Akibatnya, danau menjadi lokasi yang bagus untuk mengawasi kualitas air, tetapi juga tempat kumulasi — nutrisi, lumpur, dan zat yang tidak larut. <Cite id="noaa-water-cycle" />
+Jumlah air yang mengalir memperbesar pengaruhnya. Semakin besar debit, biasanya semakin besar pula
+beban kontaminan dan sedimen yang dibawa, sebagian karena limpasan dari permukaan tanah. Ketika
+beban itu mencapai teluk dan <Term istilah="muara" />, tumbuhan dan hewan di sana bisa terdampak.
+<Cite id="usgs-river-monitoring" />
 
-### Aliran = kualitas
-
-Kualitas air di sungai hanyalah cerminan dari apa yang dilakukan di atasnya. Penanaman di daerah hulu akan memengaruhi kualitas air di muara. Karena itu, yang mengubah "naik" hatiku adalah apa yang terjadi di kelilingnya. <Cite id="noaa-water-cycle" />
-
-### Pasang surut di perairan
-
-Aliran air sangat visibel di perairan: saat pasang, air laut masuk, membawa sedimen dan nutrisi; saat surut, air kembali, meninggalkan pasir, lumpur, dan zat yang ada di permukaan. Sistem ini berulang setiap hari. <Cite id="noaa-water-cycle" />
+Kabar baiknya, arah pengaruh ini berlaku dua arah. Kalau erosi ditahan, pupuk dikelola lebih baik,
+dan limbah diolah di hulu, maka beban yang sampai ke hilir ikut berkurang. Itulah alasan pengelolaan
+sungai dilakukan per daerah aliran sungai, bukan per batas kota atau kabupaten.
+<Cite id="usgs-watersheds" />
 
 ## Fakta menarik
 
-- Sungai yang paling panjang di dunia, Amazon, mengalir hingga ke Samudra Pasifik. Sistem alirannya sangat luas sehingga perubahannya dapat merasakan sebagian besar bagian daratan. <Cite id="noaa-water-cycle" />
-- Gunung berapi adalah sumber energi alami yang dapat mengubah karakter air, termasuk mempercepat pendangan air. <Cite id="noaa-water-cycle" />
-- Air di bawah permukaan tanah dikenal sebagai air tanah, dan cangkupan air tanah dalam jumlah besar bisa menjadi ruang dalam wadah yang dapat diukur. <Cite id="noaa-water-cycle" />
+- Daerah aliran sungai mencakup seluruh air tanah di bawahnya, bukan hanya sungai dan danau yang terlihat di permukaan. <Cite id="usgs-watersheds" />
+- Kualitas air permukaan mencerminkan kondisi alami sekaligus aktivitas manusia di seluruh daerah aliran sungai. <Cite id="usgs-river-monitoring" />
+- Aliran yang lebih besar biasanya membawa lebih banyak kontaminan dan sedimen, sebagian berasal dari limpasan permukaan. <Cite id="usgs-river-monitoring" />
 
 <Quiz
   judul="Kuis"
   client:visible
   soal={[
     {
-      tanya: 'Mengapa kualitas air di muara sungai bisa berubah?',
-      opsi: ['Karena muara selalu dekat ke laut',
-             'Karena air membawa apa yang diterima dari daratan sepanjang perjalanan',
-             'Karena sungai selalu berputar'],
-      benar: 1,
-      penjelasan:
-        'Sungai membawa muatan yang diterima dari daratan ke muara. Jadi kualitas air di muara ditentukan oleh apa yang terjadi di hulu.',
-    },
-    {
-      tanya: 'Perbedaan utama antara sungai dan danau adalah...',
-      opsi: ['Danau selalu lebih besar daripada sungai',
-             'Air di danau cenderung berdiam, sehingga kualitasnya stabil dan mudah diamati',
-             'Sungai tidak pernah mengalir'],
-      benar: 1,
-      penjelasan:
-        'Danau berair karena airnya cenderung berdiam. Akibatnya, kualitas air di danau stabil dan mudah diamati.',
-    },
-    {
-      tanya: 'Apa yang terjadi pada air saat pasang?',
-      opsi: ['Air laut masuk, membawa sedimen dan nutrisi ke daratan',
-             'Air laut keluar, meninggalkan pasir di permukaan',
-             'Sungai berputar lebih cepat'],
+      tanya: 'Apa itu daerah aliran sungai (DAS)?',
+      opsi: ['Seluruh daratan yang mengalirkan air ke satu titik keluaran', 'Hanya bagian sungai yang terlihat', 'Tempat air laut masuk ke sungai'],
       benar: 0,
       penjelasan:
-        'Saat pasang, air laut mengalir masuk, membawa sedimen dan nutrisi; saat surut, air kembali, meninggalkan pasir dan lumpur.',
+        'DAS adalah seluruh daratan yang airnya mengalir ke satu titik keluaran, termasuk air tanah di bawahnya. Batasnya bukan hanya sungai yang tampak di permukaan.',
+    },
+    {
+      tanya: 'Mengapa kualitas air di muara dipengaruhi oleh hulu?',
+      opsi: ['Karena air muara selalu bersih', 'Karena materi terbawa air sepanjang aliran', 'Karena muara tidak terhubung ke sungai'],
+      benar: 1,
+      penjelasan:
+        'Air mengangkut sedimen, nutrisi, dan limbah dari hulu ke hilir, sehingga muara menerima akumulasi sepanjang aliran. Muara justru terhubung langsung dengan sungai.',
+    },
+    {
+      tanya: 'Apa itu sedimen tersuspensi?',
+      opsi: ['Partikel tanah atau batuan yang terbawa air', 'Gas yang larut dalam air', 'Ikan kecil di dasar sungai'],
+      benar: 0,
+      penjelasan:
+        'Sedimen tersuspensi adalah partikel padat yang melayang di air dan memengaruhi kekeruhan serta kualitas air. Gas larut dan ikan bukan partikel sedimen.',
     },
   ]}
 />
