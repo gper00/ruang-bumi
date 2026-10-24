@@ -1,0 +1,183 @@
+.sb {
+  display: grid;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.sb-grafik {
+  position: relative;
+  aspect-ratio: 1000 / 560;
+  background: var(--surface-2);
+}
+
+.sb-grafik svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.sb-garis path {
+  stroke: var(--line-strong);
+  stroke-width: 1.8;
+  transition: opacity 0.2s linear, stroke 0.2s linear;
+}
+
+.sb-garis-semua path {
+  opacity: 0.6;
+}
+
+.sb-garis-aktif path {
+  stroke: var(--sea);
+  stroke-width: 2.8;
+  opacity: 1;
+}
+
+.sb-garis-redup path {
+  opacity: 0.12;
+}
+
+.sb-garis-label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  fill: var(--fg);
+  paint-order: stroke;
+  stroke: var(--surface-2);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
+
+.sb-simpul-tombol {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  min-height: 34px;
+  padding: 6px 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--fg);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.82rem;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.06);
+  transition: background 0.15s linear, border-color 0.15s linear;
+}
+
+.sb-simpul-tombol:hover {
+  border-color: var(--sea);
+}
+
+.sb-simpul-tombol[aria-pressed='true'] {
+  border-color: var(--sea);
+  background: var(--sea-soft);
+}
+
+.sb-simpul-tombol:focus-visible {
+  outline: 2px solid var(--sea);
+  outline-offset: 2px;
+}
+
+.sb-tanpa-gerak .sb-garis path,
+.sb-tanpa-gerak .sb-simpul-tombol {
+  transition: none;
+}
+
+@media (max-width: 520px) {
+  .sb-simpul-tombol {
+    padding: 5px 10px;
+    font-size: 0.7rem;
+    min-height: 30px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sb-garis path,
+  .sb-simpul-tombol {
+    transition: none;
+  }
+}
+
+.sb-panel {
+  display: grid;
+  gap: 4px;
+  padding: 14px;
+  border-top: 1px solid var(--line);
+  min-height: 168px;
+}
+
+.sb-panel-nama {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.sb-panel-ringkas {
+  margin: 0;
+  font-size: 0.88rem;
+  max-width: 70ch;
+}
+
+.sb-panel-petunjuk {
+  margin: 4px 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--muted);
+}
+
+.sb-koneksi {
+  margin: 4px 0 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 6px;
+  font-size: 0.84rem;
+}
+
+.sb-koneksi a {
+  color: var(--sea);
+  font-weight: 600;
+}
+
+.sb-koneksi span {
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.sb-koneksi p {
+  margin: 1px 0 0;
+  color: var(--muted);
+  max-width: 72ch;
+}
+
+.sb-catatan {
+  display: grid;
+  gap: 8px;
+  padding: 10px 14px 14px;
+  border-top: 1px solid var(--line);
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.sb-catatan p {
+  margin: 0;
+  max-width: 80ch;
+}
+
+.sb-ringkas {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 3px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+}
+
+.sb-ringkas strong {
+  color: var(--fg);
+  font-weight: 600;
+}

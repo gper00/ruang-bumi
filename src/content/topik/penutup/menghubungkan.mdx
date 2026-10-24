@@ -2,16 +2,17 @@
 pertanyaan: "Bagaimana semua hal di atas saling terhubung?"
 kategori: "penutup"
 level: "pemula"
-menit: 4
-jawabanSingkat: "Bumi adalah satu sistem: air menguap, bercummbun, mengalir, dan digaruti arus. Setiap penanyaan di halaman ini adalah sudut pandang yang sama terhadap satu bumi yang saling terhubung."
-terkait: ["atmosfer/angin-darat-laut", "atmosfer/siklus-air", "laut/ocean"]
-sumber: ["noaa-water-cycle", "usgs-water-cycle"]
-glosarium: ["siklus-air"]
+menit: 5
+jawabanSingkat: "Bumi bekerja sebagai satu sistem. Lempeng membentuk relief, relief mengatur aliran air dan angin, keduanya membentuk iklim dan bioma, sementara laut memindahkan panas dan mengembalikan uap air ke atmosfer."
+terkait: ["atmosfer/siklus-air", "laut/arus", "planet-bumi/lempeng-tektonik"]
+sumber: ["nasa-earth-system", "noaa-water-cycle", "usgs-water-cycle"]
+glosarium: ["sistem-bumi", "siklus-air"]
+dataset: []
 status: "terbit"
-diverifikasi: 2026-10-23
+diverifikasi: 2026-10-24
 ---
 
-import MapView from '../../../components/viz/MapView';
+import SistemBumi from '../../../components/viz/SistemBumi';
 import Figure from '../../../components/sumber/Figure.astro';
 import DataNote from '../../../components/sumber/DataNote.astro';
 import Cite from '../../../components/sumber/Cite.astro';
@@ -19,69 +20,79 @@ import Term from '../../../components/glosarium/Term.astro';
 import Quiz from '../../../components/quiz/Quiz';
 
 <Figure
-  caption="Gambar ringkas: laut sebagai penghubung utama antara atmosfer, daratan, dan laut lepas."
-  source="noaa-water-cycle"
+  caption="Pilih salah satu simpul untuk melihat apa yang mengalir ke dan darinya. Garis yang menyala menunjukkan koneksi yang sedang dibahas."
+  source="nasa-earth-system"
 >
-  <MapView
-    client:visible
-    layers={['land', 'oceans', 'currents']}
-    view="world"
-    caption="Satu bumi."
-  />
+  <SistemBumi client:visible />
 </Figure>
 
 <DataNote>
-  Ilustrasi. Peta ini menggambarkan hubungan antar wilayah. Arah aliran di atas bukanlah aliran yang
-  tepat, melainkan pemetaan konsep.
+  Ilustrasi. Diagram ini konsep, bukan peta atau model numerik. Panah dan garis menunjukkan arah
+  pengaruh yang disederhanakan.
 </DataNote>
 
 ## Kok bisa?
 
-Ketika mulai belajar tentang Bumi, kita kadang melihat hal-hal terpisah: angin, air, gunung, danau. Padahal semuanya adalah satu sistem yang satu: air menguap, bercummbun, mengalir, dan digarungi arus. <Cite id="noaa-water-cycle" />
+Bumi bukan kumpulan bagian yang berdiri sendiri. NASA membagi sistem Bumi menjadi lima subsistem:
+atmosfer, hidrosfer, biosfer, kriosfer, dan geosfer. Semuanya terhubung dalam jaringan proses, dan
+perubahan di satu bagian akan memengaruhi bagian lain. <Cite id="nasa-earth-system" />
 
-### Koneksi sederhana
+Rantai pengaruhnya bisa dimulai dari bawah kaki kita. Lempeng tektonik membentuk gunung, palung,
+dan cekungan. Relief yang terbentuk lalu mengatur arah aliran air dan pola angin. Di
+[topik lempeng tektonik](/topik/planet-bumi/lempeng-tektonik/), kita melihat bagaimana tumbukan
+lempeng membangun pegunungan; pegunungan itu sendiri kemudian memaksa udara naik dan mendingin,
+sehingga hujan turun di satu sisi dan sisi lain menjadi kering.
 
-- Angin dan arus adalah "pemindah" yang menggerakkan air dan panas.
-- Permukaan laut menerima penyalur dari daratan, sehingga kualitas air di laut dibedakan oleh apa yang terjadi di daratan.
-- Sungai dan danau adalah jalan yang membawa air dari hulu ke laut.
-- Lempeng tektonik menggerakkan gunung, danau (dari air), dan bagian dari siklus air.
+Air melanjutkan rantainya. <Term istilah="siklus-air" /> memindahkan air dari laut ke atmosfer,
+lalu ke daratan, dan kembali lagi ke laut. Penguapan membutuhkan energi, sehingga siklus ini juga
+memindahkan panas dari permukaan ke atmosfer. <Cite id="noaa-water-cycle" /> Di daratan, air
+mengalir lewat [sungai dan daerah aliran sungai](/topik/daratan/sungai/), membawa sedimen serta
+nutrisi sampai ke muara. <Cite id="usgs-water-cycle" />
+
+Laut memegang peran ganda. Ia menyimpan panas dan menjadi sumber utama uap air, tetapi juga
+mengangkut panas lewat [arus laut](/topik/laut/arus/). Arus permukaan digerakkan angin, sedangkan
+arus dalam digerakkan perbedaan suhu dan kadar garam. Perpindahan panas ini ikut memengaruhi suhu
+pesisir dan pola cuaca di banyak tempat. <Cite id="noaa-water-cycle" />
+
+Kehidupan menerima hasilnya. Ketersediaan air dan nutrisi menentukan jenis tumbuhan yang bisa
+tumbuh, dan tumbuhan bersama iklim membentuk [bioma](/topik/ekologi/bioma/). Laut yang kaya
+nutrisi menopang plankton, yang menjadi dasar rantai makanan di perairan. <Cite id="nasa-earth-system" />
+
+Karena itu, perubahan di satu bagian jarang berhenti di tempat. Menghilangkan tutupan hutan di hulu
+mengubah erosi dan aliran air ke hilir. Menghangatkan permukaan laut mengubah penguapan dan arus.
+Yang tampak sebagai "topik berbeda" sebenarnya adalah sudut pandang berbeda pada satu sistem yang
+sama. <Cite id="nasa-earth-system" />
 
 ## Fakta menarik
 
-- Koneksi sederhana: angin, arus, dll.
-- Topik utama: air dan daratan.
-- Eksperimen: tidak ada.
+- Lempeng membentuk gunung, gunung mengubah pola hujan, hujan mengisi sungai, dan sungai membawa sedimen ke laut. Satu rantai, lima bagian sistem. <Cite id="usgs-water-cycle" />
+- Laut menyimpan panas dan menguapkan air; uap itu kembali sebagai hujan dan mengalir lagi ke laut lewat sungai. <Cite id="noaa-water-cycle" />
+- Perubahan di satu subsistem Bumi akan memengaruhi subsistem lain, karena semuanya terhubung oleh aliran energi dan materi. <Cite id="nasa-earth-system" />
 
 <Quiz
   judul="Kuis"
   client:visible
   soal={[
     {
-      tanya: 'Hubungan yang paling utama yang dijelaskan dalam halaman ini adalah...',
-      opsi: ['Air menguap, bercummbun, mengalir, dan digarungi arus',
-             'Udara mengalir, lalu menjadi air',
-             'Daratan mengalir ke laut'],
-      benar: 0,
-      penjelasan:
-        'Siklus air adalah koneksi utama: air menguap, bercummbun, mengalir, dan digarungi arus.',
-    },
-    {
-      tanya: 'Gunung danau dihubungkan dengan topik lain melalui...',
-      opsi: ['Lempeng tektonik yang menggerakkan tanah',
-             'Aktivitas manusia di sungai',
-             'Laut yang selalu dangkal'],
-      benar: 0,
-      penjelasan:
-        'Lempeng tektonik menggerakkan gunung, danau, dan bagian dari siklus air.',
-    },
-    {
-      tanya: 'Topik apa yang paling utama dalam koneksi sederhana?',
-      opsi: ['Laut dan daratan',
-             'Air dan daratan',
-             'Aliran dan arus'],
+      tanya: 'Berapa subsistem utama sistem Bumi menurut NASA?',
+      opsi: ['Tiga', 'Lima', 'Tujuh'],
       benar: 1,
       penjelasan:
-        'Topik utama adalah air dan daratan, yang menjadi koneksi antara semua topik.',
+        'NASA membagi sistem Bumi menjadi atmosfer, hidrosfer, biosfer, kriosfer, dan geosfer. Jawaban tiga dan tujuh tidak sesuai pembagian itu.',
+    },
+    {
+      tanya: 'Contoh aliran yang menghubungkan laut dan atmosfer adalah...',
+      opsi: ['Arus laut dan angin', 'Warna tanah', 'Jumlah gunung'],
+      benar: 0,
+      penjelasan:
+        'Arus laut dan angin memindahkan panas serta uap air antara laut dan atmosfer. Warna tanah dan jumlah gunung bukan aliran di antara keduanya.',
+    },
+    {
+      tanya: 'Mengapa perubahan di satu bagian sistem Bumi memengaruhi bagian lain?',
+      opsi: ['Karena bagian-bagiannya terhubung lewat siklus energi dan materi', 'Karena semua bagian identik', 'Karena Bumi tidak berubah'],
+      benar: 0,
+      penjelasan:
+        'Siklus energi dan materi membuat perubahan di satu subsistem merambat ke subsistem lain. Bagian-bagian Bumi tidak identik, dan sistemnya terus berubah.',
     },
   ]}
 />
