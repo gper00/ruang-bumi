@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import yaml from 'js-yaml';
 import { describe, expect, it } from 'vitest';
+import { bacaMdx } from './bantuan-konten';
 
 const akar = path.resolve(import.meta.dirname, '../..');
 const glosarium = yaml.load(
@@ -39,4 +40,26 @@ describe('glosarium', () => {
       expect(idSumber.has(g.sumber), `${g.id} → ${g.sumber}`).toBe(true);
     }
   });
+});
+
+const topikBaru = [
+  'topik/laut/ocean.mdx',
+  'topik/laut/arus.mdx',
+  'topik/daratan/sungai.mdx',
+  'topik/daratan/danau.mdx',
+  'topik/penutup/menghubungkan.mdx',
+];
+
+describe('konten 5 topik baru', () => {
+  for (const relatif of topikBaru) {
+    it(`${relatif}: bersih, bersumber, dan punya 3 soal`, () => {
+      const { data, isi } = bacaMdx(relatif);
+      expect(isi).not.toMatch(/wetan|patchungan|auifer/i);
+      expect(isi).not.toMatch(/<MapView/);
+      expect(Array.isArray(data.sumber) ? (data.sumber as string[]).length : 0).toBeGreaterThanOrEqual(2);
+      expect((isi.match(/\btanya:/g) ?? []).length).toBe(3);
+      expect((isi.match(/\bbenar:/g) ?? []).length).toBe(3);
+      expect(String(isi)).toMatch(/<Figure[^>]*source="/);
+    });
+  }
 });
