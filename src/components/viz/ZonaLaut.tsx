@@ -37,8 +37,8 @@ export default function ZonaLaut() {
           <title id="zl-judul">Penampang vertikal zona laut</title>
           <desc id="zl-desk">
             Tiga lapisan laut menurut kedalaman: zona fotik dari permukaan sampai 200 meter, zona
-            senja dari 200 sampai 1.000 meter, dan zona gelap dari 1.000 sampai 4.000 meter. Garis
-            oranye menandai kedalaman yang dipilih.
+            senja dari 200 sampai 1.000 meter, dan zona gelap mulai 1.000 meter (digambar sampai
+            4.000 meter). Garis oranye menandai kedalaman yang dipilih.
           </desc>
 
           <rect width="700" height="400" fill="var(--ocean)" />
@@ -92,7 +92,7 @@ export default function ZonaLaut() {
             Zona gelap
           </text>
           <text x="110" y="314" className="zl-zona-kecil">
-            1.000–4.000 m · tanpa cahaya Matahari
+            lebih dari 1.000 m · tanpa cahaya Matahari
           </text>
 
           <line
@@ -117,6 +117,10 @@ export default function ZonaLaut() {
           />
           <text x="638" y={y - 6} textAnchor="middle" className="zl-penanda-teks">
             {angka.format(meter)} m
+          </text>
+
+          <text x="680" y="392" textAnchor="end" className="zl-sumbu">
+            batas gambar 4.000 m
           </text>
         </svg>
       </div>
@@ -160,7 +164,10 @@ export default function ZonaLaut() {
           {zona.nama}
           <span>
             {' '}
-            · {angka.format(zona.batas[0])}–{angka.format(zona.batas[1])} m
+            ·{' '}
+            {zona.id === 'gelap'
+              ? `lebih dari ${angka.format(zona.batas[0])} m`
+              : `${angka.format(zona.batas[0])}–${angka.format(zona.batas[1])} m`}
           </span>
         </p>
         <p className="zl-cahaya">{zona.cahaya}</p>
@@ -182,7 +189,7 @@ export default function ZonaLaut() {
           kehidupan bergantung pada makanan yang jatuh dari lapisan atas.
         </li>
         <li>
-          <strong>Zona gelap (1.000–4.000 m).</strong> Tidak ada cahaya Matahari. Banyak hewan
+          <strong>Zona gelap (di bawah 1.000 m).</strong> Tidak ada cahaya Matahari. Banyak hewan
           menghasilkan cahaya sendiri untuk berkomunikasi dan mencari mangsa.
         </li>
       </ul>

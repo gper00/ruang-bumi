@@ -106,7 +106,7 @@
 - id: upwelling
   istilah: Upwelling
   definisi: Naiknya air dingin dari kedalaman ke permukaan, membawa nutrisi.
-  sumber: noaa-ocean-currents
+  sumber: noaa-upwelling
 - id: daerah-aliran-sungai
   istilah: Daerah aliran sungai
   definisi: Seluruh daratan yang mengalirkan air hujan dan air tanah ke satu titik keluaran.

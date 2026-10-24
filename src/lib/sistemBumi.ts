@@ -53,7 +53,8 @@ export const ALIRAN: readonly Aliran[] = [
     ke: 'atmosfer',
     label: 'relief dan angin',
     topik: '/topik/planet-bumi/lempeng-tektonik/',
-    contoh: 'Pegunungan yang terbentuk oleh lempeng mengubah arah angin dan pola hujan di sekitarnya.',
+    contoh:
+      'Pegunungan yang terbentuk oleh lempeng menaikkan udara yang bergerak, sehingga pola angin dan hujan di sekitarnya berubah.',
   },
   {
     dari: 'lempeng',
@@ -67,7 +68,7 @@ export const ALIRAN: readonly Aliran[] = [
     ke: 'kehidupan',
     label: 'tanah dan gunung api',
     topik: '/topik/planet-bumi/lempeng-tektonik/',
-    contoh: 'Gunung api menyuburkan tanah, tetapi letusannya juga dapat menghancurkan habitat.',
+    contoh: 'Abu vulkanik dapat menyuburkan tanah, tetapi letusan juga dapat menghancurkan habitat.',
   },
   {
     dari: 'atmosfer',

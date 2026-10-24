@@ -23,7 +23,7 @@ export const ZONA: readonly Zona[] = [
     nama: 'Zona senja',
     batas: [200, 1000],
     cahaya: 'Sangat redup dan makin lemah seiring kedalaman, sehingga tidak cukup untuk fotosintesis.',
-    suhu: 'Lebih dingin daripada permukaan dan berubah lebih lambat.',
+    suhu: 'Suhu turun cepat di termoklin, lalu lebih stabil di bawahnya.',
     contoh: ['Ikan lentera', 'Cumi-cumi', 'Hewan yang naik ke permukaan pada malam hari'],
   },
   {

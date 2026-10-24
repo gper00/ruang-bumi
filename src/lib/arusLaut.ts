@@ -13,8 +13,9 @@ export const ARUS: readonly Arus[] = [
     id: 'gulf-stream',
     nama: 'Gulf Stream',
     jenis: 'hangat',
-    arah: 'Dari Teluk Meksiko menyusuri pantai timur Amerika Serikat, lalu menyeberang ke Atlantik utara.',
-    pengaruh: 'Membawa air hangat ke lintang tinggi dan membantu menghangatkan pesisir Eropa barat.',
+    arah: 'Dari Karibia dan Teluk Meksiko menyusuri pantai timur Amerika Serikat, lalu menyeberang Atlantik menuju Eropa.',
+    pengaruh:
+      'Membawa panas ke lintang tinggi; panasnya membuat sebagian Eropa utara lebih hangat daripada wilayah lain pada lintang yang sama.',
   },
   {
     id: 'kuroshio',
@@ -42,7 +43,8 @@ export const ARUS: readonly Arus[] = [
     nama: 'Arus Humboldt',
     jenis: 'dingin',
     arah: 'Menyusuri pantai barat Amerika Selatan dari selatan ke utara.',
-    pengaruh: 'Membawa air dingin kaya nutrisi ke permukaan dan menopang perikanan di perairan Peru.',
+    pengaruh:
+      'Membawa air dingin kaya nutrisi ke permukaan; daerah upwelling seperti ini menjadi wilayah perikanan yang produktif.',
   },
   {
     id: 'acc',
