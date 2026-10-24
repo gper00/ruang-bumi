@@ -25,6 +25,13 @@
   fill: var(--fg);
 }
 
+@media (max-width: 640px) {
+  .as-kecil,
+  .as-label-muatan {
+    font-size: 18px;
+  }
+}
+
 .as-sungai {
   stroke-dasharray: 12 8;
   animation: as-alir 1.9s linear infinite;

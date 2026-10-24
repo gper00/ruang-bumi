@@ -49,6 +49,13 @@
   stroke-linejoin: round;
 }
 
+@media (max-width: 640px) {
+  .sb-garis-label {
+    font-size: 26px;
+    stroke-width: 6px;
+  }
+}
+
 .sb-simpul {
   position: absolute;
   transform: translate(-50%, -50%);

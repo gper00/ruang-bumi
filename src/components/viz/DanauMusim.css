@@ -26,6 +26,16 @@
   fill: var(--muted);
 }
 
+@media (max-width: 640px) {
+  .dm-label {
+    font-size: 22px;
+  }
+
+  .dm-kecil {
+    font-size: 15px;
+  }
+}
+
 .dm-pencampuran path {
   animation: dm-alir 2.2s linear infinite;
 }

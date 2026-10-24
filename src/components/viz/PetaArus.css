@@ -19,6 +19,14 @@
   fill: var(--muted);
 }
 
+/* Peta 1000 unit menyusut ke ±300 px di ponsel; perbesar label agar terbaca. */
+@media (max-width: 640px) {
+  .pa-laut-label {
+    font-size: 30px;
+    letter-spacing: 0.08em;
+  }
+}
+
 .pa-panah {
   stroke-dasharray: 7 7;
   animation: pa-alir 2.6s linear infinite;

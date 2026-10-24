@@ -37,6 +37,26 @@
   fill: var(--heat-ink);
 }
 
+/* Label SVG ikut mengecil bersama kanvas; di layar sempit ukurannya dinaikkan
+   agar tetap terbaca (target ±9 px saat dirender). */
+@media (max-width: 640px) {
+  .zl-sumbu {
+    font-size: 16px;
+  }
+
+  .zl-zona-label {
+    font-size: 20px;
+  }
+
+  .zl-zona-kecil {
+    font-size: 14px;
+  }
+
+  .zl-penanda-teks {
+    font-size: 15px;
+  }
+}
+
 .zl-penanda {
   transition: opacity 0.25s linear;
 }
