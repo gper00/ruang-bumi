@@ -63,16 +63,6 @@
   definisi: Lapisan luar Bumi yang kaku, terdiri dari kerak dan bagian atas mantel, terpecah menjadi lempeng-lempeng.
   sumber: usgs-plate-tectonics
 
-- id: wetan
-  istilah: Wetan
-  definisi: Hutan yang tumbuh di dasar laut dari tebing curam, biasanya di daerah yang tenang.
-  sumber: noaa-sea-breeze
-
-- id: patchungan
-  istilah: Patchungan
-  definisi: Lahan yang luas dan mengering di musim kemarau, sering dijadikan lahan pertanian.
-  sumber: noaa-sea-breeze
-
 - id: danau
   istilah: Danau
   definisi: Perairan yang luas dan tenang, biasanya diambil dari hujan atau air tanah.
@@ -83,17 +73,65 @@
   definisi: Aliran air yang membawa muatan dari daratan menuju laut atau danau.
   sumber: noaa-water-cycle
 
-- id: auifer
-  istilah: Akuifer
-  definisi: Lapisan batuan atau tanah yang mampu menyimpan dan mengalirkan air tanah dalam jumlah besar.
-  sumber: usgs-water-cycle
-
 - id: permukaan
   istilah: Permukaan
-  definisi: Lapisan atas permukaan air yang terkena cahaya Matahari dan angin.
+  definisi: Bagian air yang berada di lapisan paling atas dan langsung terkena cahaya Matahari serta angin.
   sumber: noaa-water-cycle
 
 - id: pantai
   istilah: Pantai
-  definisi: Wilayah pertemuan antara air dan darat, yang panjang air selalu berubah.
+  definisi: Wilayah pertemuan antara air dan darat yang terus berubah karena gelombang, pasang surut, dan arus.
   sumber: noaa-sea-breeze
+
+- id: zona-fotik
+  istilah: Zona fotik
+  definisi: Lapisan permukaan laut sampai sekitar 200 meter yang masih cukup terang untuk fotosintesis.
+  sumber: noaa-layers-ocean
+- id: zona-senja
+  istilah: Zona senja
+  definisi: Lapisan laut sekitar 200–1.000 meter; cahaya sangat redup sehingga fotosintesis tidak berlangsung.
+  sumber: noaa-layers-ocean
+- id: zona-gelap
+  istilah: Zona gelap
+  definisi: Lapisan laut di bawah 1.000 meter yang tidak menerima cahaya Matahari.
+  sumber: noaa-layers-ocean
+- id: arus-laut
+  istilah: Arus laut
+  definisi: Pergerakan air laut yang terus-menerus; di permukaan digerakkan angin, di kedalaman oleh perbedaan suhu dan kadar garam.
+  sumber: noaa-ocean-currents
+- id: efek-coriolis
+  istilah: Efek Coriolis
+  definisi: Pembelokan arah gerak air dan udara karena Bumi berputar.
+  sumber: noaa-ocean-currents
+- id: upwelling
+  istilah: Upwelling
+  definisi: Naiknya air dingin dari kedalaman ke permukaan, membawa nutrisi.
+  sumber: noaa-ocean-currents
+- id: daerah-aliran-sungai
+  istilah: Daerah aliran sungai
+  definisi: Seluruh daratan yang mengalirkan air hujan dan air tanah ke satu titik keluaran.
+  sumber: usgs-watersheds
+- id: sedimen
+  istilah: Sedimen
+  definisi: Partikel tanah atau batuan yang terangkat dan terbawa air.
+  sumber: usgs-watersheds
+- id: muara
+  istilah: Muara
+  definisi: Tempat sungai bertemu laut dan air tawar bercampur dengan air laut.
+  sumber: usgs-watersheds
+- id: epilimnion
+  istilah: Epilimnion
+  definisi: Lapisan atas danau yang lebih hangat dan bercampur oleh angin.
+  sumber: usgs-lakes-stratification
+- id: termoklin
+  istilah: Termoklin
+  definisi: Lapisan peralihan di danau tempat suhu turun cepat terhadap kedalaman.
+  sumber: usgs-lakes-stratification
+- id: hipolimnion
+  istilah: Hipolimnion
+  definisi: Lapisan bawah danau yang lebih dingin dan padat.
+  sumber: usgs-lakes-stratification
+- id: sistem-bumi
+  istilah: Sistem Bumi
+  definisi: Kesatuan atmosfer, hidrosfer, biosfer, kriosfer, dan geosfer yang saling memengaruhi.
+  sumber: nasa-earth-system
