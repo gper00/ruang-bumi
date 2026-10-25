@@ -114,7 +114,7 @@
 - id: sedimen
   istilah: Sedimen
   definisi: Partikel tanah atau batuan yang terangkat dan terbawa air.
-  sumber: usgs-watersheds
+  sumber: usgs-sediment
 - id: muara
   istilah: Muara
   definisi: Tempat sungai bertemu laut dan air tawar bercampur dengan air laut.

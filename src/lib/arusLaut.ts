@@ -15,7 +15,7 @@ export const ARUS: readonly Arus[] = [
     jenis: 'hangat',
     arah: 'Dari Karibia dan Teluk Meksiko menyusuri pantai timur Amerika Serikat, lalu menyeberang Atlantik menuju Eropa.',
     pengaruh:
-      'Membawa panas ke lintang tinggi; panasnya membuat sebagian Eropa utara lebih hangat daripada wilayah lain pada lintang yang sama.',
+      'Membawa panas ke lintang tinggi; panasnya membuat sebagian besar Eropa utara lebih hangat daripada wilayah lain pada lintang yang sama.',
   },
   {
     id: 'kuroshio',
