@@ -1,0 +1,74 @@
+name: CI
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Unit tests (Vitest)
+        run: npm test
+
+      - name: Type and content check
+        run: npx astro check
+
+      - name: Build (includes source guards)
+        run: npm run build
+
+      - name: Internal links
+        run: npm run check:links
+        env:
+          SKIP_EXTERNAL: '1'
+
+  ui-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Install Chromium
+        run: npx playwright-core install --with-deps chromium
+
+      - name: Start preview server
+        run: |
+          npm run preview -- --port 4321 &
+          for i in $(seq 1 30); do
+            curl -sf http://localhost:4321/ >/dev/null && exit 0
+            sleep 2
+          done
+          echo "Preview server tidak siap dalam 60 detik."
+          exit 1
+
+      - name: UI smoke + axe checks
+        run: node tests/ui-check.mjs http://localhost:4321

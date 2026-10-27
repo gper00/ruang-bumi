@@ -1,0 +1,526 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Ruang Bumi</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: judul berupa pertanyaan, lalu simulasi 24 jam sebagai bagian utama, lalu penjelasan singkat; kolom samping untuk topik lanjutan dan sumber. */
+:root {
+  --bg: #eff5f6;
+  --surface: #ffffff;
+  --fg: #0f2229;
+  --muted: #4b6670;
+  --line: #cbdadf;
+  --sea: #14789a;
+  --sea-soft: #d5ebf2;
+  --heat: #c9461f;
+  --heat-soft: #f9ddd3;
+  --ok: #1f7a4d;
+  --bad: #b3342f;
+  --font-display: 'Bricolage Grotesque', 'Trebuchet MS', sans-serif;
+  --font-body: 'Figtree', 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0b181d; --surface: #12252c; --fg: #e3eef1; --muted: #94aeb7; --line: #264049;
+    --sea: #4fb5d6; --sea-soft: #173a47; --heat: #f0835e; --heat-soft: #3d231b;
+    --ok: #5cc08c; --bad: #f07d77; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0b181d; --surface: #12252c; --fg: #e3eef1; --muted: #94aeb7; --line: #264049;
+  --sea: #4fb5d6; --sea-soft: #173a47; --heat: #f0835e; --heat-soft: #3d231b;
+  --ok: #5cc08c; --bad: #f07d77; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  padding-block: 20px 56px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 1040px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; }
+a { color: var(--sea); }
+:focus-visible { outline: 2px solid var(--sea); outline-offset: 2px; border-radius: 4px; }
+
+.top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 6px 20px; }
+.brand { font-family: var(--font-display); font-weight: 800; font-size: 1.15rem; letter-spacing: -0.01em; }
+.crumb { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); }
+
+.eyebrow { font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
+h1 {
+  font-family: var(--font-display); font-weight: 800; font-size: clamp(1.9rem, 5.2vw, 3.2rem);
+  line-height: 1.08; letter-spacing: -0.02em; margin: 0; max-width: 20ch; text-wrap: balance;
+}
+h2 { font-family: var(--font-display); font-weight: 600; font-size: 1.5rem; line-height: 1.2; margin: 0 0 12px; text-wrap: balance; }
+.label { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 0 0 8px; }
+p { margin: 0 0 14px; max-width: 65ch; }
+
+/* Simulasi */
+.sim { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+.scene-wrap { line-height: 0; }
+#scene { width: 100%; height: auto; display: block; max-width: 100%; }
+.controls { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; padding: 14px 18px; border-top: 1px solid var(--line); }
+.btn {
+  font: inherit; font-weight: 600; font-size: 0.95rem; color: var(--fg); background: var(--bg);
+  border: 1px solid var(--line); border-radius: 8px; padding: 8px 14px; cursor: pointer; min-width: 128px;
+}
+.btn:hover { border-color: var(--sea); }
+.slider { flex: 1 1 220px; display: flex; align-items: center; gap: 12px; min-width: 0; }
+.slider input { flex: 1; min-width: 0; accent-color: var(--sea); height: 28px; }
+.clock { font-family: var(--font-mono); font-weight: 500; font-size: 1.25rem; min-width: 8.5ch; text-align: right; font-variant-numeric: tabular-nums; }
+.clock small { display: block; font-size: 0.7rem; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
+
+.readout { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 18px 28px; padding: 16px 18px 20px; border-top: 1px solid var(--line); }
+.temps { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.trow { display: grid; grid-template-columns: 64px 1fr 62px; align-items: center; gap: 10px; font-family: var(--font-mono); font-size: 0.85rem; }
+.trow .bar { height: 10px; border-radius: 5px; background: var(--bg); overflow: hidden; border: 1px solid var(--line); }
+.trow .bar i { display: block; height: 100%; width: 50%; }
+.trow.land .bar i { background: var(--heat); }
+.trow.sea .bar i { background: var(--sea); }
+.trow b { font-weight: 500; text-align: right; font-variant-numeric: tabular-nums; }
+.note { font-size: 0.78rem; color: var(--muted); margin: 4px 0 0; line-height: 1.4; }
+.verdict { min-width: 0; }
+.chip {
+  display: inline-block; font-family: var(--font-mono); font-size: 0.82rem; font-weight: 500; padding: 4px 10px;
+  border-radius: 999px; border: 1px solid var(--line); background: var(--bg); margin-bottom: 8px;
+}
+.chip[data-state="sea"] { background: var(--sea-soft); color: var(--sea); border-color: var(--sea); }
+.chip[data-state="land"] { background: var(--heat-soft); color: var(--heat); border-color: var(--heat); }
+#explain { font-size: 0.98rem; margin: 0; }
+
+/* Isi artikel */
+.cols { display: grid; grid-template-columns: minmax(0, 1fr); gap: 36px; }
+@media (min-width: 900px) { .cols { grid-template-columns: minmax(0, 1fr) 280px; gap: 56px; } }
+article { display: flex; flex-direction: column; gap: 34px; min-width: 0; }
+.answer { background: var(--sea-soft); border-radius: 12px; padding: 18px 20px; }
+.answer p { margin: 0; font-size: 1.08rem; }
+.when { display: grid; gap: 14px; margin: 0; }
+.when div { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 4px 16px; }
+.when dt { font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); padding-top: 4px; }
+.when dd { margin: 0; }
+@media (max-width: 520px) { .when div { grid-template-columns: 1fr; } }
+.kj { display: flex; flex-direction: column; gap: 8px; margin: 10px 0 8px; max-width: 520px; }
+.kj .row { display: grid; grid-template-columns: 96px 1fr 60px; gap: 10px; align-items: center; font-family: var(--font-mono); font-size: 0.82rem; }
+.kj .bar { height: 14px; border-radius: 4px; background: var(--bg); border: 1px solid var(--line); overflow: hidden; }
+.kj .bar i { display: block; height: 100%; }
+.kj .row b { font-weight: 500; text-align: right; font-variant-numeric: tabular-nums; }
+.facts { margin: 0; padding-left: 1.2em; display: grid; gap: 10px; max-width: 65ch; }
+
+.quiz { border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 18px 20px; }
+.q { border: 0; padding: 0; margin: 0 0 22px; min-width: 0; }
+.q legend { font-weight: 600; padding: 0; margin-bottom: 10px; }
+.opts { display: grid; gap: 8px; }
+.opt {
+  font: inherit; text-align: left; color: var(--fg); background: var(--bg); border: 1px solid var(--line);
+  border-radius: 8px; padding: 10px 14px; cursor: pointer; line-height: 1.4;
+}
+.opt:hover:not(:disabled) { border-color: var(--sea); }
+.opt:disabled { cursor: default; }
+.opt[data-res="right"] { border-color: var(--ok); background: color-mix(in srgb, var(--ok) 14%, var(--bg)); }
+.opt[data-res="wrong"] { border-color: var(--bad); background: color-mix(in srgb, var(--bad) 14%, var(--bg)); }
+.fb { font-size: 0.92rem; margin: 8px 0 0; color: var(--muted); }
+.score { font-family: var(--font-mono); font-size: 0.9rem; margin: 0; display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; }
+
+aside { display: flex; flex-direction: column; gap: 26px; min-width: 0; align-self: start; }
+@media (min-width: 900px) { aside { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 16px); } }
+.next { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.next li { border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; background: var(--surface); }
+.next b { display: block; font-weight: 600; }
+.next span { font-size: 0.85rem; color: var(--muted); line-height: 1.35; display: block; }
+.src { margin: 0; padding-left: 1.1em; font-size: 0.88rem; color: var(--muted); display: grid; gap: 6px; }
+.foot { font-size: 0.8rem; color: var(--muted); border-top: 1px solid var(--line); padding-top: 14px; max-width: none; }
+
+@media (max-width: 640px) {
+  .readout { grid-template-columns: minmax(0, 1fr); }
+  .btn { min-width: 0; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <span class="brand">Ruang Bumi</span>
+    <nav class="crumb" aria-label="Lokasi halaman">Atmosfer / Angin / Angin darat dan angin laut</nav>
+  </header>
+
+  <main style="display:flex;flex-direction:column;gap:28px;">
+    <section>
+      <p class="eyebrow">Atmosfer &middot; Pemula &middot; 4 menit</p>
+      <h1>Kenapa angin di pantai berubah arah antara siang dan malam?</h1>
+    </section>
+
+    <section class="sim" aria-label="Simulasi angin pantai selama 24 jam">
+      <div class="scene-wrap">
+        <svg id="scene" viewBox="0 0 800 400" role="img" aria-label="Penampang pantai. Laut di kiri, darat di kanan. Panah putih menunjukkan arah aliran udara, yang berubah mengikuti jam yang dipilih.">
+          <defs>
+            <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+              <stop id="skyTop" offset="0" stop-color="#5aa9e6"/>
+              <stop id="skyBot" offset="1" stop-color="#c8e6f7"/>
+            </linearGradient>
+            <linearGradient id="heat" x1="0" y1="1" x2="0" y2="0">
+              <stop offset="0" stop-color="#ff6a3d" stop-opacity="0.8"/>
+              <stop offset="1" stop-color="#ff6a3d" stop-opacity="0"/>
+            </linearGradient>
+            <linearGradient id="seaGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#2a93b8"/>
+              <stop offset="1" stop-color="#146583"/>
+            </linearGradient>
+          </defs>
+          <rect width="800" height="400" fill="url(#sky)"/>
+          <g id="stars"></g>
+          <g id="sunG">
+            <circle r="48" fill="#ffd36b" opacity="0.25"/>
+            <circle r="27" fill="#ffd36b"/>
+          </g>
+          <g id="moonG">
+            <circle r="21" fill="#e9edf7"/>
+            <circle cx="-6" cy="-5" r="4" fill="#cfd6e8"/>
+            <circle cx="7" cy="6" r="3" fill="#cfd6e8"/>
+          </g>
+          <rect id="heatGlow" x="470" y="140" width="330" height="150" fill="url(#heat)" opacity="0"/>
+
+          <rect x="0" y="310" width="440" height="90" fill="url(#seaGrad)"/>
+          <path d="M0 326 q25 -8 50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0" fill="none" stroke="#ffffff" stroke-opacity="0.35" stroke-width="2"/>
+          <path d="M0 354 q25 -8 50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0" fill="none" stroke="#ffffff" stroke-opacity="0.22" stroke-width="2"/>
+          <polygon points="420,310 480,290 570,290 570,400 420,400" fill="#e2c98f"/>
+          <polygon points="540,290 800,290 800,400 540,400" fill="#5f8f4c"/>
+          <rect x="540" y="372" width="260" height="28" fill="#4a7339"/>
+          <g fill="#6b4a2b"><rect x="625" y="252" width="6" height="38"/><rect x="705" y="258" width="6" height="32"/><rect x="760" y="250" width="6" height="40"/></g>
+          <g fill="#2f6b3a"><circle cx="628" cy="244" r="22"/><circle cx="708" cy="250" r="19"/><circle cx="763" cy="242" r="23"/></g>
+
+          <g id="boat"><path d="M-24 0 L24 0 L15 11 L-15 11 Z" fill="#7a4b2a"/><rect x="-1.5" y="-38" width="3" height="38" fill="#4d3320"/><polygon points="3,-36 3,-5 26,-5" fill="#f5f5f5"/></g>
+
+          <g id="flow"></g>
+          <g font-family="IBM Plex Mono, monospace" font-size="13" fill="#ffffff" stroke="#0b2a38" stroke-width="3" paint-order="stroke" text-anchor="middle">
+            <text id="lblUp" x="640" y="184" opacity="0">udara naik</text>
+            <text id="lblDown" x="190" y="184" opacity="0">udara turun</text>
+          </g>
+          <g font-family="IBM Plex Mono, monospace" font-size="14" letter-spacing="2" fill="#ffffff" text-anchor="middle">
+            <text x="200" y="388">LAUT</text>
+            <text x="670" y="388">DARAT</text>
+          </g>
+        </svg>
+      </div>
+
+      <div class="controls">
+        <button class="btn" id="play" type="button" aria-pressed="false">Putar 24 jam</button>
+        <label class="slider" for="hour"><span style="font-size:.9rem;color:var(--muted)">Jam</span>
+          <input id="hour" type="range" min="0" max="23.75" step="0.25" value="13">
+        </label>
+        <div class="clock" aria-hidden="true"><span id="clockTxt">13:00</span><small id="phase">Siang</small></div>
+      </div>
+
+      <div class="readout">
+        <div class="temps">
+          <div class="trow land"><span>Darat</span><div class="bar"><i id="barLand"></i></div><b id="tLand">0&deg;C</b></div>
+          <div class="trow sea"><span>Laut</span><div class="bar"><i id="barSea"></i></div><b id="tSea">0&deg;C</b></div>
+          <p class="note">Suhu permukaan pada model sederhana, sebagai ilustrasi. Angka nyata berbeda di tiap pantai dan tiap hari.</p>
+        </div>
+        <div class="verdict">
+          <span class="chip" id="chip" data-state="calm">Angin laut</span>
+          <p id="explain"></p>
+        </div>
+      </div>
+    </section>
+
+    <div class="cols">
+      <article>
+        <section id="jawaban">
+          <p class="label">Jawaban singkat</p>
+          <div class="answer">
+            <p>Darat dan laut tidak memanas dan mendingin sama cepat. Beda suhu itu membuat udara bergerak: siang hari bertiup dari laut ke darat, malam hari sebaliknya.</p>
+          </div>
+        </section>
+
+        <section id="kokbisa">
+          <p class="label">Kok bisa?</p>
+          <dl class="when">
+            <div><dt>Siang</dt><dd>Matahari memanaskan darat dengan cepat. Udara di atasnya memuai, menjadi lebih ringan, dan naik. Tekanan di permukaan darat turun, lalu udara dari laut yang lebih sejuk mengalir masuk. Inilah <strong>angin laut</strong>.</dd></div>
+            <div><dt>Sore ke malam</dt><dd>Matahari terbenam dan darat cepat melepas panasnya. Suhu darat turun mendekati suhu laut, jadi beda tekanan menghilang dan angin mereda atau berganti arah.</dd></div>
+            <div><dt>Malam hingga dini hari</dt><dd>Laut masih menyimpan panas, sedangkan darat sudah dingin. Sekarang udara di atas laut yang naik, dan udara dari darat mengalir keluar ke laut. Inilah <strong>angin darat</strong>.</dd></div>
+          </dl>
+        </section>
+
+        <section id="kalor">
+          <p class="label">Kenapa suhu laut berubah lambat?</p>
+          <p>Air perlu banyak sekali energi untuk naik satu derajat. Pasir kering jauh lebih mudah dipanaskan, dan juga lebih cepat dingin.</p>
+          <div class="kj" role="img" aria-label="Diagram batang kalor jenis. Air sekitar 4,18, pasir kering sekitar 0,8 joule per gram per derajat Celsius.">
+            <div class="row"><span>Air</span><div class="bar"><i style="width:100%;background:var(--sea)"></i></div><b>4,18</b></div>
+            <div class="row"><span>Pasir kering</span><div class="bar"><i style="width:19%;background:var(--heat)"></i></div><b>~0,8</b></div>
+          </div>
+          <p class="note">Kalor jenis dalam joule per gram per &deg;C. Nilai pasir bergantung pada jenis dan kelembapannya.</p>
+        </section>
+
+        <section id="faktamenarik">
+          <p class="label">Fakta menarik</p>
+          <ul class="facts">
+            <li>Nelayan tradisional sering berangkat dini hari terbawa angin darat, lalu pulang siang hari terbawa angin laut.</li>
+            <li>Di daerah tropis, angin laut yang masuk pada sore hari sering ikut memicu awan hujan di daratan.</li>
+            <li>Di pegunungan ada versi yang prinsipnya sama: angin lembah di siang hari dan angin gunung di malam hari.</li>
+          </ul>
+        </section>
+
+        <section id="quiz">
+          <p class="label">Coba jawab</p>
+          <div class="quiz">
+            <div id="qs"></div>
+            <p class="score"><span id="score">Belum dijawab</span><button class="btn" id="reset" type="button" hidden>Ulangi</button></p>
+          </div>
+        </section>
+      </article>
+
+      <aside>
+        <section>
+          <p class="label">Lanjut belajar</p>
+          <ul class="next">
+            <li><b>Angin muson</b><span>Prinsip yang sama, tetapi berganti arah tiap setengah tahun. Segera hadir.</span></li>
+            <li><b>Siklus air</b><span>Ke mana uap air dari laut pergi setelah terbawa angin. Segera hadir.</span></li>
+            <li><b>Cuaca dan iklim</b><span>Beda yang sering tertukar. Segera hadir.</span></li>
+            <li><b>Musim</b><span>Kenapa Indonesia hanya punya dua. Segera hadir.</span></li>
+          </ul>
+        </section>
+        <section>
+          <p class="label">Sumber</p>
+          <ul class="src">
+            <li>NOAA National Weather Service, JetStream: Sea Breeze</li>
+            <li>BMKG, materi edukasi cuaca dan iklim</li>
+            <li>Daftar akhir dengan tautan diisi saat artikel ditulis.</li>
+          </ul>
+        </section>
+      </aside>
+    </div>
+  </main>
+
+  <p class="foot">Prototype gaya halaman. Nama situs dan isi masih sementara.</p>
+</div>
+
+<script>
+(function () {
+  var TAU = Math.PI * 2;
+  var $ = function (id) { return document.getElementById(id); };
+  var clamp = function (v, a, b) { return Math.min(b, Math.max(a, v)); };
+  var mix = function (a, b, t) { return a.map(function (v, i) { return Math.round(v + (b[i] - v) * t); }); };
+  var rgb = function (a) { return 'rgb(' + a.join(',') + ')'; };
+  var NS = 'http://www.w3.org/2000/svg';
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Model sederhana: suhu permukaan darat dan laut sepanjang hari */
+  function landT(h) { return 28 + 6 * Math.cos(TAU * (h - 14) / 24); }
+  function seaT(h) { return 28 + 0.8 * Math.cos(TAU * (h - 15) / 24); }
+
+  /* Geometri lintasan aliran udara */
+  var XS = 190, XL = 640, YL = 262, YH = 96;
+  var H = XL - XS, V = YL - YH, L = 2 * H + 2 * V;
+  function posAt(s) {
+    s = ((s % L) + L) % L;
+    if (s < H) return { x: XS + s, y: YL, a: 0 };
+    if (s < H + V) return { x: XL, y: YL - (s - H), a: -90 };
+    if (s < 2 * H + V) return { x: XL - (s - H - V), y: YH, a: 180 };
+    return { x: XS, y: YH + (s - 2 * H - V), a: 90 };
+  }
+
+  var flow = $('flow');
+  var N = 26, parts = [];
+  for (var i = 0; i < N; i++) {
+    var p = document.createElementNS(NS, 'polygon');
+    p.setAttribute('points', '7,0 -5,5 -5,-5');
+    p.setAttribute('fill', '#ffffff');
+    p.setAttribute('stroke', '#0b2a38');
+    p.setAttribute('stroke-width', '1');
+    p.setAttribute('stroke-opacity', '0.55');
+    flow.appendChild(p);
+    parts.push({ el: p, s0: i * L / N });
+  }
+
+  var stars = $('stars');
+  var seed = 7;
+  function rnd() { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; }
+  for (var k = 0; k < 28; k++) {
+    var c = document.createElementNS(NS, 'circle');
+    c.setAttribute('cx', (rnd() * 790 + 5).toFixed(0));
+    c.setAttribute('cy', (rnd() * 170 + 8).toFixed(0));
+    c.setAttribute('r', (rnd() * 1.2 + 0.6).toFixed(1));
+    c.setAttribute('fill', '#ffffff');
+    stars.appendChild(c);
+  }
+
+  var state = { h: 13, phase: 0, sign: 1, mag: 0, playing: false, t: 0 };
+  var dayTop = [90, 169, 230], dayBot = [200, 230, 247];
+  var nightTop = [11, 20, 48], nightBot = [28, 43, 85];
+  var duskTop = [120, 110, 170], duskBot = [243, 163, 107];
+
+  function pad(n) { return n < 10 ? '0' + n : '' + n; }
+  function phaseName(h) {
+    if (h < 5) return 'Dini hari';
+    if (h < 10) return 'Pagi';
+    if (h < 15) return 'Siang';
+    if (h < 18.5) return 'Sore';
+    return 'Malam';
+  }
+
+  function paintParticles() {
+    var op = clamp(state.mag / 1.2, 0, 1) * 0.95;
+    for (var i = 0; i < parts.length; i++) {
+      var q = parts[i];
+      var pt = posAt(q.s0 + state.phase);
+      var ang = pt.a + (state.sign < 0 ? 180 : 0);
+      q.el.setAttribute('transform', 'translate(' + pt.x.toFixed(1) + ',' + pt.y.toFixed(1) + ') rotate(' + ang + ')');
+      q.el.setAttribute('opacity', op.toFixed(2));
+    }
+  }
+
+  function render() {
+    var h = state.h;
+    var lt = landT(h), st = seaT(h), d = lt - st;
+    state.sign = d >= 0 ? 1 : -1;
+    state.mag = Math.abs(d);
+
+    /* langit */
+    var e = Math.sin(TAU * (h - 6) / 24);
+    var day = clamp((e + 0.12) / 0.4, 0, 1);
+    var dusk = clamp(1 - Math.abs(e) / 0.28, 0, 1);
+    var top = mix(mix(nightTop, dayTop, day), duskTop, dusk * 0.6);
+    var bot = mix(mix(nightBot, dayBot, day), duskBot, dusk * 0.85);
+    $('skyTop').setAttribute('stop-color', rgb(top));
+    $('skyBot').setAttribute('stop-color', rgb(bot));
+    stars.setAttribute('opacity', ((1 - day) * 0.9).toFixed(2));
+
+    var sh = clamp(h, 6, 18);
+    var th = Math.PI * (sh - 6) / 12;
+    $('sunG').setAttribute('transform', 'translate(' + (400 - 330 * Math.cos(th)).toFixed(0) + ',' + (300 - 230 * Math.sin(th)).toFixed(0) + ')');
+    $('sunG').setAttribute('opacity', clamp((e + 0.1) / 0.2, 0, 1).toFixed(2));
+    var hh = h < 6 ? h + 24 : h;
+    var mh = clamp(hh, 18, 30);
+    var tm = Math.PI * (mh - 18) / 12;
+    $('moonG').setAttribute('transform', 'translate(' + (400 - 330 * Math.cos(tm)).toFixed(0) + ',' + (300 - 230 * Math.sin(tm)).toFixed(0) + ')');
+    $('moonG').setAttribute('opacity', clamp((-e + 0.1) / 0.2, 0, 1).toFixed(2));
+
+    $('heatGlow').setAttribute('opacity', clamp((lt - 28) / 6, 0, 1).toFixed(2));
+
+    /* label naik dan turun */
+    var up = state.sign > 0 ? XL : XS, down = state.sign > 0 ? XS : XL;
+    var lo = clamp(state.mag / 1.2, 0, 1).toFixed(2);
+    $('lblUp').setAttribute('x', up); $('lblUp').setAttribute('opacity', lo);
+    $('lblDown').setAttribute('x', down); $('lblDown').setAttribute('opacity', lo);
+
+    /* teks dan angka */
+    var hr = Math.floor(h), mn = Math.round((h - hr) * 60);
+    $('clockTxt').textContent = pad(hr) + ':' + pad(mn === 60 ? 0 : mn);
+    $('phase').textContent = phaseName(h);
+    $('tLand').textContent = lt.toFixed(1).replace('.', ',') + '°C';
+    $('tSea').textContent = st.toFixed(1).replace('.', ',') + '°C';
+    $('barLand').style.width = clamp((lt - 20) / 16 * 100, 4, 100) + '%';
+    $('barSea').style.width = clamp((st - 20) / 16 * 100, 4, 100) + '%';
+
+    var chip = $('chip'), ex = $('explain');
+    if (state.mag < 0.6) {
+      chip.dataset.state = 'calm';
+      chip.textContent = 'Hampir tenang';
+      ex.textContent = 'Suhu darat dan laut hampir sama, jadi beda tekanannya terlalu kecil untuk menggerakkan udara. Pada saat seperti ini angin berganti arah.';
+    } else {
+      var kuat = state.mag < 2 ? 'lemah' : state.mag < 4 ? 'sedang' : 'kuat';
+      if (state.sign > 0) {
+        chip.dataset.state = 'sea';
+        chip.textContent = 'Angin laut · ' + kuat;
+        ex.textContent = 'Darat lebih panas dari laut. Udara di atas darat naik, lalu udara dari laut mengalir masuk mengisi tempatnya. Angin bertiup dari laut ke darat.';
+      } else {
+        chip.dataset.state = 'land';
+        chip.textContent = 'Angin darat · ' + kuat;
+        ex.textContent = 'Darat sudah lebih dingin dari laut. Sekarang udara di atas laut yang naik, dan udara dari darat mengalir keluar ke laut. Angin bertiup dari darat ke laut.';
+      }
+    }
+    $('hour').setAttribute('aria-valuetext', pad(hr) + ':' + pad(mn === 60 ? 0 : mn) + ', ' + phaseName(h));
+    paintParticles();
+  }
+
+  /* Kontrol */
+  var slider = $('hour');
+  slider.addEventListener('input', function () {
+    state.h = parseFloat(slider.value);
+    render();
+  });
+  var playBtn = $('play');
+  playBtn.addEventListener('click', function () {
+    state.playing = !state.playing;
+    playBtn.setAttribute('aria-pressed', state.playing ? 'true' : 'false');
+    playBtn.textContent = state.playing ? 'Jeda' : 'Putar 24 jam';
+  });
+
+  /* Animasi */
+  var last = null;
+  function frame(ts) {
+    if (last === null) last = ts;
+    var dt = Math.min(0.05, (ts - last) / 1000);
+    last = ts;
+    state.t += dt;
+    if (state.playing) {
+      state.h = (state.h + dt * 2) % 24;
+      slider.value = Math.min(state.h, 23.75);
+    }
+    state.phase += state.sign * clamp(state.mag / 5, 0, 1) * 150 * dt;
+    $('boat').setAttribute('transform', 'translate(110,' + (312 + Math.sin(state.t * 1.6) * 2.5).toFixed(1) + ') rotate(' + (Math.sin(state.t * 1.3) * 2).toFixed(1) + ')');
+    render();
+    requestAnimationFrame(frame);
+  }
+  if (reduce) {
+    $('boat').setAttribute('transform', 'translate(110,312)');
+    render();
+  } else {
+    requestAnimationFrame(frame);
+  }
+
+  /* Kuis */
+  var QS = [
+    { q: 'Pukul 2 siang kamu berdiri di pantai. Angin terasa bertiup dari mana?',
+      o: ['Dari laut ke darat', 'Dari darat ke laut', 'Tidak ada angin karena suhu merata'], a: 0,
+      f: 'Siang hari darat lebih panas. Udara di atasnya naik, dan udara dari laut mengalir masuk.' },
+    { q: 'Kenapa darat lebih cepat panas daripada laut?',
+      o: ['Matahari hanya menyinari darat', 'Air butuh jauh lebih banyak energi untuk naik 1°C, jadi suhu laut berubah lambat', 'Laut memantulkan semua sinar matahari'], a: 1,
+      f: 'Matahari menyinari keduanya. Bedanya ada pada kalor jenis: air sekitar lima kali lebih besar daripada pasir kering.' },
+    { q: 'Nelayan sering berangkat melaut dini hari. Angin apa yang membantu mereka keluar dari pantai?',
+      o: ['Angin laut', 'Angin darat', 'Angin muson'], a: 1,
+      f: 'Dini hari darat dingin dan udaranya mengalir ke laut. Siang harinya angin laut membantu mereka pulang.' }
+  ];
+  var qs = $('qs'), answered = 0, correct = 0;
+  function buildQuiz() {
+    qs.innerHTML = ''; answered = 0; correct = 0;
+    $('score').textContent = 'Belum dijawab';
+    $('reset').hidden = true;
+    QS.forEach(function (item, qi) {
+      var fs = document.createElement('fieldset'); fs.className = 'q';
+      var lg = document.createElement('legend'); lg.textContent = item.q; fs.appendChild(lg);
+      var box = document.createElement('div'); box.className = 'opts'; fs.appendChild(box);
+      var fb = document.createElement('p'); fb.className = 'fb'; fb.hidden = true; fs.appendChild(fb);
+      item.o.forEach(function (txt, oi) {
+        var b = document.createElement('button');
+        b.type = 'button'; b.className = 'opt'; b.id = 'q' + qi + 'o' + oi; b.textContent = txt;
+        b.addEventListener('click', function () {
+          var btns = box.querySelectorAll('button');
+          btns.forEach(function (x, xi) {
+            x.disabled = true;
+            if (xi === item.a) x.dataset.res = 'right';
+            else if (xi === oi) x.dataset.res = 'wrong';
+          });
+          fb.textContent = (oi === item.a ? 'Benar. ' : 'Belum tepat. ') + item.f;
+          fb.hidden = false;
+          answered++; if (oi === item.a) correct++;
+          $('score').textContent = 'Skor ' + correct + ' dari ' + answered + (answered < QS.length ? '' : ' (selesai)');
+          if (answered === QS.length) $('reset').hidden = false;
+        });
+        box.appendChild(b);
+      });
+      qs.appendChild(fs);
+    });
+  }
+  $('reset').addEventListener('click', buildQuiz);
+  buildQuiz();
+})();
+</script>
+
+</body></html>

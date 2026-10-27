@@ -14,7 +14,7 @@ import { fileURLToPath } from 'node:url';
 
 const sini = path.dirname(fileURLToPath(import.meta.url));
 const akar = path.resolve(sini, '../..');
-const prototipe = path.resolve(akar, '../simple-proto/Peta Lempeng Tektonik.html');
+const prototipe = path.resolve(akar, 'simple-proto/Peta Lempeng Tektonik.html');
 const keluarProses = path.resolve(akar, 'data/processed');
 const keluarPublik = path.resolve(akar, 'public/data');
 
