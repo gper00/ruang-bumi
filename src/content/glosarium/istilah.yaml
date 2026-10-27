@@ -211,3 +211,28 @@
   istilah: Sistem Bumi
   definisi: Kesatuan atmosfer, hidrosfer, biosfer, kriosfer, dan geosfer yang saling memengaruhi.
   sumber: nasa-earth-system
+
+- id: magma
+  istilah: Magma
+  definisi: Batuan yang meleleh di bawah permukaan Bumi, bercampur kristal dan gas terlarut. Gas inilah yang kelak mendorong magma keluar ke permukaan.
+  sumber: usgs-about-volcanoes
+- id: lava
+  istilah: Lava
+  definisi: Magma yang sudah mencapai permukaan. Namanya berubah begitu keluar dari mulut gunung api, dan gasnya langsung mulai lepas ke udara.
+  sumber: usgs-about-volcanoes
+- id: kekentalan-magma
+  istilah: Kekentalan magma
+  definisi: Seberapa sukar magma mengalir. Magma basalt yang encer membiarkan gas lepas perlahan; magma dasit dan riolit yang kental menahannya sampai tekanannya terlepas.
+  sumber: usgs-eruption-styles
+- id: letusan-efusif
+  istilah: Letusan efusif
+  definisi: Letusan tenang yang hanya memuntahkan lava mengalir atau air mancur lava dengan sedikit abu, khas magma basalt berkekekentalan rendah.
+  sumber: usgs-eruption-styles
+- id: letusan-eksplosif
+  istilah: Letusan eksplosif
+  definisi: Letusan keras yang menembakkan abu dan serpihan batuan tinggi ke udara; terjadi saat magma kental menahan gas sampai tekanannya meledak.
+  sumber: usgs-eruption-styles
+- id: tefra
+  istilah: Tefra
+  definisi: Serpihan batuan dan abu vulkanik yang terlontar keluar mulut gunung api. Ukurannya bermacam-macam, dari kerikil sampai partikel setebal sehelai rambut.
+  sumber: usgs-about-volcanoes

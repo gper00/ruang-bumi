@@ -56,6 +56,7 @@ const halaman = [
   '/topik/atmosfer/siklus-air/',
   '/topik/ekologi/bioma/',
   '/topik/planet-bumi/gempa-bumi/',
+  '/topik/planet-bumi/gunung-api/',
   '/topik/planet-bumi/lempeng-tektonik/',
   '/topik/laut/ocean/',
   '/topik/laut/arus/',
@@ -288,6 +289,39 @@ try {
         catat(
           `Gempa: jarak hiposentrum ${jarakHipo} tidak lebih panjang daripada jarak episentrum ${jarakEpi}`,
         );
+
+      await page.goto(base + '/topik/planet-bumi/gunung-api/', { waitUntil: 'networkidle' });
+      await tungguVisual('SimErupsi');
+      const sliderErupsi = page.locator('.seu-slider input');
+      await sliderErupsi.first().scrollIntoViewIfNeeded();
+      const nilaiErupsi = page.locator('.seu-hasil .seu-nilai');
+
+      await sliderErupsi.first().fill('10');
+      await sliderErupsi.nth(1).fill('10');
+      if ((await nilaiErupsi.nth(0).textContent())?.trim() !== 'Efusif')
+        catat(
+          `Gunung api: kekentalan 10 dan gas 10 seharusnya efusif (${await nilaiErupsi.nth(0).textContent()})`,
+        );
+      if (!(await nilaiErupsi.nth(1).textContent())?.includes('Perisai'))
+        catat('Gunung api: magma encer seharusnya menghasilkan gunung perisai');
+      const lerengAwal = await page.locator('.seu-hasil .seu-extra').nth(1).textContent();
+      if (!(await page.locator('.seu-ringkas').textContent())?.includes('menyebar jauh'))
+        catat('Gunung api: ringkasan gaya efusif tidak muncul pada magma encer');
+
+      await sliderErupsi.first().fill('100');
+      await sliderErupsi.nth(1).fill('100');
+      if ((await nilaiErupsi.nth(0).textContent())?.trim() !== 'Eksplosif')
+        catat('Gunung api: kekentalan dan gas maksimal seharusnya eksplosif');
+      if ((await nilaiErupsi.nth(1).textContent())?.includes('Perisai'))
+        catat('Gunung api: magma kental seharusnya tidak berbentuk perisai');
+      if ((await page.locator('.seu-hasil .seu-extra').nth(1).textContent()) === lerengAwal)
+        catat('Gunung api: lereng tidak berubah saat kekentalan digeser');
+      if (!(await page.locator('.seu-ringkas').textContent())?.includes('menahan gas'))
+        catat('Gunung api: ringkasan gaya eksplosif tidak muncul pada magma kental ber gas tinggi');
+
+      const persenGas = (await nilaiErupsi.nth(2).textContent())?.trim();
+      if (persenGas !== '100%')
+        catat(`Gunung api: gas terperangkap pada kedua slider maksimal adalah ${persenGas}, seharusnya 100%`);
 
       await page.goto(base + '/topik/atmosfer/musim/', { waitUntil: 'networkidle' });
       await page.locator('.sms-slider input').fill('9');

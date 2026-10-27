@@ -1,0 +1,121 @@
+---
+pertanyaan: "Kenapa ada gunung api yang meletus tenang dan ada yang meledak?"
+kategori: "planet-bumi"
+level: "pemula"
+menit: 6
+jawabanSingkat: "Karena isi magmanya berbeda. Magma yang encer membiarkan gas keluar perlahan, jadi lava mengalir tenang ke lereng. Magma yang kental menahan gas sampai tekanannya terlalu besar, lalu meledak dan memuntahkan abu. Dua hal itulah yang menentukan gaya letusannya."
+terkait: ["planet-bumi/lempeng-tektonik", "planet-bumi/gempa-bumi", "penutup/menghubungkan"]
+sumber: ["usgs-eruption-styles", "usgs-about-volcanoes", "usgs-volcanic-gases", "usgs-principal-volcano-types", "usgs-plate-tectonics"]
+glosarium: ["magma", "lava", "kekentalan-magma", "letusan-efusif", "letusan-eksplosif", "tefra", "cincin-api"]
+status: "terbit"
+diverifikasi: 2026-10-28
+---
+
+import SimErupsi from '../../../components/viz/SimErupsi';
+import Figure from '../../../components/sumber/Figure.astro';
+import DataNote from '../../../components/sumber/DataNote.astro';
+import Cite from '../../../components/sumber/Cite.astro';
+import Term from '../../../components/glosarium/Term.astro';
+import Quiz from '../../../components/quiz/Quiz';
+
+<Figure
+  caption="Naikkan kekentalan magma dan kadar gasnya. Perhatikan gas yang terperangkap, gaya letusannya, dan bentuk gunung yang ikut berubah."
+  source="usgs-eruption-styles"
+>
+  <SimErupsi client:visible />
+</Figure>
+
+<DataNote>
+  Ilustrasi. Kekentalan dan kadar gas memakai skala 0–100 tanpa satuan; persentase gas
+  terperangkap dan derajat lereng adalah hasil model sederhana, bukan angka ukuran. Skala tegak
+  pada gambar juga dilebih-lebihkan supaya bentuk gunung terlihat.
+</DataNote>
+
+## Kok bisa?
+
+Di bawah sebuah gunung api ada batuan panas yang meleleh, disebut <Term istilah="magma" />.
+Bukan cairan bening saja: magma adalah campuran batuan meleleh, kristal kecil, dan gas yang
+terlarut di dalamnya. USGS menggambarkannya seperti botol soda yang belum dibuka, berisi butiran
+pasir. <Cite id="usgs-about-volcanoes" />
+
+Begitu magma mencapai permukaan, namanya berubah menjadi <Term istilah="lava" />.
+<Cite id="usgs-about-volcanoes" /> Gas di dalamnya tidak ikut berubah: saat magma naik,
+tekanannya makin turun, dan gas itu lepas dari cairan lalu naik ke udara. Gas inilah penggerak
+sebagian besar letusan. <Cite id="usgs-volcanic-gases" />
+
+Yang menentukan letusannya tenang atau keras ada dua: <Term istilah="kekentalan-magma" />
+dan kadar gasnya. Kekentalan adalah seberapa sukar magma mengalir, dan itu tergantung komposisi,
+kristal, dan suhunya. Gas menentukan berapa banyak tenaga yang tersedia untuk menyemburkan magma
+keluar. <Cite id="usgs-eruption-styles" />
+
+### Encer: gas pergi, lava mengalir
+
+Magma basalt berkekekentalan rendah. Karena encer, gas di dalamnya punya jalan keluar dan lepas
+perlahan sebelum tekanan sempat menumpuk. Hasilnya adalah <Term istilah="letusan-efusif" />:
+lava mengalir tenang keluar dari mulut, disertai air mancur lava, dengan abu yang sangat sedikit.
+<Cite id="usgs-eruption-styles" />
+
+Lava yang encer ini juga menyebar jauh sebelum mendingin. Setiap aliran mendingin sebagai lembaran
+tipis, lalu aliran berikutnya menumpuk di atasnya. Gunungnya akhirnya melebar membentuk perisai
+dengan lereng landai, seperti gunung-gunung di Hawai'i. <Cite id="usgs-principal-volcano-types" />
+
+### Kental: gas terjebak, abu menembus ke atas
+
+Magma dasit dan riolit jauh lebih kental dan kaya gas. Kekentalan membuat gasnya sulit keluar,
+sehingga gas menumpuk sampai tekanannya tidak tertahan lagi. Yang terjadi adalah
+<Term istilah="letusan-eksplosif" />: magma dan <Term istilah="tefra" /> terlontar keras ke
+udara, abu terinjeksikan tinggi ke stratosfer, dan material jatuh jauh dari mulut.
+<Cite id="usgs-eruption-styles" />
+
+Karena lava kental berhenti lebih dekat ke puncak, gunungnya tumbuh tinggi dan curam: tumpukan
+aliran lava bercampur abu dan serpihan, bentuk yang disebut kerucut lapis. Kalau magmanya sangat
+kental, lava bahkan tidak sanggup mengalir menjauh dan menumpuk di atas mulut menjadi kubah lava.
+<Cite id="usgs-principal-volcano-types" />
+
+Kedua ujungnya sama-sama mungkin terjadi di Indonesia, karena hampir semua gunung api di sini
+berdiri di <Term istilah="cincin-api" /> tempat lempeng saling bertemu.
+<Cite id="usgs-plate-tectonics" /> Yang berubah hanyalah campuran batuan dan gas di dalam perut
+gunungnya.
+
+## Fakta menarik
+
+- Pada 1943 sebuah gunung api tumbuh di ladang milik warga Meksiko bernama Parícutin. Letusannya diawali ledakan gas yang memecah lava menjadi bara, dan setelah gas habis, lava mengalir tenang keluar. Gunung itu mencapai tinggi sekitar 1.200 kaki. <Cite id="usgs-principal-volcano-types" />
+- Letusan Gunung Pinatubo 1991 diperkirakan memuntahkan lebih dari 250 megaton gas ke atmosfer atas hanya dalam satu hari. <Cite id="usgs-volcanic-gases" />
+- Di dunia ada sekitar 1.350 gunung api yang berpotensi aktif kalau tidak dihitung yang di bawah laut, dan sekitar 500 di antaranya pernah meletus dalam 100 tahun terakhir. <Cite id="usgs-about-volcanoes" />
+- Pada 1902 letusan gunung api Mont Pelée menghancurkan kota di sekitarnya lewat aliran abu panas dan gas, menewaskan hampir 30.000 penduduk. <Cite id="usgs-principal-volcano-types" />
+
+<Quiz
+  judul="Kuis"
+  client:visible
+  soal={[
+    {
+      tanya: 'Magma kental berisi banyak gas. Apa yang paling mungkin terjadi saat naik ke permukaan?',
+      opsi: [
+        'Gas terperangkap sampai tekanannya meledak dan memuntahkan abu',
+        'Gas keluar perlahan sehingga lava mengalir tenang dari mulut',
+        'Magma langsung membeku di puncak tanpa meletus sama sekali',
+      ],
+      benar: 0,
+      penjelasan:
+        'Kekentalan menahan gas. Semakin kental magma, semakin sempit jalan keluar gas, sehingga tekanan menumpuk dan terlepas sebagai letusan eksplosif. Magma encer membiarkan gas pergi perlahan, jadi letusannya tenang.',
+    },
+    {
+      tanya: 'Kenapa gunung yang berlava encer cenderung berbentuk perisai yang landai?',
+      opsi: [
+        'Lava encer menyebar jauh sebelum mendingin, jadi tumpukannya melebar',
+        'Lavanya mengandung banyak abu yang meratakan lereng',
+        'Gasnya menahan lereng supaya tetap landai',
+      ],
+      benar: 0,
+      penjelasan:
+        'Bentuk gunung mengikuti jarak tempuh lava. Magma encer mengalir jauh dari mulut lalu mendingin sebagai lembaran tipis yang lebar. Magma kental berhenti dekat puncak, sehingga gunungnya tumbuh tinggi dan curam.',
+    },
+    {
+      tanya: 'Gas apa yang paling melimpah dari gunung api?',
+      opsi: ['Karbon dioksida', 'Uap air', 'Sulfur dioksida'],
+      benar: 1,
+      penjelasan:
+        'Uap air adalah gas vulkanik yang paling melimpah, dan ia tidak beracun. Gas lain seperti karbon dioksida dan sulfur dioksida jumlahnya jauh lebih sedikit, tetapi tetap berbahaya bila terkumpul di cekungan atau berhembus ke arah penduduk.',
+    },
+  ]}
+/>

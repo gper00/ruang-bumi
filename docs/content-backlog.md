@@ -5,7 +5,7 @@ tidak hilang setelah satu putaran pekerjaan. Status: `ide` → `riset` → `draf
 `terbit`. Setiap topik baru wajib punya minimal dua sumber resmi, satu visual interaktif
 khusus, dan tiga soal kuis (lihat `CONTENT-GUIDE.md`).
 
-Terakhir diperbarui: 2026-10-27 (topik lapisan atmosfer dan gempa bumi selesai).
+Terakhir diperbarui: 2026-10-28 (topik gunung api selesai).
 
 ## Sedang dikerjakan atau baru selesai
 
@@ -14,17 +14,23 @@ Terakhir diperbarui: 2026-10-27 (topik lapisan atmosfer dan gempa bumi selesai).
 | `atmosfer/lapisan-atmosfer` | Kalau makin tinggi, kenapa udara makin dingin? | Profil suhu 0–100 km: slider ketinggian, kurva titik tetap US Standard Atmosphere 1976, penanda lapisan dan proses pemanasnya | terbit |
 | `planet-bumi/gempa-bumi` | Apa yang sebenarnya bergerak saat tanah terasa bergetar? | Dua visual: model pemulihan elastis dengan tombol pelepasan regangan, dan pembanding hiposentrum–episentrum dengan slider kedalaman 5–700 km | terbit |
 | `ekologi/bioma` (hub + tab) | Kenapa hutan di Sumatra berbeda dengan padang di Sumbawa? | Tab empat bioma: stepa (api & penggembalaan), hutan gugur (kalender daun), taiga (jarum vs daun lebar), tundra (lapisan aktif) | terbit |
+| `planet-bumi/gunung-api` | Kenapa ada gunung api yang meletus tenang dan ada yang meledak? | Slider kekentalan magma + kadar gas → gas terperangkap, gaya letusan, bentuk gunung, dan lereng | terbit |
 
 Catatan: artikel bioma memakai empat sumber baru per tab (NASA/NPS untuk stepa dan hutan gugur,
 NASA/NOAA untuk taiga dan tundra) plus tiga sumber lama. Logika mekanismenya diuji di
 `tests/unit/bioma.test.ts`, isi tab di `tests/unit/konten-bioma.test.ts`, dan perilaku tab di
 `tests/ui-check.mjs`.
 
+Catatan gunung api: model kekentalan dan kadar gas ada di `src/lib/erupsi.ts`, visualnya di
+`src/components/viz/SimErupsi.tsx`, dan diuji di `tests/unit/erupsi.test.ts` serta
+`tests/unit/konten-erupsi.test.ts`. Lima sumber baru semuanya USGS. Judul topik ini sengaja
+tidak memuat kata “gempa” supaya pencarian “gempa” di beranda tetap menampilkan dua kartu
+(ekspektasi dikunci di `tests/ui-check.mjs`).
+
 ## Berikutnya
 
 | Prioritas | Topik | Pertanyaan | Kategori | Calon visual | Calon sumber |
 |---|---|---|---|---|---|
-| Tinggi | Gunung api | Kenapa ada gunung api yang meletus tenang dan ada yang meledak? | planet-bumi | Slider kekentalan magma + kadar gas → bentuk erupsi dan lereng | USGS Volcano Hazards |
 | Tinggi | El Niño & La Niña | Kenapa kemarau di Indonesia kadang jauh lebih panjang? | atmosfer | Peta Pasifik dengan anomali suhu laut; panah angin pasat dan pergeseran hujan | NOAA ENSO, BMKG (tautan) |
 | Menengah | Cuaca vs iklim | Kenapa ramalan besok bisa salah, tetapi pola 30 tahun bisa dihitung? | atmosfer | Distribusi 30 tahun vs deret harian; slider tahun | NOAA Climate, BMKG |
 | Menengah | Pasang surut | Kenapa laut naik dua kali sehari? | laut | Bumi–Bulan–Matahari dengan slider posisi; grafik pasang purnama/perbani | NOAA Tides |
