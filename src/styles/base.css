@@ -1,5 +1,6 @@
 @import 'tailwindcss';
 @import './tokens.css';
+@import './fonts.css';
 
 @custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
 
@@ -50,7 +51,8 @@
     background: var(--bg);
     color: var(--fg);
     font-family: var(--font-body);
-    line-height: 1.65;
+    font-optical-sizing: auto;
+    line-height: 1.7;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
@@ -60,14 +62,15 @@
   h3,
   h4 {
     font-family: var(--font-display);
-    line-height: 1.15;
-    letter-spacing: -0.015em;
+    font-optical-sizing: auto;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
   }
 
   :focus-visible {
     outline: 2px solid var(--sea);
-    outline-offset: 2px;
-    border-radius: 4px;
+    outline-offset: 3px;
+    border-radius: 3px;
   }
 
   ::selection {
@@ -81,13 +84,14 @@
     width: 100%;
     max-width: var(--wrap);
     margin-inline: auto;
-    padding-inline: 20px;
+    padding-inline: clamp(20px, 4vw, 40px);
   }
 
   .label {
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
+    font-weight: 600;
     font-size: 0.72rem;
-    letter-spacing: 0.09em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--muted);
   }
@@ -97,20 +101,23 @@
     align-items: center;
     justify-content: center;
     gap: 6px;
-    min-height: 40px;
-    padding: 8px 14px;
-    border: 1px solid var(--line);
-    border-radius: 999px;
+    min-height: 38px;
+    padding: 8px 15px;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-sm);
     background: var(--surface);
     color: var(--fg);
-    font-family: var(--font-mono);
-    font-size: 0.82rem;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.85rem;
+    line-height: 1.3;
     cursor: pointer;
-    transition: border-color 0.15s ease, background-color 0.15s ease;
+    transition: border-color 0.15s ease, background-color 0.15s ease, color 0.15s ease;
   }
 
   .btn:hover {
     border-color: var(--sea);
+    color: var(--sea);
   }
 
   .btn[aria-pressed='true'] {
@@ -123,21 +130,22 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 3px 10px;
+    padding: 3px 9px;
     border: 1px solid var(--line);
-    border-radius: 999px;
+    border-radius: var(--radius-sm);
     background: var(--surface);
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 0.74rem;
     color: var(--muted);
   }
 
   .answer {
     background: var(--surface);
     border: 1px solid var(--line);
-    border-left: 4px solid var(--sea);
-    border-radius: var(--radius);
-    padding: 18px 22px;
+    border-left: 3px solid var(--sea);
+    border-radius: 8px;
+    padding: 20px 24px;
   }
 
   /* One hook for per-category accents, used by cards, chips, and headers. */
@@ -169,42 +177,44 @@
      Text is capped at a comfortable measure; figures, tables, and quizzes
      get the full column width so the page has visual rhythm. */
   .prose > * + * {
-    margin-top: 1rem;
+    margin-top: 1.1rem;
   }
 
   .prose :where(p, li, ul, ol, blockquote, h2, h3, h4) {
-    max-width: 68ch;
+    max-width: 64ch;
   }
 
   .prose h2 {
-    margin-top: 2.6rem;
-    font-size: clamp(1.3rem, 2.2vw, 1.55rem);
+    margin-top: 3rem;
+    font-size: clamp(1.35rem, 2.2vw, 1.6rem);
     font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
     text-wrap: balance;
-    scroll-margin-top: 84px;
+    scroll-margin-top: 96px;
   }
 
   .prose h2::before {
     content: '';
     display: block;
-    width: 28px;
+    width: 24px;
     height: 3px;
-    margin-bottom: 0.7rem;
+    margin-bottom: 0.65rem;
     border-radius: 2px;
-    background: linear-gradient(90deg, var(--sea), var(--heat));
+    background: var(--aksen, var(--sea));
   }
 
   .prose h3 {
-    margin-top: 1.7rem;
-    font-size: 1.1rem;
+    margin-top: 1.9rem;
+    font-size: 1.12rem;
     font-weight: 700;
     letter-spacing: -0.01em;
-    scroll-margin-top: 84px;
+    scroll-margin-top: 96px;
   }
 
   .prose :where(p, li) {
-    font-size: 1.04rem;
-    line-height: 1.75;
+    font-size: clamp(1.1rem, 1.05rem + 0.25vw, 1.15rem);
+    line-height: 1.74;
     text-wrap: pretty;
   }
 
@@ -256,8 +266,8 @@
   }
 
   .prose blockquote {
-    border-left: 3px solid var(--line-strong);
-    padding-left: 1rem;
+    border-left: 3px solid var(--sea);
+    padding: 2px 0 2px 1.1rem;
     color: var(--muted);
     font-style: italic;
   }
@@ -284,10 +294,11 @@
   }
 
   .prose th {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.73rem;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.06em;
     color: var(--muted);
   }
 
@@ -299,12 +310,12 @@
   /* Quiz */
   .quiz {
     position: relative;
-    margin: 2.4rem 0;
-    padding: 20px 22px 22px;
+    margin: 2.6rem 0;
+    padding: 22px 24px 24px;
     border: 1px solid var(--line);
     border-radius: var(--radius);
     background: var(--surface);
-    scroll-margin-top: 84px;
+    scroll-margin-top: 96px;
     overflow: hidden;
   }
 
@@ -312,8 +323,8 @@
     content: '';
     position: absolute;
     inset: 0 0 auto;
-    height: 3px;
-    background: linear-gradient(90deg, var(--sea), var(--heat));
+    height: 2px;
+    background: var(--aksen, var(--sea));
   }
 
   .quiz-head {
@@ -358,7 +369,8 @@
   .quiz-item legend {
     display: flex;
     gap: 8px;
-    font-size: 0.97rem;
+    font-size: 1rem;
+    line-height: 1.5;
     font-weight: 600;
     padding: 0;
   }
@@ -382,17 +394,24 @@
     gap: 10px;
     width: 100%;
     text-align: left;
-    padding: 9px 12px;
+    padding: 10px 12px;
     border: 1px solid var(--line);
-    border-radius: 8px;
+    border-radius: var(--radius-sm);
     background: var(--bg);
     color: var(--fg);
-    font-size: 0.92rem;
+    font-size: 1rem;
+    line-height: 1.45;
     cursor: pointer;
+    transition: border-color 0.15s ease, background-color 0.15s ease;
   }
 
   .quiz-opsi-btn:hover {
     border-color: var(--sea);
+  }
+
+  .quiz-opsi-btn.dipilih {
+    border-color: var(--sea);
+    background: var(--sea-soft);
   }
 
   .quiz-huruf {
@@ -421,10 +440,10 @@
   }
 
   .quiz-feedback {
-    margin: 10px 0 0;
-    font-size: 0.88rem;
-    line-height: 1.5;
-    padding-left: 10px;
+    margin: 12px 0 0;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    padding-left: 12px;
     border-left: 2px solid var(--line-strong);
   }
 
@@ -438,6 +457,24 @@
 
   .quiz-reset {
     margin-top: 16px;
+  }
+
+  /* Shared listing grid: same rhythm on the home page and both index pages. */
+  .grid-topik {
+    display: grid;
+    gap: 16px;
+  }
+
+  @media (min-width: 700px) {
+    .grid-topik {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1040px) {
+    .grid-topik {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
   }
 }
 

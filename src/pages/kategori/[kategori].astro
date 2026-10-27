@@ -14,6 +14,7 @@ if (!info) throw new Error(`Kategori tidak dikenal: ${kategori}`);
 
 const semua = await getTopikTerbit();
 const topik = semua.filter((t) => t.data.kategori === kategori);
+const lain = KATEGORI.filter((k) => k.id !== kategori);
 ---
 
 <Layout
@@ -30,7 +31,9 @@ const topik = semua.filter((t) => t.data.kategori === kategori);
     />
 
     <header class="kepala" data-kategori={kategori}>
-      <p class="label"><span class="tanda" aria-hidden="true"></span> Kategori</p>
+      <p class="label">
+        <span class="tanda" aria-hidden="true"></span> Kategori · {topik.length} topik
+      </p>
       <h1>{info.label}</h1>
       <p class="intro">{info.deskripsi}</p>
     </header>
@@ -48,23 +51,28 @@ const topik = semua.filter((t) => t.data.kategori === kategori);
     }
 
     <nav class="kategori-lain" aria-label="Kategori lain">
-      {
-        KATEGORI.filter((k) => k.id !== kategori).map((k) => (
-          <a href={`/kategori/${k.id}/`}>{k.label}</a>
-        ))
-      }
+      <span class="label">Kategori lain</span>
+      <ul>
+        {
+          lain.map((k) => (
+            <li>
+              <a href={`/kategori/${k.id}/`}>{k.label}</a>
+            </li>
+          ))
+        }
+      </ul>
     </nav>
   </div>
 </Layout>
 
 <style>
   .halaman {
-    padding-block: 20px 30px;
+    padding-block: 20px clamp(36px, 5vw, 56px);
   }
 
   .kepala {
-    margin: 18px 0 26px;
-    padding-bottom: 20px;
+    margin: 18px 0 clamp(26px, 3vw, 34px);
+    padding-bottom: 22px;
     border-bottom: 1px solid var(--line);
     position: relative;
   }
@@ -81,35 +89,28 @@ const topik = semua.filter((t) => t.data.kategori === kategori);
 
   .tanda {
     display: inline-block;
-    width: 9px;
-    height: 9px;
+    width: 8px;
+    height: 8px;
     border-radius: 2px;
     background: var(--aksen, var(--sea));
     margin-right: 4px;
   }
 
   .kepala h1 {
-    margin: 6px 0 8px;
-    font-size: clamp(1.9rem, 4vw, 2.6rem);
+    margin: 8px 0 10px;
+    font-size: clamp(1.95rem, 4.3vw, 2.8rem);
     font-weight: 800;
+    letter-spacing: -0.025em;
     text-wrap: balance;
   }
 
   .intro {
-    max-width: 60ch;
+    max-width: 58ch;
     margin: 0;
     color: var(--muted);
-  }
-
-  .grid-topik {
-    display: grid;
-    gap: 14px;
-  }
-
-  @media (min-width: 700px) {
-    .grid-topik {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
+    font-size: 1.02rem;
+    line-height: 1.65;
+    text-wrap: pretty;
   }
 
   .kosong {
@@ -120,24 +121,30 @@ const topik = semua.filter((t) => t.data.kategori === kategori);
   }
 
   .kategori-lain {
+    margin-top: clamp(36px, 5vw, 52px);
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+  }
+
+  .kategori-lain ul {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 32px;
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
+    gap: 4px 20px;
+    list-style: none;
+    margin: 8px 0 0;
+    padding: 0;
   }
 
   .kategori-lain a {
-    padding: 5px 12px;
-    border: 1px solid var(--line);
-    border-radius: 999px;
     color: var(--muted);
     text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 500;
   }
 
   .kategori-lain a:hover {
     color: var(--sea);
-    border-color: var(--sea);
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
 </style>

@@ -65,26 +65,29 @@ for (const id of entry.data.dataset ?? []) {
 
 <style>
   .sumber-blok {
-    margin-top: 1rem;
+    margin-top: 2.6rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+    scroll-margin-top: 88px;
   }
 
   .label-gap {
-    margin-top: 1.5rem;
+    margin-top: 2rem;
   }
 
   .sumber-list {
     list-style: none;
     padding: 0;
-    margin: 0.5rem 0 0;
+    margin: 0.75rem 0 0;
     display: grid;
-    gap: 12px;
+    gap: 16px;
   }
 
   .sumber-list li {
     display: grid;
     grid-template-columns: auto 1fr;
-    gap: 8px;
-    scroll-margin-top: 80px;
+    gap: 10px;
+    scroll-margin-top: 88px;
   }
 
   .nomor {
@@ -97,26 +100,28 @@ for (const id of entry.data.dataset ?? []) {
 
   .judul {
     margin: 0;
-    font-size: 0.9rem;
-    line-height: 1.4;
+    font-size: 0.95rem;
+    line-height: 1.45;
   }
 
   .meta,
   .catatan {
-    margin: 2px 0 0;
-    font-size: 0.76rem;
+    margin: 3px 0 0;
+    font-size: 0.72rem;
+    line-height: 1.5;
     color: var(--muted);
   }
 
   .catatan {
+    font-size: 0.84rem;
     font-style: italic;
   }
 
   .tautan {
     display: inline-block;
-    margin-top: 2px;
+    margin-top: 3px;
     font-family: var(--font-mono);
-    font-size: 0.72rem;
+    font-size: 0.71rem;
     color: var(--sea);
     text-decoration: underline;
     text-underline-offset: 2px;

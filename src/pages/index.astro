@@ -5,67 +5,57 @@ import { KATEGORI, getTopikTerbit, topikHref } from '../lib/topik';
 
 const topik = await getTopikTerbit();
 const unggulan = topik[0];
-const kategoriAktif = KATEGORI.filter((k) => topik.some((t) => t.data.kategori === k.id));
+const perKategori = KATEGORI.map((k) => ({
+  ...k,
+  jumlah: topik.filter((t) => t.data.kategori === k.id).length,
+})).filter((k) => k.jumlah > 0);
 const totalSumber = new Set(topik.flatMap((t) => t.data.sumber)).size;
 ---
 
 <Layout title="Ruang Bumi — ilmu kebumian lewat pertanyaan" fullTitle>
   <section class="hero">
     <div class="wrap hero-inner">
-      <div class="hero-teks">
-        <p class="label">Ilmu kebumian · bahasa Indonesia</p>
-        <h1>Tanya Bumi,<br />dapat jawaban yang bisa ditelusuri.</h1>
+      <p class="label hero-label">Ilmu kebumian · bahasa Indonesia</p>
+      <h1>Tanya Bumi, dapat jawaban yang bisa ditelusuri.</h1>
+      <div class="hero-sisi">
         <p class="hero-sub">
           Setiap halaman menjawab satu pertanyaan lewat visual interaktif. Setiap angka punya
           sumber yang bisa kamu buka sendiri.
         </p>
         {
           unggulan && (
-            <p class="hero-aksi">
-              <a class="btn" href={topikHref(unggulan)}>Mulai dari: {unggulan.data.pertanyaan}</a>
-            </p>
+            <a class="hero-mulai" href={topikHref(unggulan)}>
+              <span class="hero-mulai-label">Mulai dari</span>
+              <span class="hero-mulai-q">{unggulan.data.pertanyaan}</span>
+              <span class="hero-mulai-tanda" aria-hidden="true">→</span>
+            </a>
           )
         }
-      </div>
-
-      <div class="hero-gambar" aria-hidden="true">
-        <svg viewBox="0 0 320 260" role="presentation">
-          <defs>
-            <linearGradient id="lautHero" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="var(--sea)" />
-              <stop offset="1" stop-color="var(--sea-soft)" />
-            </linearGradient>
-          </defs>
-          <circle cx="160" cy="130" r="104" fill="url(#lautHero)" opacity="0.35" />
-          <circle cx="160" cy="130" r="104" fill="none" stroke="var(--sea)" stroke-width="1" />
-          <circle cx="160" cy="130" r="76" fill="none" stroke="var(--coast)" stroke-width="0.8" stroke-dasharray="3 5" />
-          <path
-            d="M92 148c18-26 42-14 56-30s30-6 44 10 24 20 38 12"
-            fill="none"
-            stroke="var(--heat)"
-            stroke-width="2"
-            stroke-linecap="round"
-          />
-          <circle cx="148" cy="118" r="4" fill="var(--heat)" />
-          <path
-            d="M60 130h200"
-            stroke="var(--fg)"
-            stroke-width="0.7"
-            stroke-dasharray="2 6"
-            opacity="0.4"
-          />
-          <text x="160" y="252" text-anchor="middle" font-family="var(--font-mono)" font-size="9" fill="var(--muted)">
-            potongan bumi, bukan skala
-          </text>
-        </svg>
       </div>
     </div>
   </section>
 
+  <nav class="jalur" aria-label="Kategori, dari inti Bumi ke permukaan">
+    <div class="wrap">
+      <ol>
+        {
+          perKategori.map((k) => (
+            <li data-kategori={k.id}>
+              <a href={`/kategori/${k.id}/`}>
+                <span class="jalur-nama">{k.label}</span>
+                <span class="jalur-jumlah">{k.jumlah} topik</span>
+              </a>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </nav>
+
   <section class="wrap daftar" aria-labelledby="daftar-judul">
     <header class="daftar-head">
-      <div>
-        <h2 id="daftar-judul">Pertanyaan yang sudah dijawab</h2>
+      <div class="daftar-judul">
+        <h2 id="daftar-judul">Semua pertanyaan, satu per satu</h2>
         <p class="label">
           {topik.length} topik terbit · {totalSumber} sumber
         </p>
@@ -73,20 +63,26 @@ const totalSumber = new Set(topik.flatMap((t) => t.data.sumber)).size;
 
       <div class="alat">
         <label class="cari">
-          <span class="label">Cari</span>
-          <input
-            id="cari-topik"
-            type="search"
-            placeholder="gempa, angin, hujan…"
-            autocomplete="off"
-          />
+          <span class="label">Cari topik</span>
+          <span class="cari-kotak">
+            <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+              <circle cx="7" cy="7" r="4.5" fill="none" stroke="currentColor" stroke-width="1.4" />
+              <path d="M10.4 10.4 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+            </svg>
+            <input
+              id="cari-topik"
+              type="search"
+              placeholder="gempa, angin, hujan…"
+              autocomplete="off"
+            />
+          </span>
         </label>
         <div class="filter" role="group" aria-label="Filter kategori">
           <button type="button" class="chip filter-btn" data-kategori="semua" aria-pressed="true">
             Semua
           </button>
           {
-            kategoriAktif.map((k) => (
+            perKategori.map((k) => (
               <button type="button" class="chip filter-btn" data-kategori={k.id} aria-pressed="false">
                 {k.label}
               </button>
@@ -103,19 +99,30 @@ const totalSumber = new Set(topik.flatMap((t) => t.data.sumber)).size;
     </div>
 
     <p id="kosong" class="kosong" hidden>
-      Belum ada topik yang cocok. Coba kata kunci lain.
+      Belum ada topik yang cocok. Coba kata kunci lain, atau pilih Semua.
     </p>
 
-    <nav class="kategori-nav" aria-label="Jelajahi kategori">
-      {
-        kategoriAktif.map((k) => (
-          <a href={`/kategori/${k.id}/`} data-kategori={k.id}>
-            <span>{k.label}</span>
-            <span>{k.deskripsi}</span>
-          </a>
-        ))
-      }
-    </nav>
+    <section class="kategori-indeks" aria-labelledby="kategori-judul">
+      <header class="kategori-head">
+        <h2 id="kategori-judul">Per kategori</h2>
+        <p class="label">Dari inti Bumi ke permukaan</p>
+      </header>
+      <ul>
+        {
+          perKategori.map((k) => (
+            <li data-kategori={k.id}>
+              <a href={`/kategori/${k.id}/`}>
+                <span class="kat-nama">{k.label}</span>
+                <span class="kat-jumlah">
+                  {k.jumlah} topik <span aria-hidden="true">→</span>
+                </span>
+                <span class="kat-desc">{k.deskripsi}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
   </section>
 </Layout>
 
@@ -153,90 +160,210 @@ const totalSumber = new Set(topik.flatMap((t) => t.data.sumber)).size;
 </script>
 
 <style>
+  /* Masthead: type first, no illustration. The category axis below carries
+     the visual weight and is also the site's actual structure. */
   .hero {
     border-bottom: 1px solid var(--line);
-    background:
-      radial-gradient(ellipse 80% 60% at 85% -10%, var(--sea-soft), transparent 60%),
-      var(--surface);
-    overflow: hidden;
+    background: var(--surface);
   }
 
   .hero-inner {
     display: grid;
-    gap: 24px;
-    padding-block: 48px 52px;
+    gap: 16px 48px;
+    padding-block: clamp(40px, 6vw, 72px) clamp(30px, 4vw, 42px);
   }
 
-  @media (min-width: 880px) {
-    .hero-inner {
-      grid-template-columns: 1.5fr 1fr;
-      align-items: center;
-      padding-block: 56px 60px;
-    }
+  .hero-label {
+    margin: 0;
   }
 
   .hero h1 {
-    font-size: clamp(2.1rem, 5.6vw, 3.5rem);
+    margin: 0;
+    max-width: 20ch;
+    font-size: clamp(2.3rem, 5.4vw, 3.7rem);
     font-weight: 800;
-    margin: 12px 0 16px;
-    letter-spacing: -0.03em;
-    line-height: 1.04;
+    line-height: 1.02;
+    letter-spacing: -0.032em;
     text-wrap: balance;
   }
 
+  .hero-sisi {
+    display: grid;
+    gap: 20px;
+    align-content: end;
+  }
+
   .hero-sub {
-    max-width: 48ch;
+    max-width: 46ch;
     margin: 0;
-    font-size: 1.08rem;
+    font-size: clamp(1.02rem, 1rem + 0.2vw, 1.12rem);
     line-height: 1.65;
     color: var(--muted);
     text-wrap: pretty;
   }
 
-  .hero-aksi {
-    margin: 22px 0 0;
+  .hero-mulai {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: baseline;
+    gap: 4px 12px;
+    max-width: 46ch;
+    padding: 14px 0 16px;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    color: var(--fg);
+    text-decoration: none;
+    transition: border-color 0.15s ease;
   }
 
-  .hero-gambar {
-    max-width: 340px;
-    justify-self: center;
+  .hero-mulai-label {
+    grid-column: 1 / -1;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
   }
 
-  .hero-gambar svg {
-    width: 100%;
-    height: auto;
+  .hero-mulai-q {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.05rem;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+
+  .hero-mulai-tanda {
+    font-size: 1rem;
+    color: var(--muted);
+    transition: transform 0.15s ease, color 0.15s ease;
+  }
+
+  .hero-mulai:hover {
+    border-top-color: var(--sea);
+    border-bottom-color: var(--sea);
+  }
+
+  .hero-mulai:hover .hero-mulai-tanda {
+    color: var(--sea);
+    transform: translateX(3px);
+  }
+
+  @media (min-width: 900px) {
+    .hero-inner {
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      align-items: end;
+      gap: 20px 64px;
+      padding-block: clamp(56px, 6vw, 80px) clamp(40px, 4vw, 52px);
+    }
+
+    .hero-label {
+      grid-column: 1 / -1;
+    }
+
+    .hero h1 {
+      margin-bottom: -0.08em;
+    }
+  }
+
+  /* Category axis: six ticks on one rule, core to surface. */
+  .jalur {
+    border-bottom: 1px solid var(--line);
+    background: var(--surface);
+  }
+
+  .jalur ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  @media (min-width: 760px) {
+    .jalur ol {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+  }
+
+  .jalur li {
+    position: relative;
+    border-top: 1px solid var(--line);
+  }
+
+  .jalur li::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 32px;
+    height: 3px;
+    background: var(--aksen, var(--sea));
+  }
+
+  .jalur a {
+    display: grid;
+    gap: 2px;
+    padding: 16px 10px 18px 0;
+    color: var(--fg);
+    text-decoration: none;
+  }
+
+  .jalur-jumlah {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    color: var(--muted);
+  }
+
+  .jalur-nama {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.92rem;
+    letter-spacing: -0.01em;
+    transition: color 0.15s ease;
+  }
+
+  .jalur a:hover .jalur-nama {
+    color: var(--sea);
   }
 
   .daftar {
-    padding-block: 36px 10px;
+    padding-block: clamp(32px, 5vw, 52px) 8px;
   }
 
   .daftar-head {
     display: grid;
-    gap: 18px;
+    gap: 20px;
     align-items: end;
-    margin-bottom: 8px;
   }
 
-  @media (min-width: 760px) {
+  @media (min-width: 820px) {
     .daftar-head {
       grid-template-columns: 1fr auto;
     }
   }
 
-  .daftar-head h2 {
-    margin: 4px 0 0;
-    font-size: clamp(1.3rem, 2.5vw, 1.6rem);
+  .daftar-judul h2 {
+    margin: 0 0 6px;
+    font-size: clamp(1.4rem, 2.6vw, 1.75rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
     text-wrap: balance;
+  }
+
+  .daftar-judul .label {
+    margin: 0;
   }
 
   .alat {
     display: grid;
-    gap: 10px;
+    gap: 12px;
     justify-items: start;
   }
 
-  @media (min-width: 760px) {
+  @media (min-width: 820px) {
     .alat {
       justify-items: end;
     }
@@ -244,20 +371,41 @@ const totalSumber = new Set(topik.flatMap((t) => t.data.sumber)).size;
 
   .cari {
     display: grid;
-    gap: 2px;
+    gap: 6px;
     width: 100%;
-    max-width: 320px;
+    max-width: 300px;
+  }
+
+  .cari-kotak {
+    position: relative;
+    display: block;
+  }
+
+  .cari-kotak svg {
+    position: absolute;
+    top: 50%;
+    left: 11px;
+    width: 14px;
+    height: 14px;
+    transform: translateY(-50%);
+    color: var(--muted);
+    pointer-events: none;
   }
 
   .cari input {
     width: 100%;
-    padding: 8px 12px;
+    padding: 9px 12px 9px 33px;
     border: 1px solid var(--line);
-    border-radius: 999px;
+    border-radius: var(--radius-sm);
     background: var(--surface);
     color: var(--fg);
     font-family: var(--font-body);
-    font-size: 0.9rem;
+    font-size: 0.92rem;
+  }
+
+  .cari input::placeholder {
+    color: var(--muted);
+    opacity: 0.85;
   }
 
   .cari input:focus-visible {
@@ -271,33 +419,23 @@ const totalSumber = new Set(topik.flatMap((t) => t.data.sumber)).size;
   }
 
   .filter-btn {
-    min-height: 30px;
-    padding: 2px 12px;
+    min-height: 32px;
+    padding: 3px 12px;
     cursor: pointer;
+    font-size: 0.78rem;
+  }
+
+  .filter-btn[aria-pressed='true'] {
+    border-color: var(--sea);
+    background: var(--sea-soft);
+    color: var(--fg);
   }
 
   .hasil {
-    margin: 14px 0 18px;
+    margin: 18px 0;
     font-family: var(--font-mono);
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     color: var(--muted);
-  }
-
-  .grid-topik {
-    display: grid;
-    gap: 16px;
-  }
-
-  @media (min-width: 700px) {
-    .grid-topik {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
-
-  @media (min-width: 1040px) {
-    .grid-topik {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
   }
 
   .kartu-topik[hidden] {
@@ -305,52 +443,114 @@ const totalSumber = new Set(topik.flatMap((t) => t.data.sumber)).size;
   }
 
   .kosong {
-    padding: 30px;
+    margin: 0;
+    padding: 28px;
     text-align: center;
     color: var(--muted);
     border: 1px dashed var(--line-strong);
     border-radius: var(--radius);
   }
 
-  .kategori-nav {
-    display: grid;
-    gap: 10px;
-    margin-top: 36px;
-    padding-top: 20px;
+  /* Category index: a quiet list, deliberately unlike the cards above. */
+  .kategori-indeks {
+    margin-top: clamp(40px, 6vw, 64px);
     border-top: 1px solid var(--line);
+    padding-top: 20px;
   }
 
-  @media (min-width: 700px) {
-    .kategori-nav {
+  .kategori-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 4px 16px;
+    margin-bottom: 6px;
+  }
+
+  .kategori-head h2 {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .kategori-head .label {
+    margin: 0;
+  }
+
+  .kategori-indeks ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+  }
+
+  @media (min-width: 760px) {
+    .kategori-indeks ul {
       grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 48px;
     }
   }
 
-  .kategori-nav a {
+  .kategori-indeks li {
+    border-top: 1px solid var(--line);
+  }
+
+  .kategori-indeks a {
     display: grid;
-    gap: 3px;
-    padding: 13px 16px;
-    border: 1px solid var(--line);
-    border-left: 3px solid var(--aksen, var(--line-strong));
-    border-radius: 10px;
-    text-decoration: none;
+    grid-template-columns: 1fr auto;
+    align-items: baseline;
+    gap: 3px 16px;
+    padding: 12px 0 13px;
     color: var(--fg);
-    background: var(--surface);
-    transition: border-color 0.15s ease;
+    text-decoration: none;
   }
 
-  .kategori-nav a:hover {
-    border-color: var(--aksen, var(--sea));
-  }
-
-  .kategori-nav span:first-child {
+  .kat-nama {
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: 0.95rem;
+    font-size: 1rem;
+    letter-spacing: -0.01em;
   }
 
-  .kategori-nav span:last-child {
-    font-size: 0.82rem;
+  .kat-jumlah {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
     color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .kat-jumlah span {
+    display: inline-block;
+    transition: transform 0.15s ease, color 0.15s ease;
+  }
+
+  .kat-desc {
+    grid-column: 1 / -1;
+    font-size: 0.86rem;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+
+  .kategori-indeks a:hover .kat-nama {
+    color: var(--sea);
+  }
+
+  .kategori-indeks a:hover .kat-jumlah span {
+    color: var(--sea);
+    transform: translateX(3px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-mulai-tanda,
+    .jalur-nama,
+    .kat-jumlah span {
+      transition: none;
+    }
+
+    .hero-mulai:hover .hero-mulai-tanda,
+    .kategori-indeks a:hover .kat-jumlah span {
+      transform: none;
+    }
   }
 </style>

@@ -1,0 +1,222 @@
+.grb {
+  display: grid;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.grb-kanvas {
+  background: var(--surface-2);
+}
+
+.grb-kanvas svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.grb-blok {
+  fill: var(--land);
+}
+
+.grb-blok-kanan {
+  fill: var(--mantle);
+  opacity: 0.85;
+}
+
+.grb-sesar {
+  stroke: var(--heat);
+  stroke-width: 2;
+  stroke-dasharray: 7 5;
+}
+
+.grb-lapisan {
+  fill: none;
+  stroke: var(--line-strong);
+  stroke-width: 1.4;
+  opacity: 0.8;
+}
+
+.grb-awal {
+  stroke: var(--line-strong);
+  stroke-width: 1;
+  stroke-dasharray: 3 5;
+  opacity: 0.7;
+}
+
+.grb-pagar {
+  fill: none;
+  stroke: var(--fg);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.grb-tiang {
+  stroke: var(--fg);
+  stroke-width: 2;
+  opacity: 0.7;
+}
+
+.grb-panah path {
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.grb-gempa circle {
+  fill: none;
+  stroke: var(--heat);
+  stroke-width: 1.6;
+  opacity: 0.45;
+}
+
+.grb-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  fill: var(--muted);
+}
+
+.grb-kontrol {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.grb-slider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+}
+
+.grb-slider-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--muted);
+}
+
+.grb-slider input {
+  flex: 1;
+  accent-color: var(--heat);
+}
+
+.grb-persen {
+  margin: 0;
+  min-width: 5ch;
+  text-align: right;
+  font-family: var(--font-mono);
+  font-size: 0.86rem;
+  color: var(--fg);
+}
+
+.grb-tombol-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--line);
+}
+
+.grb-tombol {
+  min-height: 34px;
+  padding: 5px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  color: var(--muted);
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease, background-color 0.15s ease;
+}
+
+.grb-tombol:hover:not(:disabled) {
+  border-color: var(--heat);
+  color: var(--fg);
+}
+
+.grb-tombol:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.grb-tombol:focus-visible {
+  outline: 2px solid var(--sea);
+  outline-offset: 2px;
+}
+
+.grb-petunjuk {
+  margin: 0;
+  flex: 1 0 100%;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--muted);
+}
+
+.grb-hasil {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--line);
+}
+
+.grb-hasil > div {
+  padding: 10px 14px;
+  background: var(--surface);
+}
+
+.grb-label-kecil {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.63rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.grb-nilai {
+  margin: 2px 0 0;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--fg);
+}
+
+.grb-ringkas {
+  margin: 0;
+  padding: 11px 14px;
+  border-top: 1px solid var(--line);
+  font-size: 0.9rem;
+  line-height: 1.62;
+  color: var(--fg);
+  text-wrap: pretty;
+}
+
+.grb-ilustrasi {
+  margin: 0;
+  padding: 9px 14px 12px;
+  border-top: 1px dashed var(--line-strong);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+@media (max-width: 520px) {
+  .grb-hasil {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grb-tombol {
+    transition: none;
+  }
+}

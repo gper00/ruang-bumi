@@ -1,0 +1,208 @@
+.gfk {
+  display: grid;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.gfk-kanvas {
+  background: var(--surface-2);
+}
+
+.gfk-kanvas svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.gfk-nama {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  fill: var(--fg);
+}
+
+.gfk-kecil {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  fill: var(--muted);
+}
+
+.gfk-batas {
+  stroke: var(--line-strong);
+  stroke-width: 1;
+  stroke-dasharray: 4 5;
+}
+
+.gfk-permukaan {
+  stroke: var(--fg);
+  stroke-width: 1.6;
+  opacity: 0.65;
+}
+
+.gfk-gelombang circle {
+  fill: none;
+  stroke: var(--heat);
+  stroke-width: 1.4;
+  opacity: 0.4;
+}
+
+.gfk-tegak {
+  stroke: var(--sea);
+  stroke-width: 1.2;
+  stroke-dasharray: 4 4;
+}
+
+.gfk-hiposentrum {
+  fill: var(--heat);
+}
+
+.gfk-episentrum {
+  fill: var(--sea);
+  stroke: var(--surface);
+  stroke-width: 1.5;
+}
+
+.gfk-penanda {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  fill: var(--fg);
+}
+
+.gfk-penanda.kuat {
+  font-weight: 600;
+}
+
+.gfk-kota rect,
+.gfk-kota path {
+  fill: var(--fg);
+  opacity: 0.75;
+}
+
+.gfk-getar {
+  fill: none;
+  stroke: var(--heat);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.gfk-jarak {
+  stroke: var(--muted);
+  stroke-width: 1;
+  stroke-dasharray: 3 4;
+}
+
+.gfk-kontrol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+  padding: 12px 14px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.gfk-slider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1 1 240px;
+}
+
+.gfk-slider-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--muted);
+}
+
+.gfk-slider input {
+  flex: 1;
+  accent-color: var(--heat);
+}
+
+.gfk-angka {
+  margin: 0;
+  min-width: 6ch;
+  text-align: right;
+  font-family: var(--font-mono);
+  font-size: 0.86rem;
+  color: var(--fg);
+}
+
+.gfk-hasil {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1px;
+  background: var(--line);
+}
+
+.gfk-hasil > div {
+  padding: 10px 14px;
+  background: var(--surface);
+}
+
+.gfk-label-kecil {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.63rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.gfk-nilai {
+  margin: 2px 0 0;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--fg);
+}
+
+.gfk-extra {
+  margin: 2px 0 0;
+  font-size: 0.74rem;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+.gfk-meter {
+  height: 7px;
+  margin-top: 6px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  overflow: hidden;
+}
+
+.gfk-meter span {
+  display: block;
+  height: 100%;
+  background: var(--heat);
+  transition: width 0.2s ease;
+}
+
+.gfk-ringkas {
+  margin: 0;
+  padding: 11px 14px;
+  border-top: 1px solid var(--line);
+  font-size: 0.9rem;
+  line-height: 1.62;
+  color: var(--fg);
+  text-wrap: pretty;
+}
+
+.gfk-ilustrasi {
+  margin: 0;
+  padding: 9px 14px 12px;
+  border-top: 1px dashed var(--line-strong);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gfk-meter span {
+    transition: none;
+  }
+}

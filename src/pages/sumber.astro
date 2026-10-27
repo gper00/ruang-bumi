@@ -46,8 +46,11 @@ const jenisLabel: Record<string, string> = {
       </p>
     </header>
 
-    <section aria-labelledby="daftar-sumber">
-      <h2 id="daftar-sumber" class="label">Sumber</h2>
+    <section class="bagian" aria-labelledby="daftar-sumber">
+      <header class="bagian-head">
+        <h2 id="daftar-sumber">Sumber</h2>
+        <span class="bagian-jumlah">{sumber.length} entri</span>
+      </header>
       <ul class="daftar">
         {
           sumber.map((s) => (
@@ -83,8 +86,11 @@ const jenisLabel: Record<string, string> = {
       </ul>
     </section>
 
-    <section aria-labelledby="daftar-dataset" class="blok">
-      <h2 id="daftar-dataset" class="label">Dataset</h2>
+    <section class="bagian blok" aria-labelledby="daftar-dataset">
+      <header class="bagian-head">
+        <h2 id="daftar-dataset">Dataset</h2>
+        <span class="bagian-jumlah">{dataset.length} entri</span>
+      </header>
       <ul class="daftar">
         {
           dataset.map((d) => (
@@ -118,39 +124,95 @@ const jenisLabel: Record<string, string> = {
 
 <style>
   .halaman {
-    padding-block: 20px 30px;
+    padding-block: 20px clamp(36px, 5vw, 56px);
   }
 
   .kepala {
-    margin: 18px 0 26px;
+    position: relative;
+    margin: 18px 0 clamp(26px, 3vw, 34px);
+    padding-bottom: 22px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .kepala::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 64px;
+    height: 3px;
+    background: var(--sea);
   }
 
   .kepala h1 {
-    margin: 6px 0 8px;
-    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    margin: 8px 0 10px;
+    font-size: clamp(1.95rem, 4.3vw, 2.8rem);
     font-weight: 800;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
   }
 
   .intro {
-    max-width: 62ch;
+    max-width: 58ch;
     margin: 0;
     color: var(--muted);
+    font-size: 1.02rem;
+    line-height: 1.65;
+    text-wrap: pretty;
+  }
+
+  .bagian-head {
+    position: relative;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--line);
+  }
+
+  .bagian-head::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 0;
+    width: 32px;
+    height: 3px;
+    background: var(--sea);
+  }
+
+  .bagian-head h2 {
+    margin: 0;
+    font-size: 1.18rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  .bagian-jumlah {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .bagian {
+    max-width: 74ch;
   }
 
   .blok {
-    margin-top: 34px;
+    margin-top: clamp(34px, 4vw, 46px);
   }
 
   .daftar {
     list-style: none;
+    max-width: 74ch;
     padding: 0;
-    margin: 8px 0 0;
+    margin: 4px 0 0;
     display: grid;
-    gap: 16px;
   }
 
   .daftar li {
-    padding-bottom: 14px;
+    padding: 16px 0 18px;
     border-bottom: 1px solid var(--line);
   }
 
@@ -158,13 +220,15 @@ const jenisLabel: Record<string, string> = {
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
-    gap: 8px;
+    gap: 6px 10px;
   }
 
   .judul {
     margin: 0;
-    font-size: 0.96rem;
+    font-size: 1rem;
     font-weight: 600;
+    line-height: 1.45;
+    text-wrap: pretty;
   }
 
   .judul a {
@@ -175,57 +239,72 @@ const jenisLabel: Record<string, string> = {
   .judul a:hover {
     color: var(--sea);
     text-decoration: underline;
+    text-underline-offset: 3px;
   }
 
   .meta {
-    margin: 3px 0 0;
+    margin: 5px 0 0;
     font-family: var(--font-mono);
-    font-size: 0.72rem;
+    font-size: 0.7rem;
+    line-height: 1.6;
     color: var(--muted);
   }
 
   .catatan {
-    margin: 4px 0 0;
-    font-size: 0.84rem;
+    margin: 6px 0 0;
+    font-size: 0.88rem;
+    line-height: 1.6;
     color: var(--muted);
   }
 
   .dipakai {
-    margin: 6px 0 0;
-    font-size: 0.8rem;
+    margin: 8px 0 0;
+    font-size: 0.84rem;
+    line-height: 1.6;
     color: var(--muted);
   }
 
   .dipakai a {
     color: var(--sea);
     text-decoration: underline;
-    text-underline-offset: 2px;
+    text-underline-offset: 3px;
   }
 
   code {
     font-family: var(--font-mono);
-    font-size: 0.76rem;
+    font-size: 0.78rem;
+    background: var(--surface-2);
+    padding: 1px 5px;
+    border-radius: 4px;
   }
 
   .kebijakan {
-    margin-top: 36px;
-    padding: 18px 20px;
+    max-width: 74ch;
+    margin-top: clamp(36px, 5vw, 52px);
+    padding: 20px 22px;
     border: 1px solid var(--line);
     border-radius: var(--radius);
     background: var(--surface);
   }
 
   .kebijakan h2 {
-    margin: 0 0 8px;
-    font-size: 1rem;
+    margin: 0 0 10px;
+    font-size: 1.05rem;
+    font-weight: 700;
   }
 
   .kebijakan ul {
     margin: 0;
     padding-left: 1.1rem;
-    font-size: 0.88rem;
+    list-style: disc;
+    font-size: 0.92rem;
+    line-height: 1.65;
     color: var(--muted);
     display: grid;
-    gap: 4px;
+    gap: 6px;
+  }
+
+  .kebijakan li::marker {
+    color: var(--sea);
   }
 </style>

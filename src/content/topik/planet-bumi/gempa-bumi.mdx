@@ -1,0 +1,169 @@
+---
+pertanyaan: "Apa yang sebenarnya bergerak saat tanah terasa bergetar?"
+kategori: "planet-bumi"
+level: "pemula"
+menit: 8
+jawabanSingkat: "Gempa terjadi saat dua blok batuan di sepanjang sesar tiba-tiba meluncur satu terhadap yang lain. Sebelumnya sesar tersangkut dan batuan melengkung sambil menyimpan energi elastis; saat gesekan kalah, energi itu terlepas sebagai gelombang seismik. Titik mulainya hiposentrum, titik di atasnya di permukaan episentrum."
+terkait: ["planet-bumi/lempeng-tektonik", "penutup/menghubungkan"]
+sumber: ["usgs-science-earthquakes", "usgs-elastic-rebound", "usgs-depth-earthquake", "usgs-earthquake-glossary", "usgs-plate-tectonics", "bmkg-gempa"]
+glosarium: ["sesar", "hiposentrum", "episentrum", "pemulihan-elastis", "gempa-susulan", "magnitudo", "lempeng-tektonik", "cincin-api"]
+status: "terbit"
+diverifikasi: 2026-10-27
+---
+
+import GempaRebound from '../../../components/viz/GempaRebound';
+import GempaFokus from '../../../components/viz/GempaFokus';
+import Figure from '../../../components/sumber/Figure.astro';
+import DataNote from '../../../components/sumber/DataNote.astro';
+import Cite from '../../../components/sumber/Cite.astro';
+import Term from '../../../components/glosarium/Term.astro';
+import Quiz from '../../../components/quiz/Quiz';
+
+<Figure
+  caption="Geser regangan sampai penuh, lalu tekan “Lepaskan regangan”. Perhatikan pagar yang melengkung kembali lurus dengan offset, dan energi tersimpan yang kembali ke nol."
+  source="usgs-elastic-rebound"
+>
+  <GempaRebound client:visible />
+</Figure>
+
+<DataNote>
+  Ilustrasi. Bentuk lengkungannya dilebih-lebihkan: di alam, distorsi sebesar beberapa meter
+  tersebar di banyak kilometer dan hanya terlihat dengan alat ukur presisi seperti GPS.
+</DataNote>
+
+## Kok bisa?
+
+Saat tanah bergetar, yang bergerak bukan tanah sebagai satu keping utuh. Gempa terjadi ketika dua
+blok batuan meluncur tiba-tiba satu terhadap yang lain di sebuah bidang. Bidang tempat mereka
+meluncur disebut <Term istilah="sesar" /> atau bidang sesar. <Cite id="usgs-science-earthquakes" />
+
+<Term istilah="lempeng-tektonik" /> bergerak sangat lambat, jauh lebih lambat daripada getaran yang
+kita rasakan saat gempa. Gerakan itulah yang menyimpan energi di sesar. Tepi lempeng tersusun dari
+banyak sesar, dan karena tepinya tidak rata, bagian tepi itu bisa tersangkut sementara bagian
+lempeng lainnya terus bergerak. Ketika lempeng sudah bergerak cukup jauh, tepi yang tersangkut akhirnya
+lepas, dan saat itulah terjadi gempa. <Cite id="usgs-science-earthquakes" />
+
+Energi yang tadinya “tertahan” berubah menjadi gelombang seismik yang menyebar ke segala arah dari
+sesar, seperti riak di permukaan kolam. Ketika gelombang itu mencapai permukaan, tanah dan semua
+yang berdiri di atasnya ikut bergetar. <Cite id="usgs-science-earthquakes" />
+
+### Sesar yang menahan, bukan yang bergerak
+
+Bagian yang penting justru sesar yang *tidak* bergerak. Selama sesar tersangkut, gaya yang
+seharusnya membuat kedua blok meluncur disimpan sebagai energi elastis di dalam batuan. Batuan
+yang keras pun bisa melengkung seperti karet gelang yang ditarik — dan seperti karet gelang yang
+dipotong, energinya terlepas mendadak ketika batuan itu akhirnya tidak sanggup menahan lagi.
+<Cite id="usgs-elastic-rebound" />
+
+Gambaran paling terkenal datang dari gempa San Francisco 1906. Sebuah pagar lurus dibangun
+menyeberangi Sesar San Andreas. Selama bertahun-tahun, gerakan lempeng membuat pagar itu
+melengkung menjadi bentuk huruf S. Setelah gempa, lengkungan itu lepas: kedua bagian pagar kembali
+lurus, tetapi sekarang sudah bergeser sekitar 8,5 kaki (2,6 m). Peristiwa itulah yang mendasari
+teori <Term istilah="pemulihan-elastis" />. <Cite id="usgs-elastic-rebound" />
+
+Tidak semua sesar berperilaku begitu. Sebagian sesar bergerak lambat dan terus-menerus, disebut
+krip, sehingga hampir tidak pernah menyimpan cukup energi untuk gempa besar.
+<Cite id="usgs-earthquake-glossary" /> Pada sesar yang tersangkut, bagian yang lengket dan menahan
+gerak itu disebut asperity; dari situlah rupture biasanya mulai. <Cite id="usgs-earthquake-glossary" />
+
+### Hiposentrum dan episentrum
+
+Titik di bawah permukaan tempat gempa mulai disebut <Term istilah="hiposentrum" /> atau fokus.
+Titik di permukaan Bumi yang tepat berada di atasnya disebut <Term istilah="episentrum" />.
+<Cite id="usgs-science-earthquakes" />
+
+Dua istilah ini sering tertukar, dan bedanya penting untuk mengukur jarak. Jarak dari sebuah kota
+ke episentrum diukur mendatar, sedangkan jarak ke hiposentrum harus turun dulu mengikuti garis
+miring. Kalau gempanya di kedalaman 35 km dan episentrumnya 100 km dari kota, jarak ke
+hiposentrum menjadi sekitar 106 km — selalu lebih panjang daripada jarak ke episentrum.
+
+<Figure
+  caption="Geser kedalaman gempa dan jarak kota. Titik merah adalah hiposentrum, titik biru di permukaan adalah episentrum tepat di atasnya, dan garis putus-putus membandingkan kedua jaraknya."
+  source="usgs-depth-earthquake"
+>
+  <GempaFokus client:visible />
+</Figure>
+
+<DataNote>
+  Ilustrasi. Skala kedalaman di sini dimampatkan supaya rentang 0–700 km muat dalam satu gambar,
+  sehingga skala tegak tidak sama dengan skala mendatar. Perkiraan kekuatan getarannya juga model
+  sederhana, bukan hasil perhitungan seismologi.
+</DataNote>
+
+### Seberapa dalam gempanya?
+
+Gempa bisa terjadi dari permukaan sampai sekitar 700 km di bawahnya, dan USGS membaginya menjadi
+tiga kelas: dangkal 0–70 km, menengah 70–300 km, dan dalam 300–700 km.
+<Cite id="usgs-depth-earthquake" /> Semua gempa yang lebih dalam dari 70 km terjadi di dalam
+lempeng litosfer yang sedang menunjam ke mantel. <Cite id="usgs-depth-earthquake" />
+
+Kedalaman berpengaruh pada apa yang terasa di permukaan. Gempa dalam meninggalkan gelombang
+permukaan yang kecil dan pola gelombang P serta S yang lebih sederhana pada seismogram. Karena
+energinya menempuh jarak yang lebih jauh sebelum mencapai permukaan, getaran yang dirasakan
+umumnya lebih lemah daripada gempa dangkal dengan kekuatan serupa.
+<Cite id="usgs-depth-earthquake" />
+
+### Yang belum bisa dilakukan: meramal
+
+Gempa besar punya pendahulu dan lanjutan. Gempa kecil yang mendahului gempa utama disebut
+foreshock, tetapi tidak ada cara mengetahui bahwa sebuah gempa kecil adalah pendahulu sebelum
+gempa besarnya terjadi. Setelah gempa utama, selalu ada <Term istilah="gempa-susulan" /> yang bisa
+berlanjut berhari-hari sampai bertahun-tahun. <Cite id="usgs-science-earthquakes" />
+
+Perlu dibedakan juga <Term istilah="magnitudo" /> dan intensitas: magnitudo adalah satu angka untuk
+satu gempa, sedangkan intensitas getaran berbeda-beda tergantung tempat kita berada.
+<Cite id="usgs-science-earthquakes" /> Yang belum bisa dilakukan ilmuwan adalah meramalkan kapan
+gempa berikutnya terjadi; yang bisa dilakukan adalah memantau dan menyiapkan bangunan.
+<Cite id="usgs-science-earthquakes" />
+
+Indonesia termasuk wilayah yang paling sering diguncang karena berada di pertemuan lempeng, dan
+memantau gempa di sini adalah tugas BMKG. <Cite id="bmkg-gempa" /> Sebagian besar gempa di dunia
+memang terkumpul di batas-batas lempeng, termasuk di sekitar <Term istilah="cincin-api" />.
+<Cite id="usgs-plate-tectonics" />
+
+## Fakta menarik
+
+- Pagar yang bergeser 2,6 m pada gempa 1906 adalah salah satu bukti pertama bahwa batuan menyimpan energi elastis sebelum patah. <Cite id="usgs-elastic-rebound" />
+- Gempa yang lebih dalam dari 70 km hanya terjadi di lempeng litosfer yang tenggelam ke mantel, bukan di kerak biasa. <Cite id="usgs-depth-earthquake" />
+- Sebagian sesar bergerak dengan krip yang hampir terus-menerus, sehingga jarang menghasilkan gempa besar. <Cite id="usgs-earthquake-glossary" />
+- Setiap gempa besar punya gempa susulan; pada gempa besar, susulan bisa terus terjadi bertahun-tahun. <Cite id="usgs-science-earthquakes" />
+
+<Quiz
+  judul="Kuis"
+  client:visible
+  soal={[
+    {
+      tanya: 'Apa yang sebenarnya bergerak saat terjadi gempa?',
+      opsi: [
+        'Dua blok batuan yang tiba-tiba meluncur satu terhadap yang lain di bidang sesar',
+        'Seluruh lempeng bergerak sekaligus sebagai satu keping',
+        'Tanah di permukaan mengembang lalu mengempis',
+      ],
+      benar: 0,
+      penjelasan:
+        'Gempa adalah peristiwa meluncurnya dua blok batuan di bidang sesar. Gerakan lempengnya sendiri sangat lambat; yang mendadak adalah lepasnya bagian tepi yang tersangkut.',
+    },
+    {
+      tanya: 'Apa bedanya hiposentrum dan episentrum?',
+      opsi: [
+        'Hiposentrum titik di bawah permukaan tempat gempa mulai, episentrum titik tepat di atasnya di permukaan',
+        'Hiposentrum gempa utama, episentrum gempa susulan',
+        'Hiposentrum ukuran kekuatan gempa, episentrum lokasinya',
+      ],
+      benar: 0,
+      penjelasan:
+        'Keduanya menunjuk tempat, bukan ukuran. Jarak ke hiposentrum selalu lebih panjang daripada jarak ke episentrum karena harus turun ke kedalaman gempa.',
+    },
+    {
+      tanya: 'Mengapa gempa dalam biasanya terasa lebih lemah di permukaan?',
+      opsi: [
+        'Karena energinya menempuh jarak lebih jauh dan gelombang permukaannya kecil',
+        'Karena gempa dalam selalu berkekuatan lebih kecil',
+        'Karena gempa dalam terjadi di luar lempeng',
+      ],
+      benar: 0,
+      penjelasan:
+        'Gempa dalam meninggalkan gelombang permukaan yang kecil. Energinya juga harus menempuh jarak lebih panjang, sehingga getaran yang sampai di permukaan lebih lemah.',
+    },
+  ]}
+/>

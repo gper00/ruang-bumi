@@ -54,6 +54,82 @@
   istilah: Hutan hujan tropis
   definisi: Bioma panas dan basah sepanjang tahun dengan kanopi rapat dan keanekaragaman hayati sangat tinggi.
   sumber: nasa-biomes
+- id: stepa
+  istilah: Stepa
+  definisi: Padang rumput di lintang sedang. Hujannya cukup untuk pohon, tetapi api dan penggembalaan yang berulang menahan pohon di tingkat muda.
+  sumber: nasa-grassland
+- id: hutan-gugur
+  istilah: Hutan gugur
+  definisi: Hutan beriklim sedang dengan empat musim jelas; pohonnya melepas seluruh daun sebelum musim dingin.
+  sumber: nasa-temperate-forest
+- id: taiga
+  istilah: Taiga
+  definisi: Hutan boreal berdaun jarum di lintang tinggi, bioma darat terluas di dunia.
+  sumber: nasa-coniferous
+- id: tundra
+  istilah: Tundra
+  definisi: Bioma paling dingin, tanpa pohon tinggi, tumbuh di atas tanah yang tetap beku sepanjang tahun.
+  sumber: nasa-tundra
+- id: permafrost
+  istilah: Permafrost
+  definisi: Tanah atau batuan yang tetap beku sepanjang tahun. Di atasnya hanya ada lapisan tipis yang mencair pada musim panas.
+  sumber: noaa-permafrost
+- id: lapisan-aktif
+  istilah: Lapisan aktif
+  definisi: Lapisan teratas tanah di daerah permafrost yang mencair pada musim panas. Tebalnya umumnya 30–100 cm.
+  sumber: noaa-permafrost
+- id: dormansi
+  istilah: Dormansi
+  definisi: Keadaan berhenti tumbuh untuk sementara, misalnya pohon gugur yang beristirahat sepanjang musim dingin.
+  sumber: nps-deciduous-forest
+- id: troposfer
+  istilah: Troposfer
+  definisi: Lapisan atmosfer paling bawah, dari permukaan sampai sekitar 8–14,5 km. Di sini hampir semua uap air dan cuaca berada, dan suhunya turun sekitar 6,5 °C setiap kilometer.
+  sumber: nasa-atmosphere-cake
+- id: tropopause
+  istilah: Tropopause
+  definisi: Batas antara troposfer dan stratosfer, tempat suhu berhenti turun. Letaknya sekitar 8 km di daerah kutub sampai 17 km di ekuator.
+  sumber: noaa-atmosphere-layers
+- id: stratosfer
+  istilah: Stratosfer
+  definisi: Lapisan atmosfer di atas troposfer, sampai sekitar 50 km. Ozon di lapisan ini menyerap ultraviolet sehingga suhunya makin hangat ke atas.
+  sumber: nasa-what-atmosphere
+- id: lapisan-ozon
+  istilah: Lapisan ozon
+  definisi: Bagian stratosfer yang banyak mengandung ozon dan menyerap sebagian besar radiasi ultraviolet Matahari.
+  sumber: nasa-what-atmosphere
+- id: mesosfer
+  istilah: Mesosfer
+  definisi: Lapisan atmosfer antara sekitar 50 dan 85 km. Suhunya turun lagi sampai mesopause, bagian terdingin atmosfer, dan meteor terbakar di sini.
+  sumber: nasa-atmosphere-cake
+- id: termosfer
+  istilah: Termosfer
+  definisi: Lapisan atmosfer di atas mesosfer. Gas di sini menyerap ultraviolet ekstrem dan sinar-X, sehingga suhunya bisa mencapai 2.000 °C meski jumlah molekulnya sangat sedikit.
+  sumber: nasa-what-atmosphere
+- id: sesar
+  istilah: Sesar
+  definisi: Bidang rekahan di kerak Bumi tempat dua blok batuan bergerak relatif satu terhadap yang lain. Gempa terjadi saat gerakan itu berlangsung mendadak.
+  sumber: usgs-science-earthquakes
+- id: hiposentrum
+  istilah: Hiposentrum
+  definisi: Titik di bawah permukaan Bumi tempat gempa mulai; sering disebut fokus. Kedalamannya menentukan kelas gempa — dangkal, menengah, atau dalam.
+  sumber: usgs-science-earthquakes
+- id: episentrum
+  istilah: Episentrum
+  definisi: Titik di permukaan Bumi yang tepat berada di atas hiposentrum.
+  sumber: usgs-science-earthquakes
+- id: pemulihan-elastis
+  istilah: Pemulihan elastis
+  definisi: Proses saat batuan menyimpan tegangan secara bertahap sambil melengkung, lalu melepasnya mendadak ketika sesar meluncur. Teori ini disusun setelah gempa San Francisco 1906.
+  sumber: usgs-elastic-rebound
+- id: gempa-susulan
+  istilah: Gempa susulan
+  definisi: Gempa yang lebih kecil setelah gempa utama di tempat yang sama; bisa berlanjut berminggu-minggu sampai bertahun-tahun.
+  sumber: usgs-science-earthquakes
+- id: magnitudo
+  istilah: Magnitudo
+  definisi: Ukuran besar satu gempa yang dihitung dari rekaman seismograf. Berbeda dengan intensitas, yang berbeda-beda menurut lokasi pengamat.
+  sumber: usgs-science-earthquakes
 - id: iklim
   istilah: Iklim
   definisi: Rata-rata dan pola cuaca suatu tempat dalam jangka panjang, biasanya dihitung puluhan tahun.

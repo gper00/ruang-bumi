@@ -51,9 +51,11 @@ const halaman = [
   '/',
   '/topik/',
   '/topik/atmosfer/angin-darat-laut/',
+  '/topik/atmosfer/lapisan-atmosfer/',
   '/topik/atmosfer/musim/',
   '/topik/atmosfer/siklus-air/',
   '/topik/ekologi/bioma/',
+  '/topik/planet-bumi/gempa-bumi/',
   '/topik/planet-bumi/lempeng-tektonik/',
   '/topik/laut/ocean/',
   '/topik/laut/arus/',
@@ -120,8 +122,11 @@ try {
     if (lebar === 1280 && skema === 'light' && !gerak) {
       await page.goto(base + '/', { waitUntil: 'networkidle' });
       await page.locator('#cari-topik').fill('gempa');
+      // Dua topik memuat kata "gempa": lempeng tektonik dan gempa bumi.
       let tampil = await page.locator('.kartu-topik:visible').count();
-      if (tampil !== 1) catat(`Beranda: pencarian "gempa" menampilkan ${tampil} kartu, seharusnya 1`);
+      if (tampil !== 2) catat(`Beranda: pencarian "gempa" menampilkan ${tampil} kartu, seharusnya 2`);
+      if ((await page.locator('.kartu-topik:visible', { hasText: 'bergetar' }).count()) !== 1)
+        catat('Beranda: topik gempa bumi tidak muncul saat mencari "gempa"');
       await page.locator('#cari-topik').fill('');
       await page.locator('.filter-btn', { hasText: 'Ekologi' }).click();
       tampil = await page.locator('.kartu-topik:visible').count();
@@ -163,6 +168,126 @@ try {
       await page.locator('.bio-chip', { hasText: 'Gurun subtropis' }).first().click();
       const bioma = await page.locator('.bio-judul').textContent();
       if (!bioma?.includes('Gurun')) catat('Bioma: tombol tidak mengganti panel');
+
+      // Tab empat bioma: hanya satu panel tampil, panel bertukar lewat klik dan panah,
+      // dan setiap visual menanggapi kontrolnya sendiri.
+      const tabBioma = (nama) => page.getByRole('tab', { name: new RegExp(nama) });
+      const panelBioma = async () => page.locator('.bt-panel:visible').count();
+      const tungguVisual = async (nama) => {
+        await page.waitForFunction(
+          (komponen) => {
+            const island = document.querySelector(`astro-island[component-url*="${komponen}"]`);
+            return island !== null && !island.hasAttribute('ssr');
+          },
+          nama,
+          { timeout: 15000 },
+        );
+      };
+
+      if ((await panelBioma()) !== 1)
+        catat(`Bioma tab: ${await panelBioma()} panel terlihat saat halaman dibuka, seharusnya 1`);
+
+      await tabBioma('Tundra').click();
+      if (!(await page.locator('#bioma-tundra').isVisible()))
+        catat('Bioma tab: memilih Tundra tidak menampilkan panelnya');
+      if ((await panelBioma()) !== 1)
+        catat('Bioma tab: panel lain tidak disembunyikan setelah tab diganti');
+      if (!page.url().endsWith('#bioma-tundra'))
+        catat(`Bioma tab: alamat tidak menyimpan tab aktif (${page.url()})`);
+
+      await tabBioma('Stepa').click();
+      await page.locator('#bioma-stepa').scrollIntoViewIfNeeded();
+      await tungguVisual('StepaGangguan');
+      await page.locator('.st-tombol', { hasText: 'Kebakaran' }).click();
+      if ((await page.locator('.st-meter-nilai').textContent())?.trim() !== 'rendah')
+        catat('Stepa: skenario kebakaran tidak menurunkan tutupan pohon');
+
+      await tabBioma('Hutan gugur').click();
+      await page.locator('#bioma-hutan-gugur').scrollIntoViewIfNeeded();
+      await tungguVisual('HutanGugurMusim');
+      await page.locator('.hg-slider input').fill('0');
+      if ((await page.locator('.hg-bulan').textContent())?.trim() !== 'Januari')
+        catat('Hutan gugur: slider bulan tidak mengganti bulan');
+      if (!(await page.locator('.hg-daun-status').textContent())?.includes('tidak ada'))
+        catat('Hutan gugur: musim dingin tidak digambarkan tanpa daun');
+
+      await tabBioma('Taiga').click();
+      await page.locator('#bioma-taiga').scrollIntoViewIfNeeded();
+      await tungguVisual('TaigaMusim');
+      await page.locator('.tg-tombol', { hasText: 'Musim panas' }).click();
+      if ((await page.locator('.tg-daun-lebar').textContent())?.trim() !== 'ada')
+        catat('Taiga: musim panas tidak menumbuhkan kembali daun lebar');
+
+      await tabBioma('Tundra').click();
+      await page.locator('#bioma-tundra').scrollIntoViewIfNeeded();
+      await tungguVisual('TundraMusim');
+      await page.locator('.tu-slider input').fill('0');
+      if (!(await page.locator('.tu-nilai').first().textContent())?.includes('30 cm'))
+        catat('Tundra: Januari tidak menipiskan lapisan aktif');
+      if (!(await page.locator('.tu-ringkas').textContent())?.toLowerCase().includes('membeku'))
+        catat('Tundra: ringkasan Januari tidak menyebut lapisan aktif membeku');
+
+      await tabBioma('Tundra').focus();
+      await page.keyboard.press('Home');
+      const tabAktif = await page.locator('.bt-tab[aria-selected="true"]').textContent();
+      if (!tabAktif?.includes('Stepa'))
+        catat(`Bioma tab: tombol Home tidak memindahkan tab ke tab pertama (${tabAktif})`);
+
+      await page.goto(base + '/topik/atmosfer/lapisan-atmosfer/', { waitUntil: 'networkidle' });
+      await page.locator('.atl-slider input').fill('5');
+      if ((await page.locator('.atl-km').textContent())?.trim() !== '5 km')
+        catat('Lapisan atmosfer: slider tidak mengganti angka ketinggian');
+      const lapisanKontrol = page.locator('.atl-hasil > div').first();
+      if (!(await lapisanKontrol.textContent())?.includes('Troposfer'))
+        catat('Lapisan atmosfer: 5 km tidak dibaca sebagai troposfer');
+      const cxAwal = await page.locator('.atl-titik').getAttribute('cx');
+
+      await page.locator('.atl-slider input').fill('60');
+      const suhuKontrol = page.locator('.atl-hasil > div').nth(1);
+      if (!(await lapisanKontrol.textContent())?.includes('Mesosfer'))
+        catat(`Lapisan atmosfer: 60 km menunjukkan ${await lapisanKontrol.textContent()}`);
+      if (!(await suhuKontrol.textContent())?.includes('−'))
+        catat(`Lapisan atmosfer: suhu 60 km tidak negatif (${await suhuKontrol.textContent()})`);
+      if ((await page.locator('.atl-titik').getAttribute('cx')) === cxAwal)
+        catat('Lapisan atmosfer: penanda kurva tidak bergerak saat ketinggian digeser');
+
+      await page.goto(base + '/topik/planet-bumi/gempa-bumi/', { waitUntil: 'networkidle' });
+      await tungguVisual('GempaRebound');
+      const nilaiSesar = page.locator('.grb-hasil .grb-nilai');
+      await page.locator('.grb-slider input').fill('60');
+      if ((await nilaiSesar.nth(0).textContent())?.trim() !== 'tersangkut')
+        catat(`Gempa: regangan 60% seharusnya tersangkut (${await nilaiSesar.nth(0).textContent()})`);
+      const pagarTertekuk = await page.locator('.grb-pagar').getAttribute('points');
+
+      await page.locator('.grb-slider input').fill('100');
+      await page.locator('.grb-tombol', { hasText: 'Lepaskan regangan' }).click();
+      if ((await nilaiSesar.nth(0).textContent())?.trim() !== 'meluncur')
+        catat('Gempa: melepas regangan tidak membuat sesar meluncur');
+      if ((await page.locator('.grb-pagar').getAttribute('points')) === pagarTertekuk)
+        catat('Gempa: bentuk pagar tidak berubah setelah sesar meluncur');
+      if ((await nilaiSesar.nth(2).textContent())?.trim() !== '2,6 m')
+        catat(`Gempa: geser permanen tidak muncul setelah meluncur (${await nilaiSesar.nth(2).textContent()})`);
+
+      await page.locator('.gfk-slider input').first().scrollIntoViewIfNeeded();
+      await tungguVisual('GempaFokus');
+      const nilaiFokus = page.locator('.gfk-hasil .gfk-nilai');
+      const ambilAngka = (teks) => Number((teks ?? '').match(/(\d+)/)?.[1] ?? NaN);
+
+      await page.locator('.gfk-slider input').first().fill('10');
+      if ((await nilaiFokus.nth(0).textContent())?.trim() !== 'Dangkal')
+        catat(`Gempa: kedalaman 10 km bukan kelas dangkal (${await nilaiFokus.nth(0).textContent()})`);
+
+      await page.locator('.gfk-slider input').first().fill('600');
+      if ((await nilaiFokus.nth(0).textContent())?.trim() !== 'Dalam')
+        catat('Gempa: kedalaman 600 km bukan kelas dalam');
+      if ((await nilaiFokus.nth(2).textContent())?.trim() !== 'lemah')
+        catat('Gempa: getaran gempa 600 km tidak dinilai lemah');
+      const jarakEpi = ambilAngka(await page.locator('.gfk-hasil .gfk-extra').nth(1).textContent());
+      const jarakHipo = ambilAngka(await nilaiFokus.nth(1).textContent());
+      if (!(jarakHipo > jarakEpi))
+        catat(
+          `Gempa: jarak hiposentrum ${jarakHipo} tidak lebih panjang daripada jarak episentrum ${jarakEpi}`,
+        );
 
       await page.goto(base + '/topik/atmosfer/musim/', { waitUntil: 'networkidle' });
       await page.locator('.sms-slider input').fill('9');
@@ -224,6 +349,25 @@ try {
         catat('Zona laut: slider tidak merespons panah keyboard');
     }
 
+    await context.close();
+  }
+
+  // Progresif: tanpa JavaScript keempat panel bioma tetap terbaca dan bar tab tidak ada.
+  {
+    const context = await browser.newContext({
+      javaScriptEnabled: false,
+      viewport: { width: 390, height: 900 },
+    });
+    const page = await context.newPage();
+    await page.goto(base + '/topik/ekologi/bioma/', { waitUntil: 'domcontentloaded' });
+    const panel = await page.locator('.bt-panel:visible').count();
+    if (panel !== 4) catat(`Bioma tanpa JS: ${panel} panel terlihat, seharusnya 4`);
+    if ((await page.locator('.bt-tab').count()) !== 0)
+      catat('Bioma tanpa JS: bar tab tetap dirender');
+    for (const id of ['bioma-stepa', 'bioma-hutan-gugur', 'bioma-taiga', 'bioma-tundra']) {
+      const judul = await page.locator(`#${id} .bt-panel-judul`).textContent();
+      if (!judul?.trim()) catat(`Bioma tanpa JS: judul panel ${id} kosong`);
+    }
     await context.close();
   }
 } finally {

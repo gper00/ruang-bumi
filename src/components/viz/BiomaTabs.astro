@@ -1,0 +1,229 @@
+---
+interface Props {
+  judul?: string;
+}
+
+const { judul = 'Empat bioma, empat mekanisme' } = Astro.props;
+---
+
+<div class="bt" data-bioma-tabs data-judul={judul}>
+  {/*
+    Tanpa JavaScript keempat panel tampil bertumpuk, masing-masing dengan
+    judulnya sendiri, jadi artikel tetap terbaca. Baris ini menandai bahwa
+    JavaScript hidup sebelum panel dirender, supaya panel yang tidak dipilih
+    tidak sempat berkedip terlihat.
+  */}
+  <script is:inline>
+    document.documentElement.classList.add('js');
+  </script>
+
+  <div class="bt-bar" data-bioma-bar></div>
+  <div class="bt-panels">
+    <slot />
+  </div>
+</div>
+
+<script>
+  function siapkanTab(kotak: HTMLElement) {
+    const bar = kotak.querySelector<HTMLElement>('[data-bioma-bar]');
+    const panel = Array.from(kotak.querySelectorAll<HTMLElement>('.bt-panel'));
+    if (!bar || panel.length < 2) return;
+
+    const strip = document.createElement('div');
+    strip.className = 'bt-daftar';
+    strip.setAttribute('role', 'tablist');
+    strip.setAttribute('aria-label', kotak.dataset.judul ?? 'Empat bioma');
+    strip.setAttribute('aria-orientation', 'horizontal');
+
+    const tombol = panel.map((p, i) => {
+      const id = p.id || `bioma-panel-${i}`;
+      p.id = id;
+      p.setAttribute('role', 'tabpanel');
+      p.setAttribute('aria-labelledby', `tab-${id}`);
+
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'bt-tab';
+      b.setAttribute('role', 'tab');
+      b.id = `tab-${id}`;
+      b.setAttribute('aria-controls', id);
+      b.setAttribute('aria-selected', 'false');
+      b.tabIndex = -1;
+
+      const label = document.createElement('span');
+      label.className = 'bt-tab-label';
+      label.textContent = p.dataset.tab ?? `Bioma ${i + 1}`;
+      b.append(label);
+
+      if (p.dataset.tanya) {
+        const tanya = document.createElement('span');
+        tanya.className = 'bt-tab-tanya';
+        tanya.textContent = p.dataset.tanya;
+        b.append(tanya);
+      }
+      return b;
+    });
+
+    strip.append(...tombol);
+    bar.append(strip);
+
+    function pilih(i: number, fokus = false) {
+      tombol.forEach((b, j) => {
+        const aktif = i === j;
+        b.setAttribute('aria-selected', aktif ? 'true' : 'false');
+        b.tabIndex = aktif ? 0 : -1;
+        panel[j]?.classList.toggle('bt-aktif', aktif);
+      });
+      if (fokus) tombol[i]?.focus();
+    }
+
+    function simpanAlamat(i: number) {
+      const id = panel[i]?.id;
+      if (id && window.location.hash !== `#${id}`) {
+        window.history.replaceState(null, '', `#${id}`);
+      }
+    }
+
+    tombol.forEach((b, i) =>
+      b.addEventListener('click', () => {
+        pilih(i);
+        simpanAlamat(i);
+      }),
+    );
+
+    strip.addEventListener('keydown', (e) => {
+      const dari = tombol.indexOf(document.activeElement as HTMLButtonElement);
+      if (dari < 0) return;
+      let tujuan = dari;
+      if (e.key === 'ArrowRight') tujuan = (dari + 1) % tombol.length;
+      else if (e.key === 'ArrowLeft') tujuan = (dari - 1 + tombol.length) % tombol.length;
+      else if (e.key === 'Home') tujuan = 0;
+      else if (e.key === 'End') tujuan = tombol.length - 1;
+      else return;
+      e.preventDefault();
+      pilih(tujuan, true);
+      simpanAlamat(tujuan);
+    });
+
+    // Tautan dengan #panel-bioma-… membuka tab yang tepat.
+    const dariAlamat = panel.findIndex((p) => `#${p.id}` === window.location.hash);
+    pilih(dariAlamat > 0 ? dariAlamat : 0);
+  }
+
+  for (const kotak of document.querySelectorAll<HTMLElement>('[data-bioma-tabs]')) {
+    siapkanTab(kotak);
+  }
+</script>
+
+<style>
+  .bt {
+    margin: 2.2rem 0;
+  }
+
+  /* Tanpa JavaScript bar tidak tampil: pembaca hanya melihat empat panel bertumpuk. */
+  .bt-bar {
+    display: none;
+    margin-bottom: 14px;
+  }
+
+  :global(html.js) .bt-bar {
+    display: block;
+  }
+
+  :global(.bt-daftar) {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 6px;
+  }
+
+  :global(.bt-tab) {
+    display: grid;
+    gap: 3px;
+    align-content: start;
+    min-height: 46px;
+    padding: 9px 12px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    background: var(--surface);
+    color: var(--muted);
+    text-align: left;
+    cursor: pointer;
+    transition: border-color 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+  }
+
+  :global(.bt-tab:hover) {
+    border-color: var(--sea);
+    color: var(--fg);
+  }
+
+  :global(.bt-tab[aria-selected='true']) {
+    border-color: var(--sea);
+    background: var(--sea-soft);
+    color: var(--fg);
+  }
+
+  :global(.bt-tab:focus-visible) {
+    outline: 2px solid var(--sea);
+    outline-offset: 2px;
+  }
+
+  :global(.bt-tab-label) {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.94rem;
+    letter-spacing: -0.01em;
+  }
+
+  :global(.bt-tab-tanya) {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    line-height: 1.45;
+  }
+
+  .bt-panels :global(.bt-panel) {
+    display: block;
+    margin: 0;
+    padding: 16px 18px 4px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+
+  .bt-panels :global(.bt-panel + .bt-panel) {
+    margin-top: 14px;
+  }
+
+  /* Dengan JavaScript hanya panel yang dipilih yang tampil. */
+  :global(html.js) .bt-panels :global(.bt-panel) {
+    display: none;
+  }
+
+  :global(html.js) .bt-panels :global(.bt-panel.bt-aktif) {
+    display: block;
+  }
+
+  .bt-panels :global(.bt-panel-judul) {
+    margin: 0 0 0.6rem;
+    font-family: var(--font-display);
+    font-size: 1.06rem;
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    color: var(--fg);
+    text-wrap: balance;
+  }
+
+  .bt-panels :global(figure) {
+    margin-block: 1.3rem;
+  }
+
+  .bt-panels :global(.data-note) {
+    margin-block: 1.1rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :global(.bt-tab) {
+      transition: none;
+    }
+  }
+</style>

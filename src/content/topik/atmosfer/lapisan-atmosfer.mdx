@@ -1,0 +1,146 @@
+---
+pertanyaan: "Kalau makin tinggi, kenapa udara makin dingin?"
+kategori: "atmosfer"
+level: "pemula"
+menit: 7
+jawabanSingkat: "Suhu memang turun sekitar 6,5 °C setiap kilometer di troposfer, karena udara dipanaskan dari permukaan Bumi. Tetapi arah itu berbalik di stratosfer, yang dihangatkan ozon, lalu turun lagi sampai mesopause, bagian terdingin atmosfer. Suhu termosfer bisa ribuan derajat karena molekulnya sangat sedikit."
+terkait: ["atmosfer/musim", "atmosfer/siklus-air", "atmosfer/angin-darat-laut"]
+sumber: ["nasa-atmosphere-cake", "nasa-what-atmosphere", "noaa-atmosphere-layers", "nasa-standard-atmosphere", "noaa-air-pressure", "nasa-puncak-jaya"]
+glosarium: ["troposfer", "stratosfer", "mesosfer", "termosfer", "tropopause", "lapisan-ozon"]
+status: "terbit"
+diverifikasi: 2026-10-27
+---
+
+import ProfilAtmosfer from '../../../components/viz/ProfilAtmosfer';
+import Figure from '../../../components/sumber/Figure.astro';
+import DataNote from '../../../components/sumber/DataNote.astro';
+import Cite from '../../../components/sumber/Cite.astro';
+import Term from '../../../components/glosarium/Term.astro';
+import Quiz from '../../../components/quiz/Quiz';
+
+<Figure
+  caption="Geser ketinggian untuk melihat suhu, lapisan, dan proses yang memanaskan lapisan itu. Perhatikan arah kurva: naik-turunnya berganti setiap kali lapisan berganti."
+  source="nasa-standard-atmosphere"
+>
+  <ProfilAtmosfer client:visible />
+</Figure>
+
+<DataNote>
+  Ini profil standar, bukan cuaca hari ini. Batas lapisan juga bergeser: tropopause berada di
+  sekitar 8 km di daerah kutub dan sampai 17 km di ekuator. Angka di halaman ini menggambarkan
+  pola rata-rata.
+</DataNote>
+
+## Kok bisa?
+
+Pegunungan tinggi di dekat ekuator bisa punya es. Di Papua, Puncak Jaya setinggi 4.884 m masih
+menyimpan sedikit es karena udaranya cukup dingin pada ketinggian itu, dan luasnya terus
+menyusut.
+<Cite id="nasa-puncak-jaya" /> Penyebabnya bukan jarak ke Matahari — puncak gunung justru lebih
+dekat ke Matahari daripada pantai. Yang berubah adalah ketinggiannya: di lapisan terbawah
+atmosfer, suhu rata-rata turun sekitar 6,5 °C setiap kilometer.
+<Cite id="nasa-standard-atmosphere" /> Di puncak Jaya, itu berarti sekitar 30 °C lebih dingin
+daripada di pantai.
+
+Lapisan itu bernama <Term istilah="troposfer" />, membentang dari permukaan sampai sekitar 8–14,5
+km. <Cite id="nasa-atmosphere-cake" /> Hampir semua uap air, awan, dan cuaca ada di sini, karena
+udara di lapisan ini dipanaskan dari bawah oleh permukaan Bumi.
+
+### Kenapa udara yang naik jadi dingin?
+
+Udara yang naik masuk ke tempat bertekanan lebih rendah, jadi ia mengembang. Mengembang butuh
+energi, dan energi itu diambil dari panas di dalam udara itu sendiri. Akibatnya suhu udara
+turun — bukan karena jauh dari Matahari, tetapi karena panasnya dipakai untuk mengembang.
+
+Pola ini yang membuat gunung tinggi dingin dan bersalju, sementara lembah di kakinya tetap
+hangat: setiap kilometer ke atas, suhunya turun sekitar 6,5 °C.
+
+### Di atas tropopause, arahnya berbalik
+
+Sampai ketinggian tertentu, suhunya berhenti turun. Batas itu disebut <Term istilah="tropopause" />,
+dan di profil standar letaknya di sekitar 11 km dengan suhu sekitar −56,5 °C.
+<Cite id="nasa-standard-atmosphere" />
+
+Di atasnya ada <Term istilah="stratosfer" />, lapisan yang justru makin hangat ke atas. Sebabnya
+adalah <Term istilah="lapisan-ozon" />: ozon menyerap radiasi ultraviolet Matahari, sehingga
+energi panas masuk ke lapisan ini, bukan hanya lewat dari bawah.
+<Cite id="nasa-what-atmosphere" /> Karena udara hangat berada di atas udara dingin, stratosfer
+stabil dan jarang bergejolak — itu sebabnya pesawat jet memilih terbang di sana.
+<Cite id="nasa-atmosphere-cake" />
+
+Perlu diingat, tekanan udara terus berkurang seiring ketinggian. Di permukaan laut tekanan
+standarnya 1.013,25 hPa, dan jumlah molekul per volume turun cepat begitu kita naik.
+<Cite id="noaa-air-pressure" />
+
+### Mesosfer: bagian terdingin atmosfer
+
+Lapisan berikutnya, <Term istilah="mesosfer" />, tidak punya penyerap ultraviolet seperti ozon.
+Udaranya juga sudah sangat tipis, dan tidak dihangatkan dari bawah. Karena itu suhu turun lagi
+dan mencapai titik terdingin di mesopause, dengan rata-rata sekitar −85 °C.
+<Cite id="nasa-atmosphere-cake" /> Di lapisan ini meteor dari luar angkasa terbakar karena
+bertumbukan dengan molekul udara. <Cite id="nasa-what-atmosphere" />
+
+Tiap lapisan dipisahkan batas yang oleh NOAA disebut “pause”, tempat perubahan suhu, komposisi,
+dan gerak udara paling tajam. <Cite id="noaa-atmosphere-layers" />
+
+### Termosfer: suhunya tinggi, panasnya sedikit
+
+Lapisan paling atas yang dibahas di halaman ini adalah <Term istilah="termosfer" />. Di sini
+gas menyerap ultraviolet ekstrem dan sinar-X, dan suhunya bisa mencapai 2.000 °C.
+<Cite id="nasa-what-atmosphere" />
+
+Angka itu terdengar menakutkan, tetapi bukan berarti panas. Karena molekulnya sangat sedikit,
+tiap molekul menyerap lebih banyak energi sehingga suhunya tinggi — sementara jumlah total panas
+yang tersimpan tetap kecil. Satelit dan Stasiun Antariksa Internasional mengorbit di termosfer
+tanpa meleleh. <Cite id="nasa-what-atmosphere" />
+
+Di dalam termosfer ada lapisan tempat sinar-X dan ultraviolet Matahari melepas elektron dari
+atomnya. Proses itu yang memungkinkan radio jarak jauh dan menghasilkan aurora.
+<Cite id="nasa-what-atmosphere" />
+
+## Fakta menarik
+
+- Puncak Jaya di Papua setinggi 4.884 m masih menyimpan sedikit es meski hanya beberapa derajat dari ekuator; penurunan 6,5 °C per kilometer menjelaskan suhunya. <Cite id="nasa-puncak-jaya" /> <Cite id="nasa-standard-atmosphere" />
+- Sekitar 99 persen uap air atmosfer terkumpul di troposfer, lapisan paling tipis dan paling padat. <Cite id="nasa-atmosphere-cake" />
+- Awan tertinggi di Bumi, awan noctilucent, ada di puncak mesosfer — jauh di atas awan cuaca. <Cite id="nasa-atmosphere-cake" />
+- Garis Karman di 100 km dipakai sebagai batas luar angkasa, karena 99,99997 persen massa atmosfer berada di bawahnya. <Cite id="nasa-atmosphere-cake" />
+
+<Quiz
+  judul="Kuis"
+  client:visible
+  soal={[
+    {
+      tanya: 'Mengapa suhu udara turun saat kita naik di troposfer?',
+      opsi: [
+        'Karena udara di sana dipanaskan dari permukaan Bumi dan mendingin saat naik serta mengembang',
+        'Karena puncak gunung lebih jauh dari Matahari',
+        'Karena udara di ketinggian lebih basah',
+      ],
+      benar: 0,
+      penjelasan:
+        'Panas troposfer berasal dari permukaan Bumi. Udara yang naik juga mengembang dan memakai panasnya sendiri, sehingga suhunya turun sekitar 6,5 °C per km.',
+    },
+    {
+      tanya: 'Apa yang membuat suhu di stratosfer naik lagi?',
+      opsi: [
+        'Ozon yang menyerap radiasi ultraviolet Matahari',
+        'Awan yang menahan panas di lapisan itu',
+        'Udara stratosfer yang lebih padat daripada troposfer',
+      ],
+      benar: 0,
+      penjelasan:
+        'Lapisan ozon menyerap ultraviolet, jadi energi panas masuk ke stratosfer. Karena udara hangat berada di atas udara dingin, lapisan ini stabil.',
+    },
+    {
+      tanya: 'Suhu termosfer bisa mencapai 2.000 °C. Mengapa satelit di sana tidak meleleh?',
+      opsi: [
+        'Karena molekulnya sangat sedikit, jadi panas total yang tersimpan tetap kecil',
+        'Karena satelit selalu berada di sisi Bumi yang gelap',
+        'Karena termosfer sebenarnya sedingin mesosfer',
+      ],
+      benar: 0,
+      penjelasan:
+        'Suhu mengukur gerak rata-rata tiap molekul, bukan berapa banyak panas yang tersimpan. Di termosfer molekulnya jarang sekali, sehingga energinya sedikit.',
+    },
+  ]}
+/>

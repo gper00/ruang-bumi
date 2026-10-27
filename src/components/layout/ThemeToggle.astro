@@ -52,12 +52,14 @@
     min-height: 34px;
     padding: 4px 10px;
     border: 1px solid var(--line);
-    border-radius: 999px;
+    border-radius: var(--radius-sm);
     background: var(--surface);
     color: var(--muted);
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 0.74rem;
     cursor: pointer;
+    transition: color 0.15s ease, border-color 0.15s ease;
   }
 
   .theme-toggle:hover {
@@ -79,5 +81,15 @@
 
   :global([data-theme='dark']) .ikon-gelap {
     display: block;
+  }
+
+  @media (max-width: 560px) {
+    .theme-toggle {
+      padding: 4px 8px;
+    }
+
+    .teks {
+      display: none;
+    }
   }
 </style>

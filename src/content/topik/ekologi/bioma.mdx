@@ -2,16 +2,21 @@
 pertanyaan: "Kenapa hutan di Sumatra berbeda dengan padang di Sumbawa?"
 kategori: "ekologi"
 level: "pemula"
-menit: 6
+menit: 9
 jawabanSingkat: "Tumbuhan dan hewan mengikuti iklim. Sumatra yang basah sepanjang tahun ditumbuhi hutan hujan, sedangkan Sumbawa dengan musim kering panjang lebih cocok untuk savana. Ketinggian juga mengubah jenis vegetasi."
 terkait: ["atmosfer/musim", "atmosfer/siklus-air", "planet-bumi/lempeng-tektonik"]
-sumber: ["nasa-biomes", "asu-biomes", "bmkg-musim"]
-glosarium: ["bioma", "hutan-hujan-tropis", "iklim"]
+sumber: ["nasa-biomes", "asu-biomes", "bmkg-musim", "nasa-grassland", "nps-prairie-fire", "nasa-temperate-forest", "nps-deciduous-forest", "nasa-coniferous", "noaa-boreal-fire", "nasa-tundra", "noaa-permafrost"]
+glosarium: ["bioma", "hutan-hujan-tropis", "iklim", "stepa", "hutan-gugur", "taiga", "tundra", "permafrost", "lapisan-aktif", "dormansi"]
 status: "terbit"
-diverifikasi: 2026-10-23
+diverifikasi: 2026-10-27
 ---
 
 import BiomaMap from '../../../components/viz/BiomaMap';
+import BiomaTabs from '../../../components/viz/BiomaTabs.astro';
+import StepaGangguan from '../../../components/viz/StepaGangguan';
+import HutanGugurMusim from '../../../components/viz/HutanGugurMusim';
+import TaigaMusim from '../../../components/viz/TaigaMusim';
+import TundraMusim from '../../../components/viz/TundraMusim';
 import Figure from '../../../components/sumber/Figure.astro';
 import DataNote from '../../../components/sumber/DataNote.astro';
 import Cite from '../../../components/sumber/Cite.astro';
@@ -73,12 +78,162 @@ tropis. Yang dipakai di halaman ini adalah pembagian sembilan bioma, tetapi angk
 ukuran kebenaran — yang penting bukan jumlahnya, melainkan dua hal yang mengaturnya: air dan suhu.
 <Cite id="asu-biomes" />
 
+## Empat bioma, empat mekanisme
+
+Empat tab di bawah membahas satu bioma lintang tinggi atau lintang sedang masing-masing. Yang
+dicari di sini bukan daftar ciri, tetapi mekanismenya: apa yang sebenarnya menahan atau
+mengizinkan pohon tumbuh. Setiap tab punya visual sendiri, dan sumbu serta tombol di dalamnya
+bisa kamu ubah.
+
+<BiomaTabs judul="Empat bioma, empat mekanisme">
+  <section
+    class="bt-panel"
+    id="bioma-stepa"
+    data-tab="Stepa"
+    data-tanya="Kalau hujannya cukup, kenapa pohon tidak menang?"
+    aria-label="Stepa"
+  >
+    <p class="bt-panel-judul">Stepa: rumput menang karena gangguan, bukan karena kering</p>
+
+    <Figure
+      caption="Pilih skenario untuk melihat apa yang terjadi pada pohon muda dan rumput. Akar rumput yang dalam tetap utuh pada ketiga skenario."
+      source="nasa-grassland"
+    >
+      <StepaGangguan client:visible />
+    </Figure>
+
+    <Term istilah="stepa" /> adalah padang rumput di lintang sedang dengan curah hujan sekitar
+    500–900 mm setahun. <Cite id="nasa-grassland" /> Jumlah itu sebenarnya cukup untuk menumbuhkan
+    pohon, jadi pertanyaan yang tepat bukan “kenapa terlalu kering”, melainkan “apa yang menahan
+    pohon”.
+
+    Dua penahan utamanya adalah api dan penggembalaan. Api membakar serasah dan mematikan pohon
+    serta semak muda, sedangkan rumputnya tidak mati: tunasnya menunggu di bawah permukaan tanah
+    dan tumbuh lagi setelah api lewat. <Cite id="nps-prairie-fire" /> Penggembala memakan pucuk
+    pohon muda, sehingga pohon tidak pernah sempat tinggi, sementara rumput yang terus dipangkas
+    tetap rapat di permukaan.
+
+    Akar rumput stepa bisa mencapai sekitar 1,8 m dan menyimpan cadangan di bawah tanah.
+    <Cite id="nasa-grassland" /> Cadangan itulah yang membuat rumput pulih lebih cepat daripada
+    pohon setelah gangguan. Kalau api dan penggembalaan berhenti dalam waktu lama, pohon muda
+    tumbuh, kanopinya menaungi rumput, dan stepa bergerak menuju hutan.
+    <Cite id="nps-prairie-fire" />
+
+    Jadi stepa lebih tepat dibaca sebagai hasil gangguan yang berulang, bukan sekadar akibat
+    curah hujan.
+  </section>
+
+  <section
+    class="bt-panel"
+    id="bioma-hutan-gugur"
+    data-tab="Hutan gugur"
+    data-tanya="Kenapa pohon melepas daunnya sebelum dingin?"
+    aria-label="Hutan gugur"
+  >
+    <p class="bt-panel-judul">Hutan gugur: daun mahal, jadi dilepas saat tidak menguntungkan</p>
+
+    <Figure
+      caption="Geser bulan untuk mengikuti siklus daun: kanopi penuh di musim panas, daun berwarna di musim gugur, cabang gundul dan pohon dorman di musim dingin, tunas baru di musim semi."
+      source="nasa-temperate-forest"
+    >
+      <HutanGugurMusim client:visible />
+    </Figure>
+
+    <Term istilah="hutan-gugur" /> beriklim sedang tumbuh di wilayah dengan empat musim yang jelas.
+    Curah hujannya sekitar 750–1.500 mm setahun dan suhu rata-ratanya sekitar 10 °C.
+    <Cite id="nasa-temperate-forest" />
+
+    Daun lebar yang luas adalah investasi mahal. Daun itu efisien saat cahaya berlimpah, tetapi
+    merugikan saat dingin: air di dalamnya mudah membeku dan salju bisa membebani cabang. Pohon
+    memilih melepas daunnya lebih dulu, lalu berhenti tumbuh.
+
+    Keadaan berhenti tumbuh itu disebut <Term istilah="dormansi" />. Selama dormansi, pohon tidak
+    berdaun dan hampir tidak beraktivitas, tetapi tetap hidup; pada musim semi kuncup pecah dan
+    kanopi dibangun ulang memakai cadangan makanan. <Cite id="nps-deciduous-forest" />
+
+    Pola ini berlaku di lintang menengah. Indonesia tidak mengalami empat musim, jadi pohon di sini
+    menggugurkan daun karena sebab lain, misalnya musim kering, bukan karena persiapan menghadapi
+    salju.
+  </section>
+
+  <section
+    class="bt-panel"
+    id="bioma-taiga"
+    data-tab="Taiga"
+    data-tanya="Kenapa hutan terluas di darat disusun pohon jarum?"
+    aria-label="Taiga"
+  >
+    <p class="bt-panel-judul">Taiga: musim tumbuh pendek, jadi jangan bangun kanopi dari nol</p>
+
+    <Figure
+      caption="Bandingkan pohon jarum dan pohon berdaun lebar di musim panas dan musim dingin. Perhatikan mana yang tetap berdaun saat salju turun."
+      source="nasa-coniferous"
+    >
+      <TaigaMusim client:visible />
+    </Figure>
+
+    <Term istilah="taiga" /> adalah hutan boreal di lintang tinggi, dan bioma darat terluas di
+    dunia. <Cite id="noaa-boreal-fire" /> Suhu musim panasnya hanya sekitar 10 °C, curah hujannya
+    300–900 mm, dan musim bebas beku berlangsung sekitar 4–6 bulan. <Cite id="nasa-coniferous" />
+
+    Musim tumbuh yang pendek mengubah strategi yang menang. Daun jarum tetap terpasang sepanjang
+    tahun, sehingga pohon tidak perlu membangun kanopi baru setiap kali cuaca menghangat. Bentuk
+    jarum yang sempit dan berlilin juga mengurangi penguapan dan menahan beban salju lebih baik
+    daripada daun lebar. <Cite id="nasa-coniferous" />
+
+    Pohon berdaun lebar tetap ada di taiga, tetapi biasanya di tempat yang lebih hangat dan lembap,
+    dan mereka harus menumbuhkan kanopi baru setiap tahun. Api juga menjadi bagian dari bioma ini:
+    kebakaran besar terjadi di lintang tinggi dan sejak lama membentuk komposisi hutannya.
+    <Cite id="noaa-boreal-fire" />
+  </section>
+
+  <section
+    class="bt-panel"
+    id="bioma-tundra"
+    data-tab="Tundra"
+    data-tanya="Kenapa tidak ada pohon di tanah yang basah?"
+    aria-label="Tundra"
+  >
+    <p class="bt-panel-judul">Tundra: tanah yang basah, tetapi tidak bisa dipakai akar</p>
+
+    <Figure
+      caption="Geser bulan untuk melihat lapisan aktif mencair dan membeku. Akar pohon muda berhenti di batas tanah beku, sementara air yang tidak bisa meresap tertahan di permukaan."
+      source="nasa-tundra"
+    >
+      <TundraMusim client:visible />
+    </Figure>
+
+    <Term istilah="tundra" /> adalah bioma paling dingin, dengan curah hujan hanya 150–250 mm
+    setahun. <Cite id="nasa-tundra" /> Yang benar-benar menentukan bukan hujannya, melainkan
+    <Term istilah="permafrost" />: tanah yang tetap beku sepanjang tahun. <Cite id="noaa-permafrost" />
+
+    Di atas permafrost hanya ada <Term istilah="lapisan-aktif" /> tipis yang mencair pada musim
+    panas, umumnya sekitar 30–100 cm. <Cite id="noaa-permafrost" /> Akar pohon tidak bisa menembus
+    tanah beku di bawahnya, sehingga pohon besar tidak punya tempat berpijak yang cukup.
+
+    Masalah kedua adalah air. Air lelehan tidak bisa meresap melewati lapisan beku, sehingga
+    permukaan tanah bisa tergenang walaupun hujannya sedikit. <Cite id="noaa-permafrost" /> Tanah
+    yang basah tetapi dingin dan beku di bawahnya hanya cocok untuk tumbuhan pendek seperti semak,
+    lumut, dan rumput.
+
+    Di Indonesia tidak ada permafrost. Kalau ingin melihat vegetasi yang mirip tundra, yang
+    membatasinya adalah dingin dan angin di ketinggian, bukan tanah beku.
+  </section>
+</BiomaTabs>
+
+<DataNote>
+  Keempat visual di atas adalah ilustrasi. Angka yang tertulis mengikuti sumber NASA dan NOAA,
+  tetapi bentuk tumbuhan, ketebalan lapisan tanah, dan jumlah pohon disederhanakan agar
+  mekanismenya terlihat. Jangan membacanya sebagai pengukuran.
+</DataNote>
+
 ## Fakta menarik
 
+- Stepa bisa punya curah hujan yang cukup untuk hutan, tetapi api dan penggembalaan yang berulang menahan pohon di tingkat muda. <Cite id="nps-prairie-fire" />
+- Akar rumput stepa bisa mencapai 1,8 m — jauh lebih dalam daripada lapisan aktif tundra yang hanya 30–100 cm. <Cite id="nasa-grassland" /> <Cite id="noaa-permafrost" />
 - Sabana menutupi wilayah yang cukup basah untuk rumput, tetapi terlalu kering atau terlalu sering terbakar untuk hutan rapat. <Cite id="asu-biomes" />
 - Gurun subtropis sering berada di lintang yang sama dengan kota-kota besar, karena pola sirkulasi udara global menurunkan udara kering di sana.
-- Gurun bukan selalu panas: suhu gurun bisa melompat jauh antara siang dan malam, sehingga banyak hewan di sana bertahan dengan bersembunyi di dalam tanah. <Cite id="asu-biomes" />
-- Taiga — hutan konifer dingin di lintang tinggi — adalah bioma darat terluas di dunia. <Cite id="asu-biomes" />
+- Taiga — hutan konifer dingin di lintang tinggi — adalah bioma darat terluas di dunia, dan api adalah gangguan utamanya. <Cite id="noaa-boreal-fire" />
 - Hutan hujan tropis menyimpan karbon dalam jumlah besar, sehingga perubahan tutupan lahan di wilayah ini berpengaruh pada iklim.
 - Indonesia punya dua wajah bioma yang kontras: hutan hujan di barat dan savana di tenggara, dalam satu negara kepulauan.
 
@@ -105,11 +260,15 @@ ukuran kebenaran — yang penting bukan jumlahnya, melainkan dua hal yang mengat
         'Musim kering yang panjang membatasi pertumbuhan hutan rapat. Rumput dan pohon yang tahan kering lebih cocok.',
     },
     {
-      tanya: 'Apa yang terjadi pada suhu saat kita naik gunung?',
-      opsi: ['Suhu naik', 'Suhu turun', 'Suhu tidak berubah'],
-      benar: 1,
+      tanya: 'Apa yang menghalangi akar pohon besar tumbuh di tundra?',
+      opsi: [
+        'Tanah beku yang tidak mencair, di bawah lapisan aktif yang tipis',
+        'Tidak adanya cahaya Matahari',
+        'Hujan yang terlalu banyak',
+      ],
+      benar: 0,
       penjelasan:
-        'Udara di tempat lebih tinggi lebih dingin, sehingga jenis vegetasi di lereng berbeda dari di pantai.',
+        'Hanya lapisan tipis di atas permafrost yang mencair, jadi akar tidak punya ruang. Hujan tundra justru sedikit, sekitar 150–250 mm setahun.',
     },
   ]}
 />

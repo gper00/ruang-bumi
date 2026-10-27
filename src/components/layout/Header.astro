@@ -58,8 +58,8 @@ const isActive = (href: string) =>
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    gap: 12px 24px;
-    padding-block: 12px;
+    gap: 10px 24px;
+    padding-block: 10px;
   }
 
   .brand {
@@ -71,11 +71,11 @@ const isActive = (href: string) =>
   }
 
   .brand-mark {
-    width: 26px;
-    height: 26px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
     background: var(--sea);
-    box-shadow: inset -6px -5px 0 0 var(--sea-soft);
+    box-shadow: inset -5px -4px 0 0 var(--sea-soft);
   }
 
   .brand-text {
@@ -86,13 +86,13 @@ const isActive = (href: string) =>
   .brand-name {
     font-family: var(--font-display);
     font-weight: 800;
-    font-size: 1.05rem;
-    letter-spacing: -0.01em;
+    font-size: 1.08rem;
+    letter-spacing: -0.015em;
   }
 
   .brand-sub {
     font-family: var(--font-mono);
-    font-size: 0.63rem;
+    font-size: 0.62rem;
     color: var(--muted);
     letter-spacing: 0.01em;
   }
@@ -106,23 +106,27 @@ const isActive = (href: string) =>
   nav ul {
     display: flex;
     flex-wrap: wrap;
-    gap: 4px 16px;
+    gap: 2px 18px;
     list-style: none;
     margin: 0;
     padding: 0;
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 0.8rem;
   }
 
   nav a {
+    display: inline-block;
     color: var(--muted);
     text-decoration: none;
-    padding-block: 4px;
-    border-bottom: 1px solid transparent;
+    padding-block: 5px;
+    border-bottom: 2px solid transparent;
+    transition: color 0.15s ease, border-color 0.15s ease;
   }
 
   nav a:hover {
-    color: var(--sea);
+    color: var(--fg);
+    border-bottom-color: var(--line-strong);
   }
 
   nav a[aria-current='page'] {
@@ -133,6 +137,15 @@ const isActive = (href: string) =>
   @media (max-width: 640px) {
     .brand-sub {
       display: none;
+    }
+
+    /* Keep the four links on one row next to the theme toggle. */
+    .header-nav {
+      gap: 12px;
+    }
+
+    nav ul {
+      gap: 2px 12px;
     }
   }
 </style>

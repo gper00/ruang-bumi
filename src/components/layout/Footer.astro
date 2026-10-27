@@ -5,6 +5,7 @@ const tahun = new Date().getFullYear();
 <footer class="site-footer">
   <div class="wrap footer-inner">
     <div class="footer-brand">
+      <p class="label">Kolofon</p>
       <p class="footer-name">Ruang Bumi</p>
       <p class="footer-desc">
         Belajar ilmu kebumian lewat pertanyaan, visual interaktif, dan sumber yang bisa ditelusuri.
@@ -12,6 +13,7 @@ const tahun = new Date().getFullYear();
     </div>
 
     <nav aria-label="Navigasi kaki halaman">
+      <p class="label">Jelajahi</p>
       <ul>
         <li><a href="/topik/">Semua topik</a></li>
         <li><a href="/kategori/atmosfer/">Kategori</a></li>
@@ -22,60 +24,82 @@ const tahun = new Date().getFullYear();
     </nav>
 
     <div class="footer-legal">
+      <p class="label">Lisensi</p>
       <p>© {tahun} Ruang Bumi. Teks CC BY 4.0, kode MIT.</p>
-      <p>Nama situs masih placeholder.</p>
+      <p>Peta lempeng: PB2002 (Bird, 2003), ODbL.</p>
     </div>
   </div>
 </footer>
 
 <style>
   .site-footer {
-    margin-top: 56px;
+    margin-top: 64px;
     border-top: 1px solid var(--line);
     background: var(--surface);
   }
 
   .footer-inner {
     display: grid;
-    gap: 22px;
-    padding-block: 28px 34px;
-    font-size: 0.85rem;
+    gap: 26px;
+    padding-block: 34px 42px;
+    font-size: 0.86rem;
   }
 
-  @media (min-width: 760px) {
+  @media (min-width: 640px) {
     .footer-inner {
-      grid-template-columns: 1.4fr 1fr 1fr;
-      gap: 32px;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 40px;
+    }
+
+    .footer-brand {
+      grid-column: 1 / -1;
     }
   }
 
-  .footer-name {
+  @media (min-width: 900px) {
+    .footer-inner {
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 40px;
+    }
+
+    .footer-brand {
+      grid-column: auto;
+    }
+  }
+
+  .label {
     margin: 0;
+  }
+
+  .footer-name {
+    margin: 6px 0 0;
     font-family: var(--font-display);
     font-weight: 800;
-    font-size: 1.05rem;
+    font-size: 1.12rem;
+    letter-spacing: -0.015em;
   }
 
   .footer-desc,
-  .footer-legal p {
-    margin: 4px 0 0;
+  .footer-legal p:not(.label) {
+    margin: 6px 0 0;
     color: var(--muted);
-    max-width: 42ch;
+    max-width: 44ch;
+    line-height: 1.6;
   }
 
-  .footer-legal p {
+  .footer-legal p:not(.label) {
     font-family: var(--font-mono);
     font-size: 0.7rem;
   }
 
   ul {
     list-style: none;
-    margin: 0;
+    margin: 8px 0 0;
     padding: 0;
     display: grid;
-    gap: 6px;
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
+    gap: 7px;
+    font-family: var(--font-body);
+    font-size: 0.82rem;
   }
 
   a {

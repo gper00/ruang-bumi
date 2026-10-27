@@ -5,6 +5,10 @@ import TopicCard from '../../components/topik/TopicCard.astro';
 import { KATEGORI, getTopikTerbit } from '../../lib/topik';
 
 const topik = await getTopikTerbit();
+const kelompok = KATEGORI.map((k) => ({
+  ...k,
+  isi: topik.filter((t) => t.data.kategori === k.id),
+})).filter((k) => k.isi.length > 0);
 ---
 
 <Layout title="Semua topik" description="Daftar semua pertanyaan tentang Bumi yang sudah dijawab di Ruang Bumi.">
@@ -12,110 +16,185 @@ const topik = await getTopikTerbit();
     <Breadcrumb items={[{ href: '/', label: 'Beranda' }, { label: 'Semua topik' }]} />
 
     <header class="kepala">
-      <p class="label">{topik.length} topik terbit</p>
+      <p class="label">{topik.length} topik terbit · {kelompok.length} kategori</p>
       <h1>Semua pertanyaan</h1>
       <p class="intro">
         Diurutkan dari inti ke tepi: planet, atmosfer, laut, daratan, lalu ekologi. Setiap topik
         punya minimal dua sumber dan satu visual interaktif.
       </p>
+
+      <nav class="lompat" aria-label="Lompat ke kategori">
+        <span class="label">Lompat ke</span>
+        <ul>
+          {
+            kelompok.map((k) => (
+              <li>
+                <a href={`#k-${k.id}`}>
+                  {k.label} <span>{k.isi.length}</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
     </header>
 
     {
-      KATEGORI.map((k) => {
-        const isi = topik.filter((t) => t.data.kategori === k.id);
-        if (isi.length === 0) return null;
-        return (
-          <section class="kelompok" aria-labelledby={`k-${k.id}`} data-kategori={k.id}>
-            <h2 id={`k-${k.id}`}>
-              <a href={`/kategori/${k.id}/`}>
-                <span class="kelompok-tanda" aria-hidden="true"></span>
-                {k.label}
-              </a>
+      kelompok.map((k) => (
+        <section class="kelompok" aria-labelledby={`k-${k.id}`} data-kategori={k.id} id={`k-${k.id}`}>
+          <header class="kelompok-head">
+            <h2>
+              <a href={`/kategori/${k.id}/`}>{k.label}</a>
             </h2>
-            <p class="kelompok-desc">{k.deskripsi}</p>
-            <div class="grid-topik">
-              {isi.map((entry) => (
-                <TopicCard entry={entry} kategori={false} />
-              ))}
-            </div>
-          </section>
-        );
-      })
+            <a class="kelompok-link" href={`/kategori/${k.id}/`}>
+              {k.isi.length} topik <span aria-hidden="true">→</span>
+            </a>
+          </header>
+          <p class="kelompok-desc">{k.deskripsi}</p>
+          <div class="grid-topik">
+            {k.isi.map((entry) => (
+              <TopicCard entry={entry} kategori={false} />
+            ))}
+          </div>
+        </section>
+      ))
     }
   </div>
 </Layout>
 
 <style>
   .halaman {
-    padding-block: 20px 30px;
+    padding-block: 20px clamp(36px, 5vw, 56px);
   }
 
   .kepala {
-    margin: 18px 0 36px;
+    margin: 18px 0 clamp(30px, 4vw, 44px);
   }
 
   .kepala h1 {
-    margin: 8px 0 10px;
-    font-size: clamp(1.9rem, 4vw, 2.6rem);
+    margin: 8px 0 12px;
+    font-size: clamp(1.95rem, 4.3vw, 2.8rem);
     font-weight: 800;
+    letter-spacing: -0.025em;
     text-wrap: balance;
   }
 
   .intro {
-    max-width: 60ch;
+    max-width: 58ch;
     margin: 0;
+    color: var(--muted);
+    font-size: 1.02rem;
+    line-height: 1.65;
+    text-wrap: pretty;
+  }
+
+  .lompat {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 6px 14px;
+    margin-top: 22px;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+  }
+
+  .lompat ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 16px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .lompat a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.86rem;
+    font-weight: 500;
+  }
+
+  .lompat a span {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    margin-left: 3px;
     color: var(--muted);
   }
 
+  .lompat a:hover {
+    color: var(--sea);
+  }
+
   .kelompok {
-    margin-top: 38px;
+    margin-top: clamp(30px, 4vw, 44px);
+    scroll-margin-top: 84px;
   }
 
-  .kelompok h2 {
+  .kelompok + .kelompok {
+    margin-top: clamp(40px, 5vw, 56px);
+  }
+
+  .kelompok-head {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 4px 16px;
+    padding-top: 12px;
+    border-top: 1px solid var(--line);
+  }
+
+  .kelompok-head::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 0;
+    width: 32px;
+    height: 3px;
+    background: var(--aksen, var(--sea));
+  }
+
+  .kelompok-head h2 {
     margin: 0;
-    font-size: 1.25rem;
+    font-size: 1.28rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
   }
 
-  .kelompok h2 a {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
+  .kelompok-head h2 a {
     color: var(--fg);
     text-decoration: none;
   }
 
-  .kelompok h2 a:hover {
+  .kelompok-head h2 a:hover {
     color: var(--sea);
   }
 
-  .kelompok-tanda {
-    width: 14px;
-    height: 14px;
-    border-radius: 4px;
-    background: var(--aksen, var(--sea));
-    flex-shrink: 0;
+  .kelompok-link {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--muted);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .kelompok-link span {
+    display: inline-block;
+    transition: transform 0.15s ease;
+  }
+
+  .kelompok-link:hover {
+    color: var(--sea);
+  }
+
+  .kelompok-link:hover span {
+    transform: translateX(2px);
   }
 
   .kelompok-desc {
     margin: 4px 0 16px;
-    font-size: 0.86rem;
+    font-size: 0.88rem;
     color: var(--muted);
-  }
-
-  .grid-topik {
-    display: grid;
-    gap: 16px;
-  }
-
-  @media (min-width: 700px) {
-    .grid-topik {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
-
-  @media (min-width: 1040px) {
-    .grid-topik {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
   }
 </style>

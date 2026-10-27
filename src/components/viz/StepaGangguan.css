@@ -1,0 +1,198 @@
+.st {
+  display: grid;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.st-kanvas {
+  background: var(--surface-2);
+}
+
+.st-kanvas svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.st-rumput {
+  fill: none;
+  stroke: var(--ok);
+  stroke-width: 3;
+  stroke-linecap: round;
+  opacity: 0.9;
+}
+
+.st-akar path {
+  fill: none;
+  stroke: var(--ok);
+  stroke-width: 1.6;
+  opacity: 0.35;
+}
+
+.st-pohon line {
+  stroke: var(--coast);
+  stroke-width: 5;
+  stroke-linecap: round;
+}
+
+.st-kanopi {
+  fill: var(--ok);
+  opacity: 0.82;
+}
+
+.st-pohon.terbakar line {
+  stroke: var(--fg);
+  opacity: 0.55;
+}
+
+.st-pangkas {
+  stroke: var(--heat);
+  stroke-width: 2;
+}
+
+.st-api path {
+  fill: var(--heat);
+}
+
+.st-asap {
+  fill: var(--line-strong);
+  opacity: 0.35;
+}
+
+.st-gembala ellipse,
+.st-gembala circle {
+  fill: var(--fg);
+  opacity: 0.45;
+}
+
+.st-gembala path {
+  fill: none;
+  stroke: var(--fg);
+  stroke-width: 3;
+  stroke-linecap: round;
+  opacity: 0.45;
+}
+
+.st-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  fill: var(--muted);
+}
+
+.st-kontrol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 12px 14px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.st-tombol {
+  min-height: 34px;
+  padding: 5px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  color: var(--muted);
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease, background-color 0.15s ease;
+}
+
+.st-tombol:hover {
+  border-color: var(--sea);
+  color: var(--fg);
+}
+
+.st-tombol[aria-pressed='true'] {
+  border-color: var(--sea);
+  background: var(--sea-soft);
+  color: var(--fg);
+}
+
+.st-hasil {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+}
+
+.st-meter-blok {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+}
+
+.st-meter-label {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.st-meter {
+  height: 8px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  overflow: hidden;
+}
+
+.st-meter span {
+  display: block;
+  height: 100%;
+  background: var(--sea);
+  transition: width 0.2s ease;
+}
+
+.st-meter-nilai {
+  margin: 0;
+  min-width: 5ch;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--fg);
+}
+
+.st-angka {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px 16px;
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.st-angka strong {
+  color: var(--fg);
+}
+
+.st-ringkas {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.62;
+  color: var(--fg);
+  text-wrap: pretty;
+}
+
+.st-ilustrasi {
+  margin: 0;
+  padding: 9px 14px 12px;
+  border-top: 1px dashed var(--line-strong);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .st-tombol,
+  .st-meter span {
+    transition: none;
+  }
+}

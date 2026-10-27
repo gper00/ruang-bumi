@@ -374,7 +374,12 @@ export default function MapView({
       </div>
 
       <div className="mv-canvas" style={{ height }}>
-        <div ref={wadahRef} className="mv-map" aria-label="Peta interaktif lempeng tektonik" />
+        <div
+          ref={wadahRef}
+          className="mv-map"
+          role="region"
+          aria-label="Peta interaktif lempeng tektonik"
+        />
         {status === 'memuat' && <p className="mv-status">Memuat peta…</p>}
         {status === 'gagal' && (
           <p className="mv-status error">

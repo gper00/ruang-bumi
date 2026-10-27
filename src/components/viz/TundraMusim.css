@@ -1,0 +1,176 @@
+.tu {
+  display: grid;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.tu-kanvas {
+  background: var(--surface-2);
+}
+
+.tu-kanvas svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.tu-aktif {
+  fill: var(--land);
+}
+
+.tu-beku {
+  fill: var(--ocean);
+}
+
+.tu-permafrost {
+  fill: var(--ocean);
+}
+
+.tu-batas {
+  stroke: var(--sea);
+  stroke-width: 1.4;
+  stroke-dasharray: 6 4;
+}
+
+.tu-semak ellipse {
+  fill: var(--ok);
+  opacity: 0.78;
+}
+
+.tu-pohon line,
+.tu-pohon path {
+  fill: none;
+  stroke: var(--coast);
+  stroke-width: 4.5;
+  stroke-linecap: round;
+}
+
+.tu-kanopi {
+  fill: var(--ok);
+  opacity: 0.72;
+}
+
+.tu-akar path {
+  fill: none;
+  stroke: var(--ok);
+  stroke-width: 1.5;
+  opacity: 0.45;
+}
+
+.tu-akar-pohon path {
+  opacity: 0.6;
+}
+
+.tu-akar-stop {
+  stroke: var(--heat);
+  stroke-width: 1.4;
+  opacity: 0.6;
+}
+
+.tu-genangan ellipse {
+  fill: var(--sea);
+  opacity: 0.45;
+}
+
+.tu-penggaris line {
+  stroke: var(--line-strong);
+  stroke-width: 1;
+}
+
+.tu-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  fill: var(--muted);
+}
+
+.tu-kontrol {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.tu-slider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+}
+
+.tu-slider-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--muted);
+}
+
+.tu-slider input {
+  flex: 1;
+  accent-color: var(--sea);
+}
+
+.tu-bulan {
+  margin: 0;
+  min-width: 8ch;
+  text-align: right;
+  font-family: var(--font-mono);
+  font-size: 0.86rem;
+  color: var(--fg);
+}
+
+.tu-hasil {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--line);
+}
+
+.tu-hasil > div {
+  padding: 10px 14px;
+  background: var(--surface);
+}
+
+.tu-kecil {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.63rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.tu-nilai {
+  margin: 2px 0 0;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--fg);
+}
+
+.tu-ringkas {
+  margin: 0;
+  padding: 11px 14px;
+  border-top: 1px solid var(--line);
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--fg);
+  text-wrap: pretty;
+}
+
+.tu-ilustrasi {
+  margin: 0;
+  padding: 9px 14px 12px;
+  border-top: 1px dashed var(--line-strong);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+@media (max-width: 520px) {
+  .tu-hasil {
+    grid-template-columns: 1fr;
+  }
+}

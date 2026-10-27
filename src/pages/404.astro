@@ -4,46 +4,103 @@ import Layout from '../layouts/Layout.astro';
 
 <Layout title="Halaman tidak ditemukan" description="Halaman yang kamu cari tidak ada di Ruang Bumi.">
   <div class="wrap halaman">
-    <p class="kode">404</p>
+    <p class="label kode">404 · tidak ditemukan</p>
     <h1>Halaman ini tidak ada di peta.</h1>
     <p class="pesan">
       Mungkin tautannya salah, atau topiknya belum terbit. Coba mulai dari daftar pertanyaan.
     </p>
     <p class="aksi">
-      <a class="btn" href="/">Ke beranda</a>
-      <a class="btn" href="/topik/">Semua topik</a>
+      <a class="btn utama" href="/topik/">Lihat semua topik</a>
+      <a class="tautan" href="/">Kembali ke beranda <span aria-hidden="true">→</span></a>
     </p>
   </div>
 </Layout>
 
 <style>
   .halaman {
-    padding-block: 70px 90px;
+    padding-block: clamp(56px, 10vw, 110px) clamp(64px, 10vw, 120px);
     max-width: 620px;
   }
 
   .kode {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     margin: 0;
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    letter-spacing: 0.2em;
-    color: var(--muted);
+  }
+
+  .kode::before {
+    content: '';
+    width: 24px;
+    height: 3px;
+    background: var(--sea);
   }
 
   h1 {
-    margin: 10px 0 12px;
-    font-size: clamp(1.8rem, 4.5vw, 2.6rem);
+    margin: 16px 0 14px;
+    font-size: clamp(2rem, 5vw, 3rem);
     font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.06;
+    text-wrap: balance;
   }
 
   .pesan {
-    margin: 0 0 24px;
+    max-width: 48ch;
+    margin: 0 0 26px;
     color: var(--muted);
+    font-size: 1.04rem;
+    line-height: 1.68;
+    text-wrap: pretty;
   }
 
   .aksi {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    align-items: center;
+    gap: 10px 22px;
+    margin: 0;
+  }
+
+  .btn.utama {
+    background: var(--sea);
+    border-color: var(--sea);
+    color: var(--surface);
+  }
+
+  .btn.utama:hover {
+    background: color-mix(in srgb, var(--sea) 88%, var(--fg));
+    border-color: color-mix(in srgb, var(--sea) 88%, var(--fg));
+    color: var(--surface);
+  }
+
+  .tautan {
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--muted);
+    text-decoration: none;
+  }
+
+  .tautan span {
+    display: inline-block;
+    transition: transform 0.15s ease, color 0.15s ease;
+  }
+
+  .tautan:hover {
+    color: var(--sea);
+  }
+
+  .tautan:hover span {
+    transform: translateX(3px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tautan span {
+      transition: none;
+    }
+
+    .tautan:hover span {
+      transform: none;
+    }
   }
 </style>

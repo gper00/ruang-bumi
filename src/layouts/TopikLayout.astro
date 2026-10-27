@@ -40,8 +40,8 @@ const toc = [
     />
 
     <div class="topik-grid">
-      <article class="topik-utama">
-        <header class="topik-head" data-kategori={entry.data.kategori}>
+      <article class="topik-utama" data-kategori={entry.data.kategori}>
+        <header class="topik-head">
           <p class="head-kicker">
             <span class="kicker-aksen">{kategoriLabel(entry.data.kategori)}</span>
             <span class="kicker-level">{entry.data.level}</span>
@@ -55,6 +55,23 @@ const toc = [
         </header>
 
         <AnswerBox ringkas={entry.data.jawabanSingkat} />
+
+        {
+          toc.length > 2 && (
+            <details class="toc-ringkas">
+              <summary>
+                Di halaman ini <span>{toc.length} bagian</span>
+              </summary>
+              <ol>
+                {toc.map((item) => (
+                  <li class={item.level === 3 ? 'toc-sub' : undefined}>
+                    <a href={`#${item.id}`}>{item.teks}</a>
+                  </li>
+                ))}
+              </ol>
+            </details>
+          )
+        }
 
         <div class="prose">
           <slot />
@@ -137,32 +154,117 @@ const toc = [
 
 <style>
   .topik-wrap {
-    padding-block: 20px 40px;
+    padding-block: 24px 48px;
   }
 
   .topik-grid {
     display: grid;
-    gap: 32px;
-    margin-top: 18px;
+    gap: 36px;
+    margin-top: 20px;
+  }
+
+  .topik-utama {
+    min-width: 0;
   }
 
   @media (min-width: 960px) {
     .topik-grid {
       grid-template-columns: minmax(0, 1fr) 280px;
-      gap: 48px;
+      gap: 56px;
       align-items: start;
     }
 
     .topik-sisi {
       position: sticky;
-      top: 84px;
+      top: 92px;
+    }
+  }
+
+  /* TOC ringkas hanya untuk layar sempit; sidebar TOC mengambil alih di desktop. */
+  .toc-ringkas {
+    margin: 0 0 2.2rem;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .toc-ringkas summary {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 0;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.86rem;
+    color: var(--fg);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .toc-ringkas summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .toc-ringkas summary::after {
+    content: '+';
+    margin-left: auto;
+    font-family: var(--font-mono);
+    color: var(--muted);
+  }
+
+  .toc-ringkas[open] summary::after {
+    content: '−';
+  }
+
+  .toc-ringkas summary span {
+    margin-left: 2px;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: var(--muted);
+  }
+
+  .toc-ringkas ol {
+    list-style: none;
+    margin: 0;
+    padding: 0 0 12px;
+    display: grid;
+    gap: 2px;
+  }
+
+  .toc-ringkas a {
+    display: block;
+    padding: 3px 0 3px 14px;
+    border-left: 2px solid var(--line);
+    color: var(--muted);
+    font-size: 0.86rem;
+    text-decoration: none;
+  }
+
+  .toc-ringkas a:hover {
+    color: var(--fg);
+    border-left-color: var(--sea);
+  }
+
+  .toc-ringkas .toc-sub a {
+    padding-left: 26px;
+    font-size: 0.8rem;
+  }
+
+  .toc-ringkas summary:focus-visible {
+    outline-offset: 4px;
+  }
+
+  @media (min-width: 960px) {
+    .toc-ringkas {
+      display: none;
     }
   }
 
   /* Header artikel */
   .topik-head {
     position: relative;
-    padding-bottom: 18px;
+    padding-bottom: 20px;
     border-bottom: 1px solid var(--line);
   }
 
@@ -171,7 +273,7 @@ const toc = [
     position: absolute;
     left: 0;
     bottom: -1px;
-    width: 72px;
+    width: 64px;
     height: 3px;
     background: var(--aksen, var(--sea));
   }
@@ -188,9 +290,10 @@ const toc = [
     display: inline-flex;
     align-items: center;
     gap: 7px;
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    letter-spacing: 0.09em;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.74rem;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--fg);
   }
@@ -204,30 +307,31 @@ const toc = [
   }
 
   .kicker-level {
-    font-family: var(--font-mono);
-    font-size: 0.66rem;
-    letter-spacing: 0.07em;
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--muted);
     border: 1px solid var(--line);
-    border-radius: 999px;
-    padding: 1px 8px;
+    border-radius: var(--radius-sm);
+    padding: 2px 8px;
   }
 
   .topik-head h1 {
-    font-size: clamp(1.7rem, 4.4vw, 2.7rem);
+    font-size: clamp(1.95rem, 4.3vw, 3rem);
     font-weight: 800;
-    margin: 12px 0 12px;
-    max-width: 24ch;
+    margin: 14px 0 12px;
+    max-width: 22ch;
     text-wrap: balance;
-    letter-spacing: -0.02em;
-    line-height: 1.12;
+    letter-spacing: -0.025em;
+    line-height: 1.08;
   }
 
   .meta {
     display: flex;
     flex-wrap: wrap;
-    gap: 4px 14px;
+    gap: 5px 16px;
     margin: 0;
     font-family: var(--font-mono);
     font-size: 0.72rem;
@@ -236,16 +340,16 @@ const toc = [
 
   .meta span + span::before {
     content: '·';
-    margin-right: 14px;
+    margin-right: 16px;
     color: var(--line-strong);
   }
 
   /* Sidebar */
   .topik-sisi {
     display: grid;
-    gap: 26px;
+    gap: 28px;
     align-content: start;
-    padding-top: 8px;
+    padding-top: 10px;
     border-top: 1px solid var(--line);
   }
 
@@ -253,15 +357,22 @@ const toc = [
     .topik-sisi {
       border-top: 0;
       border-left: 1px solid var(--line);
-      padding-left: 24px;
+      padding-left: 28px;
       padding-top: 0;
+    }
+  }
+
+  @media (max-width: 959px) {
+    .topik-sisi .toc {
+      display: none;
     }
   }
 
   .sisi-blok p,
   .sisi-blok ol {
-    margin: 6px 0 0;
-    font-size: 0.85rem;
+    margin: 8px 0 0;
+    font-size: 0.86rem;
+    line-height: 1.6;
     color: var(--muted);
   }
 
@@ -297,13 +408,14 @@ const toc = [
 
   .toc a {
     display: block;
-    padding: 4px 0 4px 12px;
+    padding: 5px 0 5px 12px;
     margin-left: -1px;
     border-left: 2px solid transparent;
-    font-size: 0.84rem;
-    line-height: 1.4;
+    font-size: 0.86rem;
+    line-height: 1.45;
     color: var(--muted);
     text-decoration: none;
+    transition: color 0.15s ease, border-color 0.15s ease;
   }
 
   .toc .toc-sub a {
@@ -326,11 +438,12 @@ const toc = [
     display: flex;
     justify-content: space-between;
     gap: 12px;
-    margin-top: 40px;
-    padding-top: 16px;
+    margin-top: 48px;
+    padding-top: 18px;
     border-top: 1px solid var(--line);
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 0.82rem;
   }
 
   .topik-nav a {
