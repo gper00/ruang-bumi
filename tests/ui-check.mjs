@@ -51,6 +51,7 @@ const halaman = [
   '/',
   '/topik/',
   '/topik/atmosfer/angin-darat-laut/',
+  '/topik/atmosfer/el-nino-la-nina/',
   '/topik/atmosfer/lapisan-atmosfer/',
   '/topik/atmosfer/musim/',
   '/topik/atmosfer/siklus-air/',
@@ -332,6 +333,41 @@ try {
       await page.locator('.sal-slider input').fill('2');
       const lencana = await page.locator('.sal-lencana-label').textContent();
       if (lencana?.trim() !== 'Angin darat') catat(`Angin: pukul 02.00 menunjukkan "${lencana}"`);
+
+      await page.goto(base + '/topik/atmosfer/el-nino-la-nina/', { waitUntil: 'networkidle' });
+      await tungguVisual('PetaEnso');
+      const nilaiEnso = page.locator('.pe-hasil .pe-nilai');
+      const sliderEnso = page.locator('.pe-slider input');
+      await sliderEnso.scrollIntoViewIfNeeded();
+
+      if ((await nilaiEnso.nth(0).textContent())?.trim() !== 'El Niño')
+        catat(
+          `ENSO: keadaan awal seharusnya El Niño (${await nilaiEnso.nth(0).textContent()})`,
+        );
+
+      await sliderEnso.fill('-1.5');
+      if ((await nilaiEnso.nth(0).textContent())?.trim() !== 'La Niña')
+        catat('ENSO: anomali −1,5 °C bukan La Niña');
+      if ((await nilaiEnso.nth(1).textContent())?.trim() !== 'lebih kencang')
+        catat('ENSO: La Niña tidak menampilkan angin pasat lebih kencang');
+      if ((await nilaiEnso.nth(2).textContent())?.trim() !== '125°BT')
+        catat(`ENSO: pita hujan La Niña bukan 125°BT (${await nilaiEnso.nth(2).textContent()})`);
+
+      await sliderEnso.fill('1.5');
+      if ((await nilaiEnso.nth(0).textContent())?.trim() !== 'El Niño')
+        catat('ENSO: anomali +1,5 °C bukan El Niño');
+      if ((await nilaiEnso.nth(1).textContent())?.trim() !== 'melemah')
+        catat('ENSO: El Niño tidak menampilkan angin pasat melemah');
+      if ((await nilaiEnso.nth(2).textContent())?.trim() !== '169°BB')
+        catat(`ENSO: pita hujan El Niño bukan 169°BB (${await nilaiEnso.nth(2).textContent()})`);
+      if (!(await page.locator('.pe-ringkas').textContent())?.includes('kemarau'))
+        catat('ENSO: ringkasan El Niño tidak menyebut kemarau yang lebih panjang');
+
+      await page.locator('.pe-toggle button', { hasText: 'Netral' }).click();
+      if ((await nilaiEnso.nth(0).textContent())?.trim() !== 'Netral')
+        catat('ENSO: tombol Netral tidak mengubah fase');
+      if ((await nilaiEnso.nth(1).textContent())?.trim() !== 'normal')
+        catat('ENSO: tahun netral tidak menampilkan angin pasat normal');
 
       const cite = page.locator('.cite-btn').first();
       await cite.click();

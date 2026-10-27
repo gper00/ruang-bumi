@@ -236,3 +236,24 @@
   istilah: Tefra
   definisi: Serpihan batuan dan abu vulkanik yang terlontar keluar mulut gunung api. Ukurannya bermacam-macam, dari kerikil sampai partikel setebal sehelai rambut.
   sumber: usgs-about-volcanoes
+
+- id: enso
+  istilah: ENSO
+  definisi: "Singkatan El Niño–Southern Oscillation: siklus alami dua fase, El Niño dan La Niña, yang lahir dari perubahan suhu laut dan angin di Pasifik tropis."
+  sumber: noaa-oni
+- id: el-nino
+  istilah: El Niño
+  definisi: Fase hangat ENSO. Suhu permukaan laut di Pasifik tengah dan timur naik di atas rata-rata, angin pasat melemah, dan pita hujan bergeser ke timur.
+  sumber: noaa-pmel-el-nino
+- id: la-nina
+  istilah: La Niña
+  definisi: Fase dingin ENSO. Perairan Pasifik tropis lebih dingin daripada biasanya dan angin pasat bertiup lebih kencang, mendorong air hangat makin jauh ke barat.
+  sumber: noaa-ninonina
+- id: angin-pasat
+  istilah: Angin pasat
+  definisi: Angin timur yang bertiup di sepanjang ekuator dari arah Amerika menuju Asia, membawa air hangat ke barat lalu menggantinya dengan air dingin yang naik dari dalam.
+  sumber: noaa-ninonina
+- id: anomali-suhu-laut
+  istilah: Anomali suhu laut
+  definisi: Selisih suhu permukaan laut terhadap rata-rata normalnya. NOAA memakai rata-rata tiga bulan di Pasifik tengah-timur, dengan ambang +0,5 °C untuk El Niño dan −0,5 °C untuk La Niña.
+  sumber: noaa-oni

@@ -5,7 +5,7 @@ tidak hilang setelah satu putaran pekerjaan. Status: `ide` → `riset` → `draf
 `terbit`. Setiap topik baru wajib punya minimal dua sumber resmi, satu visual interaktif
 khusus, dan tiga soal kuis (lihat `CONTENT-GUIDE.md`).
 
-Terakhir diperbarui: 2026-10-28 (topik gunung api selesai).
+Terakhir diperbarui: 2026-10-28 (topik gunung api dan El Niño/La Niña selesai).
 
 ## Sedang dikerjakan atau baru selesai
 
@@ -15,6 +15,7 @@ Terakhir diperbarui: 2026-10-28 (topik gunung api selesai).
 | `planet-bumi/gempa-bumi` | Apa yang sebenarnya bergerak saat tanah terasa bergetar? | Dua visual: model pemulihan elastis dengan tombol pelepasan regangan, dan pembanding hiposentrum–episentrum dengan slider kedalaman 5–700 km | terbit |
 | `ekologi/bioma` (hub + tab) | Kenapa hutan di Sumatra berbeda dengan padang di Sumbawa? | Tab empat bioma: stepa (api & penggembalaan), hutan gugur (kalender daun), taiga (jarum vs daun lebar), tundra (lapisan aktif) | terbit |
 | `planet-bumi/gunung-api` | Kenapa ada gunung api yang meletus tenang dan ada yang meledak? | Slider kekentalan magma + kadar gas → gas terperangkap, gaya letusan, bentuk gunung, dan lereng | terbit |
+| `atmosfer/el-nino-la-nina` | Kenapa kemarau di Indonesia kadang jauh lebih panjang? | Peta Pasifik: slider anomali suhu −2…+2 °C → pita air hangat, panah angin pasat, pita hujan, dan dampak Indonesia | terbit |
 
 Catatan: artikel bioma memakai empat sumber baru per tab (NASA/NPS untuk stepa dan hutan gugur,
 NASA/NOAA untuk taiga dan tundra) plus tiga sumber lama. Logika mekanismenya diuji di
@@ -27,12 +28,18 @@ Catatan gunung api: model kekentalan dan kadar gas ada di `src/lib/erupsi.ts`, v
 tidak memuat kata “gempa” supaya pencarian “gempa” di beranda tetap menampilkan dua kartu
 (ekspektasi dikunci di `tests/ui-check.mjs`).
 
+Catatan El Niño/La Niña: satu angka anomali (−2…+2 °C) diturunkan menjadi fase, kekuatan angin,
+dan posisi pita hujan di `src/lib/enso.ts`; ambang ±0,5 °C mengikuti Oceanic Niño Index NOAA.
+Peta memakai ulang `DUNIA_PATH` dengan dua salinan yang digeser supaya garis 180° tidak
+terpotong. Logika diuji di `tests/unit/enso.test.ts`, isi artikel di
+`tests/unit/konten-enso.test.ts`, dan perilaku slider serta tombol fase di
+`tests/ui-check.mjs`. Sumber BMKG tetap hanya ditautkan, tanpa pengambilan data otomatis.
+
 ## Berikutnya
 
 | Prioritas | Topik | Pertanyaan | Kategori | Calon visual | Calon sumber |
 |---|---|---|---|---|---|
-| Tinggi | El Niño & La Niña | Kenapa kemarau di Indonesia kadang jauh lebih panjang? | atmosfer | Peta Pasifik dengan anomali suhu laut; panah angin pasat dan pergeseran hujan | NOAA ENSO, BMKG (tautan) |
-| Menengah | Cuaca vs iklim | Kenapa ramalan besok bisa salah, tetapi pola 30 tahun bisa dihitung? | atmosfer | Distribusi 30 tahun vs deret harian; slider tahun | NOAA Climate, BMKG |
+| Tinggi | Cuaca vs iklim | Kenapa ramalan besok bisa salah, tetapi pola 30 tahun bisa dihitung? | atmosfer | Distribusi 30 tahun vs deret harian; slider tahun | NOAA Climate, BMKG |
 | Menengah | Pasang surut | Kenapa laut naik dua kali sehari? | laut | Bumi–Bulan–Matahari dengan slider posisi; grafik pasang purnama/perbani | NOAA Tides |
 | Menengah | Tanah | Kenapa tanah di tiap tempat berbeda? | daratan | Profil tanah dengan slider curah hujan/umur; lapisan O–A–B–C | USGS/FAO soils |
 | Menengah | Siklus batuan | Kenapa batu bisa berubah jenis tanpa meleleh? | planet-bumi | Diagram siklus batuan yang bisa diklik; contoh batuan Indonesia | USGS rock cycle |

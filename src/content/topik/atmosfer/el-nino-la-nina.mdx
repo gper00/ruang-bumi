@@ -1,0 +1,126 @@
+---
+pertanyaan: "Kenapa kemarau di Indonesia kadang jauh lebih panjang?"
+kategori: "atmosfer"
+level: "pemula"
+menit: 6
+jawabanSingkat: "Karena angin pasat di Pasifik melemah. Air hangat yang biasanya terdorong ke barat berbalik ke timur, dan hujan ikut menjauh dari Indonesia. Inilah El Niño, yang membuat kemarau lebih panjang. Kebalikannya, La Niña membuat angin lebih kencang dan hujan lebih lebat."
+terkait: ["atmosfer/musim", "atmosfer/angin-darat-laut", "ekologi/bioma"]
+sumber: ["noaa-pmel-el-nino", "noaa-ninonina", "noaa-oni", "bmkg-enso"]
+glosarium: ["enso", "el-nino", "la-nina", "angin-pasat", "anomali-suhu-laut", "upwelling"]
+status: "terbit"
+diverifikasi: 2026-10-28
+---
+
+import PetaEnso from '../../../components/viz/PetaEnso';
+import Figure from '../../../components/sumber/Figure.astro';
+import DataNote from '../../../components/sumber/DataNote.astro';
+import Cite from '../../../components/sumber/Cite.astro';
+import Term from '../../../components/glosarium/Term.astro';
+import Quiz from '../../../components/quiz/Quiz';
+
+<Figure
+  caption="Geser anomali suhu laut dari −2 °C sampai +2 °C. Lihat pita air hangat, panah angin pasat, dan pita hujan berpindah bersamaan, lalu baca dampaknya ke Indonesia di bawah peta."
+  source="noaa-pmel-el-nino"
+>
+  <PetaEnso client:visible />
+</Figure>
+
+<DataNote>
+  Ilustrasi. Pusat pita air hangat, tebal panah, dan letak pita hujan adalah model sederhana dari
+  satu angka anomali, bukan hasil pengukuran. Yang dipakai sebagai fakta hanya ambang fase
+  ±0,5 °C dan arah perubahannya.
+</DataNote>
+
+## Kok bisa?
+
+Di permukaan Samudra Pasifik tropis bertiup <Term istilah="angin-pasat" />: angin dari timur yang
+membawa air hangat dari arah Amerika menuju Asia. Air hangat itu menumpuk di barat, sehingga
+permukaan laut di sekitar Indonesia kira-kira setengah meter lebih tinggi daripada di Ekuador.
+<Cite id="noaa-pmel-el-nino" /> Di timur, air yang ditinggalkan digantikan oleh air dingin yang
+naik dari dalam, disebut <Term istilah="upwelling" />. Karena itu suhu laut di dekat Asia kira-kira
+8 °C lebih hangat daripada Pasifik timur. <Cite id="noaa-pmel-el-nino" />
+
+Hujan tidak turun sembarangan. Awan turun di atas air yang paling hangat, tempat udara naik, dan
+pesisir timur Pasifik justru relatif kering. <Cite id="noaa-pmel-el-nino" /> Selama angin pasat
+kencang, air hangat dan hujan itu tetap berada di barat, dekat Indonesia.
+
+Yang berubah-ubah adalah kekuatan angin itu. Perubahannya disebut <Term istilah="enso" />, siklus
+alami dengan dua ujung: <Term istilah="el-nino" /> dan <Term istilah="la-nina" />. Untuk menandai
+di mana kita berada, NOAA memakai <Term istilah="anomali-suhu-laut" />: rata-rata tiga bulan suhu
+laut di Pasifik tengah-timur. Nilai +0,5 °C atau lebih berarti El Niño, −0,5 °C atau lebih rendah
+berarti La Niña. <Cite id="noaa-oni" />
+
+### El Niño: hujan berpindah ke timur
+
+Saat El Niño, angin pasat melemah. Air hangat yang tadinya tertahan di barat kembali terdorong ke
+timur mengarah ke benua Amerika, dan hujan ikut mengikutinya. <Cite id="noaa-ninonina" /> Hasilnya
+dua arah sekaligus: Peru kebanjiran, sementara Indonesia dan Australia mengalami kemarau.
+<Cite id="noaa-pmel-el-nino" /> Upwelling di timur juga melemah, sehingga air dingin yang kaya
+nutrisi naik lebih sedikit. <Cite id="noaa-pmel-el-nino" />
+
+### La Niña: angin yang lebih kencang
+
+La Niña adalah kebalikannya. Angin pasat bertiup lebih kencang daripada biasanya, menyeret makin
+banyak air hangat ke arah Asia, sementara upwelling di timur justru menguat.
+<Cite id="noaa-ninonina" /> Air hangat dan hujan tertahan lebih jauh ke barat, mendekati Indonesia.
+
+### Apa yang dirasakan Indonesia
+
+BMKG mencatat dampaknya terutama pada curah hujan bulanan. Pada Juni–Juli–Agustus dan
+September–Oktober–November, El Niño menurunkan curah hujan di hampir seluruh wilayah Indonesia,
+sehingga kemarau berlangsung lebih panjang dan kering; risikonya kekeringan serta kebakaran lahan
+dan hutan. <Cite id="bmkg-enso" /> Sebaliknya, pada bulan-bulan yang sama La Niña menaikkan curah
+hujan sekitar 20–40% dibandingkan tahun netral, dan kemarau sering berubah menjadi yang disebut
+kemarau basah. <Cite id="bmkg-enso" />
+
+Penting: El Niño tidak berarti hujan berhenti seluruhnya. Beberapa wilayah Indonesia tetap
+mendapat hujan pada Desember–Februari, karena ENSO bekerja bersama pola muson yang berjalan pada
+saat itu. <Cite id="bmkg-enso" /> ENSO menambah atau mengurangi hujan yang memang
+sudah ada pada musimnya.
+
+## Fakta menarik
+
+- Permukaan laut di barat Pasifik kira-kira setengah meter lebih tinggi daripada di Ekuador, karena angin pasat terus mendorong air hangat menumpuk ke barat. <Cite id="noaa-pmel-el-nino" />
+- Selisih suhu laut antara perairan Asia dan Pasifik timur mencapai sekitar 8 °C, akibat air dingin yang terus naik di timur. <Cite id="noaa-pmel-el-nino" />
+- Satu kejadian El Niño atau La Niña umumnya berlangsung 9–12 bulan, kadang sampai bertahun-tahun, dan berulang rata-rata tiap 2–7 tahun. <Cite id="noaa-ninonina" />
+- El Niño kuat tahun 1997 membuat curah hujan tiga bulanan di Indonesia jauh di bawah rata-rata, sementara La Niña kuat tahun 2010 menghadirkan hujan ekstrem di Jawa, Bali, Nusa Tenggara, dan Sulawesi. <Cite id="bmkg-enso" />
+
+<Quiz
+  judul="Kuis"
+  client:visible
+  soal={[
+    {
+      tanya: 'Apa yang terjadi pada angin pasat saat El Niño?',
+      opsi: [
+        'Melemah, sehingga air hangat terdorong ke timur',
+        'Menguat, sehingga air hangat menumpuk makin banyak di barat',
+        'Berbalik arah menjadi angin barat sepanjang tahun',
+      ],
+      benar: 0,
+      penjelasan:
+        'Angin pasat yang melemah membuat air hangat bergeser ke timur bersama hujannya. Pilihan kedua menjelaskan La Niña, dan pilihan ketiga tidak terjadi: anginnya melemah, bukan berbalik arah terus-menerus.',
+    },
+    {
+      tanya: 'Kenapa hujan di Indonesia ikut berpindah saat El Niño?',
+      opsi: [
+        'Karena angin muson berbalik arah seluruhnya',
+        'Karena suhu udara di Indonesia tiba-tiba turun drastis',
+        'Karena hujan turun di atas air paling hangat, dan air hangat itu bergeser ke timur',
+      ],
+      benar: 2,
+      penjelasan:
+        'Awan turun di atas air yang paling hangat, tempat udara naik. Ketika angin pasat melemah, air hangat itu terbawa ke Pasifik tengah-timur, jadi hujan mengikutinya dan Indonesia kehilangan sebagian hujannya.',
+    },
+    {
+      tanya: 'Berapa kenaikan curah hujan saat La Niña menurut BMKG?',
+      opsi: [
+        'Hampir nol, karena kemarau tetap berjalan seperti biasa',
+        'Sekitar 20–40% dibanding tahun netral pada Juni–November',
+        'Lebih dari dua kali lipat di seluruh wilayah Indonesia',
+      ],
+      benar: 1,
+      penjelasan:
+        'BMKG mencatat kenaikan sekitar 20–40% pada Juni–November, dengan pengecualian akibat interaksi muson di sebagian wilayah. Kemarau pun tidak hilang, hanya basah — dan itu bukan berarti hujan berlipat ganda di mana-mana.',
+    },
+  ]}
+/>
