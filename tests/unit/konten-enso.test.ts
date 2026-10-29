@@ -42,6 +42,19 @@ describe('topik el nino la nina', () => {
     expect(isi).toMatch(/## Fakta menarik/);
   });
 
+  it('memasang visual pembanding El Niño kuat dan La Niña kuat', () => {
+    expect(isi).toMatch(/import BandingEnso from/);
+    // statis: tidak perlu hidrasi karena tidak punya kendali
+    expect(isi).toMatch(/<BandingEnso \/>/);
+    expect(isi).toMatch(/<Figure[^>]*source="noaa-ninonina"[^>]*>\s*<BandingEnso \/>/);
+
+    const banding = fs.readFileSync(path.join(akar, 'src/components/viz/BandingEnso.tsx'), 'utf8');
+    expect(banding).toMatch(/PERBANDINGAN/);
+    expect(banding).toMatch(/formatBujur/);
+    expect(banding).toMatch(/data-fase/);
+    expect(banding).not.toMatch(/useState/);
+  });
+
   it('memakai slider anomali dan tombol fase pada peta', () => {
     const komponen = fs.readFileSync(path.join(akar, 'src/components/viz/PetaEnso.tsx'), 'utf8');
     expect(komponen).toMatch(/Anomali suhu laut Pasifik tropis/);

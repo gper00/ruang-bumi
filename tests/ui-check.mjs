@@ -369,6 +369,20 @@ try {
       if ((await nilaiEnso.nth(1).textContent())?.trim() !== 'normal')
         catat('ENSO: tahun netral tidak menampilkan angin pasat normal');
 
+      const panelBanding = page.locator('.be-panel');
+      if ((await panelBanding.count()) !== 2)
+        catat(`ENSO: pembanding menampilkan ${await panelBanding.count()} panel, seharusnya 2`);
+      const hujanBanding = (await page.locator('.be-hujan-nilai').allTextContents()).map((t) =>
+        t.trim(),
+      );
+      if (hujanBanding.join('|') !== '155°BB|125°BT')
+        catat(`ENSO: pita hujan pembanding ${hujanBanding.join('|')}, seharusnya 155°BB|125°BT`);
+      const tebalPanah = await page
+        .locator('.be-panel .be-panah')
+        .evaluateAll((els) => [...new Set(els.map((el) => el.getAttribute('stroke-width')))]);
+      if (tebalPanah.join('|') !== '2|5')
+        catat(`ENSO: tebal panah pembanding ${tebalPanah.join('|')}, seharusnya 2|5`);
+
       const cite = page.locator('.cite-btn').first();
       await cite.click();
       const pop = page.locator('.cite-pop').first();

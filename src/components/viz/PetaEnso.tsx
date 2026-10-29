@@ -5,47 +5,22 @@ import {
   dampakIndonesia,
   faseEnso,
   formatBujur,
-  kejelasanAnomali,
   kekuatanAngin,
   labelAnomali,
   labelAngin,
+  porsiAngin,
   pusatHangat,
   pusatHujan,
 } from '../../lib/enso';
 import { DUNIA_PATH } from '../../lib/duniaPath';
+import { EKUATOR, PETA, SKALA, TX, TY, px, py } from '../../lib/petaEnso';
 import { useReduceMotion } from './useReduceMotion';
 import './PetaEnso.css';
 
-/**
- * Jendela peta: bujur 100°BT sampai 70°BB (Pasifik tropis) dan lintang
- * 30°U–30°S, dipetakan ke kanvas 720×300. DUNIA_PATH memakai proyeksi
- * equirektangular 1000×500, jadi jalur itu digambar dua kali (satu salinan
- * digeser 1000 unit) supaya garis 180° tidak terpotong di tengah peta.
- */
-const W = 720;
-const MAP_Y = 30;
-const LON_AWAL = 100;
-const LON_AKHIR = 290;
-const LAT_ATAS = 30;
-const LAT_BAWAH = -30;
-
-const SKALA = W / (((LON_AKHIR - LON_AWAL) / 360) * 1000);
-const TX = -(((LON_AWAL + 180) / 360) * 1000) * SKALA;
-const MAP_H = ((((90 - LAT_BAWAH) - (90 - LAT_ATAS)) / 180) * 500) * SKALA;
-const TY = -(((90 - LAT_ATAS) / 180) * 500) * SKALA + MAP_Y;
-
-const px = (lon: number) => ((lon - LON_AWAL) / (LON_AKHIR - LON_AWAL)) * W;
-const py = (lat: number) => MAP_Y + ((LAT_ATAS - lat) / (LAT_ATAS - LAT_BAWAH)) * MAP_H;
-
-const EKUATOR = py(0);
+const W = PETA.lebar;
 const PANAH = [7, 0, -7];
 const AWAN = [-78, -40, 0, 40, 78];
 const TURUN = [-58, -22, 14, 50];
-
-/** 0–1: seberapa kencang angin dibanding tahun netral, untuk stroke peta. */
-function porsiAngin(nilai: number): number {
-  return Math.min(Math.max((nilai - 0.3) / 1.4, 0), 1);
-}
 
 export default function PetaEnso() {
   // Keadaan awal terisi: El Niño, pertanyaan pembuka artikel.
@@ -61,11 +36,8 @@ export default function PetaEnso() {
   const cxHangat = px(pusat);
   const cxHujan = px(hujan);
   const panjang = 300 + 130 * porsi;
-
-  const warnaPita = anomali > 0.05 ? 'var(--heat)' : anomali < -0.05 ? 'var(--sea)' : 'var(--muted)';
-  const opasitasPita = 0.12 + 0.3 * kejelasanAnomali(anomali);
-  const labelPita =
-    anomali > 0.05 ? 'air lebih hangat' : anomali < -0.05 ? 'air lebih dingin' : 'sekitar biasanya';
+  // Label tidak boleh terpotong saat pusat air terhangat mendekati tepi kiri peta.
+  const xLabelPita = Math.min(Math.max(cxHangat, 72), W - 72);
 
   return (
     <div className={kurangGerak ? 'pe pe-tanpa-gerak' : 'pe'}>
@@ -123,18 +95,18 @@ export default function PetaEnso() {
             upwelling
           </text>
 
-          {/* Pita air hangat yang pusatnya bergeser mengikuti anomali. */}
+          {/* Pusat air terhangat: bergeser ke timur saat El Niño, ke barat saat La Niña. */}
           <ellipse
             cx={cxHangat}
             cy={EKUATOR}
             rx="115"
             ry="30"
-            fill={warnaPita}
-            opacity={opasitasPita}
+            fill="var(--heat)"
+            opacity="0.3"
             className="pe-pita"
           />
-          <text x={cxHangat} y={EKUATOR + 46} textAnchor="middle" className="pe-label-pita">
-            {labelPita}
+          <text x={xLabelPita} y={EKUATOR + 46} textAnchor="middle" className="pe-label-pita">
+            pusat air terhangat
           </text>
 
           {/* Angin pasat: panah dari timur ke barat, tebalnya mengikuti kekuatan. */}

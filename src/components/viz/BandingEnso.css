@@ -1,0 +1,207 @@
+.be {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+@media (min-width: 720px) {
+  .be {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.be-panel {
+  display: grid;
+  align-content: start;
+  background: var(--surface);
+}
+
+.be-kepala {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 11px 14px 9px;
+}
+
+.be-judul {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.98rem;
+}
+
+.be-anomali {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--muted);
+}
+
+.be-panel[data-fase='el-nino'] .be-anomali {
+  color: var(--heat);
+}
+
+.be-panel[data-fase='la-nina'] .be-anomali {
+  color: var(--sea);
+}
+
+.be-kanvas {
+  background: var(--ocean);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.be-kanvas svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Panel hanya selebar setengah konten; label SVG diperbesar agar terbaca. */
+.be-svg-teks {
+  font-family: var(--font-mono);
+  font-size: 24px;
+  fill: var(--muted);
+}
+
+.be-svg-tegas {
+  fill: var(--fg);
+}
+
+.be-svg-wilayah {
+  font-family: var(--font-mono);
+  font-size: 26px;
+  fill: var(--fg);
+  opacity: 0.85;
+}
+
+.be-ekuator {
+  stroke: var(--line-strong);
+  stroke-width: 1;
+  stroke-dasharray: 5 6;
+}
+
+.be-indonesia {
+  fill: var(--heat);
+  stroke: var(--surface);
+  stroke-width: 1.5;
+}
+
+.be-panah {
+  fill: none;
+  stroke-dasharray: 8 8;
+  animation: be-alir 2.4s linear infinite;
+}
+
+.be-kolom {
+  stroke: var(--line-strong);
+  stroke-width: 1;
+  stroke-dasharray: 3 5;
+}
+
+.be-awan {
+  fill: var(--muted);
+  opacity: 0.32;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: be-awan 5s ease-in-out infinite;
+}
+
+.be-tetes {
+  stroke: var(--sea);
+  stroke-width: 3;
+  stroke-linecap: round;
+  opacity: 0.75;
+  animation: be-tetes 1.8s linear infinite;
+}
+
+@keyframes be-alir {
+  to {
+    stroke-dashoffset: -32;
+  }
+}
+
+@keyframes be-awan {
+  0%,
+  100% {
+    opacity: 0.26;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+@keyframes be-tetes {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+}
+
+.be-angka {
+  display: grid;
+  gap: 1px;
+  margin: 0;
+  background: var(--line);
+}
+
+.be-angka > div {
+  padding: 8px 14px;
+  background: var(--surface);
+}
+
+.be-angka dt {
+  font-family: var(--font-mono);
+  font-size: 0.63rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.be-angka dd {
+  margin: 2px 0 0;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--fg);
+}
+
+.be-ringkas {
+  margin: 0;
+  padding: 11px 14px 13px;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--fg);
+  text-wrap: pretty;
+}
+
+.be-catatan {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 10px 14px;
+  background: var(--surface);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .be-panah,
+  .be-awan,
+  .be-tetes {
+    animation: none;
+  }
+}

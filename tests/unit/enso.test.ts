@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   BATAS_FASE,
+  PERBANDINGAN,
   PILIHAN,
   RENTANG_ANOMALI,
   dampakIndonesia,
@@ -10,6 +11,7 @@ import {
   kekuatanAngin,
   labelAnomali,
   labelAngin,
+  porsiAngin,
   pusatHangat,
   pusatHujan,
 } from '../../src/lib/enso';
@@ -143,6 +145,53 @@ describe('dampakIndonesia', () => {
     expect(dampakIndonesia(0.3).id).toBe('normal');
     expect(dampakIndonesia(-0.3).id).toBe('normal');
     expect(dampakIndonesia(Number.NaN).id).toBe('normal');
+  });
+});
+
+describe('PERBANDINGAN', () => {
+  it('berisi dua ujung, satu El Niño dan satu La Niña', () => {
+    expect(PERBANDINGAN).toHaveLength(2);
+    expect(PERBANDINGAN.map((p) => p.id)).toEqual(['el-nino', 'la-nina']);
+    expect(new Set(PERBANDINGAN.map((p) => p.judul)).size).toBe(2);
+  });
+
+  it('memakai nilai di ujung rentang yang masih menghasilkan fase kuat', () => {
+    const [elNino, laNina] = PERBANDINGAN;
+    expect(elNino.anomali).toBe(RENTANG_ANOMALI.max);
+    expect(laNina.anomali).toBe(RENTANG_ANOMALI.min);
+    expect(faseEnso(elNino.anomali).id).toBe('el-nino');
+    expect(faseEnso(laNina.anomali).id).toBe('la-nina');
+    expect(elNino.judul).toMatch(/kuat/i);
+    expect(laNina.judul).toMatch(/kuat/i);
+  });
+
+  it('menghasilkan posisi pita hujan dan dampak yang berbeda', () => {
+    const [elNino, laNina] = PERBANDINGAN;
+    expect(pusatHujan(elNino.anomali)).toBeGreaterThan(pusatHujan(laNina.anomali));
+    expect(dampakIndonesia(elNino.anomali).id).toBe('kering');
+    expect(dampakIndonesia(laNina.anomali).id).toBe('basah');
+  });
+});
+
+describe('porsiAngin', () => {
+  it('memetakan rentang 0,3–1,7 ke 0–1', () => {
+    expect(porsiAngin(0.3)).toBe(0);
+    expect(porsiAngin(1.7)).toBe(1);
+    expect(porsiAngin(1)).toBeCloseTo(0.5, 5);
+  });
+
+  it('membatasi nilai di luar rentang', () => {
+    expect(porsiAngin(0)).toBe(0);
+    expect(porsiAngin(-3)).toBe(0);
+    expect(porsiAngin(5)).toBe(1);
+  });
+
+  it('El Niño kuat memberi panah paling tipis, La Niña kuat paling tebal', () => {
+    const [elNino, laNina] = PERBANDINGAN;
+    expect(porsiAngin(kekuatanAngin(elNino.anomali))).toBeLessThan(
+      porsiAngin(kekuatanAngin(laNina.anomali)),
+    );
+    expect(porsiAngin(kekuatanAngin(laNina.anomali))).toBe(1);
   });
 });
 

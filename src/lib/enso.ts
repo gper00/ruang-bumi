@@ -36,6 +36,15 @@ export const PILIHAN: { id: FaseId; label: string; nilai: number }[] = [
   { id: 'el-nino', label: 'El Niño', nilai: 1.5 },
 ];
 
+/**
+ * Dua ujung kuat untuk visual pembanding berdampingan. Nilainya di ujung
+ * rentang ilustratif, bukan rekor kejadian nyata.
+ */
+export const PERBANDINGAN: { id: 'el-nino' | 'la-nina'; judul: string; anomali: number }[] = [
+  { id: 'el-nino', judul: 'El Niño kuat', anomali: 2 },
+  { id: 'la-nina', judul: 'La Niña kuat', anomali: -2 },
+];
+
 function batasi(nilai: number): number {
   if (!Number.isFinite(nilai)) return 0;
   return Math.min(Math.max(nilai, RENTANG_ANOMALI.min), RENTANG_ANOMALI.max);
@@ -83,6 +92,14 @@ export function labelAngin(anomali: number): 'melemah' | 'normal' | 'lebih kenca
   if (nilai > 1.1) return 'lebih kencang';
   if (nilai < 0.9) return 'melemah';
   return 'normal';
+}
+
+/**
+ * Kekuatan angin dinormalkan ke 0–1 untuk tebal dan panjang panah di peta.
+ * 0 = paling lemah (0,3 × tahun netral), 1 = paling kencang (1,7 ×).
+ */
+export function porsiAngin(nilai: number): number {
+  return Math.min(Math.max((nilai - 0.3) / 1.4, 0), 1);
 }
 
 /**
