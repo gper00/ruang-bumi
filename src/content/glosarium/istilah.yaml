@@ -134,6 +134,14 @@
   istilah: Iklim
   definisi: Rata-rata dan pola cuaca suatu tempat dalam jangka panjang, biasanya dihitung puluhan tahun.
   sumber: bmkg-musim
+- id: cuaca
+  istilah: Cuaca
+  definisi: Keadaan atmosfer di suatu tempat pada satu waktu, mencakup suhu, angin, hujan, dan tekanan udara. Cuaca berubah dalam hitungan menit sampai hari.
+  sumber: noaa-climate-vs-weather
+- id: normal-iklim
+  istilah: Normal iklim
+  definisi: Rata-rata data iklim selama 30 tahun berturut-turut yang dipakai sebagai pembanding cuaca harian. WMO memakai periode 1991–2020 dan memperbaruinya setiap dekade.
+  sumber: wmo-climate-normals
 - id: litosfer
   istilah: Litosfer
   definisi: Lapisan luar Bumi yang kaku, terdiri dari kerak dan bagian atas mantel, terpecah menjadi lempeng-lempeng.

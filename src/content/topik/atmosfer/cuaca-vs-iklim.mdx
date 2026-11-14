@@ -1,0 +1,125 @@
+---
+pertanyaan: "Kenapa ramalan cuaca besok bisa meleset, tetapi pola 30 tahun bisa dihitung?"
+kategori: "atmosfer"
+level: "pemula"
+menit: 6
+jawabanSingkat: "Cuaca adalah keadaan atmosfer pada satu waktu dan tempat, jadi ia berubah cepat dan sulit diramalkan jauh ke depan. Iklim adalah rata-rata jangka panjang, biasanya 30 tahun. Merata-ratakan ribuan hari meredam ayunan harian, sehingga pola iklim jauh lebih stabil daripada satu prakiraan besok."
+terkait: ["atmosfer/musim", "atmosfer/el-nino-la-nina", "atmosfer/siklus-air"]
+sumber: ["noaa-climate-vs-weather", "noaa-forecast-reliability", "wmo-climate-normals", "bmkg-normal-suhu"]
+glosarium: ["cuaca", "iklim", "normal-iklim"]
+status: "terbit"
+diverifikasi: 2026-11-11
+---
+
+import SimIklim from '../../../components/viz/SimIklim';
+import Figure from '../../../components/sumber/Figure.astro';
+import DataNote from '../../../components/sumber/DataNote.astro';
+import Cite from '../../../components/sumber/Cite.astro';
+import Term from '../../../components/glosarium/Term.astro';
+import Quiz from '../../../components/quiz/Quiz';
+
+<Figure
+  caption="Geser tahunnya, lalu bandingkan garis suhu harian yang berkelok dengan garis normal 30 tahun yang halus. Di grafik bawah, lihat bagaimana rata-rata tahunan bergerak perlahan meski cuaca tiap hari melonjak."
+  source="noaa-climate-vs-weather"
+>
+  <SimIklim client:visible />
+</Figure>
+
+<DataNote>
+  Ilustrasi. Deret suhunya dibangkitkan dari model sederhana, bukan pengukuran stasiun. Angka
+  normal dan anomali Indonesia yang dikutip di teks tetap berasal dari BMKG.
+</DataNote>
+
+## Kok bisa?
+
+<Term istilah="cuaca" /> adalah keadaan atmosfer di satu tempat pada satu waktu: panas atau
+dingin, cerah atau hujan, angin kencang atau tenang. <Cite id="noaa-climate-vs-weather" /> Karena
+itu cuaca bisa berubah dalam hitungan menit sampai hari, dan prakiraannya harus selalu menyebut
+tempat serta jam.
+
+<Term istilah="iklim" /> memakai bahan yang sama, tetapi dilihat dalam jangka panjang. Iklim adalah
+rata-rata dan pola cuaca yang khas di suatu tempat, bukan cuaca pada satu tanggal.
+<Cite id="noaa-climate-vs-weather" /> Untuk membuat perbandingan yang seragam, WMO menetapkan
+<Term istilah="normal-iklim" />: rata-rata data iklim selama 30 tahun berturut-turut.
+<Cite id="wmo-climate-normals" />
+
+### Kenapa ramalan besok bisa meleset
+
+Atmosfer terus berubah dan tidak bisa diukur sampai ke masa depan. Model prakiraan memakai estimasi
+kondisi awal, lalu menghitung bagaimana udara bergerak. Semakin jauh waktunya, semakin besar
+kesalahan kecil itu merambat. <Cite id="noaa-forecast-reliability" />
+
+Menurut NOAA, prakiraan lima hari tepat sekitar 90% dari waktu, tujuh hari sekitar 80%, sedangkan
+sepuluh hari atau lebih hanya tepat sekitar setengah. <Cite id="noaa-forecast-reliability" /> Jadi
+ramalan besok yang meleset bukan berarti ilmu cuaca gagal. Ia sedang bekerja pada batas waktu yang
+memang sempit.
+
+### Kenapa 30 tahun justru lebih stabil
+
+Bayangkan mencatat suhu setiap hari. Satu hari bisa jauh lebih panas atau lebih dingin daripada
+biasanya. Tetapi kalau 30 tahun ditumpuk, lonjakan dan penurunan itu saling meniadakan, dan yang
+tersisa adalah pola musiman serta perubahan jangka panjang. Itu sebabnya rata-rata 30 tahun bisa
+dihitung dengan cukup stabil, meski cuaca besok tetap sulit ditebak.
+
+NOAA mengingatkan hal yang sering tertukar: ayunan cuaca harian, bulanan, bahkan antartahun tidak
+otomatis berarti iklim berubah cepat. <Cite id="noaa-climate-vs-weather" /> Sebaliknya, satu tahun
+yang lebih hangat juga bukan bukti bahwa setiap hari akan panas.
+
+Contoh nyatanya ada di Indonesia. BMKG memakai normal suhu 1991–2020 sebesar 26,7 °C. Suhu
+rata-rata tahun 2025 adalah 27,05 °C, sehingga anomalinya +0,38 °C. <Cite id="bmkg-normal-suhu" />
+Angka +0,38 °C itu membandingkan satu tahun dengan rata-rata 30 tahun, bukan membandingkan satu
+hari dengan hari sebelumnya.
+
+### Yang tidak bisa dijawab iklim
+
+Iklim tidak memberi tahu apakah hujan akan turun di jalanmu pukul empat sore. Ia memberi gambaran
+tentang rentang dan peluang: seberapa sering suatu bulan biasanya basah, seberapa panas biasanya
+siang di musim kemarau. Untuk pertanyaan "besok", yang dipakai tetap prakiraan cuaca. Untuk
+pertanyaan "seperti apa biasanya", yang dipakai normal iklim.
+
+## Fakta menarik
+
+- Prakiraan lima hari tepat sekitar 90% dari waktu, tujuh hari sekitar 80%, dan sepuluh hari atau lebih hanya sekitar setengah. <Cite id="noaa-forecast-reliability" />
+- Normal iklim standar dihitung dari 30 tahun berturut-turut, dan WMO memperbaruinya setiap dekade. Periode terbaru adalah 1991–2020. <Cite id="wmo-climate-normals" />
+- Normal suhu Indonesia 1991–2020 adalah 26,7 °C. Tahun 2025 tercatat 27,05 °C, atau +0,38 °C di atas normal. <Cite id="bmkg-normal-suhu" />
+- Hari yang sangat dingin tidak membatalkan pemanasan jangka panjang: cuaca adalah kejadian pendek, iklim adalah rata-rata panjang. <Cite id="noaa-climate-vs-weather" />
+
+<Quiz
+  judul="Kuis"
+  client:visible
+  soal={[
+    {
+      tanya: 'Apa perbedaan utama antara cuaca dan iklim?',
+      opsi: [
+        'Cuaca hanya terjadi di darat, iklim hanya di laut',
+        'Cuaca adalah keadaan atmosfer pada satu waktu; iklim adalah rata-rata jangka panjangnya',
+        'Cuaca diukur dengan satelit, iklim diukur dengan termometer biasa',
+      ],
+      benar: 1,
+      penjelasan:
+        'Keduanya menggambarkan atmosfer yang sama, tetapi pada skala waktu berbeda. Cuaca berubah dalam hitungan menit sampai hari, sedangkan iklim adalah rata-rata dan pola selama puluhan tahun. Alat ukurnya tidak membedakan keduanya; yang berbeda adalah panjang periode dan cara membacanya.',
+    },
+    {
+      tanya: 'Kenapa rata-rata 30 tahun dipakai sebagai normal iklim?',
+      opsi: [
+        'Karena 30 tahun adalah usia rata-rata stasiun cuaca',
+        'Karena periode panjang meredam ayunan harian dan antartahun, sehingga pola jangka panjangnya terlihat',
+        'Karena prakiraan cuaca hanya bisa dibuat untuk 30 tahun ke depan',
+      ],
+      benar: 1,
+      penjelasan:
+        'Dengan merata-ratakan banyak tahun, lonjakan cuaca yang saling berlawanan sebagian besar saling meniadakan. WMO memilih 30 tahun sebagai periode standar. Ini bukan usia alat, dan bukan berarti cuaca bisa diramalkan 30 tahun ke depan; yang diproyeksikan adalah rata-ratanya.',
+    },
+    {
+      tanya: 'Suhu rata-rata suatu tahun +0,4 °C di atas normal. Apa artinya?',
+      opsi: [
+        'Setiap hari pada tahun itu pasti 0,4 °C lebih panas',
+        'Seluruh hari di tahun itu lebih panas daripada tahun sebelumnya',
+        'Rata-rata tahun itu lebih tinggi 0,4 °C daripada rata-rata 30 tahun, meski ada hari yang tetap dingin',
+      ],
+      benar: 2,
+      penjelasan:
+        'Anomali membandingkan rata-rata satu tahun dengan normal 30 tahun, bukan memeriksa tiap hari. Di dalam tahun yang hangat masih ada hari dingin, dan tahun tetangga bisa lebih hangat atau lebih dingin. Karena itu satu hari dingin tidak membatalkan anomali tahunan.',
+    },
+  ]}
+/>

@@ -51,6 +51,7 @@ const halaman = [
   '/',
   '/topik/',
   '/topik/atmosfer/angin-darat-laut/',
+  '/topik/atmosfer/cuaca-vs-iklim/',
   '/topik/atmosfer/el-nino-la-nina/',
   '/topik/atmosfer/lapisan-atmosfer/',
   '/topik/atmosfer/musim/',
@@ -397,6 +398,29 @@ try {
       await page.locator('.quiz-opsi-btn').nth(1).click();
       const umpan = page.locator('.quiz-feedback').first();
       if (!(await umpan.isVisible())) catat('Kuis: umpan balik tidak muncul setelah memilih jawaban');
+
+      await page.goto(base + '/topik/atmosfer/cuaca-vs-iklim/', { waitUntil: 'networkidle' });
+      await tungguVisual('SimIklim');
+      const keluaranIklim = page.locator('.sk-output');
+      if ((await keluaranIklim.textContent())?.trim() !== '2025')
+        catat(`Iklim: keadaan awal seharusnya 2025 (${await keluaranIklim.textContent()})`);
+      if ((await page.locator('[data-garis="normal"]').count()) !== 1)
+        catat('Iklim: garis normal 30 tahun tidak tampil pada keadaan awal');
+
+      await page.locator('#sk-tahun').fill('1996');
+      if ((await keluaranIklim.textContent())?.trim() !== '1996')
+        catat(`Iklim: slider tidak berpindah ke 1996 (${await keluaranIklim.textContent()})`);
+      if (!(await page.locator('.sk-ringkas').textContent())?.includes('Tahun 1996'))
+        catat('Iklim: ringkasan tidak ikut berubah saat tahun digeser');
+      const anomaliAwal = (await page.locator('.sk-hasil .sk-nilai').nth(1).textContent())?.trim();
+      if (!anomaliAwal?.startsWith('−'))
+        catat(`Iklim: anomali 1996 seharusnya negatif (${anomaliAwal})`);
+
+      await page.locator('#sk-normal').uncheck();
+      if ((await page.locator('[data-garis="normal"]').count()) !== 0)
+        catat('Iklim: garis normal tetap tampil setelah centang dimatikan');
+      if (!(await page.locator('.sk-ringkas').textContent())?.includes('disembunyikan'))
+        catat('Iklim: ringkasan tidak menyebut garis normal disembunyikan');
 
       await page.goto(base + '/topik/laut/ocean/', { waitUntil: 'networkidle' });
       await page.locator('.zl-slider input').fill('1500');
