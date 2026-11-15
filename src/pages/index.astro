@@ -15,75 +15,65 @@ const totalSumber = new Set(topik.flatMap((t) => t.data.sumber)).size;
 <Layout title="Ruang Bumi — ilmu kebumian lewat pertanyaan" fullTitle>
   <section class="hero">
     <div class="wrap">
-      <div class="hero-meta">
+      <div class="meta">
         <span class="label">Lembar lapangan · ilmu kebumian</span>
         <span class="label">Inti → permukaan</span>
       </div>
 
-      <div class="hero-grid">
-        <div class="hero-utama">
-          <h1>
-            <span>Tanya</span>
-            <span>Bumi<span class="hero-titik">.</span></span>
-          </h1>
-
-          <div class="hero-bawah">
-            <p class="hero-sub">
-              Setiap halaman menjawab satu pertanyaan lewat visual interaktif. Setiap angka punya
-              sumber yang bisa kamu buka sendiri.
-            </p>
-            {
-              unggulan && (
-                <a class="hero-mulai" href={topikHref(unggulan)}>
-                  <span class="hero-mulai-label">Mulai dari</span>
-                  <span class="hero-mulai-q">{unggulan.data.pertanyaan}</span>
-                  <span class="hero-mulai-tanda" aria-hidden="true">
-                    →
-                  </span>
-                </a>
-              )
-            }
-          </div>
-        </div>
-
-        <nav class="inti" aria-label="Kategori, dari inti Bumi ke permukaan">
-          <p class="inti-kepala">
-            <span>Potongan inti</span>
-            <span>{perKategori.length} lapisan · {topik.length} topik</span>
-          </p>
-          <ol>
-            {
-              perKategori.map((k, i) => (
-                <li data-kategori={k.id} style={`--bobot:${k.jumlah}`}>
-                  <a href={`/kategori/${k.id}/`}>
-                    <span class="inti-nomor">{String(i + 1).padStart(2, '0')}</span>
-                    <span class="inti-nama">{k.label}</span>
-                    <span class="inti-jumlah">
-                      {String(k.jumlah).padStart(2, '0')}
-                      <span class="sr-only"> topik</span>
-                    </span>
-                  </a>
-                </li>
-              ))
-            }
-          </ol>
-        </nav>
+      <div class="head">
+        <h1>Tanya Bumi<span class="titik">.</span></h1>
+        <p class="deck">
+          Setiap halaman menjawab satu pertanyaan lewat visual interaktif. Setiap angka punya sumber
+          yang bisa kamu buka sendiri.
+        </p>
       </div>
 
-      <dl class="hero-log">
-        <div>
-          <dt>Topik terbit</dt>
-          <dd>{topik.length}</dd>
-        </div>
-        <div>
-          <dt>Sumber unik</dt>
-          <dd>{totalSumber}</dd>
-        </div>
-        <div>
-          <dt>Lapisan</dt>
-          <dd>{String(perKategori.length).padStart(2, '0')}</dd>
-        </div>
-      </dl>
+      <nav class="strat" aria-label="Kategori, dari inti Bumi ke permukaan">
+        <ol>
+          {
+            perKategori.map((k, i) => (
+              <li data-kategori={k.id}>
+                <a href={`/kategori/${k.id}/`}>
+                  <span class="num">{String(i + 1).padStart(2, '0')}</span>
+                  <span class="name">{k.label}</span>
+                  <span class="count">
+                    {String(k.jumlah).padStart(2, '0')} topik
+                  </span>
+                </a>
+              </li>
+            ))
+          }
+        </ol>
+      </nav>
+
+      <div class="foot">
+        {
+          unggulan && (
+            <a class="start" href={topikHref(unggulan)}>
+              <span class="start-label">Mulai dari</span>
+              <span class="start-q">{unggulan.data.pertanyaan}</span>
+              <span class="start-arrow" aria-hidden="true">
+                →
+              </span>
+            </a>
+          )
+        }
+
+        <dl class="stats">
+          <div>
+            <dt>Topik terbit</dt>
+            <dd>{topik.length}</dd>
+          </div>
+          <div>
+            <dt>Sumber unik</dt>
+            <dd>{totalSumber}</dd>
+          </div>
+          <div>
+            <dt>Lapisan</dt>
+            <dd>{String(perKategori.length).padStart(2, '0')}</dd>
+          </div>
+        </dl>
+      </div>
     </div>
   </section>
 
@@ -193,20 +183,12 @@ const totalSumber = new Set(topik.flatMap((t) => t.data.sumber)).size;
 </script>
 
 <style>
-  /* The home page is a field sheet: a printed grid, a two-line masthead,
-     a solid core sample, and a numbered index instead of a card wall. */
   .hero {
-    --grid-line: color-mix(in srgb, var(--fg) 7%, transparent);
     border-bottom: 4px solid var(--fg);
-    background-color: var(--bg);
-    background-image:
-      linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
-      linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
-    background-size: 88px 88px;
-    background-position: calc(50% - 44px) 0;
+    background: var(--bg);
   }
 
-  .hero-meta {
+  .meta {
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
@@ -216,63 +198,109 @@ const totalSumber = new Set(topik.flatMap((t) => t.data.sumber)).size;
     border-bottom: 1px solid var(--line-strong);
   }
 
-  .hero-meta .label {
+  .meta .label {
     margin: 0;
     color: var(--fg);
   }
 
-  .hero-grid {
+  .head {
     display: grid;
-    gap: 34px;
-    padding-block: clamp(30px, 5vw, 54px) clamp(32px, 4vw, 48px);
+    gap: 16px;
+    padding-block: clamp(28px, 5vw, 52px) clamp(22px, 3vw, 32px);
   }
 
-  .hero-utama {
-    display: grid;
-    align-content: start;
-  }
-
-  .hero h1 {
+  h1 {
     margin: 0;
-    max-width: 9ch;
-    font-size: clamp(4.6rem, 12.5vw, 10.8rem);
+    font-size: clamp(4rem, 13.8vw, 11.5rem);
     font-weight: 900;
-    line-height: 0.74;
+    line-height: 0.72;
     letter-spacing: -0.045em;
     text-transform: uppercase;
   }
 
-  .hero h1 span {
-    display: block;
-  }
-
-  .hero-titik {
+  .titik {
     color: var(--heat);
   }
 
-  .hero-bawah {
-    display: grid;
-    gap: 22px;
-    max-width: 560px;
-    margin-top: clamp(26px, 4vw, 40px);
-  }
-
-  .hero-sub {
-    max-width: 46ch;
-    margin: 0;
+  .deck {
+    max-width: 52ch;
+    margin: 0 0 0 auto;
     color: var(--muted);
-    font-size: clamp(1.04rem, 1rem + 0.2vw, 1.16rem);
+    font-size: clamp(1.02rem, 1rem + 0.18vw, 1.12rem);
     font-weight: 500;
     line-height: 1.62;
     text-wrap: pretty;
   }
 
-  .hero-mulai {
+  .strat {
+    border-top: 2px solid var(--fg);
+    border-bottom: 2px solid var(--fg);
+  }
+
+  .strat ol {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .strat li {
+    border-left: 1px solid var(--ink);
+  }
+
+  .strat li:first-child {
+    border-left: 0;
+  }
+
+  .strat a {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 26px;
+    min-height: 158px;
+    padding: 11px 12px 13px;
+    background: var(--aksen, var(--sea));
+    color: var(--inti-teks);
+    text-decoration: none;
+    transition: box-shadow 120ms linear;
+  }
+
+  .strat a:hover {
+    box-shadow: inset 0 0 0 3px color-mix(in srgb, var(--inti-teks) 58%, transparent);
+  }
+
+  .num,
+  .count {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.05em;
+    line-height: 1.4;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .name {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(1.2rem, 2vw, 1.65rem);
+    line-height: 0.9;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+  }
+
+  .foot {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: 32px;
+    align-items: start;
+    padding-block: 24px 28px;
+  }
+
+  .start {
     display: grid;
     grid-template-columns: 1fr auto;
     align-items: center;
     gap: 4px 16px;
-    width: 100%;
     padding: 15px 18px 16px;
     border: 2px solid var(--ink);
     background: var(--ink);
@@ -283,7 +311,7 @@ const totalSumber = new Set(topik.flatMap((t) => t.data.sumber)).size;
       color 120ms linear;
   }
 
-  .hero-mulai-label {
+  .start-label {
     grid-column: 1 / -1;
     font-family: var(--font-mono);
     font-size: 0.68rem;
@@ -293,17 +321,17 @@ const totalSumber = new Set(topik.flatMap((t) => t.data.sumber)).size;
     color: var(--ink-muted);
   }
 
-  .hero-mulai-q {
+  .start-q {
     font-family: var(--font-display);
     font-weight: 900;
-    font-size: 1.35rem;
+    font-size: 1.3rem;
     line-height: 1.02;
     letter-spacing: -0.01em;
     text-transform: uppercase;
     text-wrap: balance;
   }
 
-  .hero-mulai-tanda {
+  .start-arrow {
     font-size: 1.5rem;
     line-height: 1;
     color: var(--heat-on-ink);
@@ -312,128 +340,32 @@ const totalSumber = new Set(topik.flatMap((t) => t.data.sumber)).size;
       transform 120ms linear;
   }
 
-  .hero-mulai:hover {
+  .start:hover {
     background: var(--paper);
     color: var(--ink);
   }
 
-  .hero-mulai:hover .hero-mulai-label {
+  .start:hover .start-label {
     color: var(--muted);
   }
 
-  .hero-mulai:hover .hero-mulai-tanda {
+  .start:hover .start-arrow {
     color: var(--heat-ink);
     transform: translateX(4px);
   }
 
-  /* Core sample: solid strata, thickness follows the number of topics,
-     and the whole column is the category navigation. */
-  .inti {
-    display: grid;
-    grid-template-rows: auto 1fr;
-    align-self: end;
-    border: 2px solid var(--fg);
-    background: var(--surface);
-  }
-
-  .inti-kepala {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 4px 10px;
-    margin: 0;
-    padding: 8px 12px;
-    background: var(--ink);
-    color: var(--paper);
-    font-family: var(--font-mono);
-    font-size: 0.66rem;
-    letter-spacing: 0.1em;
-    line-height: 1.4;
-    text-transform: uppercase;
-  }
-
-  .inti ol {
-    display: flex;
-    flex-direction: column;
-    min-height: 360px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  .inti li {
-    flex: var(--bobot, 1) 1 auto;
-    min-height: 50px;
-    border-top: 1px solid var(--ink);
-  }
-
-  .inti li:first-child {
-    border-top: 0;
-  }
-
-  .inti a {
-    display: grid;
-    grid-template-columns: 1.7rem minmax(0, 1fr) auto;
-    align-items: center;
-    gap: 10px;
-    height: 100%;
-    padding: 10px 12px;
-    background: var(--aksen, var(--sea));
-    color: var(--inti-teks);
-    text-decoration: none;
-    transition: box-shadow 120ms linear;
-  }
-
-  .inti a:hover {
-    box-shadow: inset 0 0 0 3px color-mix(in srgb, var(--inti-teks) 58%, transparent);
-  }
-
-  .inti a:hover .inti-nama {
-    text-decoration: underline;
-    text-decoration-thickness: 2px;
-    text-underline-offset: 3px;
-  }
-
-  .inti-nomor {
-    font-family: var(--font-mono);
-    font-size: 0.64rem;
-    letter-spacing: 0.06em;
-    font-variant-numeric: tabular-nums;
-  }
-
-  .inti-nama {
-    font-family: var(--font-display);
-    font-weight: 900;
-    font-size: 1.2rem;
-    line-height: 0.9;
-    letter-spacing: -0.01em;
-    text-transform: uppercase;
-  }
-
-  .inti-jumlah {
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
-    line-height: 1;
-    font-variant-numeric: tabular-nums;
-  }
-
-  .hero-log {
+  .stats {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     margin: 0;
-    border-top: 2px solid var(--fg);
+    border-left: 2px solid var(--fg);
   }
 
-  .hero-log > div {
-    padding: 13px 14px 15px 0;
+  .stats > div {
+    padding: 4px 0 0 16px;
   }
 
-  .hero-log > div + div {
-    padding-left: 14px;
-    border-left: 1px solid var(--line-strong);
-  }
-
-  .hero-log dt {
+  .stats dt {
     font-family: var(--font-mono);
     font-size: 0.66rem;
     letter-spacing: 0.1em;
@@ -442,29 +374,80 @@ const totalSumber = new Set(topik.flatMap((t) => t.data.sumber)).size;
     color: var(--muted);
   }
 
-  .hero-log dd {
-    margin: 5px 0 0;
+  .stats dd {
+    margin: 6px 0 0;
     font-family: var(--font-display);
     font-weight: 900;
-    font-size: clamp(2rem, 4vw, 3rem);
+    font-size: clamp(2rem, 3.4vw, 2.8rem);
     line-height: 0.76;
     letter-spacing: -0.02em;
     font-variant-numeric: tabular-nums;
   }
 
-  @media (min-width: 980px) {
-    .hero-grid {
-      grid-template-columns: minmax(0, 1fr) 340px;
-      align-items: end;
-      gap: 56px;
+  @media (max-width: 900px) {
+    .strat ol {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
-    .hero h1 {
-      max-width: none;
+    .strat li {
+      border-top: 0;
     }
 
-    .hero-bawah {
-      grid-template-columns: minmax(0, 1fr);
+    .strat li:nth-child(3n + 1) {
+      border-left: 0;
+    }
+
+    .strat li:nth-child(n + 4) {
+      border-top: 1px solid var(--ink);
+    }
+
+    .strat a {
+      min-height: 126px;
+    }
+
+    .foot {
+      grid-template-columns: 1fr;
+    }
+
+    .stats {
+      border-top: 2px solid var(--fg);
+      border-left: 0;
+    }
+
+    .stats > div {
+      padding: 14px 0 0;
+    }
+
+    .stats > div + div {
+      padding-left: 14px;
+      border-left: 1px solid var(--line-strong);
+    }
+  }
+
+  @media (max-width: 520px) {
+    .strat ol {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .strat li {
+      border-top: 0;
+      border-left: 1px solid var(--ink);
+    }
+
+    .strat li:nth-child(2n + 1) {
+      border-left: 0;
+    }
+
+    .strat li:nth-child(n + 3) {
+      border-top: 1px solid var(--ink);
+    }
+
+    .strat a {
+      min-height: 112px;
+    }
+
+    .deck {
+      margin-left: 0;
     }
   }
 
@@ -699,31 +682,20 @@ const totalSumber = new Set(topik.flatMap((t) => t.data.sumber)).size;
   }
 
   @media (max-width: 560px) {
-    .hero-log dd {
-      font-size: 2.1rem;
-    }
-
-    .hero-log > div {
-      padding-right: 8px;
-    }
-
-    .hero-log > div + div {
-      padding-left: 10px;
-    }
-
     .filter-btn {
       min-height: 44px;
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .hero-mulai-tanda,
-    .inti a,
+    .strat a,
+    .start,
+    .start-arrow,
     .kategori-indeks a {
       transition: none;
     }
 
-    .hero-mulai:hover .hero-mulai-tanda {
+    .start:hover .start-arrow {
       transform: none;
     }
   }
