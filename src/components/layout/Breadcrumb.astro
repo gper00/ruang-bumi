@@ -42,7 +42,8 @@ const { items } = Astro.props;
     padding: 0;
     margin: 0;
     font-family: var(--font-mono);
-    font-size: 0.68rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.02em;
     color: var(--muted);
   }
 
@@ -63,6 +64,7 @@ const { items } = Astro.props;
     text-overflow: ellipsis;
     white-space: nowrap;
     vertical-align: bottom;
+    color: var(--fg);
   }
 
   @media (max-width: 640px) {
@@ -74,15 +76,12 @@ const { items } = Astro.props;
   .breadcrumb a {
     color: var(--muted);
     text-decoration: none;
+    text-underline-offset: 3px;
   }
 
   .breadcrumb a:hover {
-    color: var(--sea);
+    color: var(--heat-ink);
     text-decoration: underline;
-    text-underline-offset: 2px;
-  }
-
-  .breadcrumb [aria-current='page'] {
-    color: var(--fg);
+    text-decoration-thickness: 2px;
   }
 </style>

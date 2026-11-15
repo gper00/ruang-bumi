@@ -71,9 +71,9 @@ const lain = KATEGORI.filter((k) => k.id !== kategori);
   }
 
   .kepala {
-    margin: 18px 0 clamp(26px, 3vw, 34px);
-    padding-bottom: 22px;
-    border-bottom: 1px solid var(--line);
+    margin: 22px 0 clamp(28px, 4vw, 38px);
+    padding-bottom: 24px;
+    border-bottom: 3px solid var(--fg);
     position: relative;
   }
 
@@ -81,26 +81,28 @@ const lain = KATEGORI.filter((k) => k.id !== kategori);
     content: '';
     position: absolute;
     left: 0;
-    bottom: -1px;
-    width: 64px;
-    height: 3px;
+    bottom: -3px;
+    width: 120px;
+    height: 8px;
     background: var(--aksen, var(--sea));
   }
 
   .tanda {
     display: inline-block;
-    width: 8px;
-    height: 8px;
-    border-radius: 2px;
+    width: 10px;
+    height: 10px;
+    border-radius: 0;
     background: var(--aksen, var(--sea));
-    margin-right: 4px;
+    margin-right: 5px;
   }
 
   .kepala h1 {
-    margin: 8px 0 10px;
-    font-size: clamp(1.95rem, 4.3vw, 2.8rem);
-    font-weight: 800;
+    margin: 12px 0 14px;
+    font-size: clamp(3rem, 6.5vw, 5.2rem);
+    font-weight: 900;
+    line-height: 0.84;
     letter-spacing: -0.025em;
+    text-transform: uppercase;
     text-wrap: balance;
   }
 
@@ -114,37 +116,44 @@ const lain = KATEGORI.filter((k) => k.id !== kategori);
   }
 
   .kosong {
-    color: var(--muted);
     padding: 24px;
-    border: 1px dashed var(--line-strong);
-    border-radius: var(--radius);
+    border: 2px solid var(--fg);
+    border-radius: 0;
+    background: var(--surface);
+    color: var(--muted);
   }
 
   .kategori-lain {
-    margin-top: clamp(36px, 5vw, 52px);
-    padding-top: 16px;
-    border-top: 1px solid var(--line);
+    margin-top: clamp(38px, 5vw, 56px);
+    padding-top: 18px;
+    border-top: 3px solid var(--fg);
   }
 
   .kategori-lain ul {
     display: flex;
     flex-wrap: wrap;
-    gap: 4px 20px;
+    gap: 2px 18px;
     list-style: none;
-    margin: 8px 0 0;
+    margin: 10px 0 0;
     padding: 0;
   }
 
   .kategori-lain a {
-    color: var(--muted);
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    color: var(--fg);
     text-decoration: none;
-    font-size: 0.88rem;
-    font-weight: 500;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
   }
 
   .kategori-lain a:hover {
-    color: var(--sea);
+    color: var(--heat-ink);
     text-decoration: underline;
+    text-decoration-thickness: 2px;
     text-underline-offset: 3px;
   }
 </style>

@@ -58,14 +58,18 @@ for (const item of istilah) {
   }
 
   .kepala {
-    margin: 18px 0 22px;
+    margin: 22px 0 26px;
+    padding-bottom: 24px;
+    border-bottom: 3px solid var(--fg);
   }
 
   .kepala h1 {
-    margin: 8px 0 10px;
-    font-size: clamp(1.95rem, 4.3vw, 2.8rem);
-    font-weight: 800;
+    margin: 12px 0 14px;
+    font-size: clamp(3rem, 6.5vw, 5.2rem);
+    font-weight: 900;
+    line-height: 0.84;
     letter-spacing: -0.025em;
+    text-transform: uppercase;
     text-wrap: balance;
   }
 
@@ -82,33 +86,43 @@ for (const item of istilah) {
     display: flex;
     flex-wrap: wrap;
     gap: 4px;
-    margin-bottom: clamp(26px, 3vw, 34px);
+    margin-bottom: clamp(28px, 4vw, 38px);
     padding-block: 14px 16px;
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
+    border-top: 2px solid var(--fg);
+    border-bottom: 2px solid var(--fg);
   }
 
   .huruf a {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 29px;
-    height: 29px;
-    border: 1px solid var(--line);
-    border-radius: var(--radius-sm);
-    background: var(--surface);
-    color: var(--muted);
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--line-strong);
+    border-radius: 0;
+    background: transparent;
+    color: var(--fg);
     text-decoration: none;
-    font-family: var(--font-body);
-    font-weight: 600;
-    font-size: 0.78rem;
-    transition: border-color 0.15s ease, color 0.15s ease, background-color 0.15s ease;
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 0.76rem;
+    transition:
+      border-color 120ms linear,
+      color 120ms linear,
+      background-color 120ms linear;
   }
 
   .huruf a:hover {
-    border-color: var(--sea);
-    background: var(--sea-soft);
-    color: var(--fg);
+    border-color: var(--fg);
+    background: var(--fg);
+    color: var(--bg);
+  }
+
+  @media (max-width: 560px) {
+    .huruf a {
+      width: 44px;
+      height: 44px;
+    }
   }
 
   .grup {
@@ -118,12 +132,14 @@ for (const item of istilah) {
   .grup h2 {
     display: flex;
     align-items: center;
-    gap: 14px;
-    margin: 0 0 14px;
-    font-size: 1.4rem;
-    font-weight: 800;
+    gap: 16px;
+    margin: 0 0 16px;
+    font-size: 2rem;
+    font-weight: 900;
+    line-height: 0.9;
     letter-spacing: -0.02em;
-    scroll-margin-top: 88px;
+    text-transform: uppercase;
+    scroll-margin-top: 112px;
   }
 
   .huruf-besar {
@@ -132,8 +148,8 @@ for (const item of istilah) {
 
   .grup-garis {
     flex: 1;
-    height: 1px;
-    background: var(--line);
+    height: 3px;
+    background: var(--fg);
   }
 
   .grup-jumlah {
@@ -164,8 +180,9 @@ for (const item of istilah) {
 
   dt {
     font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 1.02rem;
+    font-weight: 800;
+    font-size: 1.3rem;
+    line-height: 1;
     letter-spacing: -0.01em;
   }
 
@@ -178,6 +195,9 @@ for (const item of istilah) {
   }
 
   .istilah:target dt {
-    color: var(--sea);
+    color: var(--heat-ink);
+    text-decoration: underline;
+    text-decoration-thickness: 3px;
+    text-underline-offset: 4px;
   }
 </style>

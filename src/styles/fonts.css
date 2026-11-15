@@ -1,10 +1,15 @@
 /* Font latin-subset, disajikan dari /public/fonts agar tidak bergantung pada Google Fonts.
-   Lisensi OFL ada di public/fonts/. */
+   Lisensi OFL ada di public/fonts/.
+
+   Darker Grotesque: judul dan angka besar, sangat padat, satu sumbu berat 400–900.
+   Archivo: antarmuka dan teks bacaan, supaya artikel terasa seperti lembar lapangan,
+   bukan majalah sastra.
+   IBM Plex Mono: label, koordinat, metadata, dan angka teknis. */
 
 @font-face {
-  font-family: 'Bricolage Grotesque';
-  src: url('/fonts/bricolage-grotesque-latin.woff2') format('woff2');
-  font-weight: 200 800;
+  font-family: 'Darker Grotesque';
+  src: url('/fonts/darker-grotesque-latin.woff2') format('woff2');
+  font-weight: 400 900;
   font-style: normal;
   font-display: swap;
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304,
@@ -13,9 +18,10 @@
 }
 
 @font-face {
-  font-family: 'Figtree';
-  src: url('/fonts/figtree-latin.woff2') format('woff2');
-  font-weight: 300 900;
+  font-family: 'Archivo';
+  src: url('/fonts/archivo-latin.woff2') format('woff2');
+  font-weight: 400 800;
+  font-stretch: 75% 125%;
   font-style: normal;
   font-display: swap;
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304,

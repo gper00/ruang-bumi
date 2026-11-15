@@ -68,14 +68,18 @@ const kelompok = KATEGORI.map((k) => ({
   }
 
   .kepala {
-    margin: 18px 0 clamp(30px, 4vw, 44px);
+    margin: 22px 0 clamp(32px, 4vw, 46px);
+    padding-bottom: 24px;
+    border-bottom: 3px solid var(--fg);
   }
 
   .kepala h1 {
-    margin: 8px 0 12px;
-    font-size: clamp(1.95rem, 4.3vw, 2.8rem);
-    font-weight: 800;
+    margin: 12px 0 16px;
+    font-size: clamp(3rem, 6.5vw, 5.2rem);
+    font-weight: 900;
+    line-height: 0.84;
     letter-spacing: -0.025em;
+    text-transform: uppercase;
     text-wrap: balance;
   }
 
@@ -93,9 +97,9 @@ const kelompok = KATEGORI.map((k) => ({
     flex-wrap: wrap;
     align-items: baseline;
     gap: 6px 14px;
-    margin-top: 22px;
+    margin-top: 24px;
     padding-top: 14px;
-    border-top: 1px solid var(--line);
+    border-top: 2px solid var(--fg);
   }
 
   .lompat ul {
@@ -108,21 +112,30 @@ const kelompok = KATEGORI.map((k) => ({
   }
 
   .lompat a {
-    color: var(--muted);
+    display: inline-flex;
+    align-items: center;
+    min-height: 36px;
+    color: var(--fg);
     text-decoration: none;
-    font-size: 0.86rem;
-    font-weight: 500;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
   }
 
   .lompat a span {
     font-family: var(--font-mono);
-    font-size: 0.66rem;
-    margin-left: 3px;
+    font-size: 0.58rem;
+    margin-left: 4px;
     color: var(--muted);
+    font-variant-numeric: tabular-nums;
   }
 
   .lompat a:hover {
-    color: var(--sea);
+    color: var(--heat-ink);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
   }
 
   .kelompok {
@@ -141,25 +154,27 @@ const kelompok = KATEGORI.map((k) => ({
     align-items: baseline;
     justify-content: space-between;
     gap: 4px 16px;
-    padding-top: 12px;
-    border-top: 1px solid var(--line);
+    padding-top: 14px;
+    border-top: 2px solid var(--fg);
   }
 
   .kelompok-head::before {
     content: '';
     position: absolute;
-    top: -1px;
+    top: -2px;
     left: 0;
-    width: 32px;
-    height: 3px;
+    width: 48px;
+    height: 8px;
     background: var(--aksen, var(--sea));
   }
 
   .kelompok-head h2 {
     margin: 0;
-    font-size: 1.28rem;
-    font-weight: 800;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 900;
+    line-height: 0.9;
     letter-spacing: -0.02em;
+    text-transform: uppercase;
   }
 
   .kelompok-head h2 a {
@@ -168,13 +183,16 @@ const kelompok = KATEGORI.map((k) => ({
   }
 
   .kelompok-head h2 a:hover {
-    color: var(--sea);
+    color: var(--heat-ink);
+    text-decoration: underline;
+    text-decoration-thickness: 3px;
+    text-underline-offset: 4px;
   }
 
   .kelompok-link {
     font-family: var(--font-mono);
-    font-size: 0.68rem;
-    color: var(--muted);
+    font-size: 0.62rem;
+    color: var(--fg);
     text-decoration: none;
     white-space: nowrap;
   }
@@ -185,7 +203,10 @@ const kelompok = KATEGORI.map((k) => ({
   }
 
   .kelompok-link:hover {
-    color: var(--sea);
+    color: var(--heat-ink);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
   }
 
   .kelompok-link:hover span {
@@ -193,8 +214,10 @@ const kelompok = KATEGORI.map((k) => ({
   }
 
   .kelompok-desc {
-    margin: 4px 0 16px;
-    font-size: 0.88rem;
+    margin: 6px 0 18px;
+    max-width: 68ch;
+    font-size: 0.9rem;
+    line-height: 1.6;
     color: var(--muted);
   }
 </style>

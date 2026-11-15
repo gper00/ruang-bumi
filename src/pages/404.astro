@@ -31,17 +31,18 @@ import Layout from '../layouts/Layout.astro';
 
   .kode::before {
     content: '';
-    width: 24px;
-    height: 3px;
-    background: var(--sea);
+    width: 32px;
+    height: 6px;
+    background: var(--heat);
   }
 
   h1 {
-    margin: 16px 0 14px;
-    font-size: clamp(2rem, 5vw, 3rem);
-    font-weight: 800;
+    margin: 18px 0 16px;
+    font-size: clamp(3.2rem, 7vw, 6rem);
+    font-weight: 900;
     letter-spacing: -0.03em;
-    line-height: 1.06;
+    line-height: 0.82;
+    text-transform: uppercase;
     text-wrap: balance;
   }
 
@@ -63,21 +64,26 @@ import Layout from '../layouts/Layout.astro';
   }
 
   .btn.utama {
-    background: var(--sea);
-    border-color: var(--sea);
-    color: var(--surface);
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--paper);
   }
 
   .btn.utama:hover {
-    background: color-mix(in srgb, var(--sea) 88%, var(--fg));
-    border-color: color-mix(in srgb, var(--sea) 88%, var(--fg));
-    color: var(--surface);
+    background: var(--paper);
+    border-color: var(--ink);
+    color: var(--ink);
   }
 
   .tautan {
-    font-size: 0.88rem;
-    font-weight: 500;
-    color: var(--muted);
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--fg);
     text-decoration: none;
   }
 
@@ -87,7 +93,10 @@ import Layout from '../layouts/Layout.astro';
   }
 
   .tautan:hover {
-    color: var(--sea);
+    color: var(--heat-ink);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
   }
 
   .tautan:hover span {

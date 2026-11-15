@@ -129,26 +129,28 @@ const jenisLabel: Record<string, string> = {
 
   .kepala {
     position: relative;
-    margin: 18px 0 clamp(26px, 3vw, 34px);
-    padding-bottom: 22px;
-    border-bottom: 1px solid var(--line);
+    margin: 22px 0 clamp(28px, 4vw, 38px);
+    padding-bottom: 24px;
+    border-bottom: 3px solid var(--fg);
   }
 
   .kepala::after {
     content: '';
     position: absolute;
     left: 0;
-    bottom: -1px;
-    width: 64px;
-    height: 3px;
-    background: var(--sea);
+    bottom: -3px;
+    width: 120px;
+    height: 8px;
+    background: var(--heat);
   }
 
   .kepala h1 {
-    margin: 8px 0 10px;
-    font-size: clamp(1.95rem, 4.3vw, 2.8rem);
-    font-weight: 800;
+    margin: 12px 0 14px;
+    font-size: clamp(3rem, 6.5vw, 5.2rem);
+    font-weight: 900;
+    line-height: 0.84;
     letter-spacing: -0.025em;
+    text-transform: uppercase;
     text-wrap: balance;
   }
 
@@ -167,25 +169,27 @@ const jenisLabel: Record<string, string> = {
     align-items: baseline;
     justify-content: space-between;
     gap: 12px;
-    padding-top: 12px;
-    border-top: 1px solid var(--line);
+    padding-top: 14px;
+    border-top: 2px solid var(--fg);
   }
 
   .bagian-head::before {
     content: '';
     position: absolute;
-    top: -1px;
+    top: -2px;
     left: 0;
-    width: 32px;
-    height: 3px;
-    background: var(--sea);
+    width: 48px;
+    height: 8px;
+    background: var(--heat);
   }
 
   .bagian-head h2 {
     margin: 0;
-    font-size: 1.18rem;
-    font-weight: 800;
+    font-size: 1.9rem;
+    font-weight: 900;
+    line-height: 0.9;
     letter-spacing: -0.02em;
+    text-transform: uppercase;
   }
 
   .bagian-jumlah {
@@ -274,23 +278,27 @@ const jenisLabel: Record<string, string> = {
     font-family: var(--font-mono);
     font-size: 0.78rem;
     background: var(--surface-2);
+    border: 1px solid var(--line);
     padding: 1px 5px;
-    border-radius: 4px;
+    border-radius: 0;
   }
 
   .kebijakan {
     max-width: 74ch;
-    margin-top: clamp(36px, 5vw, 52px);
-    padding: 20px 22px;
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
+    margin-top: clamp(38px, 5vw, 56px);
+    padding: 22px 24px;
+    border: 2px solid var(--fg);
+    border-left: 8px solid var(--heat);
+    border-radius: 0;
     background: var(--surface);
   }
 
   .kebijakan h2 {
-    margin: 0 0 10px;
-    font-size: 1.05rem;
-    font-weight: 700;
+    margin: 0 0 12px;
+    font-size: 1.9rem;
+    font-weight: 900;
+    line-height: 0.9;
+    text-transform: uppercase;
   }
 
   .kebijakan ul {

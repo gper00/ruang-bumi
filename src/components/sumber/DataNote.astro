@@ -17,23 +17,25 @@ const { label = 'Catatan' } = Astro.props;
     grid-template-columns: auto 1fr;
     gap: 12px;
     align-items: start;
-    margin: 1.6rem 0;
-    padding: 13px 16px;
-    border: 1px dashed var(--line-strong);
-    border-radius: 8px;
-    background: color-mix(in srgb, var(--surface-2) 70%, transparent);
-    font-size: 0.86rem;
+    margin: 1.8rem 0;
+    padding: 14px 16px;
+    border: 2px solid var(--fg);
+    border-left: 8px solid var(--heat);
+    border-radius: 0;
+    background: var(--surface-2);
+    font-family: var(--font-body);
+    font-size: 0.92rem;
     line-height: 1.6;
   }
 
   .data-label {
-    font-family: var(--font-body);
-    font-weight: 600;
-    font-size: 0.68rem;
-    letter-spacing: 0.08em;
+    font-family: var(--font-mono);
+    font-weight: 400;
+    font-size: 0.64rem;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--heat-ink);
-    padding-top: 2px;
+    padding-top: 3px;
     white-space: nowrap;
   }
 

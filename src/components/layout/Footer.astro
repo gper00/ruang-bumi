@@ -6,7 +6,7 @@ const tahun = new Date().getFullYear();
   <div class="wrap footer-inner">
     <div class="footer-brand">
       <p class="label">Kolofon</p>
-      <p class="footer-name">Ruang Bumi</p>
+      <p class="footer-name">Ruang Bumi<span aria-hidden="true">.</span></p>
       <p class="footer-desc">
         Belajar ilmu kebumian lewat pertanyaan, visual interaktif, dan sumber yang bisa ditelusuri.
       </p>
@@ -33,15 +33,16 @@ const tahun = new Date().getFullYear();
 
 <style>
   .site-footer {
-    margin-top: 64px;
-    border-top: 1px solid var(--line);
-    background: var(--surface);
+    margin-top: 0;
+    border-top: 4px solid var(--heat);
+    background: var(--ink);
+    color: var(--paper);
   }
 
   .footer-inner {
     display: grid;
-    gap: 26px;
-    padding-block: 34px 42px;
+    gap: 30px;
+    padding-block: 38px 46px;
     font-size: 0.86rem;
   }
 
@@ -56,10 +57,10 @@ const tahun = new Date().getFullYear();
     }
   }
 
-  @media (min-width: 900px) {
+  @media (min-width: 980px) {
     .footer-inner {
-      grid-template-columns: 1.5fr 1fr 1fr;
-      gap: 40px;
+      grid-template-columns: 1.55fr 0.7fr 0.9fr;
+      gap: 48px;
     }
 
     .footer-brand {
@@ -69,47 +70,57 @@ const tahun = new Date().getFullYear();
 
   .label {
     margin: 0;
+    color: var(--ink-muted);
   }
 
   .footer-name {
-    margin: 6px 0 0;
+    margin: 12px 0 0;
     font-family: var(--font-display);
-    font-weight: 800;
-    font-size: 1.12rem;
-    letter-spacing: -0.015em;
+    font-weight: 900;
+    font-size: clamp(3.5rem, 9vw, 7.5rem);
+    line-height: 0.72;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    color: var(--paper);
+  }
+
+  .footer-name span {
+    color: var(--heat-on-ink);
   }
 
   .footer-desc,
   .footer-legal p:not(.label) {
-    margin: 6px 0 0;
-    color: var(--muted);
+    margin: 14px 0 0;
     max-width: 44ch;
+    color: #d8d3c5;
     line-height: 1.6;
   }
 
   .footer-legal p:not(.label) {
     font-family: var(--font-mono);
-    font-size: 0.7rem;
+    font-size: 0.68rem;
+    color: var(--ink-muted);
   }
 
   ul {
     list-style: none;
-    margin: 8px 0 0;
+    margin: 12px 0 0;
     padding: 0;
     display: grid;
-    gap: 7px;
+    gap: 8px;
     font-family: var(--font-body);
-    font-size: 0.82rem;
+    font-size: 0.84rem;
   }
 
   a {
-    color: var(--muted);
+    color: #e4dfd1;
     text-decoration: none;
+    text-underline-offset: 3px;
   }
 
   a:hover {
-    color: var(--sea);
+    color: var(--heat-on-ink);
     text-decoration: underline;
-    text-underline-offset: 2px;
+    text-decoration-thickness: 2px;
   }
 </style>

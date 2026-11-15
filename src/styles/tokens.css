@@ -1,96 +1,129 @@
 :root {
-  --bg: #eef2ee;
-  --surface: #fbfcf8;
-  --surface-2: #e3eae4;
-  --fg: #14201e;
-  --muted: #526660;
-  --line: #d2dcd4;
-  --line-strong: #9fb3aa;
-  --sea: #146e78;
-  --sea-soft: #d6e8e7;
-  --heat: #b5472c;
-  --heat-soft: #f4ded4;
-  /* Ink-safe variant: --heat on --surface-2 is only 4.1:1; this passes 4.5:1. */
-  --heat-ink: #9a3a22;
-  --ok: #2f6f4a;
-  --ok-soft: #dcebe1;
-  --bad: #a13c33;
-  --bad-soft: #f2dedb;
-  --ocean: #d5e5e2;
-  --land: #e7ead9;
-  --coast: #73938d;
-  --mantle: #e8d8cc;
-  --sand: #b5944e;
-  --font-display: 'Bricolage Grotesque', 'Trebuchet MS', sans-serif;
-  --font-body: 'Figtree', 'Segoe UI', system-ui, sans-serif;
+  /* Lembar lapangan: kapur, tinta cetak, dan dua sinyal lapangan.
+     Warna kategori tetap berasal dari bahan bumi, tetapi dipakai sebagai
+     blok padat, bukan tint pastel. */
+  --bg: #f2efe4;
+  --surface: #fbf9f0;
+  --surface-2: #e3ded0;
+  --fg: #12130f;
+  --muted: #52564a;
+  --line: #c4bead;
+  --line-strong: #6d7264;
+
+  /* Fixed print colours. These do not flip with the theme, so the masthead,
+     footer, and answer slab keep one identity in light and dark. */
+  --ink: #11130f;
+  --paper: #f8f4e8;
+  --ink-muted: #b9b4a6;
+
+  --sea: #005f5a;
+  --sea-soft: #cfe6df;
+  --heat: #d8461b;
+  --heat-soft: #f6d3c4;
+  /* Ink-safe orange for small text on light surfaces. */
+  --heat-ink: #a83310;
+  /* Orange for small text and icons on the fixed ink surface. */
+  --heat-on-ink: #ff8a5f;
+
+  --ok: #2f6538;
+  --ok-soft: #d7e7cf;
+  --bad: #a92f24;
+  --bad-soft: #f0d4cf;
+
+  --ocean: #c7d6d4;
+  --land: #e2dcc6;
+  --coast: #5f7d77;
+  --mantle: #d8c1ad;
+  --sand: #a07c20;
+
+  --font-display: 'Darker Grotesque', 'Arial Narrow', sans-serif;
+  --font-body: 'Archivo', system-ui, sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
-  --wrap: 1160px;
-  --radius: 10px;
-  --radius-sm: 6px;
-  /* Kategori accents. Referencing (not copying) the base tokens means they
-     follow the dark theme automatically. */
-  --acc-planet: var(--heat);
-  --acc-atmosfer: #2f6f9e;
-  --acc-laut: #146e78;
-  --acc-daratan: #a98534;
-  --acc-ekologi: var(--ok);
-  --acc-penutup: #6c7472;
+
+  --wrap: 1240px;
+  --radius: 0px;
+  --radius-sm: 0px;
+
+  /* Category accents are the strata. In light mode every accent is dark
+     enough to carry paper-coloured text. */
+  --acc-planet: #b83a12;
+  --acc-atmosfer: #1f567d;
+  --acc-laut: #0b5b56;
+  --acc-daratan: #7c5710;
+  --acc-ekologi: #3f5f1e;
+  --acc-penutup: #40433c;
+  --inti-teks: #f8f4e8;
 }
 
 [data-theme='dark'] {
-  --bg: #0b1617;
-  --surface: #122022;
-  --surface-2: #182a2b;
-  --fg: #e6efec;
-  --muted: #98ada7;
-  --line: #273b3b;
-  --line-strong: #45615c;
-  --sea: #5db7b5;
-  --sea-soft: #163a3c;
-  --heat: #eb8f6c;
-  --heat-ink: #eb8f6c;
-  --heat-soft: #3b241c;
-  --ok: #63bd8b;
-  --ok-soft: #143527;
-  --bad: #ea857c;
-  --bad-soft: #3a1e1b;
-  --ocean: #0c1e22;
-  --land: #1d312b;
-  --coast: #4d7c78;
-  --mantle: #3a2922;
-  --sand: #7a6540;
-  --acc-atmosfer: #7fb6dd;
-  --acc-laut: #5db7b5;
-  --acc-daratan: #d3b36a;
-  --acc-penutup: #a6b0ab;
+  --bg: #10120e;
+  --surface: #171a15;
+  --surface-2: #23271f;
+  --fg: #f2eddf;
+  --muted: #b8b3a4;
+  --line: #353a2f;
+  --line-strong: #777d6c;
+
+  --sea: #82d8c9;
+  --sea-soft: #123632;
+  --heat: #ff6b3a;
+  --heat-ink: #ff8a61;
+  --heat-soft: #3a1c12;
+
+  --ok: #8fc37f;
+  --ok-soft: #1a2d16;
+  --bad: #ff8a7a;
+  --bad-soft: #341b18;
+
+  --ocean: #0d1d20;
+  --land: #212a1e;
+  --coast: #4e706a;
+  --mantle: #372921;
+  --sand: #7b6235;
+
+  /* In dark mode the strata lighten and carry ink-coloured text. */
+  --acc-planet: #ff7043;
+  --acc-atmosfer: #7eb6dc;
+  --acc-laut: #5fc9bd;
+  --acc-daratan: #d9b05a;
+  --acc-ekologi: #9cc46b;
+  --acc-penutup: #a6aa9a;
+  --inti-teks: #11130f;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
-    --bg: #0b1617;
-    --surface: #122022;
-    --surface-2: #182a2b;
-    --fg: #e6efec;
-    --muted: #98ada7;
-    --line: #273b3b;
-    --line-strong: #45615c;
-    --sea: #5db7b5;
-    --sea-soft: #163a3c;
-    --heat: #eb8f6c;
-    --heat-ink: #eb8f6c;
-    --heat-soft: #3b241c;
-    --ok: #63bd8b;
-    --ok-soft: #143527;
-    --bad: #ea857c;
-    --bad-soft: #3a1e1b;
-    --ocean: #0c1e22;
-    --land: #1d312b;
-    --coast: #4d7c78;
-    --mantle: #3a2922;
-    --sand: #7a6540;
-    --acc-atmosfer: #7fb6dd;
-    --acc-laut: #5db7b5;
-    --acc-daratan: #d3b36a;
-    --acc-penutup: #a6b0ab;
+    --bg: #10120e;
+    --surface: #171a15;
+    --surface-2: #23271f;
+    --fg: #f2eddf;
+    --muted: #b8b3a4;
+    --line: #353a2f;
+    --line-strong: #777d6c;
+
+    --sea: #82d8c9;
+    --sea-soft: #123632;
+    --heat: #ff6b3a;
+    --heat-ink: #ff8a61;
+    --heat-soft: #3a1c12;
+
+    --ok: #8fc37f;
+    --ok-soft: #1a2d16;
+    --bad: #ff8a7a;
+    --bad-soft: #341b18;
+
+    --ocean: #0d1d20;
+    --land: #212a1e;
+    --coast: #4e706a;
+    --mantle: #372921;
+    --sand: #7b6235;
+
+    --acc-planet: #ff7043;
+    --acc-atmosfer: #7eb6dc;
+    --acc-laut: #5fc9bd;
+    --acc-daratan: #d9b05a;
+    --acc-ekologi: #9cc46b;
+    --acc-penutup: #a6aa9a;
+    --inti-teks: #11130f;
   }
 }

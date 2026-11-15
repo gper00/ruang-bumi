@@ -20,7 +20,7 @@ const isActive = (href: string) =>
       <span class="brand-mark" aria-hidden="true"></span>
       <span class="brand-text">
         <span class="brand-name">Ruang Bumi</span>
-        <span class="brand-sub">ilmu kebumian, satu pertanyaan sekali jalan</span>
+        <span class="brand-sub">lembar lapangan ilmu kebumian</span>
       </span>
     </a>
 
@@ -45,12 +45,12 @@ const isActive = (href: string) =>
 
 <style>
   .site-header {
-    border-bottom: 1px solid var(--line);
-    background: color-mix(in srgb, var(--bg) 88%, transparent);
-    backdrop-filter: blur(6px);
     position: sticky;
     top: 0;
     z-index: 40;
+    border-bottom: 4px solid var(--heat);
+    background: var(--ink);
+    color: var(--paper);
   }
 
   .header-inner {
@@ -58,94 +58,153 @@ const isActive = (href: string) =>
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    gap: 10px 24px;
-    padding-block: 10px;
+    gap: 0 28px;
+    min-height: 62px;
   }
 
   .brand {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
+    color: var(--paper);
     text-decoration: none;
-    color: var(--fg);
   }
 
+  /* Sample core: four strata in one narrow column. */
   .brand-mark {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background: var(--sea);
-    box-shadow: inset -5px -4px 0 0 var(--sea-soft);
+    width: 18px;
+    height: 28px;
+    background: linear-gradient(
+      to bottom,
+      var(--acc-atmosfer) 0 22%,
+      var(--acc-laut) 22% 46%,
+      var(--acc-daratan) 46% 70%,
+      var(--acc-ekologi) 70% 100%
+    );
+    box-shadow: inset 0 0 0 1px var(--paper);
   }
 
   .brand-text {
     display: grid;
-    line-height: 1.15;
+    line-height: 1;
   }
 
   .brand-name {
     font-family: var(--font-display);
-    font-weight: 800;
-    font-size: 1.08rem;
-    letter-spacing: -0.015em;
+    font-weight: 900;
+    font-size: 1.45rem;
+    line-height: 0.8;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
   }
 
   .brand-sub {
+    margin-top: 4px;
     font-family: var(--font-mono);
-    font-size: 0.62rem;
-    color: var(--muted);
-    letter-spacing: 0.01em;
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    line-height: 1.3;
+    text-transform: uppercase;
+    color: var(--ink-muted);
   }
 
   .header-nav {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 14px;
   }
 
   nav ul {
     display: flex;
     flex-wrap: wrap;
-    gap: 2px 18px;
+    align-items: center;
+    gap: 2px;
     list-style: none;
     margin: 0;
     padding: 0;
-    font-family: var(--font-body);
-    font-weight: 500;
-    font-size: 0.8rem;
+    font-family: var(--font-mono);
+    font-weight: 400;
+    font-size: 0.72rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
   }
 
   nav a {
-    display: inline-block;
-    color: var(--muted);
+    display: inline-flex;
+    align-items: center;
+    min-height: 38px;
+    padding: 6px 8px;
+    color: var(--ink-muted);
     text-decoration: none;
-    padding-block: 5px;
-    border-bottom: 2px solid transparent;
-    transition: color 0.15s ease, border-color 0.15s ease;
+    transition:
+      background-color 120ms linear,
+      color 120ms linear;
   }
 
   nav a:hover {
-    color: var(--fg);
-    border-bottom-color: var(--line-strong);
+    background: color-mix(in srgb, var(--paper) 12%, transparent);
+    color: var(--paper);
   }
 
   nav a[aria-current='page'] {
-    color: var(--fg);
-    border-bottom-color: var(--sea);
+    background: var(--paper);
+    color: var(--ink);
   }
 
-  @media (max-width: 640px) {
+  .header-nav :global(.theme-toggle) {
+    border-color: #4b4e43;
+    background: transparent;
+    color: var(--paper);
+  }
+
+  .header-nav :global(.theme-toggle:hover) {
+    border-color: var(--paper);
+    background: var(--paper);
+    color: var(--ink);
+  }
+
+  .header-nav :global(.theme-toggle .teks) {
+    color: inherit;
+  }
+
+  @media (max-width: 760px) {
+    .header-inner {
+      gap: 0;
+      padding-top: 10px;
+    }
+
+    .brand {
+      padding-bottom: 8px;
+    }
+
+    .header-nav {
+      justify-content: space-between;
+      width: 100%;
+      padding-block: 5px 7px;
+      border-top: 1px solid #34372d;
+    }
+
+    nav ul {
+      gap: 0;
+    }
+
+    nav a {
+      min-height: 36px;
+      padding-inline: 6px;
+    }
+  }
+
+  @media (max-width: 420px) {
     .brand-sub {
       display: none;
     }
 
-    /* Keep the four links on one row next to the theme toggle. */
-    .header-nav {
-      gap: 12px;
+    nav ul {
+      font-size: 0.66rem;
     }
 
-    nav ul {
-      gap: 2px 12px;
+    nav a {
+      padding-inline: 4px;
     }
   }
 </style>

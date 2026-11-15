@@ -49,42 +49,50 @@ for (const id of datasetIds) {
 </figure>
 
 <style>
+  /* Figure diperlakukan seperti pelat lapangan: bingkai tebal, caption
+     berwarna tinta, tanpa radius agar tidak terbaca sebagai kartu UI. */
   .figure {
-    margin: 2.4rem 0;
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
+    margin: 2.6rem 0;
+    border: 2px solid var(--fg);
+    border-radius: 0;
     background: var(--surface);
     overflow: hidden;
   }
 
   .figure-body {
-    padding: 12px;
-    background: var(--surface-2);
+    padding: 0;
+    background: var(--surface);
   }
 
   .figure-caption {
     display: flex;
     flex-direction: column;
-    gap: 5px;
-    padding: 13px 16px 15px;
-    border-top: 1px solid var(--line);
-    background: var(--surface);
-    font-size: 0.86rem;
+    gap: 7px;
+    padding: 14px 16px 16px;
+    border-top: 2px solid var(--fg);
+    background: var(--fg);
+    color: var(--bg);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
     line-height: 1.55;
-    color: var(--muted);
   }
 
   .figure-source {
     font-family: var(--font-mono);
-    font-size: 0.7rem;
-    line-height: 1.5;
+    font-size: 0.66rem;
+    line-height: 1.55;
+    color: color-mix(in srgb, var(--bg) 76%, var(--fg));
   }
 
   .figure-source a {
-    color: var(--sea);
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
   }
 
   .missing {
-    color: var(--bad);
+    font-weight: 700;
+    color: inherit;
   }
 </style>

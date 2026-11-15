@@ -3,8 +3,8 @@
 
 <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Tema: ganti ke tema gelap">
   <svg class="ikon-terang" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
-    <circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.6"></circle>
-    <g stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+    <circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.8"></circle>
+    <g stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
       <path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"></path>
     </g>
   </svg>
@@ -13,7 +13,7 @@
       d="M20 14.3A8.2 8.2 0 0 1 9.7 4a8.2 8.2 0 1 0 10.3 10.3z"
       fill="none"
       stroke="currentColor"
-      stroke-width="1.6"
+      stroke-width="1.8"
       stroke-linejoin="round"></path>
   </svg>
   <span class="teks">Tema</span>
@@ -48,27 +48,32 @@
   .theme-toggle {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 7px;
     min-height: 34px;
-    padding: 4px 10px;
-    border: 1px solid var(--line);
-    border-radius: var(--radius-sm);
-    background: var(--surface);
-    color: var(--muted);
-    font-family: var(--font-body);
-    font-weight: 500;
-    font-size: 0.74rem;
+    padding: 5px 9px;
+    border: 1px solid #4b4e43;
+    border-radius: 0;
+    background: transparent;
+    color: var(--paper);
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
     cursor: pointer;
-    transition: color 0.15s ease, border-color 0.15s ease;
+    transition:
+      background-color 120ms linear,
+      color 120ms linear,
+      border-color 120ms linear;
   }
 
   .theme-toggle:hover {
-    color: var(--fg);
-    border-color: var(--sea);
+    background: var(--paper);
+    border-color: var(--paper);
+    color: var(--ink);
   }
 
   .teks {
-    color: var(--muted);
+    color: inherit;
   }
 
   .ikon-gelap {
@@ -85,7 +90,7 @@
 
   @media (max-width: 560px) {
     .theme-toggle {
-      padding: 4px 8px;
+      padding: 5px 7px;
     }
 
     .teks {

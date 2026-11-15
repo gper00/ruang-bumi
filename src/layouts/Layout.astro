@@ -35,14 +35,14 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://ruangbumi.e
     <title>{pageTitle}</title>
     <link
       rel="preload"
-      href="/fonts/figtree-latin.woff2"
+      href="/fonts/darker-grotesque-latin.woff2"
       as="font"
       type="font/woff2"
       crossorigin
     />
     <link
       rel="preload"
-      href="/fonts/bricolage-grotesque-latin.woff2"
+      href="/fonts/archivo-latin.woff2"
       as="font"
       type="font/woff2"
       crossorigin
@@ -75,15 +75,16 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://ruangbumi.e
   .skip-link {
     position: absolute;
     left: 12px;
-    top: -60px;
+    top: -72px;
     z-index: 100;
-    padding: 8px 14px;
-    border-radius: 8px;
-    background: var(--surface);
-    border: 1px solid var(--sea);
-    color: var(--fg);
+    padding: 10px 14px;
+    border: 2px solid var(--ink);
+    border-radius: 0;
+    background: var(--paper);
+    color: var(--ink);
     font-family: var(--font-mono);
-    font-size: 0.8rem;
+    font-size: 0.72rem;
+    text-transform: uppercase;
   }
 
   .skip-link:focus {
