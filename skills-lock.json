@@ -1,0 +1,41 @@
+{
+  "version": 2,
+  "skills": {
+    "better-colors": {
+      "source": "jakubkrehel/skills",
+      "sourceType": "github",
+      "skillPath": "skills/better-colors/SKILL.md",
+      "computedHash": "d114ace9df09574564a14316882d80501b48bea636017dc7e4c0ad53053d6319"
+    },
+    "better-layout": {
+      "source": "jakubkrehel/skills",
+      "sourceType": "github",
+      "skillPath": "skills/better-layout/SKILL.md",
+      "computedHash": "c00f4b9a36a561d2b5f63ce318467f6e522294bdd217684d3c12c7ec7ce86ea1"
+    },
+    "better-typography": {
+      "source": "jakubkrehel/skills",
+      "sourceType": "github",
+      "skillPath": "skills/better-typography/SKILL.md",
+      "computedHash": "85b6c26d65e0bcf11fb97f03ec91c057d5adc5d87bdffdee2eb14e0fac59c0a8"
+    },
+    "better-ui": {
+      "source": "jakubkrehel/skills",
+      "sourceType": "github",
+      "skillPath": "skills/better-ui/SKILL.md",
+      "computedHash": "abfdcb9c08248aa0f1ed413ff5390574fa799b6dcb9237fe7e7ce965598a0753"
+    },
+    "brutalism": {
+      "source": "bergside/awesome-design-skills",
+      "sourceType": "github",
+      "skillPath": "skills/brutalism/SKILL.md",
+      "computedHash": "0d642d0e9901d3e829704a9290410538e4eb468093c61a7a83b93dc8bd846410"
+    },
+    "variant": {
+      "source": "jakubkrehel/skills",
+      "sourceType": "github",
+      "skillPath": "skills/variant/SKILL.md",
+      "computedHash": "3f761b70ef27b2c7e19451c00f5d70877ac9d296967b1363c97254f747ac23dc"
+    }
+  }
+}
